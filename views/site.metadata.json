@@ -1,0 +1,289 @@
+{
+    "home": {
+        "ogNamespace": "website",
+        "title": "Foster Care in Ontario",
+        "description": "Becoming a foster parent in Ontario can be confusing. There are many options. Annie's Havens has been providing foster care services since 1996.",
+        "keywords": "foster care,foster care ontario,foster care programs,foster parents,Annie's Havens",
+        "metaTags": [
+            {"property": "og:url", "content": "https://www.annieshavens.ca"},
+            {"property": "og:type", "content": "website"},
+            {"property": "og:title", "content": "Foster Care in Ontario"},
+            {"property": "og:description", "content": "Becoming a foster parent in Ontario can be confusing. There are many options. Annie's Havens has been providing foster care services since 1996."},
+            {"property": "og:image", "content": "https://www.annieshavens.ca/images/logo.png"},
+            {"property": "og:image:secure", "content": "https://www.annieshavens.ca/images/logo.png"}
+        ]
+    },
+    "aboutUs": {
+        "ogNamespace": "website",
+        "title": "About Our Foster Care Agency",
+        "description": "Annie's Havens provides foster care in Ontario through our qualified and caring foster homes. We are licensed by the Government of Ontario.",
+        "keywords": "foster care,foster care ontario,private foster care,about us,foster care agency,Annie's Havens",
+        "metaTags": [
+            {"property": "og:url", "content": "https://www.annieshavens.ca"},
+            {"property": "og:type", "content": "website"},
+            {"property": "og:title", "content": "About Our Foster Care Agency"},
+            {"property": "og:description", "content": "Annie's Havens provides foster care in Ontario through our qualified and caring foster homes. We are licensed by the Government of Ontario."},
+            {"property": "og:image", "content": "https://www.annieshavens.ca/images/logo.png"},
+            {"property": "og:image:secure", "content": "https://www.annieshavens.ca/images/logo.png"}
+        ],
+        "readMore": [
+            {"href": "/care-programs", "linkName": "Care Programs"},
+            {"href": "/service-area", "linkName": "Service Area"},
+            {"href": "/referral-sources", "linkName": "Referral Sources"},
+            {"href": "/contact-us", "linkName": "Contact Us"}
+        ]
+    },
+    "carePrograms": {
+        "ogNamespace": "website",
+        "title": "Foster Care Programs",
+        "description": "Kids come into foster care with all types of needs. Annie's Havens has different care programs tailored to the different supports that may be needed.",
+        "keywords": "foster care programs,special needs foster care,trauma focused foster care,trauma foster care,regular foster care,foster care Ontario,Annie's Havens",
+        "metaTags": [
+            {"property": "og:url", "content": "https://www.annieshavens.ca"},
+            {"property": "og:type", "content": "website"},
+            {"property": "og:title", "content": "Foster Care Programs"},
+            {"property": "og:description", "content": "Kids come into foster care with all types of needs. Annie's Havens has different care programs tailored to the different supports that may be needed."},
+            {"property": "og:image", "content": "https://www.annieshavens.ca/images/logo.png"},
+            {"property": "og:image:secure", "content": "https://www.annieshavens.ca/images/logo.png"}
+        ],
+        "readMore": [
+            {"href": "/foster-parenting/children-in-care", "linkName": "Ontario Children in Care"},
+            {"href": "/foster-parenting/foster-care-in-ontario", "linkName": "Foster Care in Ontario"},
+            {"href": "/foster-parenting/faq", "linkName": "Frequently Asked Questions"},
+            {"href": "/contact-us", "linkName": "Contact Us"}
+        ]
+    },
+    "referralSources": {
+        "ogNamespace": "website",
+        "title": "Foster Care Referral Sources",
+        "description": "We accept foster children from many parts of southern Ontario. Our foster homes benefit from our many referral sources (Children's Aid Societies).",
+        "keywords": "foster care,foster care referrals,foster care placements,foster care Ontario,Annie's Havens",
+        "metaTags": [
+            {"property": "og:url", "content": "https://www.annieshavens.ca"},
+            {"property": "og:type", "content": "website"},
+            {"property": "og:title", "content": "Foster Care Referral Sources"},
+            {"property": "og:description", "content": "We accept foster children from many parts of southern Ontario. Our foster homes benefit from our many referral sources (Children's Aid Societies)."},
+            {"property": "og:image", "content": "https://www.annieshavens.ca/images/logo.png"},
+            {"property": "og:image:secure", "content": "https://www.annieshavens.ca/images/logo.png"}
+        ],
+        "readMore": [
+            {"href": "/service-area", "linkName": "Service Area"},
+            {"href": "/foster-parenting/foster-care-in-ontario", "linkName": "Foster Care in Ontario"},
+            {"href": "/care-programs", "linkName":"Care Programs"},
+            {"href": "/contact-us", "linkName":"Contact Us"}
+        ]
+    },
+    "serviceArea": {
+        "ogNamespace": "website",
+        "title": "Foster Home Service Area",
+        "description": "Our foster homes cover a large area of southen Ontario. We are able to open homes in most areas of the GTA and surrounding regions.",
+        "keywords": "foster care Ontario,GTA foster care,Toronto foster care,foster homes Ontario,becoming a foster parent,Annie's Havens",
+        "metaTags": [
+            {"property": "og:url", "content": "https://www.annieshavens.ca"},
+            {"property": "og:type", "content": "website"},
+            {"property": "og:title", "content": "Foster Home Service Area"},
+            {"property": "og:description", "content": "Our foster homes cover a large area of southen Ontario. We are able to open homes in most areas of the GTA and surrounding regions."},
+            {"property": "og:image", "content": "https://www.annieshavens.ca/images/logo.png"},
+            {"property": "og:image:secure", "content": "https://www.annieshavens.ca/images/logo.png"}
+        ],
+        "readMore": [
+            {"href": "/referral-sources", "linkName": "Referral Sources"},
+            {"href": "/about-us", "linkName": "About Us"},
+            {"href": "/foster-parenting/faq", "linkName":"Frequently Asked Questions"},
+            {"href": "/contact-us", "linkName": "Contact Us"}
+        ]
+    },
+    "contactUs": {
+        "ogNamespace": "website",
+        "title": "Contact Us About Foster Parenting",
+        "description": "Finding out how to become a foster parent in Ontario is easy with Annie's Havens. Contact us through the web or by phone.",
+        "keywords": "contact us,becoming a foster parent,becoming a foster parent Ontario,becoming a foster parent in Ontario,Annie's Havens",
+        "metaTags": [
+            {"property": "og:url", "content": "https://www.annieshavens.ca"},
+            {"property": "og:type", "content": "website"},
+            {"property": "og:title", "content": "Contact Us About Foster Parenting"},
+            {"property": "og:description", "content": "Finding out how to become a foster parent in Ontario is easy with Annie's Havens. Contact us through the web or by phone."},
+            {"property": "og:image", "content": "https://www.annieshavens.ca/images/logo.png"},
+            {"property": "og:image:secure", "content": "https://www.annieshavens.ca/images/logo.png"}
+        ],
+        "readMore": [
+            {"href": "/about-us", "linkName": "About Us"},
+            {"href": "/service-area", "linkName": "Service Area"},
+            {"href": "/referral-sources", "linkName": "Referral Sources"},
+            {"href": "/foster-parenting/foster-home-quiz", "linkName":"Foster Home Quiz"}
+        ]
+    },
+    "fosterOntario": {
+        "ogNamespace": "website",
+        "title": "Foster Care in Ontario",
+        "description": "",
+        "keywords": "",
+        "metaTags": [
+            {"property": "og:url", "content": "https://www.annieshavens.ca"},
+            {"property": "og:type", "content": "website"},
+            {"property": "og:title", "content": "Foster Care in Ontario"},
+            {"property": "og:description", "content": ""},
+            {"property": "og:image", "content": "https://www.annieshavens.ca/images/logo.png"},
+            {"property": "og:image:secure", "content": "https://www.annieshavens.ca/images/logo.png"}
+        ],
+        "readMore": [
+            {"href": "/foster-parenting/what-is-foster-parenting", "linkName": "What is Foster Parenting?"},
+            {"href": "/foster-parenting/children-in-care", "linkName": "Ontario Children in Care"},
+            {"href": "/foster-parenting/faq", "linkName":"Frequently Asked Questions"},
+            {"href": "/contact-us", "linkName": "Contact Us"}
+        ]
+    },
+    "whatIsFosterParenting": {
+        "ogNamespace": "website",
+        "title": "What is Foster Parenting?",
+        "description": "The term 'foster parent' can mean something different to everyone. Learn what is means to be a foster parent in Ontario with Annie's Havens.",
+        "keywords": "what is foster parenting,who are foster parents,being a foster parent,foster parenting Ontario,foster parenting in Ontario,Annie's Havens",
+        "metaTags": [
+            {"property": "og:url", "content": "https://www.annieshavens.ca"},
+            {"property": "og:type", "content": "website"},
+            {"property": "og:title", "content": "What is Foster Parenting?"},
+            {"property": "og:description", "content": "The term 'foster parent' can mean something different to everyone. Learn what is means to be a foster parent in Ontario with Annie's Havens."},
+            {"property": "og:image", "content": "https://www.annieshavens.ca/images/logo.png"},
+            {"property": "og:image:secure", "content": "https://www.annieshavens.ca/images/logo.png"}
+        ],
+        "readMore": [
+            {"href": "/foster-parenting/faq", "linkName": "Frequently Asked Questions"},
+            {"href": "/care-programs", "linkName": "Care Programs"},
+            {"href": "/foster-parenting/children-in-care", "linkName": "Ontario Children in Care"},
+            {"href": "/foster-parenting/foster-parent-application-process", "linkName": "Foster Parent Application Process in Ontario"},
+            {"href": "/contact-us", "linkName": "Contact Us"}
+        ]
+    },
+    "faq": {
+        "ogNamespace": "website",
+        "title": "Foster Care Frequently Asked Questions",
+        "description": "So you're thinking of becoming a foster parent in Ontario? Have a look at some answers to common questions.",
+        "keywords": "faq foster care,faq foster parenting,faq foster care Ontario,frequently asked questions,foster private public,single foster parent,same-sex foster parent,same sex foster parent,foster care race,foster care ethnicity,foster parent pay,foster parent pay Ontario,foster care pay,foster care pay Ontario,foster care per diem, foster parent per diem Ontario,maximum number of foster kids,maximum number of foster children,how many kids can I foster,foster care medical,foster care medical devices,becoming a foster parent,ask about foster care",
+        "metaTags": [
+            {"property": "og:url", "content": "https://www.annieshavens.ca"},
+            {"property": "og:type", "content": "website"},
+            {"property": "og:title", "content": "Foster Care Frequently Asked Questions"},
+            {"property": "og:description", "content": "So you're thinking of becoming a foster parent in Ontario? Have a look at some answers to common questions."},
+            {"property": "og:image", "content": "https://www.annieshavens.ca/images/logo.png"},
+            {"property": "og:image:secure", "content": "https://www.annieshavens.ca/images/logo.png"}
+        ],
+        "readMore": [
+            {"href": "/foster-parenting/what-is-foster-parenting", "linkName": "What is Foster Parenting?"},
+            {"href": "/care-programs", "linkName": "Care Programs"},
+            {"href": "/foster-parenting/foster-home-quiz", "linkName": "Foster Home Quiz"},
+            {"href": "/contact-us", "linkName": "Contact Us"}
+        ]
+    },
+    "childrenInCare": {
+        "ogNamespace": "website",
+        "title": "Ontario Children in Care",
+        "description": "Ontario has over 14,000 foster children across the various child welfare agencies. Learn more about children in care.",
+        "keywords": "ontario children in care,ontario foster children,foster care ontario,ontario foster kids,foster kids ontario,ontario foster parent",
+        "metaTags": [
+            {"property": "og:url", "content": "https://www.annieshavens.ca"},
+            {"property": "og:type", "content": "website"},
+            {"property": "og:title", "content": "Ontario Children in Care"},
+            {"property": "og:description", "content": "Ontario has over 14,000 foster children across the various child welfare agencies. Learn more about children in care."},
+            {"property": "og:image", "content": "https://www.annieshavens.ca/images/logo.png"},
+            {"property": "og:image:secure", "content": "https://www.annieshavens.ca/images/logo.png"}
+        ],
+        "readMore": [
+            {"href": "/foster-parenting/what-is-foster-parenting", "linkName": "What is Foster Parenting?"},
+            {"href": "/foster-parenting/faq", "linkName": "Frequently Asked Questions"},
+            {"href": "/care-programs", "linkName": "Care Programs"},
+            {"href": "/contact-us", "linkName": "Contact Us"}
+        ]
+    },
+    "familyInvolvement": {
+        "ogNamespace": "website",
+        "title": "Family Involvement in a Foster Home",
+        "description": "Being a foster parent often means having family involved. Learn how fostering effects spousal, child and extended family relationships.",
+        "keywords": "",
+        "metaTags": [
+            {"property": "og:url", "content": "https://www.annieshavens.ca"},
+            {"property": "og:type", "content": "website"},
+            {"property": "og:title", "content": "Family Involvement in a Foster Home"},
+            {"property": "og:description", "content": "Being a foster parent often means having family involved. Learn how fostering effects spousal, child and extended family relationships."},
+            {"property": "og:image", "content": "https://www.annieshavens.ca/images/logo.png"},
+            {"property": "og:image:secure", "content": "https://www.annieshavens.ca/images/logo.png"}
+        ],
+        "readMore": [
+            {"href": "/foster-parenting/what-is-foster-parenting", "linkName": "What is Foster Parenting?"},
+            {"href": "/foster-parenting/children-in-care", "linkName": "Ontario Children in Care"},
+            {"href": "/foster-parenting/foster-home-quiz", "linkName": "Foster Home Quiz"},
+            {"href": "/contact-us", "linkName": "Contact Us"}
+        ]
+    },
+    "fosterParentApplicationProcess": {
+        "ogNamespace": "website",
+        "title": "Foster Parent Application Proccess in Ontario",
+        "description": "",
+        "keywords": "",
+        "metaTags": [
+            {"property": "og:url", "content": "https://www.annieshavens.ca"},
+            {"property": "og:type", "content": "website"},
+            {"property": "og:title", "content": "Foster Parent Application Process in Ontario"},
+            {"property": "og:description", "content": "Being a foster parent often means having family involved. Learn how fostering effects spousal, child and extended family relationships."},
+            {"property": "og:image", "content": "https://www.annieshavens.ca/images/logo.png"},
+            {"property": "og:image:secure", "content": "https://www.annieshavens.ca/images/logo.png"}
+        ],
+        "readMore": [
+            {"href": "/foster-parenting/what-is-foster-parenting", "linkName": "What is Foster Parenting?"},
+            {"href": "/foster-parenting/foster-home-quiz", "linkName": "Foster Home Quiz"},
+            {"href": "/foster-parenting/children-in-care", "linkName": "Ontario Children in Care"},
+            {"href": "/contact-us", "linkName": "Contact Us"}
+        ]
+    },
+    "fosterHomeQuiz": {
+        "ogNamespace": "website",
+        "title": "Foster Home Quiz - Do I Qualify?",
+        "description": "",
+        "keywords": "",
+        "metaTags": [
+            {"property": "og:url", "content": "https://www.annieshavens.ca"},
+            {"property": "og:type", "content": "website"},
+            {"property": "og:title", "content": "Foster Home Quiz - Do I Qualify?"},
+            {"property": "og:description", "content": ""},
+            {"property": "og:image", "content": "https://www.annieshavens.ca/images/logo.png"},
+            {"property": "og:image:secure", "content": "https://www.annieshavens.ca/images/logo.png"}
+        ],
+        "readMore": [
+            {"href": "/foster-parenting/faq", "linkName": "Frequently Asked Questions"},
+            {"href": "/foster-parenting/children-in-care", "linkName": "Ontario Children in Care"},
+            {"href": "/foster-parenting/family-involvement", "linkName": "Family Involvement"},
+            {"href": "/contact-us", "linkName": "Contact Us"}
+        ]
+    },
+    "news": {
+        "ogNamespace": "website",
+        "title": "Foster Care News and Updates",
+        "description": "Being a foster parent often means having family involved. Learn how fostering effects spousal, child and extended family relationships.",
+        "keywords": "",
+        "metaTags": [
+            {"property": "og:url", "content": "https://www.annieshavens.ca"},
+            {"property": "og:type", "content": "website"},
+            {"property": "og:title", "content": "Family Involvement in a Foster Home"},
+            {"property": "og:description", "content": "Being a foster parent often means having family involved. Learn how fostering effects spousal, child and extended family relationships."},
+            {"property": "og:image", "content": "https://www.annieshavens.ca/images/logo.png"},
+            {"property": "og:image:secure", "content": "https://www.annieshavens.ca/images/logo.png"}
+        ]
+    },
+    "urgentNeedForFosterParentsInOntario": {
+        "ogNamespace": "article",
+        "title": "Urgent Need for Foster Parents in Ontario",
+        "description": "",
+        "keywords": "",
+        "metaTags": [
+            {"property": "og:url", "content": "https://www.annieshavens.ca"},
+            {"property": "og:type", "content": "article"},
+            {"property": "og:title", "content": "Urgent Need for Foster Parenting in Ontario"},
+            {"property": "og:description", "content": ""},
+            {"property": "og:image", "content": "https://www.annieshavens.ca/images/logo.png"},
+            {"property": "og:image:secure", "content": "https://www.annieshavens.ca/images/logo.png"},
+            {"property": "article:modified_time", "content": "2018-02-15"},
+            {"property": "article:expiration_time", "content": "2020-02-15T00:00:00+06:00"},
+            {"property": "article:tag", "content": "Ontario foster care"},
+            {"property": "article:tag", "content": "foster home shortage"}
+        ]
+    }
+}

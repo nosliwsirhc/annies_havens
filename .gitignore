@@ -1,0 +1,13 @@
+/node_modules
+/config/*
+*.jpg
+*.png
+*.mp4
+*.gif
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db

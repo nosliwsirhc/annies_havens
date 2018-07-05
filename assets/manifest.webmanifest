@@ -1,0 +1,13 @@
+{
+    "name": "Annie's Havens Ltd.",
+    "short_name": "Annie Havens",
+    "start_url": ".",
+    "display": "standalone",
+    "background_color": "#fff",
+    "description": "Providing foster care in Ontario since 1996.",
+    "icons": [{
+      "src": "/images/logo.png",
+      "sizes": "200x200",
+      "type": "image/png"
+    }]
+  }

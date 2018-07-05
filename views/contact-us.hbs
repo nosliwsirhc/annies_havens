@@ -1,0 +1,156 @@
+{{> page-header}}
+<div class="container">
+    <p>We are always open letting people know more about our program and what is involved in becoming a foster parent. Feel free to use our contact form, email us directly or give us a call.</p>
+    <div class="row contact-cards">
+        <div class="col s12 l6">
+            <div class="card contact-card">
+                <div class="card-image">
+                    <img src="/images/contact-us.jpg" alt="contact us icons">
+                </div>
+                <div class="card-content">
+                    <span class="card-title">Contact Us</span>   
+                    <div class="row">
+                        <div class="col s2 m1">
+                            <i class="material-icons">phone</i>
+                        </div>
+                        <div class="col s10 m11">
+                            <p style="font-size: 1.2rem; line-height: 1.5rem;"><strong>Toll-Free: 1 (866) 321-2137</strong></p>
+                            <p>Placement @ ext. 958</p>
+                            <p>New Foster Homes @ ext. 956</p>
+                            <p>Programs @ ext. 984</p>
+                        </div>
+                    </div> 
+                    <div class="row">
+                        <div class="col s2 m1">
+                            <i class="material-icons">email</i>
+                        </div>
+                        <div class="col s10 m11">
+                            <p style="font-size: 1.2rem; line-height: 1.5rem;"><strong><a href="mailto:williamwilson@annieshavens.ca">New Home Inquiries</a></strong></p>
+                            <p><a href="mailto:williamwilson@annieshavens.ca">William Wilson</a></p>
+                            <p><a href="mailto:hildawilson@annieshavens.ca">Hilda Wilson</a></p>
+                            <p><a href="mailto:chriswilson@annieshavens.ca">Chris Wilson</a></p>
+                            <p><a href="mailto:karenthompson@annieshavens.ca">Karen Thompson</a></p>
+                            <p><a href="mailto:huichen@annieshavens.ca">Hui Chen</a></p>
+                        </div>
+                    </div>               
+                </div>
+            </div>
+        </div>
+        <div class="col s12 l6">
+            <div class="card contact-card">
+                <div class="card-image">
+                    <img src="/images/location-2.jpg" alt="map to office">
+                </div>
+                <div class="card-content">
+                    <span class="card-title">Location</span>
+                    <div class="row">
+                        <div class="col s2 m1">
+                            <i class="material-icons">location_on</i>
+                        </div>
+                        <div class="col s10 m11">
+                            <p>144 Main St. N, Unit 19</p>
+                            <p>Markham, Ontario</p>
+                            <p>L3P 5T3</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="divider"></div>
+
+        <div class="card">
+            <div class="card-content">
+                <span class="card-title">Contact Form</span>
+                <form id="contact-form">
+                    <div class="row">
+                        <div class="input-field col s12 m6">
+                            <input type="text" id="first-name" name="first-name">
+                            <label for="first-name">First Name</label>
+                        </div>
+                        <div class="input-field col s12 m6">
+                            <input type="text" id="last-name" name="last-name">
+                            <label for="last-name">Last Name</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12 l6">
+                            <input type="email" id="email" name="email">
+                            <label for="email">Email</label>
+                        </div>
+                        <div class="input-field col s12 l6">
+                            <select name="subject" id="subject">
+                                <option value="Foster Parenting" selected>Foster Parenting</option>
+                                <option value="Employment">Employment</option>
+                                <option value="General Inquiry">General Inquiry</option>
+                            </select>
+                            <label for="subject">Subject</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12">
+                            <textarea name="message" id="message" class="materialize-textarea"></textarea>
+                            <label for="message">Message</label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="card-action">
+                <button class="g-recaptcha btn-flat" data-sitekey="6LceOl8UAAAAANNkfF5sAahY6MQZ8rBtPEykFIUJ" data-callback="submitContactForm">
+                    Send Your Message
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{!-- Read More --}}
+{{> read-more}}
+
+{{#section 'script'}}
+    <script>
+        // Form Select
+        const formSelects = document.querySelectorAll('select');
+        M.FormSelect.init(formSelects, {});
+
+        // Contact Us Form
+        const contactForm = document.getElementById('contact-form');
+        if(contactForm) {
+            contactForm.addEventListener('submit', submitContactForm);
+        }
+
+        function submitContactForm(token) {
+            const firstName = contactForm.querySelector('#first-name').value;
+            const lastName = contactForm.querySelector('#last-name').value;
+            const email = contactForm.querySelector('#email').value;
+            const subject = contactForm.querySelector('#subject').value;
+            const message = contactForm.querySelector('#message').value;
+
+            fetch('/contact-us', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json, text/plain, */**',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    firstName,
+                    lastName,
+                    email,
+                    subject,
+                    message,
+                    token
+                })
+            })
+            .then((res) => res.json())
+            .then((data) => {
+                if(data.success) {
+                    contactForm.reset();
+                    M.toast({html: "Thanks! We'll be getting back to you soon.", displayLength: 5000});
+                }
+                if(!data.success) {
+                    M.toast({html: 'Verification failed. You may be a bot...'});
+                }
+            })
+        }
+    </script>
+{{/section}}

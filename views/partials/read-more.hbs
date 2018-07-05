@@ -1,0 +1,14 @@
+{{#if @meta.readMore}}
+    <div id="read-more" class="teal darken-1 scrollspy">
+        <section id="read-more" class="container">
+            <ul class="collection with-header">
+                <li class="collection-header">
+                    <h5>Read More...</h5>
+                </li>
+                {{#each @meta.readMore}}
+                    <a href="{{this.href}}" class="collection-item">{{this.linkName}}<span class="secondary-content"><i class="material-icons">arrow_forward_ios</i></span></a>
+                {{/each}}
+            </ul>
+        </section>
+    </div>
+{{/if}}
