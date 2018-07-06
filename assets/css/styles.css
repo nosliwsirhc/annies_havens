@@ -92,15 +92,15 @@ p {
 }
 
 .first-carousel-item {
-    background-image: url('/images/sad-boy-2.jpg');
+    background-image: url('https://firebasestorage.googleapis.com/v0/b/annies-havens.appspot.com/o/images%2Fsad-boy-2.jpg?alt=media&token=f3e52992-8f91-42b9-921b-b4b1d087eea1');
 }
 
 .second-carousel-item.load {
-    background-image: url('/images/sad-cardboard-face-2.jpg');
+    background-image: url('https://firebasestorage.googleapis.com/v0/b/annies-havens.appspot.com/o/images%2Fsad-cardboard-face-2.jpg?alt=media&token=1fdb041e-58a3-40ea-80c9-33f7008094a6');
 }
 
 .third-carousel-item.load {
-    background-image: url('/images/happy-father-daughter-dock-2.jpg');
+    background-image: url('https://firebasestorage.googleapis.com/v0/b/annies-havens.appspot.com/o/images%2Fhappy-father-daughter-dock-2.jpg?alt=media&token=32756830-7552-43f2-95dd-fe00d5c2b349');
 }
 
 .cta {

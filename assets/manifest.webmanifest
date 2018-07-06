@@ -6,8 +6,8 @@
     "background_color": "#fff",
     "description": "Providing foster care in Ontario since 1996.",
     "icons": [{
-      "src": "/images/logo.png",
-      "sizes": "200x200",
+      "src": "https://firebasestorage.googleapis.com/v0/b/annies-havens.appspot.com/o/images%2Flogo-300-300.png?alt=media&token=deb9960f-30d0-4c7d-ae07-b57b17dc209a",
+      "sizes": "300x300",
       "type": "image/png"
     }]
   }
