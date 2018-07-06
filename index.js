@@ -46,7 +46,7 @@ transporter.verify(function(error, success) {
     }
 });
 
-const baseRef = "http://120.0.0.1/";
+const baseRef = "https://devsite.annieshavens.ca/";
 
 // Site Links
 app.get('/', function (req, res) {
@@ -303,6 +303,6 @@ app.get('*', function (req, res) {
 });
 
  
-app.listen(3000, function() {
+app.listen(PORT, function() {
     console.log(`Server started on port ${PORT}`);
 });
