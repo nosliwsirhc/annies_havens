@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>404 Page Not Found</title>
+    <style>
+        .error {
+            width: 100vw;
+            height: 100vh;
+        }
+
+        h1 {
+            font-family: sans-serif;
+            text-align: center;
+        }
+
+        p {
+            font-family: sans-serif;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="error">
+        <h1>Page Not Found</h1>
+        <p>Redirecting in
+            <span class="timer">3</span>
+        </p>
+    </div>
+    <script>
+        const timer = document.querySelector('.timer');
+        let countdown = 3;
+        setInterval(() => {
+            countdown--;
+            timer.innerHTML = countdown;
+        }, 1000);
+        setTimeout(() => {
+            window.history.back();
+        }, 2900);
+    </script>
+</body>
+
+</html>

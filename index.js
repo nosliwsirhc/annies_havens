@@ -10,7 +10,7 @@ const smtp = require('./config/smtp');
 const recaptcha = require('./config/recaptcha');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 
 app.use(compression());
 
@@ -210,6 +210,9 @@ app.get('/news', function (req, res) {
 app.get('/news/urgent-need-for-foster-parents-in-ontario', function (req, res) {
     res.render('urgent-need-for-foster-parents-in-ontario', {data: {baseRef, css, meta: meta.urgentNeedForFosterParentsInOntario}});
 });
+app.get('/privacy-policy', function(req, res) {
+    res.render('privacy-policy', {data: {baseRef, css}});
+});
 // Redirect from old site links
 app.get('/care-program', function (req, res) {
     return res.redirect(301, '/care-programs');
@@ -258,48 +261,7 @@ app.get('/urgent-need-for-foster-parents', function (req, res) {
 });
 // Page Not Found
 app.get('*', function (req, res) {
-    res.status(404).send(`
-        <!DOCTYPE html>
-        <html lang="en">
-        <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <meta http-equiv="X-UA-Compatible" content="ie=edge">
-            <title>404 Page Not Found</title>
-            <style>
-                .error {
-                    width: 100vw;
-                    height: 100vh;
-                }
-                h1 {
-                    font-family: sans-serif;
-                    text-align: center;
-                }
-                p {
-                    font-family: sans-serif;
-                    text-align: center;
-                }
-            </style>
-        </head>
-        <body>
-            <div class="error">
-                <h1>Page Not Found</h1>
-                <p>Redirecting in <span class="timer">3</span></p>
-            </div>
-            <script>
-                const timer = document.querySelector('.timer');
-                let countdown = 3;
-                setInterval(()=>{
-                    countdown--;
-                    timer.innerHTML = countdown;
-                }, 1000);
-                setTimeout(()=> {
-                    window.history.back();
-                }, 2900);
-            </script>
-        </body>
-        </html>
-    `);
+    res.status(404).sendFile('html_templates/page-not-found.html', {root: __dirname});
 });
 
  

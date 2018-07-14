@@ -5,6 +5,6 @@ The pages served to the browser are rendered on a NodeJS server using Express. T
 Nodemailer is used on the server to send messages that users create on the website. Bot screening is handled by Recaptcha offscreen.
 The entire UI framework utilizes [MaterializeCSS](https://materializecss.com/) with some custom CSS added.
 ## SEO
-A JSON file is used to supply the metadata for each page including OpenGraph tags. Not sure of this is the best approach.
+A JSON file is used to supply the metadata for each page including OpenGraph tags. Not sure of this is the best approach. For development purposes, a robots.txt file located in the assets directory prevents indexing and there is a meta tag in the main.hbs layout preventing indexing and following.
 ## Notes
 Some work was done to get the page load time down. Videos are lazy loaded and future work will include getting images to lazy load.
