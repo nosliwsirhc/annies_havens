@@ -217,6 +217,7 @@ function _possibleConstructorReturn(t,e){if(!t)throw new ReferenceError("this ha
         });
 
         // Navigation link active
+        // FUTURE - show parent url as active i.e. /foster-parenting/do-i-qualify both segments show active
         (function () {
             const nav = document.getElementsByTagName("nav");
             const ul = nav[0].getElementsByTagName("ul");
@@ -224,7 +225,7 @@ function _possibleConstructorReturn(t,e){if(!t)throw new ReferenceError("this ha
             let anchors = [];
             for (let i = 0; i < lis.length; i++) {
                 const navEl = lis[i].querySelector("a");
-                if (navEl !== null && navEl.getAttribute("href").split("/")) {
+                if (navEl !== null && navEl.getAttribute("href") && navEl.getAttribute("href").split("/")) {
                     anchors.push(lis[i]);
                 }
             }
