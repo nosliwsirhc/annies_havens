@@ -3,7 +3,6 @@ const exphbs = require('express-handlebars');
 const compression = require('compression');
 const bodyParser = require('body-parser');
 const request = require('request');
-const fs = require('fs');
 const nodemailer = require('nodemailer');
 const meta = require('./views/site.metadata.json');
 const smtp = require('./config/smtp');
@@ -18,9 +17,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended : false}));
 
 app.use(express.static('assets'));
-
-let css = fs.readFileSync(__dirname + '/assets/css/materialize.min.css', {encoding: 'utf-8'});
-css += fs.readFileSync(__dirname + '/assets/css/styles.css');
 
 const hbs = exphbs.create({
     defaultLayout: "main",
@@ -50,22 +46,22 @@ const baseRef = "https://devsite.annieshavens.ca/";
 
 // Site Links
 app.get('/', function (req, res) {
-    res.render('home', {data: {baseRef, css, meta: meta.home}});
+    res.render('home', {data: {baseRef, meta: meta.home}});
 });
 app.get('/about-us', function(req, res) {
-    res.render('about-us', {data: {baseRef, css, meta: meta.aboutUs}});
+    res.render('about-us', {data: {baseRef, meta: meta.aboutUs}});
 });
 app.get('/care-programs', function(req,res) {
-    res.render('care-programs', {data: {baseRef, css, meta: meta.carePrograms}});
+    res.render('care-programs', {data: {baseRef, meta: meta.carePrograms}});
 });
 app.get('/referral-sources', function (req, res) {
-    res.render('referral-sources', {data: {baseRef, css, meta: meta.referralSources}});
+    res.render('referral-sources', {data: {baseRef, meta: meta.referralSources}});
 });
 app.get('/service-area', function (req, res) {
-    res.render('service-area', {data: {baseRef, css, meta: meta.serviceArea}});
+    res.render('service-area', {data: {baseRef, meta: meta.serviceArea}});
 });
 app.get('/contact-us', function (req, res) {
-    res.render('contact-us', {data: {baseRef, css, meta: meta.contactUs}});
+    res.render('contact-us', {data: {baseRef, meta: meta.contactUs}});
 });
 app.post('/contact-us', function (req, res) {
     if(req.body.token === null || req.body.token === undefined || req.body.token === '') {
@@ -127,13 +123,13 @@ app.post('/contact-us', function (req, res) {
     })
 });
 app.get('/foster-parenting/foster-care-in-ontario', function (req, res) {
-    res.render('foster-care-in-ontario', {data: {baseRef, css, meta: meta.fosterOntario}});
+    res.render('foster-care-in-ontario', {data: {baseRef, meta: meta.fosterOntario}});
 });
 app.get('/foster-parenting/what-is-foster-parenting', function (req, res) {
-    res.render('what-is-foster-parenting', {data: {baseRef, css, meta: meta.whatIsFosterParenting}});
+    res.render('what-is-foster-parenting', {data: {baseRef, meta: meta.whatIsFosterParenting}});
 });
 app.get('/foster-parenting/faq', function (req, res) {
-    res.render('faq', {data: {baseRef, css, meta: meta.faq}});
+    res.render('faq', {data: {baseRef, meta: meta.faq}});
 });
 app.post('/foster-parenting/faq', function (req, res) {
     if(req.body.token === null || req.body.token === undefined || req.body.token === '') {
@@ -193,26 +189,29 @@ app.post('/foster-parenting/faq', function (req, res) {
     })
 });
 app.get('/foster-parenting/children-in-care', function (req, res) {
-    res.render('children-in-care', {data: {baseRef, css, meta: meta.childrenInCare}});
+    res.render('children-in-care', {data: {baseRef, meta: meta.childrenInCare}});
 });
 app.get('/foster-parenting/family-involvement', function (req, res) {
-    res.render('family-involvement', {data: {baseRef, css, meta: meta.familyInvolvement}});
+    res.render('family-involvement', {data: {baseRef, meta: meta.familyInvolvement}});
 });
 app.get('/foster-parenting/foster-parent-application-process', function (req, res) {
-    res.render('foster-parent-application-process', {data: {baseRef, css, meta: meta.fosterParentApplicationProcess}});
+    res.render('foster-parent-application-process', {data: {baseRef, meta: meta.fosterParentApplicationProcess}});
 });
 app.get('/foster-parenting/foster-home-quiz', function (req, res) {
-    res.render('foster-home-quiz', {data: {baseRef, css, meta: meta.fosterHomeQuiz}});
+    res.render('foster-home-quiz', {data: {baseRef, meta: meta.fosterHomeQuiz}});
 });
 app.get('/news', function (req, res) {
-    res.render('news', {data: {baseRef, css, meta: meta.news}});
+    res.render('news', {data: {baseRef, meta: meta.news}});
 });
 app.get('/news/urgent-need-for-foster-parents-in-ontario', function (req, res) {
-    res.render('urgent-need-for-foster-parents-in-ontario', {data: {baseRef, css, meta: meta.urgentNeedForFosterParentsInOntario}});
+    res.render('urgent-need-for-foster-parents-in-ontario', {data: {baseRef, meta: meta.urgentNeedForFosterParentsInOntario}});
 });
 app.get('/privacy-policy', function(req, res) {
-    res.render('privacy-policy', {data: {baseRef, css}});
+    res.render('privacy-policy', {data: {baseRef}});
 });
+app.get('/sitemap', function (req, res) {
+    res.status(200).sendFile('assets/sitemap-2018-07-13-23-28-42.xml', {root: __dirname});
+})
 // Redirect from old site links
 app.get('/care-program', function (req, res) {
     return res.redirect(301, '/care-programs');

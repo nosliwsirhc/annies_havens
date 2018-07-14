@@ -1,9 +1,9 @@
 /node_modules
 /config/*
-*.jpg
-*.png
-*.mp4
-*.gif
+/assets/images/*.jpg
+/assets/images/*.png
+/assets/video/*.mp4
+/assets/images/*.gif
 .DS_Store
 .DS_Store?
 ._*
