@@ -1,0 +1,13 @@
+<div class="container">
+    <h1>Message Received</h1>
+    <p>Please allow up to 24-hours for us to reply. Thanks for getting in touch!</p>
+    <p>You will be automatically taken back to the previous page in 3 seconds...</p>
+</div>
+
+{{#section 'script'}}
+    <script>
+        setTimeout(function() {
+            location.assign('/contact-us');
+        }, 3000);
+    </script>
+{{/section}}

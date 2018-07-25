@@ -122,6 +122,9 @@ app.post('/contact-us', function (req, res) {
         });
     })
 });
+app.get('/contact-success', function(req, res) {
+    res.render('contact-success', {data: {baseRef, noFooter: true}});
+});
 app.get('/foster-parenting/foster-care-in-ontario', function (req, res) {
     res.render('foster-care-in-ontario', {data: {baseRef, meta: meta.fosterOntario}});
 });

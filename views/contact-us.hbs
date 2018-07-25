@@ -145,7 +145,8 @@
             .then((data) => {
                 if(data.success) {
                     contactForm.reset();
-                    M.toast({html: "Thanks! We'll be getting back to you soon.", displayLength: 5000});
+                    // M.toast({html: "Thanks! We'll be getting back to you soon.", displayLength: 5000});
+                    window.location('/contact-success');
                 }
                 if(!data.success) {
                     M.toast({html: 'Verification failed. You may be a bot...'});
