@@ -92,7 +92,7 @@ app.post('/contact-us', function (req, res) {
             `,
             html: `
                 <p><strong>Sender's Name:</strong> ${req.body.firstName} ${req.body.lastName}</p>
-                <p><strong>Sender's Email:</strong ${req.body.email}</p>
+                <p><strong>Sender's Email:</strong> ${req.body.email}</p>
                 <p><strong>Subject:</strong> ${req.body.subject}</p>
                 <p><strong>Question:</strong><br>
                 ${req.body.message}</p>
