@@ -1,15 +1,38 @@
 {{> page-header}}
 <section class="container">
     <p>Take this short quiz to quickly see if you qualify to start the application process.</p>
-    <p>Please answer truthfully. None of the information you provide in this quiz is used for any purpose other than to pre-screen
-        you as an applicant. This helps people who do not qualify from having to go through the application process only
+    <p>Please answer truthfully. None of the information you provide in this quiz is used for any purpose other than to
+        pre-screen
+        you as an applicant. This helps people who do not qualify from having to go through the application process
+        only
         to be denied several weeks later.</p>
-    <p>If you do not submit your answers at the end, we will receive none of your personal information. If you do not qualify
+    <p>If you do not submit your answers at the end, we will receive none of your personal information. If you do not
+        qualify
         you will have no option to submit.</p>
     <div class="card">
         <div class="card-content">
             <span class="card-title">Quiz</span>
             <form name="foster-home-quiz">
+                <div class="divider"></div>
+                <div class="row valign-wrapper">
+                    <div class="col s3 m2 xl1">
+                        <label>
+                            <input class="with-gap" name="special-needs-experience" data-errorvalue="no" value="no" type="radio" />
+                            <span>No</span>
+                        </label>
+                        <br>
+                        <label>
+                            <input class="with-gap" name="special-needs-experience" data-errorvalue="no" value="yes" type="radio" />
+                            <span>Yes</span>
+                        </label>
+                    </div>
+                    <div class="col s9 m10 xl11">
+                        <p>Do you have any professional or personal experience with special needs children or adults?</p>
+                    </div>
+                </div>
+                <div id="special-needs-experience-error" class="quiz-error">
+                    <p>We prefer homes with prior experience. You may still inquire, however, it will limit prospective referrals of children to your home.</p>
+                </div>
                 <div class="divider"></div>
                 <div class="row valign-wrapper">
                     <div class="col s3 m2 xl1">
@@ -24,7 +47,8 @@
                         </label>
                     </div>
                     <div class="col s9 m10 xl11">
-                        <p>Has anyone in your home ever been convicted of a serious crime and/or a crime involving a child?</p>
+                        <p>Has anyone in your home ever been convicted of a serious crime and/or a crime involving a
+                            child?</p>
                     </div>
                 </div>
                 <div id="crime-error" class="quiz-error">
@@ -84,7 +108,8 @@
                         </label>
                     </div>
                     <div class="col s9 m10 xl11">
-                        <p>Do any of the people in your home have any active substance abuse issues (alcoholism, drug abuse)?</p>
+                        <p>Do any of the people in your home have any active substance abuse issues (alcoholism, drug
+                            abuse)?</p>
                     </div>
                 </div>
                 <div id="substance-abuse-error" class="quiz-error">
@@ -104,7 +129,8 @@
                         </label>
                     </div>
                     <div class="col s9 m10 xl11">
-                        <p>Do any of the people in your home suffer from a contagious health issue for which they are not being
+                        <p>Do any of the people in your home suffer from a contagious health issue for which they are
+                            not being
                             treated?
                         </p>
                     </div>
@@ -126,7 +152,8 @@
                         </label>
                     </div>
                     <div class="col s9 m10 xl11">
-                        <p>Do any of the people in your home suffer from a mental health issue for which they are not being
+                        <p>Do any of the people in your home suffer from a mental health issue for which they are not
+                            being
                             treated?</p>
                     </div>
                 </div>
@@ -148,7 +175,8 @@
                     </div>
                 </div>
                 <div id="schedule-error" class="quiz-error">
-                    <p>Sorry, you must have at least a flexible schedule due to he many appointments and unexpected circumstances which may come up.</p>
+                    <p>Sorry, you must have at least a flexible schedule due to he many appointments and unexpected
+                        circumstances which may come up.</p>
                 </div>
                 <div class="divider"></div>
                 <div class="row valign-wrapper">
@@ -206,7 +234,9 @@
                     </div>
                 </div>
                 <div id="tenants-error" class="quiz-error">
-                    <p>Warning. Tenants must be in a separate area of the home that is locked off and has a separate entrance. Common areas such as laundry rooms must be 'dead-bolted'. Tenants must also submit to a Vulnerable Sector Police Check to ensure they have no child or sex-related offences.</p>
+                    <p>Warning. Tenants must be in a separate area of the home that is locked off and has a separate
+                        entrance. Common areas such as laundry rooms must be 'dead-bolted'. Tenants must also submit to
+                        a Vulnerable Sector Police Check to ensure they have no child or sex-related offences.</p>
                 </div>
                 <div class="divider"></div>
                 <div class="row valign-wrapper">
@@ -222,7 +252,8 @@
                         </label>
                     </div>
                     <div class="col s9 m10 xl11">
-                        <p>Do you or your partner (if applicable) have any post-secondary education (i.e. college, university)?</p>
+                        <p>Do you or your partner (if applicable) have any post-secondary education (i.e. college,
+                            university)?</p>
                     </div>
                 </div>
                 <div id="post-secondary-error" class="quiz-error">
@@ -246,7 +277,8 @@
                     </div>
                 </div>
                 <div id="computer-error" class="quiz-error">
-                    <p>Sorry, there are a lot of forms which must be submitted online and use of the web and other internet technologies is a requirement.</p>
+                    <p>Sorry, there are a lot of forms which must be submitted online and use of the web and other
+                        internet technologies is a requirement.</p>
                 </div>
                 <div class="divider"></div>
                 <div class="row valign-wrapper">
@@ -266,7 +298,8 @@
                     </div>
                 </div>
                 <div id="drivers-license-error" class="quiz-error">
-                    <p>Sorry, you need to have a valid G driver's license to be able to take children and youth to distant appointments.</p>
+                    <p>Sorry, you need to have a valid G driver's license to be able to take children and youth to
+                        distant appointments.</p>
                 </div>
                 <div class="divider"></div>
                 <div class="row valign-wrapper">
@@ -306,7 +339,8 @@
                     </div>
                 </div>
                 <div id="care-direction-error" class="quiz-error">
-                    <p>Sorry, foster parents become a central part of a care team but must work as a positive and compliant team member.</p>
+                    <p>Sorry, foster parents become a central part of a care team but must work as a positive and
+                        compliant team member.</p>
                 </div>
             </form>
         </div>
@@ -320,43 +354,43 @@
 {{> read-more}}
 
 {{#section 'script'}}
-    <script>
-        function toggleQuizError(formRef, question, errorValue) {
-            const qSelector = `#${question.name}-error`;
-            const errorRef = formRef.querySelector(qSelector);
-            if(question.value === errorValue) {
-                errorRef.style.display = "block";
-                setTimeout(() => {
+<script>
+    function toggleQuizError(formRef, question, errorValue) {
+        const qSelector = `#${question.name}-error`;
+        const errorRef = formRef.querySelector(qSelector);
+        if (question.value === errorValue) {
+            errorRef.style.display = "block";
+            setTimeout(() => {
                 errorRef.style.opacity = "1";
-                }, 1);
-            } else {
-                errorRef.style.opacity = "0";
-                setTimeout(() => {
+            }, 1);
+        } else {
+            errorRef.style.opacity = "0";
+            setTimeout(() => {
                 errorRef.style.display = "none";
-                }, 400);
-            }
+            }, 400);
         }
+    }
 
-        // Foster Home Quiz
-        const fosterHomeQuiz = document.forms['foster-home-quiz'];
-        if(fosterHomeQuiz) {
-            quizState = {};
-            fosterHomeQuiz.addEventListener('change', function(event) {
+    // Foster Home Quiz
+    const fosterHomeQuiz = document.forms['foster-home-quiz'];
+    if (fosterHomeQuiz) {
+        quizState = {};
+        fosterHomeQuiz.addEventListener('change', function (event) {
             const field = event.target;
             const qErrorVal = field.dataset.errorvalue;
             toggleQuizError(fosterHomeQuiz, field, qErrorVal);
             // This doesn't work with radio fields
-            for(let i=0; i<fosterHomeQuiz.length; i++) {
+            for (let i = 0; i < fosterHomeQuiz.length; i++) {
                 quizState[fosterHomeQuiz.elements[i].name] = fosterHomeQuiz.elements[i].value;
             }
             console.log(quizState);
-            });
-        }
+        });
+    }
 
-        // Select Fields
-        const selectFields = document.querySelectorAll('select');
-        if (selectFields) {
-            M.FormSelect.init(selectFields, {});
-        }
-    </script>
+    // Select Fields
+    const selectFields = document.querySelectorAll('select');
+    if (selectFields) {
+        M.FormSelect.init(selectFields, {});
+    }
+</script>
 {{/section}}
