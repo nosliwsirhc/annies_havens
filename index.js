@@ -42,7 +42,7 @@ transporter.verify(function(error, success) {
     }
 });
 
-const baseRef = "https://devsite.annieshavens.ca/";
+const baseRef = "https://annieshavens.ca/";
 
 // Site Links
 app.get('/', function (req, res) {
@@ -101,18 +101,16 @@ app.post('/contact-us', function (req, res) {
             if(err) {
                 return res.json({'success': false, 'message': 'We had some trouble...'})
             }
-            console.log(info.envelope);
-            console.log(info.messageId);
             res.json({'success': true, 'delivered': true, 'message': 'Your query has been submitted.'});
             transporter.sendMail({
                 from: 'chriswilson@annieshavens.ca',
                 to: req.body.email,
                 subject: "Annie's Havens has received your message",
-                text: "Your message has been sent. Please allow up to 24-hours for a response.",
+                text: "Your message has been sent. Please allow up to two (2) business days for a response.",
                 html: `
                     <h1>Thanks for getting in touch!</h1>
-                    <p>We'll do our very reply as quickly as possible. It may take up to 24-hours for us to respond.</p>
-                    <p>While you're waiting, have a look at the rest of <a href="https://www.annieshavens.ca">our site</a>.</p>
+                    <p>We'll do our very reply as quickly as possible. It may take up to two (2) business days for us to respond.</p>
+                    <p>While you're waiting, have a look at the rest of <a href="https://annieshavens.ca">our site</a>.</p>
                     <br><p>Sincerely,</p>
                     <p>Chris Wilson<br>Program Supervisor</p>
                 `
@@ -177,11 +175,11 @@ app.post('/foster-parenting/faq', function (req, res) {
                 from: 'chriswilson@annieshavens.ca',
                 to: req.body.email,
                 subject: "Question to Annie's Havens Submitted",
-                text: "Your question has been submitted. Please allow up to 24-hours for a response.",
+                text: "Your question has been submitted. Please allow up to two (2) business days for a response.",
                 html: `
                     <h1>Thanks for your question!</h1>
-                    <p>We'll do our very best to answer your question as quickly as possible. It may take up to 24-hours for us to respond.</p>
-                    <p>While you're waiting, have a look at the rest of <a href="https://www.annieshavens.ca">our site</a>.</p>
+                    <p>We'll do our very best to answer your question as quickly as possible. It may take up to two (2) business days for us to respond.</p>
+                    <p>While you're waiting, have a look at the rest of <a href="https://annieshavens.ca">our site</a>.</p>
                     <br><p>Sincerely,</p>
                     <p>Chris Wilson<br>Program Supervisor</p>
                 `
@@ -214,7 +212,7 @@ app.get('/privacy-policy', function(req, res) {
     res.render('privacy-policy', {data: {baseRef}});
 });
 app.get('/sitemap', function (req, res) {
-    res.status(200).sendFile('assets/sitemap-2018-07-13-23-28-42.xml', {root: __dirname});
+    res.status(200).sendFile('assets/sitemap', {root: __dirname});
 })
 // Redirect from old site links
 app.get('/care-program', function (req, res) {
