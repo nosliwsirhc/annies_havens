@@ -46,22 +46,22 @@ const baseRef = "https://annieshavens.ca/";
 
 // Site Links
 app.get('/', function (req, res) {
-    res.render('home', {data: {baseRef, meta: meta.home}});
+    res.render('home', {data: {baseRef, meta: meta.home, canonical: req.protocol + '://' + req.get('host') + req.originalUrl}});
 });
 app.get('/about-us', function(req, res) {
-    res.render('about-us', {data: {baseRef, meta: meta.aboutUs}});
+    res.render('about-us', {data: {baseRef, meta: meta.aboutUs, canonical: req.protocol + '://' + req.get('host') + req.originalUrl}});
 });
 app.get('/care-programs', function(req,res) {
-    res.render('care-programs', {data: {baseRef, meta: meta.carePrograms}});
+    res.render('care-programs', {data: {baseRef, meta: meta.carePrograms, canonical: req.protocol + '://' + req.get('host') + req.originalUrl}});
 });
 app.get('/referral-sources', function (req, res) {
-    res.render('referral-sources', {data: {baseRef, meta: meta.referralSources}});
+    res.render('referral-sources', {data: {baseRef, meta: meta.referralSources, canonical: req.protocol + '://' + req.get('host') + req.originalUrl}});
 });
 app.get('/service-area', function (req, res) {
-    res.render('service-area', {data: {baseRef, meta: meta.serviceArea}});
+    res.render('service-area', {data: {baseRef, meta: meta.serviceArea, canonical: req.protocol + '://' + req.get('host') + req.originalUrl}});
 });
 app.get('/contact-us', function (req, res) {
-    res.render('contact-us', {data: {baseRef, meta: meta.contactUs}});
+    res.render('contact-us', {data: {baseRef, meta: meta.contactUs, canonical: req.protocol + '://' + req.get('host') + req.originalUrl}});
 });
 app.post('/contact-us', function (req, res) {
     if(req.body.token === null || req.body.token === undefined || req.body.token === '') {
@@ -122,16 +122,16 @@ app.post('/contact-us', function (req, res) {
     })
 });
 app.get('/contact-success', function(req, res) {
-    res.render('contact-success', {data: {baseRef, noFooter: true}});
+    res.render('contact-success', {data: {baseRef, noFooter: true, canonical: req.protocol + '://' + req.get('host') + req.originalUrl}});
 });
 app.get('/foster-parenting/foster-care-in-ontario', function (req, res) {
-    res.render('foster-care-in-ontario', {data: {baseRef, meta: meta.fosterOntario}});
+    res.render('foster-care-in-ontario', {data: {baseRef, meta: meta.fosterOntario, canonical: req.protocol + '://' + req.get('host') + req.originalUrl}});
 });
 app.get('/foster-parenting/what-is-foster-parenting', function (req, res) {
-    res.render('what-is-foster-parenting', {data: {baseRef, meta: meta.whatIsFosterParenting}});
+    res.render('what-is-foster-parenting', {data: {baseRef, meta: meta.whatIsFosterParenting, canonical: req.protocol + '://' + req.get('host') + req.originalUrl}});
 });
 app.get('/foster-parenting/faq', function (req, res) {
-    res.render('faq', {data: {baseRef, meta: meta.faq}});
+    res.render('faq', {data: {baseRef, meta: meta.faq, canonical: req.protocol + '://' + req.get('host') + req.originalUrl}});
 });
 app.post('/foster-parenting/faq', function (req, res) {
     if(req.body.token === null || req.body.token === undefined || req.body.token === '') {
@@ -191,25 +191,25 @@ app.post('/foster-parenting/faq', function (req, res) {
     })
 });
 app.get('/foster-parenting/children-in-care', function (req, res) {
-    res.render('children-in-care', {data: {baseRef, meta: meta.childrenInCare}});
+    res.render('children-in-care', {data: {baseRef, meta: meta.childrenInCare, canonical: req.protocol + '://' + req.get('host') + req.originalUrl}});
 });
 app.get('/foster-parenting/family-involvement', function (req, res) {
-    res.render('family-involvement', {data: {baseRef, meta: meta.familyInvolvement}});
+    res.render('family-involvement', {data: {baseRef, meta: meta.familyInvolvement, canonical: req.protocol + '://' + req.get('host') + req.originalUrl}});
 });
 app.get('/foster-parenting/foster-parent-application-process', function (req, res) {
-    res.render('foster-parent-application-process', {data: {baseRef, meta: meta.fosterParentApplicationProcess}});
+    res.render('foster-parent-application-process', {data: {baseRef, meta: meta.fosterParentApplicationProcess, canonical: req.protocol + '://' + req.get('host') + req.originalUrl}});
 });
 app.get('/foster-parenting/foster-home-quiz', function (req, res) {
-    res.render('foster-home-quiz', {data: {baseRef, meta: meta.fosterHomeQuiz}});
+    res.render('foster-home-quiz', {data: {baseRef, meta: meta.fosterHomeQuiz, canonical: req.protocol + '://' + req.get('host') + req.originalUrl}});
 });
 app.get('/news', function (req, res) {
     res.render('news', {data: {baseRef, meta: meta.news}});
 });
 app.get('/news/urgent-need-for-foster-parents-in-ontario', function (req, res) {
-    res.render('urgent-need-for-foster-parents-in-ontario', {data: {baseRef, meta: meta.urgentNeedForFosterParentsInOntario}});
+    res.render('urgent-need-for-foster-parents-in-ontario', {data: {baseRef, meta: meta.urgentNeedForFosterParentsInOntario, canonical: req.protocol + '://' + req.get('host') + req.originalUrl}});
 });
 app.get('/privacy-policy', function(req, res) {
-    res.render('privacy-policy', {data: {baseRef}});
+    res.render('privacy-policy', {data: {baseRef, canonical: req.protocol + '://' + req.get('host') + req.originalUrl}});
 });
 app.get('/sitemap', function (req, res) {
     res.status(200).sendFile('assets/sitemap', {root: __dirname});
