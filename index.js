@@ -88,12 +88,16 @@ app.post('/contact-us', function (req, res) {
             text: `
                 From: ${req.body.firstName} ${req.body.lastName}
                 Subject: ${req.body.subject}
+                Has Spouse: ${req.body.hasSpouse}
+                Stay At Home Parent: ${req.body.stayAtHome}
                 Message: ${req.body.message}
             `,
             html: `
                 <p><strong>Sender's Name:</strong> ${req.body.firstName} ${req.body.lastName}</p>
                 <p><strong>Sender's Email:</strong> ${req.body.email}</p>
                 <p><strong>Subject:</strong> ${req.body.subject}</p>
+                <p><strong>Has Spouse:</strong> ${req.body.hasSpouse}</p>
+                <p><strong>Stay At Home Parent:</strong> ${req.body.stayAtHome}</p>
                 <p><strong>Question:</strong><br>
                 ${req.body.message}</p>
             `

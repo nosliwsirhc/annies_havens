@@ -1,45 +1,140 @@
 {{> page-header}}
 <div class="container">
-    <p>We are always open letting people know more about our program and what is involved in becoming a foster parent. Feel free to use our contact form, email us directly or give us a call.</p>
-    <div class="row contact-cards">
+    <p>We are always open letting people know more about our program and what is involved in becoming a foster parent.
+        Feel free to use our contact form, email us directly or give us a call.</p>
+
+    <div class="card contact-form">
+        <div class="card-content">
+            <span class="card-title">Contact Form</span>
+            <form id="contact-form" name="contact-form">
+                <div class="row">
+                    <div class="input-field col s12 m6">
+                        <input type="text" id="first-name" name="first-name" class="validate" pattern=".{2,}" required>
+                        <label for="first-name">First Name</label>
+                        <span class="helper-text" data-error="Must be two or more characters" data-success=""></span>
+                    </div>
+                    <div class="input-field col s12 m6">
+                        <input type="text" id="last-name" name="last-name" class="validate" pattern=".{2,}" required>
+                        <label for="last-name">Last Name</label>
+                        <span class="helper-text" data-error="Must be two or more characters" data-success=""></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12 l6">
+                        <input type="email" id="email" name="email" class="validate" required>
+                        <label for="email">Email</label>
+                        <span class="helper-text" data-error="Must be a valid email address" data-success=""></span>
+                    </div>
+                    <div class="input-field col s12 l6">
+                        <select name="subject" id="subject" value="Foster Parenting">
+                            <option value="Foster Parenting" selected>Foster Parenting</option>
+                            <option value="Employment">Employment</option>
+                            <option value="General Inquiry">General Inquiry</option>
+                        </select>
+                        <label for="subject">Subject</label>
+                    </div>
+                </div>
+                <div class="row" id="fosterparentapplicant">
+                    <div class="col s12 m6">
+                        <p>Do you have a spouse?</p>
+                        <p>
+                            <label>
+                                <input name="hasspouse" data-option="Yes" type="radio" class="validate" value="Yes" required />
+                                <span>Yes</span>
+                            </label>
+                        </p>
+                        <p>
+                            <label>
+                                <input name="hasspouse" data-option="No" type="radio" class="validate" value="No" />
+                                <span>No</span>
+                            </label>
+                        </p>
+                        <span class="helper-text" id="has-spouse-error" style="color: #F44336; font-size: 12px;">Must have a spouse</span>
+                    </div>
+                    <div class="col s12 m6">
+                        <p>Is one adult a stay-at-home parent?</p>
+                        <p>
+                            <label>
+                                <input name="stayathome" type="radio" data-option="Yes" />
+                                <span>Yes</span>
+                            </label>
+                        </p>
+                        <p>
+                            <label>
+                                <input name="stayathome" type="radio" data-option="No" />
+                                <span>No</span>
+                            </label>
+                        </p>
+                        <span class="helper-text" id="stay-at-home-error" style="color: #F44336; font-size: 12px;">Must have one stay at home parent</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s12">
+                        <textarea name="message" id="message" class="materialize-textarea validate" pattern=".{2,}" required></textarea>
+                        <label for="message">Message</label>
+                        <span class="helper-text" data-error="Must have two or more characters" data-success=""></span>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="card-action">
+            <div class="g-recaptcha" data-sitekey="6LceOl8UAAAAANNkfF5sAahY6MQZ8rBtPEykFIUJ" data-callback="setToken" data-expired-callback="expireToken"></div>
+            <input type="submit" value="Send Your Message" id="submit-button" class="btn-flat" style="margin-top: 1.5rem;" />
+            {{!-- <button class="g-recaptcha btn-flat" id="submit-button" data-sitekey="6LceOl8UAAAAANNkfF5sAahY6MQZ8rBtPEykFIUJ"
+                data-callback="submitContactForm">
+                Send Your Message
+            </button> --}}
+        </div>
+    </div>
+
+
+    <div class="divider" id="contact"></div>
+
+    <div class="row">
         <div class="col s12 l6">
             <div class="card contact-card">
                 <div class="card-image">
-                    <img src="https://firebasestorage.googleapis.com/v0/b/annies-havens.appspot.com/o/images%2Fcontact-us.jpg?alt=media&token=1442d80b-46af-4b01-99d1-c94a622534e8" alt="contact us icons">
+                    <img src="https://firebasestorage.googleapis.com/v0/b/annies-havens.appspot.com/o/images%2Fcontact-us.jpg?alt=media&token=1442d80b-46af-4b01-99d1-c94a622534e8"
+                        alt="contact us icons">
                 </div>
                 <div class="card-content">
-                    <span class="card-title">Contact Us</span>   
+                    <span class="card-title">Contact Us</span>
                     <div class="row">
                         <div class="col s2 m1">
                             <i class="material-icons">phone</i>
                         </div>
                         <div class="col s10 m11">
-                            <p style="font-size: 1.2rem; line-height: 1.5rem;"><strong>Toll-Free: 1 (866) 321-2137</strong></p>
+                            <p style="font-size: 1.2rem; line-height: 1.5rem;"><strong>Toll-Free: 1 (866)
+                                    321-2137</strong></p>
                             <p>Placement @ ext. 958</p>
                             <p>New Foster Homes @ ext. 956</p>
                             <p>Programs @ ext. 984</p>
                         </div>
-                    </div> 
+                    </div>
                     <div class="row">
                         <div class="col s2 m1">
                             <i class="material-icons">email</i>
                         </div>
                         <div class="col s10 m11">
-                            <p style="font-size: 1.2rem; line-height: 1.5rem;"><strong><a href="mailto:williamwilson@annieshavens.ca">New Home Inquiries</a></strong></p>
+                            <p style="font-size: 1.2rem; line-height: 1.5rem;"><strong><a
+                                        href="mailto:williamwilson@annieshavens.ca">New Home Inquiries</a></strong></p>
                             <p><a href="mailto:williamwilson@annieshavens.ca">William Wilson</a></p>
                             <p><a href="mailto:hildawilson@annieshavens.ca">Hilda Wilson</a></p>
                             <p><a href="mailto:chriswilson@annieshavens.ca">Chris Wilson</a></p>
                             <p><a href="mailto:laurarudolph@annieshavens.ca">Laura Rudolph</a></p>
+                            <p><a href="mailto:inayahamadani@annieshavens.ca">Inaya Hamadani</a></p>
+                            <p><a href="mailto:tracygodden@annieshavens.ca">Tracy Godden</a></p>
                             <p><a href="mailto:huichen@annieshavens.ca">Hui Chen</a></p>
                         </div>
-                    </div>               
+                    </div>
                 </div>
             </div>
         </div>
         <div class="col s12 l6">
             <div class="card contact-card">
                 <div class="card-image">
-                    <img src="https://firebasestorage.googleapis.com/v0/b/annies-havens.appspot.com/o/images%2Flocation-2.jpg?alt=media&token=7c2a3e29-bae6-462b-8dae-54081a0f1673" alt="map to office">
+                    <img src="https://firebasestorage.googleapis.com/v0/b/annies-havens.appspot.com/o/images%2Flocation-2.jpg?alt=media&token=7c2a3e29-bae6-462b-8dae-54081a0f1673"
+                        alt="map to office">
                 </div>
                 <div class="card-content">
                     <span class="card-title">Location</span>
@@ -57,101 +152,243 @@
             </div>
         </div>
     </div>
-    <div class="divider" id="contact"></div>
 
-        <div class="card">
-            <div class="card-content">
-                <span class="card-title">Contact Form</span>
-                <form id="contact-form">
-                    <div class="row">
-                        <div class="input-field col s12 m6">
-                            <input type="text" id="first-name" name="first-name">
-                            <label for="first-name">First Name</label>
-                        </div>
-                        <div class="input-field col s12 m6">
-                            <input type="text" id="last-name" name="last-name">
-                            <label for="last-name">Last Name</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s12 l6">
-                            <input type="email" id="email" name="email">
-                            <label for="email">Email</label>
-                        </div>
-                        <div class="input-field col s12 l6">
-                            <select name="subject" id="subject">
-                                <option value="Foster Parenting" selected>Foster Parenting</option>
-                                <option value="Employment">Employment</option>
-                                <option value="General Inquiry">General Inquiry</option>
-                            </select>
-                            <label for="subject">Subject</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col s12">
-                            <textarea name="message" id="message" class="materialize-textarea"></textarea>
-                            <label for="message">Message</label>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="card-action">
-                <button class="g-recaptcha btn-flat" data-sitekey="6LceOl8UAAAAANNkfF5sAahY6MQZ8rBtPEykFIUJ" data-callback="submitContactForm">
-                    Send Your Message
-                </button>
-            </div>
-        </div>
-    </div>
 </div>
 
 {{!-- Read More --}}
 {{> read-more}}
 
 {{#section 'script'}}
-    <script>
-        // Form Select
-        const formSelects = document.querySelectorAll('select');
-        M.FormSelect.init(formSelects, {});
+<script>
+    // Form Select
+    const formSelects = document.querySelectorAll('select');
+    M.FormSelect.init(formSelects, {});
 
-        // Contact Us Form
-        const contactForm = document.getElementById('contact-form');
-        if(contactForm) {
-            contactForm.addEventListener('submit', submitContactForm);
+    // Submit Button
+    const submitButton = document.getElementById('submit-button');
+    submitButton.disabled = true;
+    submitButton.addEventListener('click', submitContactForm);
+
+    // Hide error messages
+    const hasSpouseError = document.getElementById('has-spouse-error');
+    hasSpouseError.style.display = 'none';
+
+    const stayAtHomeError = document.getElementById('stay-at-home-error');
+    stayAtHomeError.style.display = 'none';
+
+    // Contact Us Form
+    const contactForm = document.querySelector('#contact-form');
+
+    // Variables
+    var isValid = false;
+    var isFosterParent = true;
+
+    // Subject input changes the display of the foster parent applicant block
+    const subject = contactForm.querySelector('#subject');
+    subject.addEventListener('change', () => {
+        const fosterParentApplicant = contactForm.querySelector('#fosterparentapplicant');
+        if (subject.value !== 'Foster Parenting') {
+            fosterParentApplicant.style.display = "none";
+            isFosterParent = false;
+        } else {
+            fosterParentApplicant.style.display = "block";
+            isFosterParent = true;
         }
+    });
 
-        function submitContactForm(token) {
-            const firstName = contactForm.querySelector('#first-name').value;
-            const lastName = contactForm.querySelector('#last-name').value;
-            const email = contactForm.querySelector('#email').value;
-            const subject = contactForm.querySelector('#subject').value;
-            const message = contactForm.querySelector('#message').value;
+    // Form Inputs
+    const firstName = document.querySelector('#first-name');
+    const lastName = document.querySelector('#last-name');
+    const email = document.querySelector('#email');
+    const hasSpouse = document.forms["contact-form"].elements["hasspouse"];
+    const stayAtHome = document.forms["contact-form"].elements["stayathome"];
+    const message = document.querySelector('#message');
 
-            fetch('/contact-us', {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json, text/plain, */**',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    firstName,
-                    lastName,
-                    email,
-                    subject,
-                    message,
-                    token
-                })
+    // Validation
+    var firstNameValidation = {
+        valid: false,
+        touched: false,
+        message: ''
+    };
+    firstName.addEventListener('blur', () => {
+        firstNameValidation.touched = true;
+        if(firstName.value.length > 2) {
+            firstNameValidation.valid = true;
+            firstNameValidation.message = '';
+        } else {
+            firstNameValidation.valid = false;
+            firstNameValidation.message = 'Must be 2 or more characters'
+        }
+        validateForm();
+    });
+
+    var lastNameValidation = {
+        valid: false,
+        touched: false,
+        message: ''
+    };
+    lastName.addEventListener('blur', () => {
+        lastNameValidation.touched = true;
+        if(lastName.value.length > 2) {
+            lastNameValidation.valid = true;
+            lastNameValidation.message = '';
+        } else {
+            lastNameValidation.valid = false;
+            lastNameValidation.message = 'Must be 2 or more characters';
+        }
+        validateForm();
+    });
+
+    var emailValidation = {
+        valid: false,
+        touched: false,
+        message: ''
+    };
+    email.addEventListener('blur', () => {
+        emailValidation.touched = true;
+        const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        if(re.test(String(email.value).toLowerCase())) {
+            emailValidation.valid = true;
+            emailValidation.message = '';
+        } else {
+            emailValidation.valid = false;
+            emailValidation.message = 'Please provide a valid email address';
+        }
+        validateForm();
+    });
+
+    var hasSpouseValidation = {
+        valid: false,
+        touched: false,
+        message: ''
+    };
+    for(var i = 0, max = hasSpouse.length; i < max; i++) {
+        hasSpouse[i].onchange = function(radio = hasSpouse[i]) {
+            const hasSpouseMessage = document.getElementById('has-spouse-message');
+            hasSpouseValidation.touched = true;
+            if(radio.target.dataset.option == 'Yes' && radio.target.checked === true) {
+                hasSpouseValidation.valid = true;
+                hasSpouseValidation.message = '';
+                hasSpouseError.style.display = 'none';
+            } else {
+                hasSpouseValidation.valid = false;
+                hasSpouseValidation.message = 'Applicants must have a spouse';
+                hasSpouseError.style.display = 'block';
+            }
+            validateForm();
+        }
+    }
+
+    var stayAtHomeValidation = {
+        valid: false,
+        touched: false,
+        message: ''
+    };
+    for(var i = 0, max = stayAtHome.length; i < max; i++) {
+        stayAtHome[i].onchange = function(radio = stayAtHome[i]) {
+            stayAtHomeValidation.touched = true;
+            if(radio.target.dataset.option == 'Yes' && radio.target.checked === true) {
+                stayAtHomeValidation.valid = true;
+                stayAtHomeValidation.message = '';
+                stayAtHomeError.style.display = 'none';
+            } else {
+                stayAtHomeValidation.valid = false;
+                stayAtHomeValidation.message = 'Must have one stay-at-home parent';
+                stayAtHomeError.style.display = 'block';
+            }
+            validateForm();
+        }
+    }
+
+    var messageValidation = {
+        valid: false,
+        touched: false,
+        message: ''
+    };
+    message.addEventListener('blur', () => {
+        messageValidation.touched = true;
+        if(message.value.length > 0) {
+            messageValidation.valid = true;
+            messageValidation.message = '';
+        } else {
+            messageValidation.valid = false;
+            messageValidation.message = 'Please enter a message';
+        }
+        validateForm();
+    });
+
+    // Recaptcha Token Grab
+    var token = '';
+    function setToken(e) {
+        token = e;
+        validateForm();
+    }
+    function expireToken() {
+        token = '';
+        validateForm();
+    }
+
+    function validateForm() {
+        if(
+            firstNameValidation.valid &&
+            lastNameValidation.valid &&
+            emailValidation.valid &&
+            messageValidation.valid &&
+            token !== '' &&
+            validateFosterParent()
+        ) {
+            isValid = true;
+            submitButton.disabled = false;
+        } else {
+            isValid = false;
+            submitButton.disabled = true;
+        }
+    }
+
+    function validateFosterParent() {
+        if(subject.value == 'Foster Parenting') {
+            if(hasSpouseValidation.valid && stayAtHomeValidation) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return true;
+        }
+    }
+
+    function submitContactForm(e) {
+        console.log('Submit in progress');
+        e.preventDefault();
+        submitButton.disabled = true;
+        fetch('/contact-us', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json, text/plain, */**',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                firstName: firstName.value,
+                lastName: lastName.value,
+                email: email.value,
+                subject: subject.value,
+                hasSpouse: hasSpouse.value,
+                stayAtHome: stayAtHome.value,
+                message: message.value,
+                token
             })
+        })
             .then((res) => res.json())
             .then((data) => {
-                if(data.success) {
+                if (data.success) {
                     contactForm.reset();
                     // M.toast({html: "Thanks! We'll be getting back to you soon.", displayLength: 5000});
                     location.assign('/contact-success');
                 }
-                if(!data.success) {
-                    M.toast({html: 'Verification failed. You may be a bot...'});
+                if (!data.success) {
+                    M.toast({ html: 'Verification failed. You may be a bot...' });
                 }
             })
-        }
-    </script>
+    }
+</script>
 {{/section}}

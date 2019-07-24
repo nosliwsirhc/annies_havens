@@ -340,8 +340,9 @@ video {
     height: auto;
 }
 
-.contact-cards {
+.contact-form {
     margin-top: 2rem;
+    margin-bottom: 1.5rem;
 }
 
 .contact-card .card-title {
