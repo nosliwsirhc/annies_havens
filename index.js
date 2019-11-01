@@ -88,16 +88,16 @@ app.post('/contact-us', function (req, res) {
             text: `
                 From: ${req.body.firstName} ${req.body.lastName}
                 Subject: ${req.body.subject}
-                Has Spouse: ${req.body.hasSpouse}
-                Stay At Home Parent: ${req.body.stayAtHome}
+                Has Spouse: ${req.body.hasSpouse ? 'Yes' : 'No'}
+                Stay At Home Parent: ${req.body.stayAtHome ? 'Yes' : 'No'}
                 Message: ${req.body.message}
             `,
             html: `
                 <p><strong>Sender's Name:</strong> ${req.body.firstName} ${req.body.lastName}</p>
                 <p><strong>Sender's Email:</strong> ${req.body.email}</p>
                 <p><strong>Subject:</strong> ${req.body.subject}</p>
-                <p><strong>Has Spouse:</strong> ${req.body.hasSpouse}</p>
-                <p><strong>Stay At Home Parent:</strong> ${req.body.stayAtHome}</p>
+                <p><strong>Has Spouse:</strong> ${req.body.hasSpouse ? 'Yes' : 'No'}</p>
+                <p><strong>Stay At Home Parent:</strong> ${req.body.stayAtHome ? 'Yes' : 'No'}</p>
                 <p><strong>Question:</strong><br>
                 ${req.body.message}</p>
             `
@@ -113,7 +113,7 @@ app.post('/contact-us', function (req, res) {
                 text: "Your message has been sent. Please allow up to two (2) business days for a response.",
                 html: `
                     <h1>Thanks for getting in touch!</h1>
-                    <p>We'll do our very reply as quickly as possible. It may take up to two (2) business days for us to respond.</p>
+                    <p>We'll do our best to reply as quickly as possible. It may take up to two (2) business days for us to respond.</p>
                     <p>While you're waiting, have a look at the rest of <a href="https://annieshavens.ca">our site</a>.</p>
                     <br><p>Sincerely,</p>
                     <p>Chris Wilson<br>Program Supervisor</p>
