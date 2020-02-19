@@ -38,7 +38,7 @@ transporter.verify(function(error, success) {
     if (error) {
          console.log(error);
     } else {
-         console.log('G Suite Works');
+         console.log('Office 365 Works');
     }
 });
 
