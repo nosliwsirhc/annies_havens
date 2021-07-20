@@ -2,14 +2,16 @@
 <html lang="en-CA" prefix="og: http://ogp.me/ns/{{meta.ogNamespace}}#">
 
 <head>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-57027634-1"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'UA-57027634-1');
-    </script>
+    <!-- Google Tag Manager -->
+    <script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-PJJX5XT');</script>
+    <!-- End Google Tag Manager -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -31,21 +33,15 @@
     <meta name="keywords" content="{{@meta.keywords}}">
     <meta property="og:locale" content="en_CA">
     {{#each @meta.metaTags}}
-        <meta property="{{this.property}}" content="{{this.content}}">
+    <meta property="{{this.property}}" content="{{this.content}}">
     {{/each}}
 </head>
 
 <body>
-    <div id="fb-root"></div>
-    <script>
-        (function(d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) return;
-            js = d.createElement(s); js.id = id;
-            js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.1';
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
-    </script>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PJJX5XT" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
     <!-- Navigation -->
     <div class="navbar-fixed">
         <ul id="more-dropdown" class="dropdown-content">
@@ -95,11 +91,14 @@
         </ul>
         <nav class="white">
             <div class="nav-wrapper">
-                <a href="/" class="brand-logo left hide-on-med-and-down grey-text text-darken-3" style="margin-left: 1rem;">
-                    <img src="https://firebasestorage.googleapis.com/v0/b/annies-havens.appspot.com/o/images%2Flogo-300-300.png?alt=media&token=deb9960f-30d0-4c7d-ae07-b57b17dc209a" alt="Annie's Havens Logo">
+                <a href="/" class="brand-logo left hide-on-med-and-down grey-text text-darken-3"
+                    style="margin-left: 1rem;">
+                    <img src="https://firebasestorage.googleapis.com/v0/b/annies-havens.appspot.com/o/images%2Flogo-300-300.png?alt=media&token=deb9960f-30d0-4c7d-ae07-b57b17dc209a"
+                        alt="Annie's Havens Logo">
                 </a>
                 <a href="/" class="brand-logo hide-on-large-only grey-text text-darken-3">
-                    <img src="https://firebasestorage.googleapis.com/v0/b/annies-havens.appspot.com/o/images%2Flogo-300-300.png?alt=media&token=deb9960f-30d0-4c7d-ae07-b57b17dc209a" alt="Annie's Havens Logo">
+                    <img src="https://firebasestorage.googleapis.com/v0/b/annies-havens.appspot.com/o/images%2Flogo-300-300.png?alt=media&token=deb9960f-30d0-4c7d-ae07-b57b17dc209a"
+                        alt="Annie's Havens Logo">
                 </a>
                 <a href="#" data-target="mobile-nav" class="sidenav-trigger grey-text text-darken-3">
                     <i class="material-icons">menu</i>
@@ -109,12 +108,14 @@
                         <a href="/" class="grey-text text-darken-3">Home</a>
                     </li>
                     <li>
-                        <a class="grey-text text-darken-3 dropdown-trigger" data-target="foster-parenting-dropdown">Foster Parenting
+                        <a class="grey-text text-darken-3 dropdown-trigger"
+                            data-target="foster-parenting-dropdown">Foster Parenting
                             <i class="material-icons right">arrow_drop_down</i>
                         </a>
                     </li>
                     <li>
-                        <a class="grey-text text-darken-3 dropdown-trigger" href="/care-programs" data-target="care-programs-dropdown">Foster Care Programs
+                        <a class="grey-text text-darken-3 dropdown-trigger" href="/care-programs"
+                            data-target="care-programs-dropdown">Foster Care Programs
                             <i class="material-icons right">arrow_drop_down</i>
                         </a>
                     </li>
@@ -136,7 +137,9 @@
 
     <ul class="sidenav" id="mobile-nav">
         <li><a href="/" class="grey-text text-darken-3">Home</a></li>
-        <li><div class="divider"></div></li>
+        <li>
+            <div class="divider"></div>
+        </li>
         <li><a class="subheader">Foster Parenting</a></li>
         <li><a href="/foster-parenting/foster-care-in-ontario">Foster Care in Ontario</a></li>
         <li><a href="/foster-parenting/what-is-foster-parenting">What Is Foster Parenting?</a></li>
@@ -145,15 +148,21 @@
         <li><a href="/foster-parenting/family-involvement">Family Involvement</a></li>
         <li><a href="/foster-parenting/foster-parent-application-process">Foster Parent Application Process</a></li>
         <li><a href="/foster-parenting/foster-home-quiz">Foster Home Quiz</a></li>
-        <li><div class="divider"></div></li>
+        <li>
+            <div class="divider"></div>
+        </li>
         <li><a href="/care-programs" class="subheader">Care Programs</a></li>
         <li><a href="/care-programs#mainstream">Mainstream</a></li>
         <li><a href="/care-programs#special-needs">Special Needs</a></li>
         <li><a href="/care-programs#trauma-focused">Trauma-Focused Care</a></li>
-        <li><div class="divider"></div></li>
+        <li>
+            <div class="divider"></div>
+        </li>
         <li><a href="/about-us">About Us</a></li>
         <li><a href="/contact-us">Contact</a></li>
-        <li><div class="divider"></div></li>
+        <li>
+            <div class="divider"></div>
+        </li>
         <li><a class="subheader">More...</a></li>
         <li><a href="/news">News</a></li>
         <li><a href="/referral-sources">Referral Sources</a></li>
@@ -168,16 +177,23 @@
         <div class="container">
             <div class="row">
                 <div class="col l2 s12 m2" style="text-align: center;">
-                    <img src="https://firebasestorage.googleapis.com/v0/b/annies-havens.appspot.com/o/images%2Flogo-300-300.png?alt=media&token=deb9960f-30d0-4c7d-ae07-b57b17dc209a" alt="Annie's Havens logo">
+                    <img src="https://firebasestorage.googleapis.com/v0/b/annies-havens.appspot.com/o/images%2Flogo-300-300.png?alt=media&token=deb9960f-30d0-4c7d-ae07-b57b17dc209a"
+                        alt="Annie's Havens logo">
                 </div>
                 <div class="col l4 offset-l2 s12 m4 offset-m2">
                     <h5 class="grey-text text-darken-3">Social</h5>
                     <ul>
                         <li>
-                            <div class="fb-share-button" data-href="https://www.annieshavens.ca" data-layout="button_count" data-size="small" data-mobile-iframe="true"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.annieshavens.ca%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
+                            <div class="fb-share-button" data-href="https://www.annieshavens.ca"
+                                data-layout="button_count" data-size="small" data-mobile-iframe="true"><a
+                                    target="_blank"
+                                    href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.annieshavens.ca%2F&amp;src=sdkpreparse"
+                                    class="fb-xfbml-parse-ignore">Share</a></div>
                         </li>
                         <li>
-                            <a href="https://twitter.com/annieshavens?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @annieshavens</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                            <a href="https://twitter.com/annieshavens?ref_src=twsrc%5Etfw" class="twitter-follow-button"
+                                data-show-count="false">Follow @annieshavens</a>
+                            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
                         </li>
                     </ul>
                 </div>
@@ -240,7 +256,7 @@
                     anchors[i].classList.add("active");
                 }
             }
-        })();         
+        })();
     </script>
     {{!-- Page JS --}}
     {{{_sections.script}}}
