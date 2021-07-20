@@ -1,7 +1,6 @@
 const express = require('express');
 const exphbs = require('express-handlebars');
 const compression = require('compression');
-const bodyParser = require('body-parser');
 const request = require('request');
 const nodemailer = require('nodemailer');
 const meta = require('./views/site.metadata.json');
@@ -13,8 +12,8 @@ const PORT = process.env.PORT || 5000;
 
 app.use(compression());
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended : false}));
+app.use(express.json());
+app.use(express.urlencoded({extended : false}));
 
 app.use(express.static('assets'));
 
