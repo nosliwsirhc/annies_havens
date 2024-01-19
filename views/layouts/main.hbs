@@ -209,7 +209,7 @@
         </div>
         <div class="footer-copyright">
             <div class="container grey-text text-darken-3">
-                &copy; 2019 Copyright
+                &copy;&nbsp;<span id="copyright">2024</span>
                 <a class="grey-text text-darken-3 right" href="/sitemap">Sitemap</a>
             </div>
         </div>
@@ -220,6 +220,9 @@
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script>
+        // Copyright Date
+        document.getElementById("copyright").innerHTML = new Date().getFullYear();
+
         // Side Navigation Init
         const sideNav = document.querySelector(".sidenav");
         M.Sidenav.init(sideNav, {});

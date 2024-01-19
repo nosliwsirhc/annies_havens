@@ -1,5 +1,6 @@
 /node_modules
-/config/*
+/config/recaptcha.js
+/config/smtp.js
 /assets/images/*.jpg
 /assets/images/*.png
 /assets/video/*.mp4

@@ -3,10 +3,11 @@
     <p>We are always open letting people know more about our program and what is involved in becoming a foster parent.
         Feel free to use our contact form, email us directly or give us a call.</p>
 
+            <form id="contact-form" name="contact-form">
     <div class="card contact-form">
         <div class="card-content">
             <span class="card-title">Contact Form</span>
-            <form id="contact-form" name="contact-form">
+            <span>All fields are required to submit the contact form.</span>
                 <div class="row">
                     <div class="input-field col s12 m6">
                         <input type="text" id="first-name" name="first-name" class="validate" pattern=".{2,}" required>
@@ -36,7 +37,7 @@
                 </div>
                 <div class="row" id="fosterparentapplicant">
                     <div class="col s12 m6">
-                        <p>Do you have a spouse?</p>
+                        <p>Do you have a spouse or partner?</p>
                         <p>
                             <label>
                                 <input name="hasspouse" data-option="Yes" type="radio" class="validate" value="Yes" required />
@@ -49,7 +50,7 @@
                                 <span>No</span>
                             </label>
                         </p>
-                        <span class="helper-text" id="has-spouse-error" style="color: #F44336; font-size: 12px;">Must have a spouse</span>
+                        <span class="helper-text" id="has-spouse-error" style="color: #F44336; font-size: 12px;">Must have a spouse or partner</span>
                     </div>
                     <div class="col s12 m6">
                         <p>Is one adult a stay-at-home parent?</p>
@@ -75,17 +76,12 @@
                         <span class="helper-text" data-error="Must have two or more characters" data-success=""></span>
                     </div>
                 </div>
-            </form>
         </div>
         <div class="card-action">
-            <div class="g-recaptcha" data-sitekey="6LceOl8UAAAAANNkfF5sAahY6MQZ8rBtPEykFIUJ" data-callback="setToken" data-expired-callback="expireToken"></div>
-            <input type="submit" value="Send Your Message" id="submit-button" class="btn-flat" style="margin-top: 1.5rem;" />
-            {{!-- <button class="g-recaptcha btn-flat" id="submit-button" data-sitekey="6LceOl8UAAAAANNkfF5sAahY6MQZ8rBtPEykFIUJ"
-                data-callback="submitContactForm">
-                Send Your Message
-            </button> --}}
+                <button id="submit-button" disabled class="g-recaptcha btn waves-effect waves-light disabled" data-sitekey="6Ld8uFUpAAAAAAGsf6jYup0tnHbbsbbFki_9PPqX" data-callback='onSubmit' data-action='submit' type="button">Submit <i class="material-icons right">send</i></button>
         </div>
     </div>
+            </form>
 
 
     <div class="divider" id="contact"></div>
@@ -118,13 +114,13 @@
                         <div class="col s10 m11">
                             <p style="font-size: 1.2rem; line-height: 1.5rem;"><strong><a
                                         href="mailto:williamwilson@annieshavens.ca">New Home Inquiries</a></strong></p>
-                            <p><a href="mailto:williamwilson@annieshavens.ca">William Wilson</a></p>
-                            <p><a href="mailto:hildawilson@annieshavens.ca">Hilda Wilson</a></p>
-                            <p><a href="mailto:chriswilson@annieshavens.ca">Chris Wilson</a></p>
-                            <p><a href="mailto:laurarudolph@annieshavens.ca">Laura Rudolph</a></p>
-                            <p><a href="mailto:inayahamadani@annieshavens.ca">Inaya Hamadani</a></p>
-                            <p><a href="mailto:tracygodden@annieshavens.ca">Tracy Godden</a></p>
-                            <p><a href="mailto:huichen@annieshavens.ca">Hui Chen</a></p>
+                            <p><a href="mailto:chriswilson@annieshavens.ca"><strong>Chris Wilson</strong> Program Supervisor</a></p>
+                            <p><a href="mailto:hildawilson@annieshavens.ca"><strong>Hilda Wilson</strong> Placement Coordinator</a></p>
+                            <p><a href="mailto:ki-esha.ellis@annieshavens.ca"><strong>Ki-Esha Ellis</strong> Executive Assistant</a></p>
+                            <p><a href="mailto:laurarudolph@annieshavens.ca"><strong>Laura Rudolph</strong> Resource Worker</a></p>
+                            <p><a href="mailto:michellepotvin@annieshavens.ca"><strong>Michelle Potvin</strong> Resource Worker</a></p>
+                            <p><a href="mailto:tracygodden@annieshavens.ca"><strong>Tracy Godden</strong> Resource Worker</a></p>
+                            <p><a href="mailto:williamwilson@annieshavens.ca"><strong>William Wilson</strong> Executive Director</a></p>
                         </div>
                     </div>
                 </div>
@@ -133,7 +129,7 @@
         <div class="col s12 l6">
             <div class="card contact-card">
                 <div class="card-image">
-                    <img src="https://firebasestorage.googleapis.com/v0/b/annies-havens.appspot.com/o/images%2Flocation-2.jpg?alt=media&token=7c2a3e29-bae6-462b-8dae-54081a0f1673"
+                    <img src="https://firebasestorage.googleapis.com/v0/b/annies-havens.appspot.com/o/images%2Flocation-2.jpg?alt=media&token=74ab729e-bf5c-412b-9d61-09776c4674d6"
                         alt="map to office">
                 </div>
                 <div class="card-content">
@@ -143,9 +139,9 @@
                             <i class="material-icons">location_on</i>
                         </div>
                         <div class="col s10 m11">
-                            <p>144 Main St. N, Unit 19</p>
-                            <p>Markham, Ontario</p>
-                            <p>L3P 5T3</p>
+                            <p>100 Emmeloord Crescent</p>
+                            <p>Unionville, Ontario</p>
+                            <p>L3R 1P8</p>
                         </div>
                     </div>
                 </div>
@@ -167,7 +163,6 @@
     // Submit Button
     const submitButton = document.getElementById('submit-button');
     submitButton.disabled = true;
-    submitButton.addEventListener('click', submitContactForm);
 
     // Hide error messages
     const hasSpouseError = document.getElementById('has-spouse-error');
@@ -264,15 +259,14 @@
     };
     for(var i = 0, max = hasSpouse.length; i < max; i++) {
         hasSpouse[i].onchange = function(radio = hasSpouse[i]) {
-            const hasSpouseMessage = document.getElementById('has-spouse-message');
             hasSpouseValidation.touched = true;
             if(radio.target.dataset.option == 'Yes' && radio.target.checked === true) {
                 hasSpouseValidation.valid = true;
                 hasSpouseValidation.message = '';
                 hasSpouseError.style.display = 'none';
-            } else {
+            } else if (radio.target.dataset.option == 'No' && radio.target.checked === true) {
                 hasSpouseValidation.valid = false;
-                hasSpouseValidation.message = 'Applicants must have a spouse';
+                hasSpouseValidation.message = 'Applicants must have a spouse or partner';
                 hasSpouseError.style.display = 'block';
             }
             validateForm();
@@ -305,9 +299,9 @@
         touched: false,
         message: ''
     };
-    message.addEventListener('blur', () => {
+    message.addEventListener('keyup', () => {
         messageValidation.touched = true;
-        if(message.value.length > 0) {
+        if(message.value.length > 1) {
             messageValidation.valid = true;
             messageValidation.message = '';
         } else {
@@ -317,31 +311,21 @@
         validateForm();
     });
 
-    // Recaptcha Token Grab
-    var token = '';
-    function setToken(e) {
-        token = e;
-        validateForm();
-    }
-    function expireToken() {
-        token = '';
-        validateForm();
-    }
-
     function validateForm() {
         if(
             firstNameValidation.valid &&
             lastNameValidation.valid &&
             emailValidation.valid &&
             messageValidation.valid &&
-            token !== '' &&
             validateFosterParent()
         ) {
             isValid = true;
             submitButton.disabled = false;
+            submitButton.classList.remove('disabled');
         } else {
             isValid = false;
             submitButton.disabled = true;
+            submitButton.classList.add('disabled')
         }
     }
 
@@ -357,9 +341,9 @@
         }
     }
 
-    function submitContactForm(e) {
+    function onSubmit(token) {
         console.log('Submit in progress');
-        e.preventDefault();
+ 
         submitButton.disabled = true;
         fetch('/contact-us', {
             method: 'POST',

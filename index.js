@@ -37,7 +37,7 @@ transporter.verify(function(error, success) {
     if (error) {
          console.log(error);
     } else {
-         console.log('Office 365 Works');
+         console.log('SendLayer Connected');
     }
 });
 
@@ -268,7 +268,10 @@ app.get('*', function (req, res) {
     res.status(404).sendFile('html_templates/page-not-found.html', {root: __dirname});
 });
 
- 
-app.listen(PORT, function() {
-    console.log(`Server started on port ${PORT}`);
-});
+try {
+    app.listen(PORT, function() {
+        console.log(`Server started on port ${PORT}`);
+    });
+} catch (error) {
+    console.error(error);
+}
