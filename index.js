@@ -4,11 +4,15 @@ const compression = require('compression');
 const request = require('request');
 const nodemailer = require('nodemailer');
 const meta = require('./views/site.metadata.json');
-const smtp = require('./config/smtp');
-const recaptcha = require('./config/recaptcha');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+const CAPTCHA_SECRET = process.env.CAPTCHA_SECRET || ''
+const SMTP_HOST = process.env.SMTP_HOST || ''
+const SMTP_PORT = process.env.SMTP_PORT || 587
+const SMTP_AUTH_USER = process.env.SMTP_AUTH_USER || ''
+const SMTP_AUTH_PASSWORD = process.env.SMTP_AUTH_PASSWORD || ''
+const SMTP_TLS_CIPHERS = process.env.SMTP_TLS_CIPHERS || ''
 
 app.use(compression());
 
@@ -32,7 +36,19 @@ const hbs = exphbs.create({
 app.engine('hbs', hbs.engine);
 app.set('view engine', '.hbs');
 
-let transporter = nodemailer.createTransport(smtp);
+let transporter = nodemailer.createTransport({
+    host: SMTP_HOST,
+    port: SMTP_PORT,
+    secure: false,
+    auth: {
+        user: SMTP_AUTH_USER,
+        pass: SMTP_AUTH_PASSWORD
+    },
+    tls: {
+        ciphers: SMTP_TLS_CIPHERS,
+        rejectUnauthorized: false
+    }
+});
 transporter.verify(function(error, success) {
     if (error) {
          console.log(error);
@@ -67,7 +83,7 @@ app.post('/contact-us', function (req, res) {
         return res.json({success: false, message: 'Missing Captcha Token'});
     }
     // Secret Key
-    const secretKey = recaptcha.secret;
+    const secretKey = CAPTCHA_SECRET;
     // Verification URL
     const verificationUrl = `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${req.body.token}&remoteip=${req.connection.remoteAddress}`;
     // Make request to verify URL
@@ -141,7 +157,7 @@ app.post('/foster-parenting/faq', function (req, res) {
         return res.json({success: false, message: 'Missing Captcha Token'});
     }
     // Secret Key
-    const secretKey = recaptcha.secret;
+    const secretKey = CAPTCHA_SECRET;
     // Verification URL
     const verificationUrl = `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${req.body.token}&remoteip=${req.connection.remoteAddress}`;
     // Make request to verify URL
