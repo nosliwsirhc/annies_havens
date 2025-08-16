@@ -97,7 +97,7 @@ app.post('/contact-us', function (req, res) {
         // send some mail
         transporter.sendMail({
             from: 'chriswilson@annieshavens.ca',
-            to: 'chriswilson@annieshavens.ca,williamwilson@annieshavens.ca',
+            to: 'chriswilson@annieshavens.ca,jamie.moreau@annieshavens.ca,amanda.west@annieshavens.ca',
             replyTo: req.body.email,
             subject: 'Contact Us Submission re: ' + req.body.subject,
             text: `
