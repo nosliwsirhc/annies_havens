@@ -1,172 +1,221 @@
 <!DOCTYPE html>
 <html lang="en-CA" prefix="og: http://ogp.me/ns/{{meta.ogNamespace}}#">
-
-<head>
+  <head>
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RED0CX4VTP"></script>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-RED0CX4VTP"
+    ></script>
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-MEVS4XBLNL"></script>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-MEVS4XBLNL"
+    ></script>
     <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-
-        gtag('config', 'G-MEVS4XBLNL');
+      window.dataLayer = window.dataLayer || []; function gtag() {
+      dataLayer.push(arguments); } gtag('js', new Date()); gtag('config',
+      'G-MEVS4XBLNL');
     </script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="canonical" href="{{@canonical}}" />
-    <link rel="manifest" href="/site.webmanifest">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
-    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
-    <meta name="msapplication-TileColor" content="#00aba9">
-    <meta name="theme-color" content="#f7f7f7">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" defer>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link rel="stylesheet" href="/css/styles.min.css">
-    <script src='https://www.google.com/recaptcha/api.js' async defer></script>
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+    <meta name="msapplication-TileColor" content="#00aba9" />
+    <meta name="theme-color" content="#f7f7f7" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+      defer
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link rel="stylesheet" href="/css/styles.css" />
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <title>{{@meta.title}}</title>
-    <meta name="description" content="{{@meta.description}}">
-    <meta name="keywords" content="{{@meta.keywords}}">
-    <meta property="og:locale" content="en_CA">
+    <meta name="description" content="{{@meta.description}}" />
+    <meta name="keywords" content="{{@meta.keywords}}" />
+    <meta property="og:locale" content="en_CA" />
     {{#each @meta.metaTags}}
-    <meta property="{{this.property}}" content="{{this.content}}">
+      <meta property="{{this.property}}" content="{{this.content}}" />
     {{/each}}
-</head>
+  </head>
 
-<body>
+  <body>
     <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PJJX5XT" height="0" width="0"
-            style="display:none;visibility:hidden"></iframe></noscript>
+    <noscript><iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-PJJX5XT"
+        height="0"
+        width="0"
+        style="display:none;visibility:hidden"
+      ></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
+    <!-- Facebook Share Button Loader / Actual Button Further Down -->
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if
+      (d.getElementById(id)) return; js = d.createElement(s); js.id = id; js.src
+      = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
+      fjs.parentNode.insertBefore(js, fjs); }(document, 'script',
+      'facebook-jssdk'));</script>
     <!-- Navigation -->
     <div class="navbar-fixed">
-        <ul id="more-dropdown" class="dropdown-content">
+      <ul id="more-dropdown" class="dropdown-content">
+        <li>
+          <a href="/news" class="blue-grey-text text-darken-4">News</a>
+        </li>
+        <li>
+          <a href="/referral-sources" class="blue-grey-text text-darken-4">Referral Sources</a>
+        </li>
+        <li>
+          <a href="/service-area" class="blue-grey-text text-darken-4">Service Area</a>
+        </li>
+      </ul>
+      <ul id="care-programs-dropdown" class="dropdown-content">
+        <li>
+          <a href="/care-programs#mainstream" class="blue-grey-text text-darken-4">Mainstream</a>
+        </li>
+        <li>
+          <a href="/care-programs#special-needs" class="blue-grey-text text-darken-4">Special Needs</a>
+        </li>
+        <li>
+          <a href="/care-programs#trauma-focused" class="blue-grey-text text-darken-4">Trauma-Focused Care</a>
+        </li>
+      </ul>
+      <ul id="foster-parenting-dropdown" class="dropdown-content">
+        <li>
+          <a href="/foster-parenting/foster-care-in-ontario" class="blue-grey-text text-darken-4">Foster Care in
+            Ontario</a>
+        </li>
+        <li>
+          <a href="/foster-parenting/what-is-foster-parenting" class="blue-grey-text text-darken-4">What Is Foster
+            Parenting?</a>
+        </li>
+        <li>
+          <a href="/foster-parenting/faq" class="blue-grey-text text-darken-4">Frequently Asked Questions</a>
+        </li>
+        <li>
+          <a href="/foster-parenting/children-in-care" class="blue-grey-text text-darken-4">Children In Care</a>
+        </li>
+        <li>
+          <a href="/foster-parenting/family-involvement" class="blue-grey-text text-darken-4">Family Involvement</a>
+        </li>
+        <li>
+          <a href="/foster-parenting/foster-parent-application-process" class="blue-grey-text text-darken-4">Foster
+            Parent Application Process</a>
+        </li>
+        <li>
+          <a href="/foster-parenting/foster-home-quiz" class="blue-grey-text text-darken-4">Foster Home Quiz</a>
+        </li>
+      </ul>
+      <nav>
+        <div class="nav-wrapper blue-grey">
+          <a
+            href="/"
+            class="brand-logo left hide-on-med-and-down"
+            style="margin-left: 1rem;"
+          >
+            <img
+              src="/images/logo-300-300-white.png"
+              alt="Annie's Havens Logo"
+            />
+          </a>
+          <a
+            href="/"
+            class="brand-logo hide-on-large-only text-lighten-4"
+          >
+            <img
+              src="/images/logo-300-300-white.png"
+              alt="Annie's Havens Logo"
+            />
+          </a>
+          <a
+            href="#"
+            data-target="mobile-nav"
+            class="sidenav-trigger white-text"
+          >
+            <i class="material-icons">menu</i>
+          </a>
+          <ul class="right hide-on-med-and-down my-nav-links">
             <li>
-                <a href="/news">News</a>
+              <a href="/" class="white-text">Home</a>
             </li>
             <li>
-                <a href="/referral-sources">Referral Sources</a>
+              <a
+                class="white-text dropdown-trigger"
+                data-target="foster-parenting-dropdown"
+              >Foster Parenting
+                <i class="material-icons right">arrow_drop_down</i>
+              </a>
             </li>
             <li>
-                <a href="/service-area">Service Area</a>
-            </li>
-        </ul>
-        <ul id="care-programs-dropdown" class="dropdown-content">
-            <li>
-                <a href="/care-programs#mainstream">Mainstream</a>
-            </li>
-            <li>
-                <a href="/care-programs#special-needs">Special Needs</a>
+              <a
+                class="white-text dropdown-trigger"
+                href="/care-programs"
+                data-target="care-programs-dropdown"
+              >Foster Care Programs
+                <i class="material-icons right">arrow_drop_down</i>
+              </a>
             </li>
             <li>
-                <a href="/care-programs#trauma-focused">Trauma-Focused Care</a>
-            </li>
-        </ul>
-        <ul id="foster-parenting-dropdown" class="dropdown-content">
-            <li>
-                <a href="/foster-parenting/foster-care-in-ontario">Foster Care in Ontario</a>
+              <a class="white-text" href="/about-us">About Us</a>
             </li>
             <li>
-                <a href="/foster-parenting/what-is-foster-parenting">What Is Foster Parenting?</a>
+              <a class="white-text" href="/contact-us">Contact</a>
             </li>
             <li>
-                <a href="/foster-parenting/faq">Frequently Asked Questions</a>
+              <a
+                class="white-text dropdown-trigger"
+                data-target="more-dropdown"
+              >More...
+                <i class="material-icons right">arrow_drop_down</i>
+              </a>
             </li>
-            <li>
-                <a href="/foster-parenting/children-in-care">Children In Care</a>
-            </li>
-            <li>
-                <a href="/foster-parenting/family-involvement">Family Involvement</a>
-            </li>
-            <li>
-                <a href="/foster-parenting/foster-parent-application-process">Foster Parent Application Process</a>
-            </li>
-            <li>
-                <a href="/foster-parenting/foster-home-quiz">Foster Home Quiz</a>
-            </li>
-        </ul>
-        <nav class="white">
-            <div class="nav-wrapper">
-                <a href="/" class="brand-logo left hide-on-med-and-down grey-text text-darken-3"
-                    style="margin-left: 1rem;">
-                    <img src="https://firebasestorage.googleapis.com/v0/b/annies-havens.appspot.com/o/images%2Flogo-300-300.png?alt=media&token=deb9960f-30d0-4c7d-ae07-b57b17dc209a"
-                        alt="Annie's Havens Logo">
-                </a>
-                <a href="/" class="brand-logo hide-on-large-only grey-text text-darken-3">
-                    <img src="https://firebasestorage.googleapis.com/v0/b/annies-havens.appspot.com/o/images%2Flogo-300-300.png?alt=media&token=deb9960f-30d0-4c7d-ae07-b57b17dc209a"
-                        alt="Annie's Havens Logo">
-                </a>
-                <a href="#" data-target="mobile-nav" class="sidenav-trigger grey-text text-darken-3">
-                    <i class="material-icons">menu</i>
-                </a>
-                <ul class="right hide-on-med-and-down my-nav-links">
-                    <li>
-                        <a href="/" class="grey-text text-darken-3">Home</a>
-                    </li>
-                    <li>
-                        <a class="grey-text text-darken-3 dropdown-trigger"
-                            data-target="foster-parenting-dropdown">Foster Parenting
-                            <i class="material-icons right">arrow_drop_down</i>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="grey-text text-darken-3 dropdown-trigger" href="/care-programs"
-                            data-target="care-programs-dropdown">Foster Care Programs
-                            <i class="material-icons right">arrow_drop_down</i>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="grey-text text-darken-3" href="/about-us">About Us</a>
-                    </li>
-                    <li>
-                        <a class="grey-text text-darken-3" href="/contact-us">Contact</a>
-                    </li>
-                    <li>
-                        <a class="grey-text text-darken-3 dropdown-trigger" data-target="more-dropdown">More...
-                            <i class="material-icons right">arrow_drop_down</i>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
+          </ul>
+        </div>
+      </nav>
     </div>
 
     <ul class="sidenav" id="mobile-nav">
-        <li><a href="/" class="grey-text text-darken-3">Home</a></li>
-        <li>
-            <div class="divider"></div>
-        </li>
-        <li><a class="subheader">Foster Parenting</a></li>
-        <li><a href="/foster-parenting/foster-care-in-ontario">Foster Care in Ontario</a></li>
-        <li><a href="/foster-parenting/what-is-foster-parenting">What Is Foster Parenting?</a></li>
-        <li><a href="/foster-parenting/faq">Frequently Asked Questions</a></li>
-        <li><a href="/foster-parenting/children-in-care">Children In Care</a></li>
-        <li><a href="/foster-parenting/family-involvement">Family Involvement</a></li>
-        <li><a href="/foster-parenting/foster-parent-application-process">Foster Parent Application Process</a></li>
-        <li><a href="/foster-parenting/foster-home-quiz">Foster Home Quiz</a></li>
-        <li>
-            <div class="divider"></div>
-        </li>
-        <li><a href="/care-programs" class="subheader">Care Programs</a></li>
-        <li><a href="/care-programs#mainstream">Mainstream</a></li>
-        <li><a href="/care-programs#special-needs">Special Needs</a></li>
-        <li><a href="/care-programs#trauma-focused">Trauma-Focused Care</a></li>
-        <li>
-            <div class="divider"></div>
-        </li>
-        <li><a href="/about-us">About Us</a></li>
-        <li><a href="/contact-us">Contact</a></li>
-        <li>
-            <div class="divider"></div>
-        </li>
-        <li><a class="subheader">More...</a></li>
-        <li><a href="/news">News</a></li>
-        <li><a href="/referral-sources">Referral Sources</a></li>
+      <li><a href="/" class="grey-text text-darken-3">Home</a></li>
+      <li>
+        <div class="divider"></div>
+      </li>
+      <li><a class="nav-subheader">Foster Parenting</a></li>
+      <li><a href="/foster-parenting/foster-care-in-ontario">Foster Care in
+          Ontario</a></li>
+      <li><a href="/foster-parenting/what-is-foster-parenting">What Is Foster
+          Parenting?</a></li>
+      <li><a href="/foster-parenting/faq">Frequently Asked Questions</a></li>
+      <li><a href="/foster-parenting/children-in-care">Children In Care</a></li>
+      <li><a href="/foster-parenting/family-involvement">Family Involvement</a></li>
+      <li><a href="/foster-parenting/foster-parent-application-process">Foster
+          Parent Application Process</a></li>
+      <li><a href="/foster-parenting/foster-home-quiz">Foster Home Quiz</a></li>
+      <li>
+        <div class="divider"></div>
+      </li>
+      <li><a href="/care-programs" class="nav-subheader">Care Programs</a></li>
+      <li><a href="/care-programs#mainstream">Mainstream</a></li>
+      <li><a href="/care-programs#special-needs">Special Needs</a></li>
+      <li><a href="/care-programs#trauma-focused">Trauma-Focused Care</a></li>
+      <li>
+        <div class="divider"></div>
+      </li>
+      <li><a href="/about-us">About Us</a></li>
+      <li><a href="/contact-us">Contact</a></li>
+      <li>
+        <div class="divider"></div>
+      </li>
+      <li><a class="nav-subheader">More...</a></li>
+      <li><a href="/news">News</a></li>
+      <li><a href="/referral-sources">Referral Sources</a></li>
     </ul>
     <!-- End Navigation -->
 
@@ -174,96 +223,93 @@
 
     <!-- Footer -->
     {{#unless @noFooter}}
-    <footer class="page-footer grey lighten-3">
+      <footer class="page-footer grey lighten-3">
         <div class="container">
-            <div class="row">
-                <div class="col l2 s12 m2" style="text-align: center;">
-                    <img src="https://firebasestorage.googleapis.com/v0/b/annies-havens.appspot.com/o/images%2Flogo-300-300.png?alt=media&token=deb9960f-30d0-4c7d-ae07-b57b17dc209a"
-                        alt="Annie's Havens logo">
-                </div>
-                <div class="col l4 offset-l2 s12 m4 offset-m2">
-                    <h5 class="grey-text text-darken-3">Social</h5>
-                    <ul>
-                        <li>
-                            <div class="fb-share-button" data-href="https://www.annieshavens.ca"
-                                data-layout="button_count" data-size="small" data-mobile-iframe="true"><a
-                                    target="_blank"
-                                    href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.annieshavens.ca%2F&amp;src=sdkpreparse"
-                                    class="fb-xfbml-parse-ignore">Share</a></div>
-                        </li>
-                        <li>
-                            <a href="https://twitter.com/annieshavens?ref_src=twsrc%5Etfw" class="twitter-follow-button"
-                                data-show-count="false">Follow @annieshavens</a>
-                            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col l4 s12 m4">
-                    <h5 class="grey-text text-darken-3">Legal</h5>
-                    <ul>
-                        <li>
-                            <a class="grey-text text-darken-3" href="/privacy-policy">Privacy Policy</a>
-                        </li>
-                    </ul>
-                </div>
+          <div class="row">
+            <div class="col l2 s12 m2" style="text-align: center;">
+              <img
+                src="/images/logo-300-300.png"
+                alt="Annie's Havens logo"
+              />
             </div>
+            <div class="col l4 offset-l2 s12 m4 offset-m2">
+              <h5 class="grey-text text-darken-3">Social</h5>
+              <ul>
+                <li>
+                  <div
+                    class="fb-share-button"
+                    data-href="https://annieshavens.ca"
+                    data-layout="button_count"
+                  >
+                  </div>
+                </li>
+                <li>
+                  <a
+                    href="https://twitter.com/annieshavens?ref_src=twsrc%5Etfw"
+                    class="twitter-follow-button"
+                    data-show-count="false"
+                  >Follow @annieshavens</a>
+                  <script
+                    async
+                    src="https://platform.twitter.com/widgets.js"
+                    charset="utf-8"
+                  ></script>
+                </li>
+              </ul>
+            </div>
+            <div class="col l4 s12 m4">
+              <h5 class="grey-text text-darken-3">Legal</h5>
+              <ul>
+                <li>
+                  <a
+                    class="grey-text text-darken-3"
+                    href="/privacy-policy"
+                  >Privacy Policy</a>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
         <div class="footer-copyright">
-            <div class="container grey-text text-darken-3">
-                &copy;&nbsp;<span id="copyright">2024</span>
-                <a class="grey-text text-darken-3 right" href="/sitemap">Sitemap</a>
-            </div>
+          <div class="container blue-grey-text text-darken-4">
+            &copy;&nbsp;<span id="copyright">2024</span>
+            <a class="right" href="/sitemap">Sitemap</a>
+          </div>
         </div>
-    </footer>
+      </footer>
     {{/unless}}
     <!-- End Footer -->
 
     <!-- Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"
+    ></script>
     <script>
-        // Copyright Date
-        document.getElementById("copyright").innerHTML = new Date().getFullYear();
-
-        // Side Navigation Init
-        const sideNav = document.querySelector(".sidenav");
-        M.Sidenav.init(sideNav, {});
-
-        // Dropdown
-        const dropdowns = document.querySelectorAll(".dropdown-trigger");
-        M.Dropdown.init(dropdowns, {
-            hover: true,
-            coverTrigger: false,
-            inDuration: 500,
-            constrainWidth: false
-        });
-
-        // Navigation link active
-        // FUTURE - show parent url as active i.e. /foster-parenting/do-i-qualify both segments show active
-        (function () {
-            const nav = document.getElementsByTagName("nav");
-            const ul = nav[0].getElementsByTagName("ul");
-            const lis = ul[0].getElementsByTagName("li");
-            let anchors = [];
-            for (let i = 0; i < lis.length; i++) {
-                const navEl = lis[i].querySelector("a");
-                if (navEl !== null && navEl.getAttribute("href") && navEl.getAttribute("href").split("/")) {
-                    anchors.push(lis[i]);
-                }
-            }
-            const locationArr = window.location.pathname.split("/");
-            const currentLoc = locationArr[locationArr.length - 1];
-            for (let i = 0; i < anchors.length; i++) {
-                const anchorHrefArr = anchors[i].querySelector("a").getAttribute("href").split("/");
-                if (
-                    anchorHrefArr[anchorHrefArr.length - 1] == currentLoc
-                ) {
-                    anchors[i].classList.add("active");
-                }
-            }
-        })();
+      // Copyright Date
+      document.getElementById("copyright").innerHTML = new Date().getFullYear();
+      // Side Navigation Init
+      const sideNav = document.querySelector(".sidenav"); M.Sidenav.init(sideNav, {});
+      // Dropdown
+      const dropdowns = document.querySelectorAll(".dropdown-trigger");
+      M.Dropdown.init(dropdowns, { hover: true, coverTrigger: false, inDuration:
+      500, constrainWidth: false });
+      // Navigation link active // FUTURE - show parent url as active i.e. /foster-parenting/do-i-qualify both segments show active
+      (function () { const nav =
+      document.getElementsByTagName("nav"); const ul =
+      nav[0].getElementsByTagName("ul"); const lis =
+      ul[0].getElementsByTagName("li"); let anchors = []; for (let i = 0; i <
+      lis.length; i++) { const navEl = lis[i].querySelector("a"); if (navEl !==
+      null && navEl.getAttribute("href") &&
+      navEl.getAttribute("href").split("/")) { anchors.push(lis[i]); } } const
+      locationArr = window.location.pathname.split("/"); const currentLoc =
+      locationArr[locationArr.length - 1]; for (let i = 0; i < anchors.length;
+      i++) { const anchorHrefArr =
+      anchors[i].querySelector("a").getAttribute("href").split("/"); if (
+      anchorHrefArr[anchorHrefArr.length - 1] == currentLoc ) {
+      anchors[i].classList.add("active"); } } })();
     </script>
-    {{!-- Page JS --}}
+    {{! Page JS }}
     {{{_sections.script}}}
-</body>
+  </body>
 
 </html>

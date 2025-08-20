@@ -4,7 +4,7 @@ import { getMetadata, getCanonicalUrl, getBaseRef } from '../utils/helpers.js';
 const router: Router = express.Router();
 
 router.get('/', (req: Request, res: Response): void => {
-    res.render('news', {
+    res.render('news/index', {
         data: {
             baseRef: getBaseRef(),
             meta: getMetadata('news'),
@@ -14,7 +14,7 @@ router.get('/', (req: Request, res: Response): void => {
 });
 
 router.get('/urgent-need-for-foster-parents-in-ontario', (req: Request, res: Response): void => {
-    res.render('urgent-need-for-foster-parents-in-ontario', {
+    res.render('news/urgent-need-for-foster-parents-in-ontario', {
         data: {
             baseRef: getBaseRef(),
             meta: getMetadata('urgentNeedForFosterParentsInOntario'),

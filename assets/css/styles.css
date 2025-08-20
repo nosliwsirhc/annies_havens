@@ -1,4 +1,16 @@
 /* Site CSS */
+h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 1.5rem 0;
+}
+
+h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 1.2rem 0;
+}
+
 .brand-logo {
     display: inline-block;
     height: 100%;
@@ -19,6 +31,52 @@ p {
     font-size: 16px;
 }
 
+.section-header {
+   padding: 2rem 1rem;
+}
+
+.section-header h1 {
+    text-align: center;
+    font-size: 2.8rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.section-header h2 {
+    text-align: center;
+    font-size: 2.4rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.card-panel-title {
+    font-size: 1.6rem;
+    font-weight: bold;
+    padding: 6rem 2rem;
+}
+
+.section-header p {
+    text-align: center;
+    font-size: 1.4rem;
+    font-weight: 500;
+    padding: 0.75rem 0;
+    margin: 0;
+}
+
+.no-margin-bottom .row .col {
+    margin-bottom: 0 !important;
+}
+
+.collection-item.list {
+    align-items: center;
+    display: flex;
+}
+
+.collection-item.list > i {
+    font-size: 2rem;
+    margin-right: 1rem;
+}
+
 .carousel {
     margin-top: 5rem;
     transition: margin-top 0.4s ease-in-out;
@@ -32,7 +90,7 @@ p {
 
 .carousel-item-box {
     position: absolute;
-    bottom: 8px;
+    bottom: 0;
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -42,9 +100,7 @@ p {
     display: flex;
     justify-content: center;
     align-content: center;
-    background: rgba(21,149,135,0.7);
     width: 100%;
-    border-radius: 6px 6px 0 0;
 }
 
 .carousel-item-headline h2 {
@@ -57,18 +113,15 @@ p {
     padding: 0.5rem;
     align-items: center;
     justify-content: center;
-    background: rgba(170,254,235,0.7);
-    color: black !important;
     text-align: left;
     width: 100%;
-    border-radius: 0 0 6px 6px;
 }
 
-.carousel-item-description p {  
-    padding: 0 2rem 0 2rem;
-    margin: 0.5rem;
+.carousel-item-description {  
+    padding: 0.5rem 2rem;
     line-height: 1;
-    font-weight: 500;
+    font-weight: 600;
+    text-transform: uppercase !important;
 }
 
 .carousel-item-description .btn {
@@ -76,15 +129,15 @@ p {
 }
 
 .first-carousel-item {
-    background-image: url('https://firebasestorage.googleapis.com/v0/b/annies-havens.appspot.com/o/images%2Fsad-boy-2.jpg?alt=media&token=f3e52992-8f91-42b9-921b-b4b1d087eea1');
+    background-image: url('/images/sad-boy-2.jpg');
 }
 
 .second-carousel-item.load {
-    background-image: url('https://firebasestorage.googleapis.com/v0/b/annies-havens.appspot.com/o/images%2Fsad-cardboard-face-2.jpg?alt=media&token=1fdb041e-58a3-40ea-80c9-33f7008094a6');
+    background-image: url('/images/sad-cardboard-face-2.jpg');
 }
 
 .third-carousel-item.load {
-    background-image: url('https://firebasestorage.googleapis.com/v0/b/annies-havens.appspot.com/o/images%2Fhappy-father-daughter-dock-2.jpg?alt=media&token=32756830-7552-43f2-95dd-fe00d5c2b349');
+    background-image: url('/images/happy-father-daughter-dock-2.jpg');
 }
 
 .cta {
@@ -122,23 +175,7 @@ p {
 }
 
 .tabs-section {
-    margin-top: 2rem;
-}
-
-.tabs-title {
-    text-align: center;
-}
-
-.tab-panel .btn-flat {
-    text-align: center;
-    border: 1px solid teal;
-    border-radius: 3px;
-    transition: background 0.4s, color 0.2s;
-}
-
-.tab-panel .btn-flat:hover {
-    background: teal;
-    color: white;
+    padding-top: 2rem;
 }
 
 .parallax-container { 
@@ -177,10 +214,6 @@ p {
     margin-bottom: 2rem;
 }
 
-.program-cards .card .card-title {
-    background: rgba(30,190,165,0.9);
-}
-
 @media only screen and (max-width: 992px) {
     .carousel-item-description p {
         padding: 0.3rem 1rem 0.3rem 0.5rem;
@@ -209,7 +242,7 @@ p {
     color: white;
     text-align: center;
     padding: 2rem;
-    background: rgba(21,149,135,0.9);
+    background: rgba(102,124,137,0.8);
     width: 50%;
     height: 50%;
     margin: 3rem auto;
@@ -253,10 +286,6 @@ video {
     border-radius: 6px 6px 0 0;
 }
 
-.card-image .card-title {
-    background: rgba(30,190,165,0.9);
-}
-
 #read-more {
     margin-top: 1rem;
     padding: 0.5rem 0;
@@ -290,8 +319,13 @@ video {
     margin-right: 2rem;
 }
 
+.nav-subheader {
+    font-size: 1.2rem !important;
+    font-weight: bold !important;
+}
+
 .tabs .indicator {
-    background: teal;
+    background: rgb(58,71,78);
 }
 
 .faq-form {
@@ -366,7 +400,7 @@ video {
 .youtube .play-button {
     width: 90px;
     height: 60px;
-    background-color: #333;
+    background-color: #d61f1f;
     box-shadow: 0 0 30px rgba( 0,0,0,0.6 );
     z-index: 1;
     opacity: 0.8;
@@ -413,12 +447,12 @@ video {
     margin-bottom: 2rem;
 }
 
-.section-header {
+.page-header {
     padding: 1rem;
     margin-bottom: 2rem;
 }
 
-.section-header h1 {
+.page-header h1 {
     margin: 0;
     font-size: 2rem;
 }

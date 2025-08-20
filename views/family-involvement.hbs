@@ -6,7 +6,6 @@
             <a href="#spouse" class="collection-item">Spouse</a>
             <a href="#children" class="collection-item">Children</a>
             <a href="#extended-family" class="collection-item">Extended Family</a>
-            <a href="#read-more" class="collection-item">Read More</a>
         </div>
     </div>
     <div id="spouse" class="card scrollspy">
@@ -39,7 +38,8 @@
         // Scrollspy
         const scrollspy = document.querySelectorAll(".scrollspy");
         M.ScrollSpy.init(scrollspy, {
-            scrollOffset: 70
+            scrollOffset: 70,
+            activeClass: 'blue-grey darken-2 white-text'
         });
     </script>
 {{/section}}

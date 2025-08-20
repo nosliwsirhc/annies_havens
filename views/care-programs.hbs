@@ -6,7 +6,6 @@
             <a href="#mainstream" class="collection-item">Mainstream</a>
             <a href="#special-needs" class="collection-item">Special Needs</a>
             <a href="#trauma-focused" class="collection-item">Trauma Focused</a>
-            <a href="#read-more" class="collection-item">Read More</a>
         </div>
     </div>
     <div id="mission-statement" class="mission-statement">
@@ -17,7 +16,7 @@
 
     <div id="mainstream" class="card scrollspy">
         <div class="card-image">
-            <img src="https://annieshavens.ca/images/mainstream-child-1440-548.jpg" alt="happy girl with flower">
+            <img src="/images/mainstream-child-1440-548.jpg" alt="happy girl with flower">
             <span class="card-title">Mainstream Program</span>
         </div>
         <div class="card-content">
@@ -29,7 +28,7 @@
     <div class="divider"></div>
     <div id="special-needs" class="card scrollspy">
         <div class="card-image">
-            <img src="https://annieshavens.ca/images/special-needs-2.jpg" alt="special needs client">
+            <img src="/images/special-needs-2.jpg" alt="special needs client">
             <span class="card-title">Special Needs Program</span>
         </div>
         <div class="card-content">
@@ -86,7 +85,7 @@
     <div class="divider"></div>
     <div id="trauma-focused" class="card scrollspy">
         <div class="card-image">
-            <img src="https://annieshavens.ca/images/trauma-2.jpg" alt="trauma client">
+            <img src="/images/trauma-2.jpg" alt="trauma client">
             <span class="card-title">Trauma Focused Program by Safe Harbours Family Treatment Homes</span>
         </div>
         <div class="card-content">
@@ -96,8 +95,8 @@
                 can be difficult to manage and come with exceptional needs. Trauma focused foster homes receive a premium
                 on their per diem to reflect the added time and training that is needed to serve these children and youth. Additional support if given through staffing which may be provided depending on the requirements of the child or youth.</p>
             <br>
-            <p>The per diem is $90 - $110 depending on experience, education and placement stability (i.e. two (2) children @ $90/day multiplied by a thirty (30) day month = $5400 - or $65,700 per year).</p>
-            <br><p>To learn more about the Safe Harbours Family Treatment Homes program, please visit <a href="https://safeharbours.ca">www.safeharbours.ca</a></p>
+            <p>The per diem is $75 - $90 depending on experience, education and placement stability (i.e. two (2) children @ $90/day multiplied by a thirty (30) day month = $5400 - or $65,700 per year).</p>
+            <br><p>To learn more about the Safe Harbours Family Treatment Homes program, please visit <a href="https://safeharbours.ca" target="_blank">safeharbours.ca</a></p>
             <br>
             <ul class="collapsible">
                 <li class="active">
@@ -162,7 +161,8 @@
         // Scrollspy
         const scrollspy = document.querySelectorAll(".scrollspy");
         M.ScrollSpy.init(scrollspy, {
-            scrollOffset: 70
+            scrollOffset: 70,
+            activeClass: 'blue-grey darken-2 white-text'
         });
 
         // Collapsibles

@@ -7,8 +7,8 @@ spec:
       github:
         branch: main
         deploy_on_push: true
-      run_command: "npm start"
-      build_command: "npm install && npm run build"
+      run_command: "npm run start"
+      build_command: "npm install --include=dev && npm run build"
       http_port: 8080
       instance_size_slug: basic-xxs  # change to your size
       instance_count: 1

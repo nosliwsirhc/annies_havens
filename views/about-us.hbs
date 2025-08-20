@@ -1,15 +1,16 @@
 <!-- Shout Outs -->
-<section class="slider">
+{{> page-header}}
+<section class="slider" style="margin-top: -2rem;">
     <ul class="slides">
         <li>
-            <img src="https://annieshavens.ca/images/slider-image-1-2.jpg" alt="About Foster Parent Danny">
+            <img src="/images/slider-image-1-2.jpg" alt="About Foster Parent Danny">
             <div class="caption center-align">
                 <h2>Danny</h2>
                 <h5 class="light grey-text text-lighten-3 hide-on-med-and-down">I never know foster parenting would change me. Forever grateful to help kids in need.</h5>
             </div>
         </li>
         <li>
-            <img src="https://annieshavens.ca/images/slider-image-2-2.jpg" alt="About Foster Parent Paul">
+            <img src="/images/slider-image-2-2.jpg" alt="About Foster Parent Paul">
             <!-- random image -->
             <div class="caption left-align">
                 <h2>Paul</h2>
@@ -17,7 +18,7 @@
             </div>
         </li>
         <li>
-            <img src="https://annieshavens.ca/images/slider-image-3-2.jpg" alt="About Foster Parent Jessica">
+            <img src="/images/slider-image-3-2.jpg" alt="About Foster Parent Jessica">
             <!-- random image -->
             <div class="caption right-align">
                 <h2>Jessica</h2>
@@ -28,13 +29,12 @@
 </section>
 <!-- End Shout Outs -->
 
-{{> page-header}}
 <!-- About Us Blurb -->
-<article class="container">
-    <div class="row">
+<section class="blue-grey lighten-5" style="padding: 2rem 0;">
+    <div class="row container">
         <div class="col s12 m4 video-wrapper">
-            <video controls preload="none" poster="https://annieshavens.ca/annie.jpg">
-                <source src="https://annieshavens.ca/video/annie-wilson.mp4" type="video/mp4">
+            <video controls preload="none" poster="/images/annie.jpg">
+                <source src="/video/annie-wilson.mp4" type="video/mp4">
             </video>
             <div class="video-text">
                 <p class="video-title">Annie Wilson</p>
@@ -42,7 +42,7 @@
             </div>
         </div>
         <div class="col s12 m8">
-            <h3>Personal History</h3>
+            <h2>Personal History</h2>
             <p>There is a personal background and history with our agency which makes our program very special.</p>
             <p>William and Hilda Wilson, the founders of Annie's Havens, have an intimate knowledge of the challenges inherent in caring for a child with special needs
                 because of a personal tragedy that befell their family in 1989. William and Hilda&#8217;s daughter, Annie, suffered
@@ -66,55 +66,151 @@
             <p>Our agency, Annie&#8217;s Havens Ltd. was named in her memory with Robert Wilson as our first Executive Director who has since retired.</p>
         </div>
     </div>
-</article>
+</section>
 <!-- End About Us Blurb -->
-
-<!-- Parallax -->
-<div class="parallax-container">
-    <div class="parallax">
-        <img src="https://annieshavens.ca/imeages/about-us-parallax-2.jpg" alt="About Us Parallax Image">
-    </div>
-    <h2 class="flow-text">Providing Foster Care Since 1996</h2>
-</div>
-<!-- End Parallax -->
 
 <!-- Employees -->
 <section id="employees">
     <div class="container">
-        <h3>Owners</h3>
+        <h2>Owners</h2>
         <div class="row">
-            <div class="col s12 m6">
-                <div class="card hoverable modal-trigger" data-target="modal-wwilson">
+            <div class="col s12 m6 l4 xl3">
+                <div class="card hoverable modal-trigger" data-target="modal-cwilson">
                     <div class="card-image">
-                        <img src="https://annieshavens.ca/images/william-wilson.jpg" alt="William Wilson">
-                        <span class="card-title">William Wilson</span>
+                        <img src="/images/chris-wilson.jpg" alt="Chris Wilson">
+                        <span class="card-title">Christopher Wilson</span>
                     </div>
                     <div class="card-content">
-                        <p>William (Bill) is a co-founder of Annie's Havens and the Ontario Residential Care Association (formerly the Foster Care Operators Association of Ontario). He currently serves as our Executive Director.</p>
+                        <p>Christopher is our Executive Director. Along with his mother, Hilda Wilson, he has been instrumental in shaping the vision and direction of Annie's Havens.</p>
                     </div>
                 </div>
             </div>
-            <div class="col s12 m6">
+            <div class="col s12 m6 l4 xl3">
                 <div class="card hoverable modal-trigger" data-target="modal-hwilson">
                     <div class="card-image">
-                        <img src="https://annieshavens.ca/images/hilda-wilson.jpg" alt="Hilda Wilson">
+                        <img src="/images/hilda-wilson.jpg" alt="Hilda Wilson">
                         <span class="card-title">Hilda Wilson</span>
                     </div>
                     <div class="card-content">
-                        <p>Hilda is a co-founder of Annie's Havens. She has served in many roles such as foster parent, Program Supervisor, Resource Worker and Placement Coordinator for over 20 years.</p>
+                        <p>Hilda is a co-founder of Annie's Havens. She has served in many roles such as foster parent, Program Supervisor, Case Manager and Placement Coordinator for over 20 years.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m6 l4 xl3">
+                <div class="card hoverable modal-trigger" data-target="modal-wwilson">
+                    <div class="card-image">
+                        <img src="/images/william-wilson.jpg" alt="William Wilson">
+                        <span class="card-title">William Wilson &#40;1956 - 2025&#41;</span>
+                    </div>
+                    <div class="card-content">
+                        <p>William was a co-founder of Annie's Havens and the Foster Care Operators Association of Ontario &#40;merged with OARTY to become the Ontario Care Collective&#41;. He served as our Executive Director until his passing.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2>Our Team</h2>
+        <div class="row">
+            <div class="col s12 m6 l4 xl3">
+                <div class="card">
+                    <div class="card-image">
+                        <img src="/images/jamie-moreau.jpg" alt="Jamie Moreau">
+                        <span class="card-title">Jamie Moreau</span>
+                    </div>
+                    <div class="card-content">
+                        <p>Director of Children's Services</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m6 l4 xl3">
+                <div class="card">
+                    <div class="card-image">
+                        <img src="/images/shoaib-ali-syed.jpg" alt="Shoaib Ali Syed">
+                        <span class="card-title">Shoaib Ali Syed</span>
+                    </div>
+                    <div class="card-content">
+                        <p>Director of Finance</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m6 l4 xl3">
+                <div class="card">
+                    <div class="card-image">
+                        <img src="/images/blank-headshot-f.jpg" alt="Oksana Fedan">
+                        <span class="card-title">Oksana Fedan</span>
+                    </div>
+                    <div class="card-content">
+                        <p>Director of Service Development</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m6 l4 xl3">
+                <div class="card">
+                    <div class="card-image">
+                        <img src="/images/blank-headshot-f.jpg" alt="Faith Buckingham">
+                        <span class="card-title">Faith Buckingham</span>
+                    </div>
+                    <div class="card-content">
+                        <p>Case Manager</p>
                     </div>
                 </div>
             </div>
         </div>
         <div class="row">
-            <div class="col s12 m6 offset-m3">
-                <div class="card hoverable modal-trigger" data-target="modal-cwilson">
+            <div class="col s12 m6 l4 xl3">
+                <div class="card">
                     <div class="card-image">
-                        <img src="https://annieshavens.ca/images/chris-wilson.jpg" alt="Chris Wilson">
-                        <span class="card-title">Chris Wilson</span>
+                        <img src="/images/blank-headshot-m.jpg" alt="Jason Dove">
+                        <span class="card-title">Jason Dove</span>
                     </div>
                     <div class="card-content">
-                        <p>Chris has worked with Annie's Havens since 2008 starting as an administrator. He filled in as Acting Executive Director for a period and now serves as our Program Supervisor.</p>
+                        <p>Case Manager</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m6 l4 xl3">
+                <div class="card">
+                    <div class="card-image">
+                        <img src="/images/blank-headshot-f.jpg" alt="Sherry Flood">
+                        <span class="card-title">Sherry Flood</span>
+                    </div>
+                    <div class="card-content">
+                        <p>Case Manager</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m6 l4 xl3">
+                <div class="card">
+                    <div class="card-image">
+                        <img src="/images/blank-headshot-f.jpg" alt="Tracy Godden">
+                        <span class="card-title">Tracy Godden</span>
+                    </div>
+                    <div class="card-content">
+                        <p>Area Manager for Southwestern Ontario</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m6 l4 xl3">
+                <div class="card">
+                    <div class="card-image">
+                        <img src="/images/blank-headshot-f.jpg" alt="Michelle Potvin">
+                        <span class="card-title">Michelle Potvin, MSW</span>
+                    </div>
+                    <div class="card-content">
+                        <p>Case Manager and Placement Coordinator</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 m6 l4 xl3">
+                <div class="card">
+                    <div class="card-image">
+                        <img src="/images/blank-headshot-f.jpg" alt="Lillian White">
+                        <span class="card-title">Lillian White</span>
+                    </div>
+                    <div class="card-content">
+                        <p>Case Manager</p>
                     </div>
                 </div>
             </div>
@@ -125,12 +221,12 @@
     <div class="modal-content">
         <div class="row">
             <div class="col s12 m4">
-                <img src="https://annieshavens.ca/images/william-wilson.jpg" alt="william wilson" class="circle responsive-img">
+                <img src="/images/william-wilson.jpg" alt="william wilson" class="circle responsive-img">
             </div>
             <div class="col s12 m8">
                 <h4>William Wilson</h4>
-                <p>William (Bill) is a co-founder of Annie's Havens and the Ontario Residential Care Association (formerly the Foster Care Operators Association of Ontario). He currently serves as our Executive Director.</p>
-                <br><p>His work with the provincial foster care association helped guide policy affecting the child welfare sector. While retired from his position at the association, he still offers advice to other Ontario foster care operators.</p>
+                <p>William was a co-founder of Annie's Havens and the Foster Care Operators Association of Ontario &#40;merged with OARTY to become the Ontario Care Collective&#41;. He served as our Executive Director until his passing.</p>
+                <br><p>His work with the provincial foster care association helped guide policy affecting the child welfare sector. He retired from his position at the association, but still offered advice to other Ontario foster care operators and was friends with many.</p>
                 <blockquote>
                     We always need to ask ourselves what kind of care we want for our own children. Then we need to apply those same thoughts to the kids coming into Annie's Havens when they are at their most vulnerable.<br>
                     <span class="right"><em>&mdash; William Wilson</em></span>
@@ -143,7 +239,7 @@
     <div class="modal-content">
         <div class="row">
             <div class="col s12 m4">
-                <img src="https://annieshavens.ca/images/hilda-wilson.jpg" alt="hilda wilson" class="circle responsive-img">
+                <img src="/images/hilda-wilson.jpg" alt="hilda wilson" class="circle responsive-img">
             </div>
             <div class="col s12 m8">
                 <h4>Hilda Wilson</h4>
@@ -161,7 +257,7 @@
     <div class="modal-content">
         <div class="row">
             <div class="col s12 m4">
-                <img src="https://annieshavens.ca/images/chris-wilson.jpg" alt="chris wilson" class="circle responsive-img">
+                <img src="/images/chris-wilson.jpg" alt="chris wilson" class="circle responsive-img">
             </div>
             <div class="col s12 m8">
                 <h4>Chris Wilson</h4>
@@ -176,6 +272,15 @@
     </div>
 </div>
 <!-- End Employees -->
+
+<!-- Parallax -->
+<div class="parallax-container" style="margin-bottom: -2rem;">
+    <div class="parallax">
+        <img src="/images/about-us-parallax-2.jpg" alt="About Us Parallax Image">
+    </div>
+    <h2 class="flow-text">Providing Foster Care Since 1996</h2>
+</div>
+<!-- End Parallax -->
 
 <!-- Read More -->
 {{> read-more}}
