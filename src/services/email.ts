@@ -1,4 +1,4 @@
-import nodemailer, { Transporter, SentMessageInfo } from 'nodemailer';
+import nodemailer, { Transporter } from 'nodemailer';
 import { config } from '../config/index.js';
 import type { ContactFormData, FAQFormData } from '../types/index.js';
 
@@ -42,7 +42,7 @@ class EmailService {
         }
 
         const { email, firstName, lastName, subject, hasSpouse, stayAtHome, message } = data;
-        const recipients = ['chriswilson@annieshavens.ca', 'jamie.moreau@annieshavens.ca', 'amanda.west@annieshavens.ca'];
+        const recipients = ['chriswilson@annieshavens.ca', 'jamie.moreau@annieshavens.ca', 'amanda.west@safeharbours.ca'];
         
         // Send to staff
         await this.transporter.sendMail({
