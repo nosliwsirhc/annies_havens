@@ -129,15 +129,15 @@ p {
 }
 
 .first-carousel-item {
-    background-image: url('/images/sad-boy-2.jpg');
+    background-image: url('/images/carousel1.jpg');
 }
 
 .second-carousel-item.load {
-    background-image: url('/images/sad-cardboard-face-2.jpg');
+    background-image: url('/images/carousel2.jpg');
 }
 
 .third-carousel-item.load {
-    background-image: url('/images/happy-father-daughter-dock-2.jpg');
+    background-image: url('/images/carousel3.jpg');
 }
 
 .cta {
