@@ -174,22 +174,32 @@ app.use((req, res, next) => {
                 }
             }
 
-            const minified = minify(String(body), {
+            const minifyOptions = {
                 collapseWhitespace: true,
                 removeComments: true,
                 removeRedundantAttributes: true,
                 removeEmptyAttributes: true,
                 minifyCSS: true,
                 minifyJS: true
-            });
-            if (req.method === 'GET') {
-                htmlCache.set(req.originalUrl, minified);
-                if (htmlCache.size > htmlCacheMaxEntries) {
-                    const oldestKey = htmlCache.keys().next().value;
-                    htmlCache.delete(oldestKey);
+            };
+            void (async () => {
+                try {
+                    const minified = await minify(String(body), minifyOptions);
+                    if (req.method === 'GET') {
+                        htmlCache.set(req.originalUrl, minified);
+                        if (htmlCache.size > htmlCacheMaxEntries) {
+                            const oldestKey = htmlCache.keys().next().value;
+                            if (oldestKey) {
+                                htmlCache.delete(oldestKey);
+                            }
+                        }
+                    }
+                    originalSend(minified);
+                } catch {
+                    originalSend(body);
                 }
-            }
-            return originalSend(minified);
+            })();
+            return res;
         }
 
         return originalSend(body);

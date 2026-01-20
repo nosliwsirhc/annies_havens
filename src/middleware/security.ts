@@ -6,7 +6,6 @@ const { generateToken, doubleCsrfProtection } = doubleCsrf({
     getSecret: () => process.env.CSRF_SECRET || 'change-me-in-prod',
     cookieName: 'csrf-token',
     cookieOptions: {
-        httpOnly: true,
         sameSite: 'lax',
         secure: process.env.NODE_ENV === 'production'
     },
