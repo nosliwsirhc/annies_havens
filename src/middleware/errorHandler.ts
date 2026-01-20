@@ -17,10 +17,14 @@ export const errorHandler = (
         return;
     }
 
-    const statusCode = err.statusCode || 500;
-    const message = process.env.NODE_ENV === 'production' 
-        ? 'Something went wrong!' 
-        : err.message;
+    const statusCode = err.code === 'EBADCSRFTOKEN'
+        ? 403
+        : (err.statusCode || 500);
+    const message = err.code === 'EBADCSRFTOKEN'
+        ? 'Invalid form submission token.'
+        : (process.env.NODE_ENV === 'production'
+            ? 'Something went wrong!'
+            : err.message);
 
     res.status(statusCode).json({
         success: false,

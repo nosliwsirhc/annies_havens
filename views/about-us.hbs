@@ -3,26 +3,65 @@
 <section class="slider" style="margin-top: -2rem;">
     <ul class="slides">
         <li>
-            <img src="/images/slider-image-1-2.jpg" alt="About Foster Parent Danny">
+            <picture>
+                <source
+                    type="image/avif"
+                    srcset="/images/about-slider-image-1-640.avif 640w, /images/about-slider-image-1-1024.avif 1024w, /images/about-slider-image-1-1920.avif 1920w"
+                    sizes="100vw"
+                />
+                <source
+                    type="image/webp"
+                    srcset="/images/about-slider-image-1-1440.webp 1440w, /images/about-slider-image-1-1920.webp 1920w"
+                    sizes="100vw"
+                />
+                <img src="/images/about-slider-image-1.jpg" alt="About Foster Parent Danny" fetchpriority="high" decoding="async" loading="eager">
+            </picture>
+            <div class="slide-overlay" aria-hidden="true"></div>
             <div class="caption center-align">
                 <h2>Danny</h2>
-                <h5 class="light grey-text text-lighten-3 hide-on-med-and-down">I never know foster parenting would change me. Forever grateful to help kids in need.</h5>
+                <h5 class="light white-text hide-on-med-and-down">I never know foster parenting would change me. Forever grateful to help kids in need.</h5>
             </div>
         </li>
         <li>
-            <img src="/images/slider-image-2-2.jpg" alt="About Foster Parent Paul">
+            <picture>
+                <source
+                    type="image/avif"
+                    srcset="/images/about-slider-image-2-640.avif 640w, /images/about-slider-image-2-1440.avif 1440w, /images/about-slider-image-2-1920.avif 1920w"
+                    sizes="100vw"
+                />
+                <source
+                    type="image/webp"
+                    srcset="/images/about-slider-image-2-640.webp 640w, /images/about-slider-image-2-1024.webp 1024w, /images/about-slider-image-2-1920.webp 1920w"
+                    sizes="100vw"
+                />
+                <img src="/images/about-slider-image-2.jpg" alt="About Foster Parent Paul" loading="lazy" decoding="async">
+            </picture>
+            <div class="slide-overlay" aria-hidden="true"></div>
             <!-- random image -->
             <div class="caption left-align">
                 <h2>Paul</h2>
-                <h5 class="light grey-text text-lighten-3 hide-on-med-and-down">My reward greets me every morning - sometimes with a smile. Always worth it.</h5>
+                <h5 class="light white-text hide-on-med-and-down">My reward greets me every morning - sometimes with a smile. Always worth it.</h5>
             </div>
         </li>
         <li>
-            <img src="/images/slider-image-3-2.jpg" alt="About Foster Parent Jessica">
+            <picture>
+                <source
+                    type="image/avif"
+                    srcset="/images/about-slider-image-3-640.avif 640w, /images/about-slider-image-3-1024.avif 1024w, /images/about-slider-image-3-1440.avif 1440w"
+                    sizes="100vw"
+                />
+                <source
+                    type="image/webp"
+                    srcset="/images/about-slider-image-3-640.webp 640w, /images/about-slider-image-3-1024.webp 1024w, /images/about-slider-image-3-1440.webp 1440w, /images/about-slider-image-3-1920.webp 1920w"
+                    sizes="100vw"
+                />
+                <img src="/images/about-slider-image-3.jpg" alt="About Foster Parent Jessica" loading="lazy" decoding="async">
+            </picture>
+            <div class="slide-overlay" aria-hidden="true"></div>
             <!-- random image -->
             <div class="caption right-align">
                 <h2>Jessica</h2>
-                <h5 class="light grey-text text-lighten-3 hide-on-med-and-down">Fostering has it's challenges but I would never stop. This is my calling.</h5>
+                <h5 class="light white-text hide-on-med-and-down">Fostering has it's challenges but I would never stop. This is my calling.</h5>
             </div>
         </li>
     </ul>
@@ -265,7 +304,19 @@
 <!-- Parallax -->
 <div class="parallax-container" style="margin-bottom: -2rem;">
     <div class="parallax">
-        <img src="/images/about-us-parallax-2.jpg" alt="About Us Parallax Image">
+        <picture>
+            <source
+                type="image/avif"
+                srcset="/images/about-us-parallax-2-640.avif 640w, /images/about-us-parallax-2-1024.avif 1024w, /images/about-us-parallax-2-1440.avif 1440w, /images/about-us-parallax-2-1920.avif 1920w"
+                sizes="100vw"
+            />
+            <source
+                type="image/webp"
+                srcset="/images/about-us-parallax-2-640.webp 640w, /images/about-us-parallax-2-1024.webp 1024w, /images/about-us-parallax-2-1440.webp 1440w, /images/about-us-parallax-2-1920.webp 1920w"
+                sizes="100vw"
+            />
+            <img src="/images/about-us-parallax-2.jpg" alt="About Us Parallax Image" loading="lazy" decoding="async">
+        </picture>
     </div>
     <h2 class="flow-text">Providing Foster Care Since 1996</h2>
 </div>
@@ -277,25 +328,31 @@
 
 {{#section 'script'}}
     <script>
-        // Parallax
-        const parallax = document.querySelectorAll(".parallax");
-        if (parallax.length > 0) {
-            M.Parallax.init(parallax, {});
-        }
+        document.addEventListener("DOMContentLoaded", () => {
+            if (!window.M) {
+                return;
+            }
 
-        // Sliders
-        const slider = document.querySelector(".slider");
-        if (slider) {
-            M.Slider.init(slider, {
-            indicators: false,
-            height: 300,
-            duration: 500,
-            interval: 6000
-            });
-        }
+            // Parallax
+            const parallax = document.querySelectorAll(".parallax");
+            if (parallax.length > 0) {
+                window.M.Parallax.init(parallax, {});
+            }
 
-        // Modals
-        const modals = document.querySelectorAll('.modal');
-        M.Modal.init(modals, {});
+            // Sliders
+            const slider = document.querySelector(".slider");
+            if (slider) {
+                window.M.Slider.init(slider, {
+                    indicators: false,
+                    height: 300,
+                    duration: 500,
+                    interval: 6000
+                });
+            }
+
+            // Modals
+            const modals = document.querySelectorAll('.modal');
+            window.M.Modal.init(modals, {});
+        });
     </script>
 {{/section}}

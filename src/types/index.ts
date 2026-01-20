@@ -3,8 +3,6 @@ export interface ContactFormData {
   firstName: string;
   lastName: string;
   subject: string;
-  hasSpouse: boolean;
-  stayAtHome: boolean;
   message: string;
 }
 
@@ -36,6 +34,7 @@ export interface EmailConfig {
   user: string;
   password: string;
   tlsCiphers: string;
+  tlsRejectUnauthorized: boolean;
 }
 
 export interface AppConfig {

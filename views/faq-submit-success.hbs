@@ -1,1 +1,21 @@
-<h1>Success</h1>
+<div class="container">
+    <h1>Question Submitted</h1>
+    <p>Please allow up to 24-hours for us to reply. Thanks for your question!</p>
+    <p>You will be automatically taken back to the FAQ page in <span id="redirect-countdown">3</span> seconds...</p>
+</div>
+
+{{#section 'script'}}
+    <script>
+        var secondsRemaining = 3;
+        var countdownEl = document.getElementById('redirect-countdown');
+        var countdownTimer = setInterval(function() {
+            secondsRemaining -= 1;
+            if (secondsRemaining <= 0) {
+                clearInterval(countdownTimer);
+                location.assign('/faq');
+                return;
+            }
+            countdownEl.textContent = String(secondsRemaining);
+        }, 1000);
+    </script>
+{{/section}}

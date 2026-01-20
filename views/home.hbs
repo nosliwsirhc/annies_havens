@@ -2,22 +2,47 @@
 <section class="cta blue-grey darken-3 white-text">
   <p>Homes Urgently Needed</p>
   <a
-    href="/foster-parenting/foster-home-quiz"
+    href="/foster-home-quiz"
     class="btn-floating btn-large blue darken-2 pulse"
-  ><i class="material-icons">rocket_launch</i></a>
-  <i class="material-icons white-text dismiss">cancel</i>
+    aria-label="Take the foster home quiz"
+  ><i class="material-symbols-outlined" aria-hidden="true">rocket_launch</i></a>
+  <button
+    type="button"
+    class="material-symbols-outlined dismiss btn-flat"
+    aria-label="Dismiss call to action"
+  >cancel</button>
 </section>
 <!-- End Call To Action-->
 
 <main>
+  <h1 class="visually-hidden">Annie's Havens</h1>
   <section class="light-blue lighten-5">
     <!-- Carousel -->
     <div class="carousel carousel-slider">
       
       <div class="carousel-item first-carousel-item">
+        <picture class="carousel-image" aria-hidden="true">
+          <source
+            type="image/avif"
+            srcset="/images/carousel1-640.avif 640w, /images/carousel1-1024.avif 1024w, /images/carousel1-1440.avif 1440w, /images/carousel1-1920.avif 1920w"
+            sizes="100vw"
+          />
+          <source
+            type="image/webp"
+            srcset="/images/carousel1-640.webp 640w, /images/carousel1-1024.webp 1024w, /images/carousel1-1440.webp 1440w, /images/carousel1-1920.webp 1920w"
+            sizes="100vw"
+          />
+          <img
+            src="/images/carousel1.jpg"
+            alt=""
+            fetchpriority="high"
+            decoding="async"
+            loading="eager"
+          />
+        </picture>
         <div class="carousel-item-box">
           <div class="carousel-item-headline blue lighten-5">
-            <h2 class="blue-grey-text">Ontario Kids in Crisis</h2>
+            <h2 class="blue-grey-text text-darken-4">Ontario Kids in Crisis</h2>
           </div>
           <div class="carousel-item-description blue-grey">
             <p class="white-text">Every year more and more children are brought
@@ -26,6 +51,24 @@
         </div>
       </div>
       <div class="carousel-item second-carousel-item lazy">
+        <picture class="carousel-image" aria-hidden="true">
+          <source
+            type="image/avif"
+            srcset="/images/carousel2-640.avif 640w, /images/carousel2-1024.avif 1024w, /images/carousel2-1440.avif 1440w, /images/carousel2-1920.avif 1920w"
+            sizes="100vw"
+          />
+          <source
+            type="image/webp"
+            srcset="/images/carousel2-640.webp 640w, /images/carousel2-1024.webp 1024w, /images/carousel2-1440.webp 1440w, /images/carousel2-1920.webp 1920w"
+            sizes="100vw"
+          />
+          <img
+            src="/images/carousel2.jpg"
+            alt=""
+            decoding="async"
+            loading="lazy"
+          />
+        </picture>
         <div class="carousel-item-box">
           <div class="carousel-item-headline blue lighten-5">
             <h2>Nowhere To Go</h2>
@@ -37,6 +80,24 @@
         </div>
       </div>
       <div class="carousel-item third-carousel-item lazy">
+        <picture class="carousel-image" aria-hidden="true">
+          <source
+            type="image/avif"
+            srcset="/images/carousel3-640.avif 640w, /images/carousel3-1024.avif 1024w, /images/carousel3-1440.avif 1440w, /images/carousel3-1920.avif 1920w"
+            sizes="100vw"
+          />
+          <source
+            type="image/webp"
+            srcset="/images/carousel3-640.webp 640w, /images/carousel3-1024.webp 1024w, /images/carousel3-1440.webp 1440w, /images/carousel3-1920.webp 1920w"
+            sizes="100vw"
+          />
+          <img
+            src="/images/carousel3.jpg"
+            alt=""
+            decoding="async"
+            loading="lazy"
+          />
+        </picture>
         <div class="carousel-item-box">
           <div class="carousel-item-headline blue lighten-5">
             <h2>Every Child Deserves a Home</h2>
@@ -52,7 +113,7 @@
   </section>
   <section class="blue-grey lighten-5">
     <div class="section-header">
-      <h1 class="blue-grey-text text-darken-3">Annie's Havens</h1>
+      <h2 class="blue-grey-text text-darken-4">Annie's Havens</h2>
       <p>Provider of Foster Care in Ontario</p>
     </div>
     <!-- Message -->
@@ -68,10 +129,10 @@
             <p>My late husband William and I had been foster parents since 1991, and together we founded Annie’s Havens shortly afterwards. Over the years, we have seen countless children flourish under the care of our foster parents.<br />Kids come into foster care for countless reasons, and it has always been our mission to make sure they leave care with the best chances for success. Having been foster parents ourselves, we truly understand the daily lives of our foster families and how best to support them—something that continues to be deeply valued.</p><br />
             <p>Licensed by the Ministry of Children and Youth Services, we make sure that only the best foster parents are part of our program. High quality homes not only make for better outcomes, they also keep our kids safe.</p><br />
             <p>We invite you to learn more about
-              <a href="/foster-parenting/foster-care-in-ontario">foster care in Ontario</a>, our
+              <a href="/foster-care-in-ontario">foster care in Ontario</a>, our
               <a href="/care-programs">foster care programs</a>
               and what it means to
-              <a href="/foster-parenting/what-is-foster-parenting">become a foster parent</a>.
+              <a href="/what-is-foster-parenting">become a foster parent</a>.
             </p>
             <p>If you have any questions which haven't been answered here,
               <a href="/contact-us">give us a call or drop us an email</a>.
@@ -80,7 +141,7 @@
               <a
                 class="btn btn-large blue darken-2 white-text"
                 href="/about-us"
-              ><i class="left material-icons">groups</i>About Us</a>
+              ><i class="left material-symbols-outlined" aria-hidden="true">groups</i>About Us</a>
             </div>
           </div>
         </div>
@@ -91,13 +152,17 @@
   <!-- Programs At A Glance -->
   <section class="container programs-section">
     <div class="section-header">
-      <h2 class="blue-grey-text text-darken-3">Foster Care Programs</h2>
+      <h2 class="blue-grey-text text-darken-4">Foster Care Programs</h2>
       <p>We offer a variety of foster care programs to meet the diverse needs of children in care.</p>
     </div>
     <div class="program-cards">
       <div class="card hoverable mainstream">
         <div class="card-image">
-          <img src="/images/mainstream-child.jpg" alt="happy child playing" />
+          <picture>
+            <source type="image/avif" srcset="/images/mainstream-child-boy.avif" />
+            <source type="image/webp" srcset="/images/mainstream-child-boy.webp" />
+            <img src="/images/mainstream-child.jpg" alt="happy child playing" loading="lazy" decoding="async" />
+          </picture>
           <span class="card-title blue-grey lighten-2">Mainstream</span>
         </div>
         <div class="card-content">
@@ -229,7 +294,7 @@
                   <p>This video will be played in a separate tab.</p>
                   <br />
                   <a
-                    href="/foster-parenting/foster-care-in-ontario"
+                    href="/foster-care-in-ontario"
                     class="btn blue darken-2"
                   >Read More
                   </a>
@@ -255,7 +320,7 @@
                   </p>
                   <br />
                   <a
-                    href="/foster-parenting/foster-parent-application-process"
+                    href="/foster-parent-application-process"
                     class="btn blue darken-2"
                   >Read More
                   </a>
@@ -277,56 +342,111 @@
 <!-- Parallax -->
 <div class="parallax-container">
   <div class="parallax">
-    <img
-      srcset="/images/slider-image-2-2-800w.jpg 800w,
-                    /images/slider-image-2-2-1200w.jpg 1200w,
-                    /images/slider-image-2-2.jpg 2400w"
-      sizes="(max-width: 800px) 800px,
-                    (max-width: 1200px) 1200px,
-                    1201px"
-      src="/images/slider-image-2-2-1200w.jpg"
-      alt="man holding child"
-    />
+    <picture>
+      <source
+        type="image/avif"
+        srcset="/images/about-slider-image-2-640.avif 640w, /images/about-slider-image-2-1440.avif 1440w, /images/about-slider-image-2-1920.avif 1920w"
+        sizes="100vw"
+      />
+      <source
+        type="image/webp"
+        srcset="/images/about-slider-image-2-640.webp 640w, /images/about-slider-image-2-1024.webp 1024w, /images/about-slider-image-2-1920.webp 1920w"
+        sizes="100vw"
+      />
+      <img
+        src="/images/about-slider-image-2.jpg"
+        alt="man holding child"
+        loading="lazy"
+        decoding="async"
+      />
+    </picture>
   </div>
 </div>
 <!-- End Parallax -->
 
 {{#section "script"}}
   <script>
-    const carousels = document.querySelectorAll(".carousel"); if
-    (carousels.length > 0) { function lazyCarouselSlide(element) { if
-    (element.classList.contains('lazy')) { element.classList.remove('lazy');
-    element.classList.add('load'); } } const instances =
-    M.Carousel.init(carousels, { fullWidth: true, indicators: false, onCycleTo:
-    lazyCarouselSlide }); if (instances && instances.length > 0) {
-    setInterval(() => { instances[0].next(); }, 8000); } } const parallax =
-    document.querySelectorAll(".parallax"); if (parallax.length > 0) {
-    M.Parallax.init(parallax, {}); } const tabs =
-    document.querySelectorAll(".tabs"); if (tabs.length > 0) { M.Tabs.init(tabs,
-    {}); } const ctaDismiss = document.querySelector(".dismiss"); if (ctaDismiss
-    && carousels.length > 0) { ctaDismiss.addEventListener("click", () => {
-    const cta = document.querySelector(".cta"); const carousel = carousels[0];
-    if (cta) { cta.style.visibility = "hidden"; cta.style.opacity = "0"; } if
-    (carousel) { carousel.style.marginTop = "0"; } }); } const youtubeElements =
-    document.querySelectorAll('.youtube'); youtubeElements.forEach((youtube) =>
-    { const source = "https://img.youtube.com/vi/" + youtube.dataset.embed +
-    "/hqdefault.jpg"; const image = new Image(); image.src = source; image.alt =
-    "YouTube video placeholder"; image.addEventListener("load", () => {
-    youtube.appendChild(image); }); youtube.addEventListener('click', function()
-    { const iframe = document.createElement("iframe");
-    iframe.setAttribute("frameborder", "0");
-    iframe.setAttribute("allowfullscreen", ""); iframe.setAttribute("src",
-    "https://www.youtube.com/embed/" + this.dataset.embed +
-    "?rel=0&showinfo=0&autoplay=1" ); this.innerHTML = "";
-    this.appendChild(iframe); }); }); const mainstreamCard =
-    document.querySelector('.mainstream'); if (mainstreamCard) {
-    mainstreamCard.addEventListener('click', () => {
-    window.location.assign('/care-programs#mainstream'); }); } const
-    specialNeedsCard = document.querySelector('.special-needs'); if
-    (specialNeedsCard) { specialNeedsCard.addEventListener('click', () => {
-    window.location.assign('/care-programs#special-needs'); }); } const
-    traumaFocusedCard = document.querySelector('.trauma-focused'); if
-    (traumaFocusedCard) { traumaFocusedCard.addEventListener('click', () => {
-    window.location.assign('https://safeharbours.ca'); }); }
+    document.addEventListener("DOMContentLoaded", () => {
+      const carousels = document.querySelectorAll(".carousel");
+      if (carousels.length > 0 && window.M) {
+        function lazyCarouselSlide(element) {
+          if (element.classList.contains('lazy')) {
+            element.classList.remove('lazy');
+            element.classList.add('load');
+          }
+        }
+        const instances = window.M.Carousel.init(carousels, {
+          fullWidth: true,
+          indicators: false,
+          onCycleTo: lazyCarouselSlide
+        });
+        if (instances && instances.length > 0) {
+          setInterval(() => {
+            instances[0].next();
+          }, 8000);
+        }
+      }
+      const parallax = document.querySelectorAll(".parallax");
+      if (parallax.length > 0 && window.M) {
+        window.M.Parallax.init(parallax, {});
+      }
+      const tabs = document.querySelectorAll(".tabs");
+      if (tabs.length > 0 && window.M) {
+        window.M.Tabs.init(tabs, {});
+      }
+      const ctaDismiss = document.querySelector(".dismiss");
+      if (ctaDismiss && carousels.length > 0) {
+        ctaDismiss.addEventListener("click", () => {
+          const cta = document.querySelector(".cta");
+          const carousel = carousels[0];
+          if (cta) {
+            cta.style.visibility = "hidden";
+            cta.style.opacity = "0";
+          }
+          if (carousel) {
+            carousel.style.marginTop = "0";
+          }
+        });
+      }
+      const youtubeElements = document.querySelectorAll('.youtube');
+      youtubeElements.forEach((youtube) => {
+        const source = "https://img.youtube.com/vi/" + youtube.dataset.embed +
+        "/hqdefault.jpg";
+        const image = new Image();
+        image.src = source;
+        image.alt = "YouTube video placeholder";
+        image.addEventListener("load", () => {
+          youtube.appendChild(image);
+        });
+        youtube.addEventListener('click', function() {
+          const iframe = document.createElement("iframe");
+          iframe.setAttribute("frameborder", "0");
+          iframe.setAttribute("allowfullscreen", "");
+          iframe.setAttribute("src",
+          "https://www.youtube.com/embed/" + this.dataset.embed +
+          "?rel=0&showinfo=0&autoplay=1" );
+          this.innerHTML = "";
+          this.appendChild(iframe);
+        });
+      });
+      const mainstreamCard = document.querySelector('.mainstream');
+      if (mainstreamCard) {
+        mainstreamCard.addEventListener('click', () => {
+          window.location.assign('/care-programs#mainstream');
+        });
+      }
+      const specialNeedsCard = document.querySelector('.special-needs');
+      if (specialNeedsCard) {
+        specialNeedsCard.addEventListener('click', () => {
+          window.location.assign('/care-programs#special-needs');
+        });
+      }
+      const traumaFocusedCard = document.querySelector('.trauma-focused');
+      if (traumaFocusedCard) {
+        traumaFocusedCard.addEventListener('click', () => {
+          window.location.assign('https://safeharbours.ca');
+        });
+      }
+    });
   </script>
 {{/section}}

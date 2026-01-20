@@ -8,7 +8,19 @@
     </div>
     <div class="card">
         <div class="card-image">
-            <img src="/images/queens-park.jpg" alt="queen's park">
+            <picture>
+                <source
+                    type="image/avif"
+                    srcset="/images/queens-park-640.avif 640w, /images/queens-park-1200.avif 1200w"
+                    sizes="100vw"
+                />
+                <source
+                    type="image/webp"
+                    srcset="/images/queens-park-640.webp 640w, /images/queens-park-1200.webp 1200w"
+                    sizes="100vw"
+                />
+                <img src="/images/queens-park.jpg" alt="queen's park" loading="lazy" decoding="async">
+            </picture>
             <span class="card-title">Ministry of Children and Youth Services</span>
         </div>
         <div class="card-content">
@@ -16,23 +28,23 @@
             <br>
             <ul class="collapsible">
                 <li class="active">
-                    <div class="collapsible-header">Licensing<i class="collapsible-secondary material-icons">arrow_drop_down</i></div>
-                    <div class="collapsible-body">
+                    <div class="collapsible-header" id="fc-mcys-header-1" role="button" tabindex="0" aria-expanded="true" aria-controls="fc-mcys-body-1">Licensing<i class="collapsible-secondary material-symbols-outlined" aria-hidden="true">arrow_drop_down</i></div>
+                    <div class="collapsible-body" id="fc-mcys-body-1" role="region" aria-labelledby="fc-mcys-header-1">
                         <p>In order to open foster homes and accept foster children, agencies need to qualify and have a valid license - think licensed daycare. There are many requirements which must be followed which makes sure that we respect the child in care as an individual, and most importantly, that we have safe and supportive homes.</p>
                         <br><p>This license needs to be renewed annually. If an agency does not follow the rules completely they will get a warning called a "Term and Condition". These warnings are serious and an agency could lose their license if not corrected. For this reason, nost agencies are very strict when it comes to getting paperwork filled out correctly and on time.</p>
                     </div>
                 </li>
                 <li>
-                    <div class="collapsible-header">Children's Rights<i class="collapsible-secondary material-icons">arrow_drop_down</i></div>
-                    <div class="collapsible-body">
+                    <div class="collapsible-header" id="fc-mcys-header-2" role="button" tabindex="0" aria-expanded="false" aria-controls="fc-mcys-body-2">Children's Rights<i class="collapsible-secondary material-symbols-outlined" aria-hidden="true">arrow_drop_down</i></div>
+                    <div class="collapsible-body" id="fc-mcys-body-2" role="region" aria-labelledby="fc-mcys-header-2">
                         <p>Ontario follows the <a href="https://www.unicef.ca/en/policy-advocacy-for-children/about-the-convention-on-the-rights-of-the-child" target="_blank">United Nations Convention on the Rights of the Child</a>. Children in Care are read their rights - and responsibilities - frequently. Building a more responsive and accountable foster care system begins with respecting the rights of the child.</p>
                         <br><p>The list of rights is somewhat lengthly. The website for the <a href="https://www.provincialadvocate.on.ca/how-we-help/what-are-my-rights">Ontario Child Advocate</a> has an easy to read breakdown of the rights we are talking about.</p>
                         <p>The MCYS checks that the children are aware of their rights and that they have been reviewed frequently.</p>
                     </div>
                 </li>
                 <li>
-                    <div class="collapsible-header">Types of Foster Care<i class="collapsible-secondary material-icons">arrow_drop_down</i></div>
-                    <div class="collapsible-body">
+                    <div class="collapsible-header" id="fc-mcys-header-3" role="button" tabindex="0" aria-expanded="false" aria-controls="fc-mcys-body-3">Types of Foster Care<i class="collapsible-secondary material-symbols-outlined" aria-hidden="true">arrow_drop_down</i></div>
+                    <div class="collapsible-body" id="fc-mcys-body-3" role="region" aria-labelledby="fc-mcys-header-3">
                         <p>It's generally accepted that there are three levels of care:</p>
                         <br><p>Mainstream or "Regular" Care - Therapeutic Care - Treatment Care</p>
                         <br><p>Annie's Havens provides Mainstream Care <a href="/care-programs#mainstream">(Mainstream Program)</a> for children and youth presenting without complex needs.</p>
@@ -51,29 +63,29 @@
             <br><p>Children's Aid has their own foster homes and will see if they have an appropriate space for incoming children. If there is no appropriate option, the CAS will refer the child to other agencies such as Annie's Havens. This <em>usually</em> means that the lowest needs children go to CAS foster homes.</p>
             <ul class="collapsible">
                 <li class="active">
-                    <div class="collapsible-header">Investigations<i class="collapsible-secondary material-icons">arrow_drop_down</i></div>
-                    <div class="collapsible-body">
+                    <div class="collapsible-header" id="fc-cas-header-1" role="button" tabindex="0" aria-expanded="true" aria-controls="fc-cas-body-1">Investigations<i class="collapsible-secondary material-symbols-outlined" aria-hidden="true">arrow_drop_down</i></div>
+                    <div class="collapsible-body" id="fc-cas-body-1" role="region" aria-labelledby="fc-cas-header-1">
                         <p>In Ontario, the responsibility for child welfare investigations lay with the Children's Aid Societies. As stated above, investigations don't necessarily lead to children being removed from their home.</p>
                         <br><p>Investigations can also happen to foster homes. Sometimes, if an allegation is serious, all foster children may be temporarily placed in other homes until the investigation is complete.</p>
                         <p>While investigations are very stressful and the allegations may be false, it is important for Children's Aid to have this authority to keep children safe.</p>
                     </div>
                 </li>
                 <li>
-                    <div class="collapsible-header">Guardianship<i class="collapsible-secondary material-icons">arrow_drop_down</i></div>
-                    <div class="collapsible-body">
+                    <div class="collapsible-header" id="fc-cas-header-2" role="button" tabindex="0" aria-expanded="false" aria-controls="fc-cas-body-2">Guardianship<i class="collapsible-secondary material-symbols-outlined" aria-hidden="true">arrow_drop_down</i></div>
+                    <div class="collapsible-body" id="fc-cas-body-2" role="region" aria-labelledby="fc-cas-header-2">
                         <p>Most of the time a Children's Aid will have guardianship of the child in care. This is not always the case but it is most often. Guardianship means that the CAS has to give their support for school placement, medical direction and any other situation where consent is needed and the child is unable to give consent on their own.</p>
                         <br><p>Since the CAS has guardianship, foster parents understand that while they are the primary caregiver, their authority on certain matters is limited.</p>
                     </div>
                 </li>
                 <li>
-                    <div class="collapsible-header">Foster Care Provision<i class="collapsible-secondary material-icons">arrow_drop_down</i></div>
-                    <div class="collapsible-body">
+                    <div class="collapsible-header" id="fc-cas-header-3" role="button" tabindex="0" aria-expanded="false" aria-controls="fc-cas-body-3">Foster Care Provision<i class="collapsible-secondary material-symbols-outlined" aria-hidden="true">arrow_drop_down</i></div>
+                    <div class="collapsible-body" id="fc-cas-body-3" role="region" aria-labelledby="fc-cas-header-3">
                         <p>Children's Aid has a very highly regarded training program for new foster homes called PRIDE (Parent Resources for Information, Development and Education). They are the sole license holders for this training in Ontario outside of adoption. It is approximately 40+ hours of course material.</p>
                     </div>
                 </li>
                 <li>
-                    <div class="collapsible-header">Adoptions<i class="collapsible-secondary material-icons">arrow_drop_down</i></div>
-                    <div class="collapsible-body">
+                    <div class="collapsible-header" id="fc-cas-header-4" role="button" tabindex="0" aria-expanded="false" aria-controls="fc-cas-body-4">Adoptions<i class="collapsible-secondary material-symbols-outlined" aria-hidden="true">arrow_drop_down</i></div>
+                    <div class="collapsible-body" id="fc-cas-body-4" role="region" aria-labelledby="fc-cas-header-4">
                         <p>There are private adoption agencies in Ontario. All public adoptions are carried out by the Children's Aid Societies. This means that all foster children who are elligible for adoption have their adoption handled by their CAS.</p>
                         <br><p>Annie's Havens foster parents can adopt their foster children too and many have done so. The adoption is done through CAS even though our parents are fostering for our agency.</p>
                     </div>
@@ -83,7 +95,19 @@
     </div>
     <div class="card">
         <div class="card-image">
-            <img src="/images/special-needs-group.jpg" alt="group of special needs clients">
+            <picture>
+                <source
+                    type="image/avif"
+                    srcset="/images/special-needs-group-640.avif 640w, /images/special-needs-group-1024.avif 1024w, /images/special-needs-group-1440.avif 1440w, /images/special-needs-group-1920.avif 1920w"
+                    sizes="100vw"
+                />
+                <source
+                    type="image/webp"
+                    srcset="/images/special-needs-group-640.webp 640w, /images/special-needs-group-1024.webp 1024w, /images/special-needs-group-1440.webp 1440w, /images/special-needs-group-1920.webp 1920w"
+                    sizes="100vw"
+                />
+                <img src="/images/special-needs-group.jpg" alt="group of special needs clients" loading="lazy" decoding="async">
+            </picture>
             <span class="card-title">Annie's Havens</span>
         </div>
         <div class="card-content">
@@ -92,8 +116,8 @@
             <br>
             <ul class="collapsible">
                 <li class="active">
-                    <div class="collapsible-header">Foster Parents<i class="collapsible-secondary material-icons">arrow_drop_down</i></div>
-                    <div class="collapsible-body">
+                    <div class="collapsible-header" id="fc-ah-header-1" role="button" tabindex="0" aria-expanded="true" aria-controls="fc-ah-body-1">Foster Parents<i class="collapsible-secondary material-symbols-outlined" aria-hidden="true">arrow_drop_down</i></div>
+                    <div class="collapsible-body" id="fc-ah-body-1" role="region" aria-labelledby="fc-ah-header-1">
                         <p>All foster homes in Ontario who wish to receive placements from a Children's Aid Society must belong to a licensed agency. Becoming a foster parent in Ontario means going through the process of a Home Study, background checks and training. All of this is provided at no cost to the potential foster home.</p>
                         <br><p>Once a foster home is approved, they will begin to receive referral packages from Annie's Havens. These referral packages contain as much information as possible about the child so that the home can make an informed decision to accept the child.</p>
                         <br><p>Our homes also receive funding for 24-days of relief. Relief means the children go to another home for a weekend or we provide a caregiver to come to the foster home while the foster parent(s) go away for rest and relaxation.</p>
@@ -101,15 +125,15 @@
                     </div>
                 </li>
                 <li>
-                    <div class="collapsible-header">Support Staff<i class="collapsible-secondary material-icons">arrow_drop_down</i></div>
-                    <div class="collapsible-body">
+                    <div class="collapsible-header" id="fc-ah-header-2" role="button" tabindex="0" aria-expanded="false" aria-controls="fc-ah-body-2">Support Staff<i class="collapsible-secondary material-symbols-outlined" aria-hidden="true">arrow_drop_down</i></div>
+                    <div class="collapsible-body" id="fc-ah-body-2" role="region" aria-labelledby="fc-ah-header-2">
                         <p>In some cases, the children referred to Annie's Havens have complex needs which require additional support. We have support staff such as Personal Support Workers and Child and Youth Workers who can work one-on-one with the children. This support is important for children with high medical needs or trauma-based emotional and behavioural issues.</p>
                         <br><p>If needed, we can offer up to 30 hours per month of this additional support or more is there is a specific issue to be addressed.</p>
                     </div>
                 </li>
                 <li>
-                    <div class="collapsible-header">Resource Workers<i class="collapsible-secondary material-icons">arrow_drop_down</i></div>
-                    <div class="collapsible-body">
+                    <div class="collapsible-header" id="fc-ah-header-3" role="button" tabindex="0" aria-expanded="false" aria-controls="fc-ah-body-3">Resource Workers<i class="collapsible-secondary material-symbols-outlined" aria-hidden="true">arrow_drop_down</i></div>
+                    <div class="collapsible-body" id="fc-ah-body-3" role="region" aria-labelledby="fc-ah-header-3">
                         <p>A Resource Worker is a person provided by Annie's Havens to work as a liaison between the foster home and our management team. The Resource Worker will help advocate for school placement, additional supports if needed, attend important meetings and ensure that the home is meeting the requirements of our foster care license.</p>
                         <br><p>Resource Workers are there for the foster parents and the children in their care. If a foster home has had a bad day and needs someone to talk to, their Resource Worker is there to listen.</p>
                     </div>
@@ -124,7 +148,39 @@
 
 {{#section 'script'}}
     <script>
-        const collapsibles = document.querySelectorAll('.collapsible');
-        M.Collapsible.init(collapsibles, {});
+        document.addEventListener('DOMContentLoaded', () => {
+            const collapsibles = document.querySelectorAll('.collapsible');
+            const setAriaState = (el, expanded) => {
+                const header = el.querySelector('.collapsible-header');
+                if (header) {
+                    header.setAttribute('aria-expanded', String(expanded));
+                }
+            };
+            const setInitialAria = (root) => {
+                root.querySelectorAll('li').forEach((item) => {
+                    const header = item.querySelector('.collapsible-header');
+                    if (!header) return;
+                    header.setAttribute('aria-expanded', String(item.classList.contains('active')));
+                });
+            };
+            const attachKeyHandlers = (root) => {
+                root.querySelectorAll('.collapsible-header').forEach((header) => {
+                    header.addEventListener('keydown', (event) => {
+                        if (event.key === 'Enter' || event.key === ' ') {
+                            event.preventDefault();
+                            header.click();
+                        }
+                    });
+                });
+            };
+            if (collapsibles.length > 0 && window.M) {
+                setInitialAria(document);
+                attachKeyHandlers(document);
+                window.M.Collapsible.init(collapsibles, {
+                    onOpenStart: (el) => setAriaState(el, true),
+                    onCloseStart: (el) => setAriaState(el, false)
+                });
+            }
+        });
     </script>
 {{/section}}

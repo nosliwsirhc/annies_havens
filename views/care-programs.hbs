@@ -9,14 +9,26 @@
         </div>
     </div>
     <div id="mission-statement" class="mission-statement">
-        <h3>Mission Statement</h3>
+        <h2>Mission Statement</h2>
         <p>We have a total commitment to quality and excellence in all that we do. Annie’s Havens will provide a positive growth environment to all children placed in our care.</p>
         <p>To accomplish this we need to consider careful placement of the child, as well as exceptional support and specialized training to our foster parents and staff.</p>
     </div>
 
     <div id="mainstream" class="card scrollspy">
         <div class="card-image">
-            <img src="/images/mainstream-child-1440-548.jpg" alt="happy girl with flower">
+            <picture>
+                <source
+                    type="image/avif"
+                    srcset="/images/mainstream-child-640.avif 640w, /images/mainstream-child-1024.avif 1024w, /images/mainstream-child-1440.avif 1440w"
+                    sizes="100vw"
+                />
+                <source
+                    type="image/webp"
+                    srcset="/images/mainstream-child-640.webp 640w, /images/mainstream-child-1024.webp 1024w, /images/mainstream-child-1440.webp 1440w"
+                    sizes="100vw"
+                />
+                <img src="/images/mainstream-child-1440.jpg" alt="happy girl with flower" loading="lazy" decoding="async">
+            </picture>
             <span class="card-title">Mainstream Program</span>
         </div>
         <div class="card-content">
@@ -40,8 +52,8 @@
             <br>
             <ul class="collapsible">
                 <li class="active">
-                    <div class="collapsible-header"><p>Spectrum of Special Needs</p><i class="collapsible-secondary material-icons">arrow_drop_down</i></div>
-                    <div class="collapsible-body">
+                    <div class="collapsible-header" id="cp-special-header-1" role="button" tabindex="0" aria-expanded="true" aria-controls="cp-special-body-1"><p>Spectrum of Special Needs</p><i class="collapsible-secondary material-symbols-outlined" aria-hidden="true">arrow_drop_down</i></div>
+                    <div class="collapsible-body" id="cp-special-body-1" role="region" aria-labelledby="cp-special-header-1">
                         <ul>
                             <li>Mobility issues (wheelchair, walker, etc.)</li>
                             <li>Autism Spectrum Disorder</li>
@@ -53,8 +65,8 @@
                     </div>
                 </li>
                 <li>
-                    <div class="collapsible-header">Experience with Special Needs<i class="collapsible-secondary material-icons">arrow_drop_down</i></div>
-                    <div class="collapsible-body">
+                    <div class="collapsible-header" id="cp-special-header-2" role="button" tabindex="0" aria-expanded="false" aria-controls="cp-special-body-2">Experience with Special Needs<i class="collapsible-secondary material-symbols-outlined" aria-hidden="true">arrow_drop_down</i></div>
+                    <div class="collapsible-body" id="cp-special-body-2" role="region" aria-labelledby="cp-special-header-2">
                         <p>Often it's asked, "Do I need to have knowledge in all special needs?". No. It is not expected that parents be a “Swiss army knife” catering to all needs. Most referrals are for children
                             with autism and mobility issues. A therapeutic background in autism is an asset for kids with ASD. Wheelchair
                             accessible homes are required for kids with mobility issues. All other issues are discussed during recruitment
@@ -63,8 +75,8 @@
                     </div>
                 </li>
                 <li>
-                    <div class="collapsible-header">Support Staff<i class="collapsible-secondary material-icons">arrow_drop_down</i></div>
-                    <div class="collapsible-body">
+                    <div class="collapsible-header" id="cp-special-header-3" role="button" tabindex="0" aria-expanded="false" aria-controls="cp-special-body-3">Support Staff<i class="collapsible-secondary material-symbols-outlined" aria-hidden="true">arrow_drop_down</i></div>
+                    <div class="collapsible-body" id="cp-special-body-3" role="region" aria-labelledby="cp-special-header-3">
                         <p>Not all kids need support staff. Support is provided depending on how much intervention is needed for daily care.
                             An 8-year old needs diaper changes and is unable to feed herself would have a PSW, for example. Another example,
                             a 6-year old is developmentally delayed and needs help picking out his clothes and getting ready for school
@@ -72,8 +84,8 @@
                     </div>
                 </li>
                 <li>
-                    <div class="collapsible-header">Adoption and Long-Term Care<i class="collapsible-secondary material-icons">arrow_drop_down</i></div>
-                    <div class="collapsible-body">
+                    <div class="collapsible-header" id="cp-special-header-4" role="button" tabindex="0" aria-expanded="false" aria-controls="cp-special-body-4">Adoption and Long-Term Care<i class="collapsible-secondary material-symbols-outlined" aria-hidden="true">arrow_drop_down</i></div>
+                    <div class="collapsible-body" id="cp-special-body-4" role="region" aria-labelledby="cp-special-header-4">
                         <p>Adoption takes a long time for special needs kids. The more severe the special needs, the longer it takes. Finding
                             adoptive parents is not realistic for some of our kids. Foster parents need to be prepared to care for the
                             kids over a much longer period of time than others.</p>
@@ -85,7 +97,19 @@
     <div class="divider"></div>
     <div id="trauma-focused" class="card scrollspy">
         <div class="card-image">
-            <img src="/images/trauma-2.jpg" alt="trauma client">
+            <picture>
+                <source
+                    type="image/avif"
+                    srcset="/images/trauma-2-640.avif 640w, /images/trauma-2-1024.avif 1024w, /images/trauma-2-1440.avif 1440w"
+                    sizes="100vw"
+                />
+                <source
+                    type="image/webp"
+                    srcset="/images/trauma-2-640.webp 640w, /images/trauma-2-1024.webp 1024w, /images/trauma-2-1440.webp 1440w"
+                    sizes="100vw"
+                />
+                <img src="/images/trauma-2.jpg" alt="trauma client" loading="lazy" decoding="async">
+            </picture>
             <span class="card-title">Trauma Focused Program by Safe Harbours Family Treatment Homes</span>
         </div>
         <div class="card-content">
@@ -100,8 +124,8 @@
             <br>
             <ul class="collapsible">
                 <li class="active">
-                    <div class="collapsible-header">Expected Behaviours<i class="collapsible-secondary material-icons">arrow_drop_down</i></div>
-                    <div class="collapsible-body">
+                    <div class="collapsible-header" id="cp-trauma-header-1" role="button" tabindex="0" aria-expanded="true" aria-controls="cp-trauma-body-1">Expected Behaviours<i class="collapsible-secondary material-symbols-outlined" aria-hidden="true">arrow_drop_down</i></div>
+                    <div class="collapsible-body" id="cp-trauma-body-1" role="region" aria-labelledby="cp-trauma-header-1">
                         <ul>
                             <li>Oppositional Defiance Disorder</li>
                             <li>Conduct Disorder</li>
@@ -119,8 +143,8 @@
                     </div>
                 </li>
                 <li>
-                    <div class="collapsible-header">Support for Children and Youth<i class="collapsible-secondary material-icons">arrow_drop_down</i></div>
-                    <div class="collapsible-body">
+                    <div class="collapsible-header" id="cp-trauma-header-2" role="button" tabindex="0" aria-expanded="false" aria-controls="cp-trauma-body-2">Support for Children and Youth<i class="collapsible-secondary material-symbols-outlined" aria-hidden="true">arrow_drop_down</i></div>
+                    <div class="collapsible-body" id="cp-trauma-body-2" role="region" aria-labelledby="cp-trauma-header-2">
                         <p>The first goal will be for the youth to be enrolled in school and speak with any relevant special needs staff
                             at the school board. In parallel to school enrolment, a request will be sent to a community mental health
                             agency to access their services. An preliminary assessment on the support needs of the youth will be completed
@@ -136,8 +160,8 @@
                     </div>
                 </li>
                 <li>
-                    <div class="collapsible-header">Violence and Personal Safety<i class="collapsible-secondary material-icons">arrow_drop_down</i></div>
-                    <div class="collapsible-body">
+                    <div class="collapsible-header" id="cp-trauma-header-3" role="button" tabindex="0" aria-expanded="false" aria-controls="cp-trauma-body-3">Violence and Personal Safety<i class="collapsible-secondary material-symbols-outlined" aria-hidden="true">arrow_drop_down</i></div>
+                    <div class="collapsible-body" id="cp-trauma-body-3" role="region" aria-labelledby="cp-trauma-header-3">
                         <p>Annie’s Havens will do it’s best to screen for youth who have a history of violence. If a youth placed in your
                             home begins to threaten the safety of the people in the home or in the community, a request will be sent
                             to Children’s Aid to find a more suitable placement (preferably a specialized group home). Time must be given
@@ -158,15 +182,49 @@
 
 {{#section 'script'}}
     <script>
-        // Scrollspy
-        const scrollspy = document.querySelectorAll(".scrollspy");
-        M.ScrollSpy.init(scrollspy, {
-            scrollOffset: 70,
-            activeClass: 'blue-grey darken-2 white-text'
-        });
+        document.addEventListener('DOMContentLoaded', () => {
+            // Scrollspy
+            const scrollspy = document.querySelectorAll(".scrollspy");
+            if (scrollspy.length > 0 && window.M) {
+                window.M.ScrollSpy.init(scrollspy, {
+                    scrollOffset: 70,
+                    activeClass: 'blue-grey darken-2 white-text'
+                });
+            }
 
-        // Collapsibles
-        const collapsibles = document.querySelectorAll('.collapsible');
-        M.Collapsible.init(collapsibles, {});
+            // Collapsibles
+            const collapsibles = document.querySelectorAll('.collapsible');
+            const setAriaState = (el, expanded) => {
+                const header = el.querySelector('.collapsible-header');
+                if (header) {
+                    header.setAttribute('aria-expanded', String(expanded));
+                }
+            };
+            const setInitialAria = (root) => {
+                root.querySelectorAll('li').forEach((item) => {
+                    const header = item.querySelector('.collapsible-header');
+                    if (!header) return;
+                    header.setAttribute('aria-expanded', String(item.classList.contains('active')));
+                });
+            };
+            const attachKeyHandlers = (root) => {
+                root.querySelectorAll('.collapsible-header').forEach((header) => {
+                    header.addEventListener('keydown', (event) => {
+                        if (event.key === 'Enter' || event.key === ' ') {
+                            event.preventDefault();
+                            header.click();
+                        }
+                    });
+                });
+            };
+            if (collapsibles.length > 0 && window.M) {
+                setInitialAria(document);
+                attachKeyHandlers(document);
+                window.M.Collapsible.init(collapsibles, {
+                    onOpenStart: (el) => setAriaState(el, true),
+                    onCloseStart: (el) => setAriaState(el, false)
+                });
+            }
+        });
     </script>
 {{/section}}

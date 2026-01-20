@@ -1,37 +1,39 @@
-// Side Navigation Init
-const sideNav = document.querySelector(".sidenav");
-M.Sidenav.init(sideNav, {});
+document.addEventListener("DOMContentLoaded", () => {
+  // Copyright Date
+  const copyright = document.getElementById("copyright");
+  if (copyright) {
+    copyright.innerHTML = new Date().getFullYear();
+  }
 
-// Dropdown
-const dropdown = document.querySelectorAll(".dropdown-trigger");
-M.Dropdown.init(dropdown, {
-    hover: true,
-    coverTrigger: false,
-    inDuration: 500,
-    constrainWidth: false
+  if (window.M) {
+    // Side Navigation Init
+    const sideNav = document.querySelector(".sidenav");
+    if (sideNav) {
+      window.M.Sidenav.init(sideNav, {});
+    }
+
+    // Dropdown
+    const dropdowns = document.querySelectorAll(".dropdown-trigger");
+    window.M.Dropdown.init(dropdowns, {
+      hover: true,
+      coverTrigger: false,
+      inDuration: 500,
+      constrainWidth: false
+    });
+  }
+
+  // Navigation link active
+  const navLinks = document.querySelectorAll("nav .my-nav-links li a[href]");
+  if (navLinks.length) {
+    const currentPath = window.location.pathname;
+    navLinks.forEach((link) => {
+      const href = link.getAttribute("href");
+      if (!href) return;
+      const isHome = href === "/" && currentPath === "/";
+      const isMatch = href !== "/" && currentPath.startsWith(href);
+      if (isHome || isMatch) {
+        link.parentElement?.classList.add("active");
+      }
+    });
+  }
 });
-
-// Navigation link active
-(function() {
-  const nav = document.getElementsByTagName("NAV");
-  const ul = nav[0].getElementsByTagName("ul");
-  const lis = ul[0].getElementsByTagName("li");
-  let anchors = [];
-  for (let i = 0; i < lis.length; i++) {
-    const navEl = lis[i].querySelector("a");
-    if (navEl !== null && navEl.getAttribute("href").split("/")[1]) {
-      anchors.push(lis[i]);
-    }
-  }
-  const current = window.location.pathname.split("/")[1];
-  for (let i = 0; i < anchors.length; i++) {
-    if (
-      anchors[i]
-        .querySelector("a")
-        .getAttribute("href")
-        .split("./")[1] == current
-    ) {
-      anchors[i].classList.add("active");
-    }
-  }
-})();

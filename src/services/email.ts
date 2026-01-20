@@ -1,5 +1,6 @@
 import nodemailer, { Transporter } from 'nodemailer';
 import { config } from '../config/index.js';
+import { escapeHtml } from '../utils/sanitize.js';
 import type { ContactFormData, FAQFormData } from '../types/index.js';
 
 class EmailService {
@@ -18,7 +19,7 @@ class EmailService {
                 },
                 tls: {
                     ciphers: config.smtp.tlsCiphers,
-                    rejectUnauthorized: false
+                    rejectUnauthorized: config.smtp.tlsRejectUnauthorized
                 }
             });
 
@@ -41,7 +42,12 @@ class EmailService {
             throw new Error('Email service not initialized');
         }
 
-        const { email, firstName, lastName, subject, hasSpouse, stayAtHome, message } = data;
+        const { email, firstName, lastName, subject, message } = data;
+        const safeFirstName = escapeHtml(firstName);
+        const safeLastName = escapeHtml(lastName);
+        const safeEmail = escapeHtml(email);
+        const safeSubject = escapeHtml(subject);
+        const safeMessage = escapeHtml(message).replace(/\n/g, '<br>');
         const recipients = ['chriswilson@annieshavens.ca', 'jamie.moreau@annieshavens.ca', 'amanda.west@safeharbours.ca'];
         
         // Send to staff
@@ -52,12 +58,10 @@ class EmailService {
             subject: `Contact Us Submission re: ${subject}`,
             html: `
                 <h2>New Contact Form Submission</h2>
-                <p><strong>Sender's Name:</strong> ${firstName} ${lastName}</p>
-                <p><strong>Sender's Email:</strong> ${email}</p>
-                <p><strong>Subject:</strong> ${subject}</p>
-                <p><strong>Has Spouse:</strong> ${hasSpouse ? 'Yes' : 'No'}</p>
-                <p><strong>Stay At Home Parent:</strong> ${stayAtHome ? 'Yes' : 'No'}</p>
-                <p><strong>Message:</strong><br>${message.replace(/\n/g, '<br>')}</p>
+                <p><strong>Sender's Name:</strong> ${safeFirstName} ${safeLastName}</p>
+                <p><strong>Sender's Email:</strong> ${safeEmail}</p>
+                <p><strong>Subject:</strong> ${safeSubject}</p>
+                <p><strong>Message:</strong><br>${safeMessage}</p>
             `
         });
 
@@ -83,6 +87,10 @@ class EmailService {
         }
 
         const { email, firstName, lastName, question } = data;
+        const safeFirstName = escapeHtml(firstName);
+        const safeLastName = escapeHtml(lastName);
+        const safeEmail = escapeHtml(email);
+        const safeQuestion = escapeHtml(question).replace(/\n/g, '<br>');
 
         // Send to staff
         await this.transporter.sendMail({
@@ -92,9 +100,9 @@ class EmailService {
             subject: 'FAQ Submission',
             html: `
                 <h2>New FAQ Question</h2>
-                <p><strong>Sender's Name:</strong> ${firstName} ${lastName}</p>
-                <p><strong>Sender's Email:</strong> ${email}</p>
-                <p><strong>Question:</strong><br>${question.replace(/\n/g, '<br>')}</p>
+                <p><strong>Sender's Name:</strong> ${safeFirstName} ${safeLastName}</p>
+                <p><strong>Sender's Email:</strong> ${safeEmail}</p>
+                <p><strong>Question:</strong><br>${safeQuestion}</p>
             `
         });
 

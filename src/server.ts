@@ -29,4 +29,8 @@ process.on('SIGINT', (): void => {
     process.exit(0);
 });
 
-startServer();
+void startServer()
+    .catch((error) => {
+        console.error('❌ Unhandled error during server startup:', error);
+        process.exit(1);
+    });
