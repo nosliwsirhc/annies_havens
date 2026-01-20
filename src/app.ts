@@ -167,6 +167,7 @@ app.use((req, res, next) => {
     res.send = (body: any): Response => {
         const contentType = res.get('Content-Type');
         if (contentType && contentType.includes('text/html')) {
+            res.set('Cache-Control', 'public, max-age=3600');
             if (req.method === 'GET') {
                 const cached = htmlCache.get(req.originalUrl);
                 if (cached) {
