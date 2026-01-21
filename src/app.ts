@@ -82,7 +82,9 @@ app.use(helmet({
                 'https://www.recaptcha.net',
                 'https://www.facebook.com',
                 'https://platform.twitter.com',
-                'https://www.googletagmanager.com'
+                'https://www.googletagmanager.com',
+                'https://www.youtube.com',
+                'https://www.youtube-nocookie.com'
             ]
         }
     },
