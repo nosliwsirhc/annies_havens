@@ -319,6 +319,8 @@ form.contact .sub { color: var(--muted); font-size: 0.95rem; margin-bottom: 22px
 .frow { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 .field { margin-bottom: 16px; }
 .field label { display: block; font-weight: 800; font-size: 0.8rem; letter-spacing: 0.03em; margin-bottom: 7px; }
+.field label .req { color: var(--coral-d); font-weight: 800; }
+.field label .opt { font-weight: 500; color: var(--muted); }
 .field input, .field select, .field textarea { width: 100%; padding: 13px 14px; border: 1.5px solid var(--line); border-radius: 9px; font-family: inherit; font-size: 0.97rem; background: var(--bg); transition: 0.2s; color: var(--ink); }
 .field input:focus, .field select:focus, .field textarea:focus { outline: 0; border-color: var(--slate); background: #fff; box-shadow: 0 0 0 4px var(--sky-2); }
 .field textarea { resize: vertical; min-height: 90px; }
