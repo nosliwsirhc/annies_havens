@@ -1,0 +1,301 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site';
+
+const title = "Annie's Havens — A Trusted Provider of Foster Care in Ontario";
+const description =
+  "Annie's Havens is a licensed Ontario foster care provider. Since 1991 we've supported foster families and partners with training, guidance, and a team that understands fostering firsthand.";
+
+// Real homepage FAQ (drawn from the site's FAQ page)
+const faqs = [
+  {
+    q: 'What’s the difference between fostering with a CAS and Annie’s Havens?',
+    a: 'Both a Children’s Aid Society and Annie’s Havens are licensed by the Province of Ontario each year using the same criteria. The support we provide to children and foster families is structured a little differently, and we’re a smaller, dedicated team focused on getting the match and the support right.',
+  },
+  {
+    q: 'What if I’m single?',
+    a: 'Single applicants are always welcome. As with every applicant, what we assess is the ability to meet the needs of a child in care — including time, commitment, and the support around you.',
+  },
+  {
+    q: 'Is Annie’s Havens LGBTQ2S friendly?',
+    a: 'Absolutely. Annie’s Havens is committed to a safe and inclusive environment for all LGBTQ2S individuals, and we are proud of the caregivers in our community who identify as such.',
+  },
+  {
+    q: 'How much are foster parents reimbursed?',
+    a: 'Foster parents aren’t “paid” in the usual sense. A daily per diem covers the costs of caring for a child — clothing, food, hygiene, and a contribution to household costs. Annie’s Havens caregivers receive $80–$85 per child per day depending on experience and the supports a child needs. It isn’t a replacement for steady income.',
+  },
+  {
+    q: 'We’ve been thinking about fostering for years. Can we start right away?',
+    a: 'We can begin the application quickly. Background checks, a home study, and orientation training all take time, but with prompt paperwork and a flexible schedule it can take as little as two months to open your home for placement consideration — our goal is no more than three.',
+  },
+];
+
+const programs = [
+  {
+    title: 'Mainstream',
+    img: '/images/mainstream-child-boy.jpg',
+    alt: 'A happy young child playing',
+    body: 'Every child in care carries some emotional weight — leaving home and being placed with new people is hard. “Mainstream” simply describes children without a known diagnosis or serious acting-out behaviours. It’s often the most straightforward fostering, though these referrals are a smaller share of what we see.',
+    href: '/care-programs#mainstream',
+  },
+  {
+    title: 'Special Needs',
+    img: '/images/special-needs-child.jpg',
+    alt: 'A child receiving attentive care',
+    body: 'Many foster children in Ontario live with a developmental, physical, or mental-health need. These homes require extra training and support, and Annie’s Havens is proud to offer one of the most highly regarded special-needs programs in the province — our homes are consistently commended for their care.',
+    href: '/care-programs#special-needs',
+  },
+  {
+    title: 'Trauma-Focused',
+    img: '/images/trauma-youth.jpg',
+    alt: 'A thoughtful teenager outdoors',
+    body: 'The need for trauma-focused homes has grown sharply, and they’re in short supply. Caregivers complete a trauma-focused curriculum before accepting referrals. The challenge is real — so are the rewards. This program is provided by our sister agency, Safe Harbours Family Treatment Homes.',
+    href: site.sisterAgency.url,
+  },
+];
+---
+<BaseLayout title={title} description={description}>
+  <h1 class="visually-hidden">Annie's Havens — Foster Care in Ontario</h1>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="badge"><span class="star">★</span> A trusted Ontario foster care provider since {site.founded}</span>
+        <h1>Steady homes for the children who need them <em>most</em>.</h1>
+        <p class="lede">Annie's Havens supports foster families and partners across Ontario with training, ongoing guidance, and a team that has been doing this for more than three decades.</p>
+        <div class="hero-cta">
+          <a class="btn btn-pri" href="#contact">Talk to our team</a>
+          <a class="btn btn-out" href="#how">How fostering works</a>
+        </div>
+      </div>
+      <div class="hero-media">
+        <img src="/images/about-slider-image-2.jpg" alt="A foster parent holding a young child" width="560" height="480" fetchpriority="high" />
+        <div class="verify"><span class="chk"></span><div><b>Fully supported</b><br /><span>Licensed &amp; trauma-informed care</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CREDIBILITY STRIP -->
+  <div class="strip">
+    <div class="wrap">
+      <span class="lbl">Trusted across Ontario for</span>
+      <div class="stat"><b>30+</b><span>years of foster care</span></div>
+      <div class="divider"></div>
+      <div class="stat"><b>Licensed</b><span>by the Province of Ontario</span></div>
+      <div class="divider"></div>
+      <div class="stat"><b>All ages</b><span>infants to teens</span></div>
+      <div class="divider"></div>
+      <div class="stat"><b>Per diem</b><span>caregiving costs covered</span></div>
+    </div>
+  </div>
+
+  <!-- WHO WE HELP -->
+  <section class="pad" id="who">
+    <div class="wrap">
+      <div class="sec-head center">
+        <span class="eyebrow">Two ways to make a difference</span>
+        <h2>Whether you can open a home or open a door</h2>
+        <p>Most people who reach out fall into one of these. Tell us which sounds like you.</p>
+      </div>
+      <div class="split">
+        <div class="panel reveal">
+          <div class="ic"><span></span></div>
+          <h3>I want to foster</h3>
+          <p>You have room in your home and your life for a child who needs stability. We'll guide you from your very first question through your first placement — and well beyond.</p>
+          <a class="more" href="#how">Start fostering <span class="arr">→</span></a>
+        </div>
+        <div class="panel dark reveal">
+          <div class="ic"><span></span></div>
+          <h3>I work with children</h3>
+          <p>Social workers, Children's Aid Societies, schools and community partners — connect with us to refer a child, coordinate care, or explore working together.</p>
+          <a class="more" href="/referral-sources">Partner with us <span class="arr">→</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="pad how" id="how">
+    <div class="wrap">
+      <div class="sec-head center">
+        <span class="eyebrow">A clear, supported path</span>
+        <h2>How becoming a foster parent works</h2>
+      </div>
+      <div class="timeline">
+        <div class="tnode reveal"><div class="tdot">1</div><h3>Get in touch</h3><p>Ask us anything. A real member of our team answers — no commitment required.</p></div>
+        <div class="tnode reveal"><div class="tdot">2</div><h3>Assessment</h3><p>Background checks and a home study, completed together step by step.</p></div>
+        <div class="tnode reveal"><div class="tdot">3</div><h3>Training</h3><p>Trauma-informed preparation, including PRIDE training, so you feel ready.</p></div>
+        <div class="tnode reveal"><div class="tdot">4</div><h3>Placement</h3><p>A thoughtful match, then ongoing support for as long as you foster.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SUPPORT -->
+  <section class="pad support" id="support">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow" style="color:var(--coral)">Wrap-around support</span>
+        <h2>What every Annie's Havens family receives</h2>
+        <p>We've been foster parents ourselves. The support we offer is the support we wished we'd had.</p>
+      </div>
+      <div class="slist">
+        <div class="srow reveal"><span class="sic"></span><div><h3>A dedicated case manager</h3><p>A worker who knows your family and walks alongside you.</p></div></div>
+        <div class="srow reveal"><span class="sic"></span><div><h3>Ongoing training</h3><p>Practical, trauma-informed learning before placement and throughout.</p></div></div>
+        <div class="srow reveal"><span class="sic"></span><div><h3>Per-diem reimbursement</h3><p>Caregiving costs are covered so fostering is sustainable.</p></div></div>
+        <div class="srow reveal"><span class="sic"></span><div><h3>Medical costs covered</h3><p>Major costs like dental, medication and devices are covered through Children's Aid.</p></div></div>
+        <div class="srow reveal"><span class="sic"></span><div><h3>Specialized programs</h3><p>Higher-needs and trauma-focused care backed by clinical expertise.</p></div></div>
+        <div class="srow reveal"><span class="sic"></span><div><h3>An inclusive community</h3><p>A welcoming home for caregivers and children of every background.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOUNDER QUOTE -->
+  <section class="pad quote">
+    <div class="wrap quote-grid">
+      <img class="portrait reveal" src="/images/hilda-wilson.jpg" alt="Hilda Wilson, founder of Annie's Havens" width="420" height="420" />
+      <div class="reveal">
+        <span class="eyebrow">From our founder</span>
+        <blockquote class="serif" style="margin-top:14px">"My late husband William and I had been foster parents since 1991, and together we founded Annie's Havens. It has always been our mission to make sure children leave care with the best chances for success. Having been foster parents ourselves, we truly understand the daily lives of our families."</blockquote>
+        <div class="who">Hilda Wilson<span>Founder of Annie's Havens · fostering since 1991</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROGRAMS -->
+  <section class="pad" id="programs">
+    <div class="wrap">
+      <div class="sec-head center">
+        <span class="eyebrow">Foster care programs</span>
+        <h2>Care matched to a child's needs</h2>
+        <p>We offer a range of programs to meet the diverse needs of children in care across Ontario.</p>
+      </div>
+      <div class="prog-grid">
+        {programs.map((p) => (
+          <article class="prog reveal">
+            <div class="img-wrap">
+              <img src={p.img} alt={p.alt} loading="lazy" />
+              <span class="tag">{p.title}</span>
+            </div>
+            <div class="body">
+              <p>{p.body}</p>
+              <a class="more" href={p.href}>Learn more <span class="arr">→</span></a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="pad" id="faq">
+    <div class="wrap" style="max-width:860px">
+      <div class="sec-head center" style="margin-left:auto;margin-right:auto">
+        <span class="eyebrow">Good questions</span>
+        <h2>You probably have questions. Good.</h2>
+      </div>
+      <div class="faq">
+        {faqs.map((f) => (
+          <div class="faq-item">
+            <button class="faq-q" type="button" aria-expanded="false">{f.q}<span class="pm" aria-hidden="true"></span></button>
+            <div class="faq-a"><div><p>{f.a}</p></div></div>
+          </div>
+        ))}
+      </div>
+      <p style="margin-top:28px"><a class="btn btn-out" href="/faq">See all questions →</a></p>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="pad cta" id="contact">
+    <div class="wrap cta-grid">
+      <div class="reveal">
+        <span class="eyebrow" style="color:var(--coral)">Contact us</span>
+        <h2>Reach out today. We'll take it from here.</h2>
+        <p>Share a few details and a member of our team will get back to you. No pressure — just a conversation.</p>
+        <div class="ways">
+          <div class="way"><span class="wic"><span></span></span><a href={site.phoneHref}>{site.phone}</a> · New homes {site.newHomesExt}</div>
+          <div class="way"><span class="wic"><span></span></span><a href={`mailto:${site.newHomesEmail}`}>{site.newHomesEmail}</a></div>
+          <div class="way"><span class="wic"><span></span></span>{site.address.street}, {site.address.city}, {site.address.region}</div>
+        </div>
+      </div>
+      <div>
+        <form class="contact" id="contact-form" novalidate>
+          <h3>Send us a message</h3>
+          <p class="sub">All fields except your message are required.</p>
+          <div class="frow">
+            <div class="field"><label for="f-first">First name</label><input id="f-first" name="first" /><div class="errmsg">Required</div></div>
+            <div class="field"><label for="f-last">Last name</label><input id="f-last" name="last" /><div class="errmsg">Required</div></div>
+          </div>
+          <div class="frow">
+            <div class="field"><label for="f-email">Email</label><input id="f-email" name="email" type="email" /><div class="errmsg">Enter a valid email</div></div>
+            <div class="field"><label for="f-phone">Phone</label><input id="f-phone" name="phone" type="tel" /><div class="errmsg">Required</div></div>
+          </div>
+          <div class="field"><label for="f-role">I am a…</label>
+            <select id="f-role" name="role">
+              <option value="">Select one</option>
+              <option>Prospective foster parent</option>
+              <option>Current foster family</option>
+              <option>Professional / agency partner</option>
+              <option>Community supporter</option>
+            </select>
+            <div class="errmsg">Please choose one</div>
+          </div>
+          <div class="field"><label for="f-msg">Message <span style="font-weight:500;color:var(--muted)">(optional)</span></label><textarea id="f-msg" name="msg" placeholder="How can we help?"></textarea></div>
+          <button type="submit" class="btn btn-coral" style="width:100%;justify-content:center;padding:15px">Submit message</button>
+        </form>
+        <div class="form-ok" id="form-ok"><h3>Thank you for reaching out.</h3><p style="color:var(--muted)">Your message is on its way to our team. We'll be in touch soon.</p></div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  // Scroll reveals
+  const io = new IntersectionObserver(
+    (entries) => entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }),
+    { threshold: 0.15 }
+  );
+  document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+
+  // FAQ accordion (single-open)
+  document.querySelectorAll<HTMLButtonElement>('.faq-q').forEach((q) => {
+    q.addEventListener('click', () => {
+      const item = q.closest('.faq-item');
+      if (!item) return;
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach((i) => {
+        i.classList.remove('open');
+        i.querySelector('.faq-q')?.setAttribute('aria-expanded', 'false');
+      });
+      if (!isOpen) { item.classList.add('open'); q.setAttribute('aria-expanded', 'true'); }
+    });
+  });
+
+  // Contact form — client validation only for now.
+  // TODO (Phase 4): POST to /api/contact (Cloudflare Pages Function) with
+  // Turnstile token; send via Resend. Until then this does NOT email anyone.
+  const form = document.getElementById('contact-form') as HTMLFormElement | null;
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      let ok = true;
+      ['first', 'last', 'email', 'phone', 'role'].forEach((n) => {
+        const el = form.elements.namedItem(n) as HTMLInputElement | null;
+        if (!el) return;
+        const field = el.closest('.field');
+        let bad = !el.value.trim();
+        if (n === 'email' && el.value.trim()) bad = !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(el.value);
+        field?.classList.toggle('err', bad);
+        if (bad) ok = false;
+      });
+      if (ok) {
+        form.style.display = 'none';
+        document.getElementById('form-ok')?.classList.add('show');
+      }
+    });
+    form.querySelectorAll('input,select').forEach((el) =>
+      el.addEventListener('input', () => el.closest('.field')?.classList.remove('err'))
+    );
+  }
+</script>

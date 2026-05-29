@@ -1,0 +1,42 @@
+---
+import { site } from '../data/site';
+const year = new Date().getFullYear();
+---
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <b>{site.name}</b>
+        <p>A trusted provider of foster care in Ontario, helping children flourish in loving homes since {site.founded}.</p>
+      </div>
+      <div>
+        <h4>Fostering</h4>
+        <ul>
+          <li><a href="/what-is-foster-parenting">What is fostering?</a></li>
+          <li><a href="/foster-parent-application-process">How it works</a></li>
+          <li><a href="/faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Organization</h4>
+        <ul>
+          <li><a href="/about-us">About us</a></li>
+          <li><a href="/care-programs">Programs</a></li>
+          <li><a href="/contact-us">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Get in touch</h4>
+        <ul>
+          <li><a href={`mailto:${site.newHomesEmail}`}>New home inquiries</a></li>
+          <li><a href={site.phoneHref}>{site.phone}</a></li>
+          <li>{site.address.street}, {site.address.city}, ON</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>&copy; {year} {site.name}. All rights reserved.</span>
+      <span>Provider of foster care in Ontario, Canada</span>
+    </div>
+  </div>
+</footer>
