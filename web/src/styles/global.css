@@ -403,3 +403,54 @@ form.contact .sub { color: var(--muted); font-size: 0.95rem; margin-bottom: 22px
   section.pad { padding: 60px 0; }
   .strip .divider { display: none; }
 }
+
+/* ============================================================
+   Inner-page editorial elements (Phase 3 prototypes)
+   ============================================================ */
+
+/* photo banner with overlaid title */
+.page-banner { position: relative; }
+.page-banner img { width: 100%; height: clamp(300px, 40vw, 460px); object-fit: cover; display: block; }
+.page-banner .scrim { position: absolute; inset: 0; display: flex; align-items: flex-end; background: linear-gradient(180deg, rgba(17, 32, 45, 0.1) 0%, rgba(17, 32, 45, 0.82) 100%); }
+.page-banner .scrim .wrap { padding-top: 44px; padding-bottom: 44px; }
+.page-banner h1 { color: #fff; font-size: clamp(2.2rem, 4.6vw, 3.5rem); max-width: 20ch; }
+.page-banner .lead { color: rgba(255, 255, 255, 0.92); font-size: 1.18rem; line-height: 1.55; max-width: 56ch; margin-top: 14px; }
+
+/* editorial two-column article */
+.article { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 56px; align-items: start; }
+.article .aside { position: sticky; top: 100px; display: grid; gap: 18px; }
+@media (max-width: 920px) { .article { grid-template-columns: 1fr; gap: 40px; } .article .aside { position: static; } }
+
+.aside-card { border-radius: 16px; padding: 26px; border: 1px solid var(--line); background: var(--paper); }
+.aside-card h3 { font-size: 1.15rem; margin-bottom: 10px; }
+.aside-card.is-cta { background: var(--slate); color: #fff; border-color: var(--slate); }
+.aside-card.is-cta p { color: var(--on-dark-muted); font-size: 0.95rem; margin: 6px 0 18px; }
+.aside-card.is-cta .btn { width: 100%; justify-content: center; }
+.aside-card.is-cta .call { display: block; margin-top: 12px; text-align: center; color: var(--on-dark); font-weight: 700; }
+.aside-facts { list-style: none; }
+.aside-facts li { display: flex; gap: 10px; align-items: flex-start; padding: 10px 0; border-top: 1px solid var(--line); font-weight: 600; font-size: 0.94rem; color: var(--slate-d); }
+.aside-facts li:first-child { border-top: 0; padding-top: 0; }
+.aside-facts svg { width: 18px; height: 18px; color: var(--coral-d); flex: none; margin-top: 2px; }
+
+/* drop cap + pull quote */
+.dropcap::first-letter { font-family: var(--font-serif); font-weight: 800; font-size: 3.4em; line-height: 0.78; float: left; padding: 0.06em 0.12em 0 0; color: var(--coral-d); }
+.pullquote { margin: 0; padding-left: 24px; border-left: 4px solid var(--coral); font-family: var(--font-serif); font-size: clamp(1.4rem, 2.5vw, 1.9rem); line-height: 1.32; color: var(--slate); }
+
+/* scannable "what it means" points */
+.points { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+@media (max-width: 720px) { .points { grid-template-columns: 1fr; } }
+.point { background: var(--paper); border: 1px solid var(--line); border-radius: 16px; padding: 30px; }
+.point .ic { width: 48px; height: 48px; border-radius: 12px; background: var(--warm); display: flex; align-items: center; justify-content: center; margin-bottom: 16px; }
+.point .ic svg { width: 22px; height: 22px; color: var(--coral-d); }
+.point h3 { font-size: 1.3rem; margin-bottom: 8px; }
+.point p { color: var(--muted); }
+
+/* centered feature quote */
+.feature-quote { text-align: center; max-width: 22ch; margin: 0 auto; font-family: var(--font-serif); font-size: clamp(1.7rem, 3.4vw, 2.5rem); line-height: 1.24; color: var(--slate); }
+.feature-quote .by { display: block; margin-top: 20px; font-family: var(--font-body); font-size: 0.95rem; font-weight: 700; color: var(--muted); }
+
+/* closing CTA band */
+.cta-band { background: var(--slate); color: #fff; text-align: center; }
+.cta-band h2 { color: #fff; font-size: clamp(1.8rem, 3.2vw, 2.6rem); }
+.cta-band p { color: var(--on-dark-muted); margin-top: 12px; font-size: 1.08rem; max-width: 48ch; margin-left: auto; margin-right: auto; }
+.cta-band .actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-top: 26px; }

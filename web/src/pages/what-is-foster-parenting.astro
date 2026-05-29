@@ -1,7 +1,10 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import PageHeader from '../components/PageHeader.astro';
+import Picture from '../components/Picture.astro';
+import Icon from '../components/Icon.astro';
 import ReadMore from '../components/ReadMore.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { site } from '../data/site';
 
 const readMore = [
   { href: '/faq', label: 'Frequently Asked Questions' },
@@ -10,25 +13,77 @@ const readMore = [
   { href: '/foster-parent-application-process', label: 'The Application Process' },
   { href: '/contact-us', label: 'Contact Us' },
 ];
+const facts = [
+  'Licensed by the Province of Ontario',
+  'Caring for children since 1991',
+  'Full training provided',
+  'Ongoing support for every family',
+];
+const points = [
+  { icon: 'home', h: 'A lifeline', p: 'Foster parents are a safe, stable presence for a child who needs one. The work you do with a child can be the most rewarding experience of a lifetime.' },
+  { icon: 'cap', h: 'Trained and supported', p: 'Background checks, an evaluation, and ongoing training mean only the safest, most caring homes receive children. And you are never doing it alone.' },
+  { icon: 'users', h: 'A front-line partner', p: 'Working alongside a licensed agency, foster parents are the front-line partner in helping a child overcome a disability, trauma, or a mental-health need.' },
+  { icon: 'leaf', h: 'A lifelong bond', p: 'Many foster until they retire, and stay part of the lives of the grown children who once shared their home.' },
+] as const;
 ---
 <BaseLayout
   title="What Is Foster Parenting? | Annie's Havens"
   description="The term 'foster parent' can mean something different to everyone. Learn what it means to be a foster parent in Ontario with Annie's Havens."
 >
-  <PageHeader
-    title="What Is Foster Parenting?"
-    intro="In its simplest form, fostering means opening your home and family to a child who isn't related to you, in care regulated under Ontario's Child, Youth and Family Services Act. In practice, it's so much more than that."
-  />
-  <section class="pad">
-    <div class="wrap">
-      <div class="prose">
-        <p>Foster parents become a lifeline for children who need a safe and stable environment, and the work done with a child can be the most rewarding experience of a lifetime.</p>
-        <p>A foster parent goes through background checks, an evaluation, and training, so that only the safest and most caring homes are able to receive children. Some refer to fostering as a career, but that's a clumsy term: a career would imply that foster parents are employees, which they are not.</p>
-        <p>While foster parents must be supervised by a licensed foster care agency and strictly adhere to a set of policies and procedures, they are the front-line partner in helping a child overcome a disability, trauma, or mental-health issue. Most find their role so important and rewarding that they continue to care for children until they retire. For some, even after retirement, they stay in touch with and remain part of the lives of the grown children who have come and gone from their home.</p>
-        <p>At times, foster parenting can feel like the most thankless job in the world, which, unsurprisingly, is how ordinary parenting can feel too. The sense of purpose comes from the lives touched and the progress made over the years.</p>
-        <p>Above all, a good foster parent is a hero for every child who desperately needs one.</p>
+  <div class="page-banner">
+    <Picture
+      base="/images/about-slider-image-1"
+      alt="A foster parent and child outdoors"
+      width={1920}
+      height={600}
+      formats={['avif', 'webp']}
+      widths={[640, 1024, 1440, 1920]}
+      sizes="100vw"
+      loading="eager"
+      fetchpriority="high"
+    />
+    <div class="scrim">
+      <div class="wrap">
+        <h1>What Is Foster Parenting?</h1>
+        <p class="lead">In its simplest form, fostering means opening your home and family to a child who isn't related to you, in care regulated under Ontario's Child, Youth and Family Services Act. In practice, it's so much more than that.</p>
       </div>
     </div>
+  </div>
+
+  <section class="pad">
+    <div class="wrap article">
+      <div>
+        <div class="points">
+          {points.map((pt) => (
+            <article class="point">
+              <div class="ic"><Icon name={pt.icon} /></div>
+              <h3>{pt.h}</h3>
+              <p>{pt.p}</p>
+            </article>
+          ))}
+        </div>
+        <blockquote class="pullquote" style="margin-top:40px">A good foster parent is a hero for every child who desperately needs one.</blockquote>
+      </div>
+
+      <aside class="aside">
+        <div class="aside-card">
+          <h3>At a glance</h3>
+          <ul class="aside-facts">
+            {facts.map((f) => (
+              <li><Icon name="leaf" />{f}</li>
+            ))}
+          </ul>
+        </div>
+        <div class="aside-card is-cta">
+          <h3>Thinking about it?</h3>
+          <p>Ask us anything. A real member of our team answers, with no commitment required.</p>
+          <a class="btn btn-coral" href="/contact-us">Talk to Our Team</a>
+          <a class="call" href={site.phoneHref}>{site.phone}</a>
+        </div>
+      </aside>
+    </div>
   </section>
+
+  <CtaBand />
   <ReadMore links={readMore} />
 </BaseLayout>
