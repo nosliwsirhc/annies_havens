@@ -466,3 +466,25 @@ form.contact .sub { color: var(--muted); font-size: 0.95rem; margin-bottom: 22px
 .cta-band h2 { color: #fff; font-size: clamp(1.8rem, 3.2vw, 2.6rem); }
 .cta-band p { color: var(--on-dark-muted); margin-top: 12px; font-size: 1.08rem; max-width: 48ch; margin-left: auto; margin-right: auto; }
 .cta-band .actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-top: 26px; }
+
+/* utility */
+.bg-warm { background: var(--warm); }
+
+/* about: founding story */
+.story { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 52px; align-items: center; }
+@media (max-width: 920px) { .story { grid-template-columns: 1fr; gap: 28px; } }
+.story-media video, .story-media img { width: 100%; border-radius: 18px; box-shadow: var(--shadow); display: block; background: var(--slate-dd); }
+.story-media .vid-cap { margin-top: 10px; text-align: center; color: var(--muted); font-size: 0.9rem; }
+.story-text h2 { margin-bottom: 14px; }
+.story-text p + p { margin-top: 1em; }
+
+/* team */
+.team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 28px; }
+.person img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 16px; }
+.person .nm { font-family: var(--font-serif); font-weight: 700; font-size: 1.2rem; margin-top: 14px; }
+.person .role { color: var(--muted); font-size: 0.93rem; margin-top: 2px; }
+.team-list { list-style: none; columns: 2; column-gap: 40px; max-width: 760px; }
+@media (max-width: 600px) { .team-list { columns: 1; } }
+.team-list li { break-inside: avoid; padding: 14px 0; border-bottom: 1px solid var(--line); }
+.team-list .nm { font-weight: 700; color: var(--slate-d); }
+.team-list .role { color: var(--muted); font-size: 0.92rem; }

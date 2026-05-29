@@ -1,0 +1,117 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Picture from '../components/Picture.astro';
+import ReadMore from '../components/ReadMore.astro';
+import CtaBand from '../components/CtaBand.astro';
+
+const readMore = [
+  { href: '/care-programs', label: 'Our Care Programs' },
+  { href: '/what-is-foster-parenting', label: 'What Is Foster Parenting?' },
+  { href: '/program-description', label: 'Program Description' },
+  { href: '/referral-sources', label: 'For Referral Sources' },
+  { href: '/contact-us', label: 'Contact Us' },
+];
+
+const leadership = [
+  { img: '/images/hilda-wilson.jpg', name: 'Hilda Wilson', role: 'Co-founder' },
+  { img: '/images/chris-wilson.jpg', name: 'Christopher Wilson', role: 'Executive Director' },
+  { img: '/images/jamie-moreau.jpg', name: 'Jamie Moreau', role: "Director of Children's Services" },
+];
+const team = [
+  { name: 'Oksana Fedan', role: 'Director of Service Development' },
+  { name: 'Alexis McNeil', role: 'Compliance Manager' },
+  { name: 'Michelle Potvin, MSW', role: 'Case Manager & Placement Coordinator' },
+  { name: 'Tracy Godden', role: 'Area Manager, Southwestern Ontario' },
+  { name: 'Faith Buckingham', role: 'Case Manager' },
+  { name: 'Jason Dove', role: 'Case Manager' },
+  { name: 'Lillian White', role: 'Case Manager' },
+  { name: 'Sherry Flood', role: 'Case Manager' },
+];
+---
+<BaseLayout
+  title="About Our Foster Care Agency | Annie's Havens"
+  description="Annie's Havens is a licensed Ontario foster care agency named for Annie Wilson. Our focus on children with special needs comes from family, and from experience."
+>
+  <div class="page-banner">
+    <Picture
+      base="/images/about-slider-image-3"
+      alt="A foster family"
+      width={1920}
+      height={600}
+      formats={['avif', 'webp']}
+      widths={[640, 1024, 1440, 1920]}
+      sizes="100vw"
+      loading="eager"
+      fetchpriority="high"
+    />
+    <div class="scrim">
+      <div class="wrap">
+        <h1>About Us</h1>
+        <p class="lead">Annie's Havens is a licensed Ontario foster care agency with a focus that comes from family: caring for children and youth living with developmental, physical, and medical needs.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOUNDING STORY -->
+  <section class="pad bg-warm">
+    <div class="wrap story">
+      <div class="story-media reveal">
+        <video controls preload="none" poster="/images/annie.jpg">
+          <source src="/video/annie-wilson.mp4" type="video/mp4" />
+        </video>
+        <p class="vid-cap">Annie Wilson, 1985-1997</p>
+      </div>
+      <div class="story-text reveal">
+        <h2>Why we exist</h2>
+        <p>Annie's Havens is named for Annie Wilson, the daughter of our founders, William and Hilda. In 1989, a cerebral haemorrhage during surgery left Annie with severe physical disabilities. Her parents learned to do everything they could to help her, and advocated successfully for her full inclusion in her local school, where she thrived.</p>
+        <p>Caring for Annie taught William and Hilda an enormous amount about raising a child with complex medical and developmental needs, and earned them the trust of the medical, therapeutic, and educational professionals they worked alongside. With that hard-won experience, they began opening their home to other children with special needs, and have cared for many across Ontario since the mid-1990s.</p>
+        <p>Annie passed away in 1997, but she inspired everyone who knew her, and her life shaped one of Ontario's most distinctive foster care programs. Her brother, Chris, now helps lead the agency, carrying that same understanding forward.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- APPROACH -->
+  <section class="pad">
+    <div class="wrap">
+      <div class="sec-head" style="margin-bottom:32px">
+        <h2>Our approach</h2>
+        <p>Annie's Havens Ltd. is licensed by the Ministry of Children, Community and Social Services and has provided foster care in Ontario since 1996, taking referrals from Children's Aid Societies across our service area. Our care is child-centred, trauma-informed, and culturally responsive, and our homes are hands-off, meaning physical restraint is never used.</p>
+      </div>
+      <blockquote class="feature-quote">
+        We're committed to a positive growth environment for every child in our care, with careful matching and exceptional support for our foster parents.
+        <span class="by">Our mission</span>
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- LEADERSHIP -->
+  <section class="pad bg-warm">
+    <div class="wrap">
+      <div class="sec-head" style="margin-bottom:36px"><h2>Leadership</h2></div>
+      <div class="team-grid">
+        {leadership.map((p) => (
+          <div class="person reveal">
+            <img src={p.img} alt={p.name} width="300" height="300" loading="lazy" decoding="async" />
+            <div class="nm">{p.name}</div>
+            <div class="role">{p.role}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section class="pad">
+    <div class="wrap">
+      <div class="sec-head" style="margin-bottom:24px"><h2>Our team</h2></div>
+      <ul class="team-list">
+        {team.map((p) => (
+          <li><span class="nm">{p.name}</span><br /><span class="role">{p.role}</span></li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <CtaBand />
+  <ReadMore links={readMore} />
+</BaseLayout>
