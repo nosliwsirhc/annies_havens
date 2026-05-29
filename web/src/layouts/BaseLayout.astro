@@ -82,5 +82,21 @@ const orgSchema = {
       <slot />
     </main>
     <SiteFooter />
+    <script>
+      // Global scroll-reveal: reveal .reveal elements as they enter the viewport.
+      // Lives in the layout so every page gets it (the .js .reveal { opacity: 0 }
+      // rule is global, so the un-hiding must be too).
+      const io = new IntersectionObserver(
+        (entries) =>
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add('in');
+              io.unobserve(e.target);
+            }
+          }),
+        { threshold: 0.12 }
+      );
+      document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+    </script>
   </body>
 </html>
