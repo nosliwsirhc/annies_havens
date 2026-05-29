@@ -46,7 +46,7 @@ export function formatPhoneWithCaret(raw: string, caret: number): { value: strin
 
 /**
  * Email validation pattern. This is the WHATWG / HTML5 `<input type="email">`
- * spec pattern — strict enough to catch real typos (missing @, bad domain,
+ * spec pattern - strict enough to catch real typos (missing @, bad domain,
  * spaces) without rejecting valid-but-unusual addresses.
  */
 export const EMAIL_PATTERN =

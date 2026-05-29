@@ -1,10 +1,10 @@
 /* ============================================================
-   Annie's Havens — design tokens + base
+   Annie's Havens - design tokens + base
    Palette derived from Safe Harbours: deep navy structure,
    coral primary accent, warm cream surfaces.
    ============================================================ */
 :root {
-  --slate: #20384c;     /* deep navy — structure */
+  --slate: #20384c;     /* deep navy - structure */
   --slate-d: #18293a;
   --slate-dd: #11202d;
   --slate-l: #41607a;
@@ -19,7 +19,7 @@
   --line: #ebe0d4;       /* warm cream hairline */
   --coral: #e76a4d;      /* primary accent */
   --coral-soft: #f7dcd0;
-  --coral-d: #c0552f;    /* accessible coral — passes AA on white, used for filled buttons + icons on light */
+  --coral-d: #c0552f;    /* accessible coral - passes AA on white, used for filled buttons + icons on light */
   --on-dark: #dce7ec;       /* primary text on dark surfaces */
   --on-dark-muted: #c5d7de; /* secondary text on dark surfaces */
   --on-dark-faint: #93a8b2; /* fine print on dark surfaces (AA on slate-dd) */
@@ -65,7 +65,7 @@ img { display: block; max-width: 100%; }
   overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
 }
 
-/* skip link — visible only on keyboard focus */
+/* skip link - visible only on keyboard focus */
 .skip-link {
   position: absolute; left: 16px; top: -60px; z-index: 100;
   background: var(--slate); color: #fff; font-weight: 800; font-size: 0.9rem;
@@ -238,7 +238,7 @@ section.pad { padding: 88px 0; }
 .panel a.more .arr { transition: 0.2s; }
 .panel a.more:hover .arr { transform: translateX(4px); }
 
-/* programs — editorial alternating rows */
+/* programs - editorial alternating rows */
 .prog-rows { display: grid; gap: 56px; }
 .prog-row { display: grid; grid-template-columns: 1fr 1fr; gap: 52px; align-items: center; }
 .prog-row:nth-child(even) .prog-media { order: 2; }
@@ -313,7 +313,9 @@ section.pad { padding: 88px 0; }
 .way .wic { width: 40px; height: 40px; border-radius: 10px; background: rgba(255, 255, 255, 0.1); display: flex; align-items: center; justify-content: center; flex: none; }
 .way .wic svg { color: var(--coral); width: 20px; height: 20px; }
 
-form.contact { background: #fff; border-radius: 18px; padding: 34px; color: var(--ink); }
+/* One surface that morphs between the form and the success message. */
+.form-card { background: #fff; border-radius: 18px; overflow: hidden; transition: height 0.5s cubic-bezier(0.22, 0.61, 0.36, 1); }
+form.contact { padding: 34px; color: var(--ink); }
 form.contact h3 { font-size: 1.3rem; margin-bottom: 6px; }
 form.contact .sub { color: var(--muted); font-size: 0.95rem; margin-bottom: 22px; }
 .frow { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
@@ -327,9 +329,11 @@ form.contact .sub { color: var(--muted); font-size: 0.95rem; margin-bottom: 22px
 .field.err input, .field.err select { border-color: var(--coral-d); }
 .errmsg { color: var(--coral-d); font-size: 0.78rem; font-weight: 700; margin-top: 6px; display: none; }
 .field.err .errmsg { display: block; }
-.form-ok { background: var(--warm); border: 1px solid var(--coral); border-radius: 16px; padding: 38px 34px; text-align: center; display: none; }
+.form-ok { padding: 52px 34px; text-align: center; display: none; }
 .form-ok.show { display: block; animation: okIn 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
-.form-ok h3 { color: var(--slate-d); font-size: 1.5rem; margin-bottom: 8px; }
+.form-ok h3 { color: var(--slate-d); font-size: 1.6rem; margin-bottom: 10px; }
+.form-ok p { color: var(--muted); max-width: 40ch; margin: 0 auto; }
+.form-ok .btn { margin-top: 24px; }
 .ok-check { width: 60px; height: 60px; display: block; margin: 0 auto 18px; }
 .ok-check circle, .ok-check path { fill: none; stroke: var(--coral-d); stroke-linecap: round; stroke-linejoin: round; }
 .ok-check circle { stroke-width: 2.5; stroke-dasharray: 166; stroke-dashoffset: 166; }
@@ -361,7 +365,7 @@ form.contact .sub { color: var(--muted); font-size: 0.95rem; margin-bottom: 22px
   .tnode::before { display: none; }
   .hero-media { order: -1; }
   .hero-media img { height: 320px; }
-  /* don't float the badge over faces on mobile — sit it below the photo */
+  /* don't float the badge over faces on mobile - sit it below the photo */
   .verify { position: static; max-width: none; margin-top: 14px; }
   .topbar .links { display: none; }
 }
