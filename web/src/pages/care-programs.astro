@@ -1,0 +1,98 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Picture from '../components/Picture.astro';
+import ReadMore from '../components/ReadMore.astro';
+import CtaBand from '../components/CtaBand.astro';
+
+const readMore = [
+  { href: '/what-is-foster-parenting', label: 'What Is Foster Parenting?' },
+  { href: '/children-in-care', label: 'Children in Care' },
+  { href: '/foster-parent-application-process', label: 'The Application Process' },
+  { href: '/service-area', label: 'Our Service Area' },
+  { href: '/contact-us', label: 'Contact Us' },
+];
+const spectrum = [
+  'Mobility needs, such as wheelchair or walker use',
+  'Autism Spectrum Disorder',
+  'Global developmental delays',
+  'Tube or IV feeding (for example, G-tube or TPN)',
+  'Medically fragile children',
+  'Palliative care',
+];
+---
+<BaseLayout
+  title="Foster Care Programs | Annie's Havens"
+  description="Children come into foster care with all kinds of needs. Annie's Havens offers mainstream, special needs, and trauma-focused care programs so each placement is matched to the child."
+>
+  <div class="page-banner">
+    <Picture
+      base="/images/about-slider-image-2"
+      alt="A caregiver and child"
+      width={1920}
+      height={600}
+      formats={['avif', 'webp']}
+      widths={[640, 1024, 1440, 1920]}
+      sizes="100vw"
+      loading="eager"
+      fetchpriority="high"
+    />
+    <div class="scrim">
+      <div class="wrap">
+        <h1>Foster Care Programs</h1>
+        <p class="lead">Children come into care with all kinds of needs. We offer a range of programs so every placement can be matched to the child, and to the family best able to care for them.</p>
+      </div>
+    </div>
+  </div>
+
+  <section class="pad">
+    <div class="wrap">
+      <div class="programs-detail">
+        <article class="prog-row reveal" id="mainstream">
+          <div class="prog-media">
+            <Picture base="/images/mainstream-child-boy" formats={['avif', 'webp']} alt="A happy young child" width={800} height={600} loading="lazy" />
+          </div>
+          <div class="prog-text">
+            <h2>Mainstream</h2>
+            <p class="lead">For children and youth with comparatively lower needs.</p>
+            <p>Every child who comes into care carries some degree of trauma and a story of their own. "Mainstream" describes children and youth who present with lower needs and fewer trauma-related behaviours.</p>
+            <p>Our training prepares foster parents to understand and respond to what a child brings with patience and a supportive lens. Many mainstream foster parents go on to build the skills and confidence to care for children with more complex needs.</p>
+            <a class="more" href="/foster-parent-application-process">Become a foster parent <span class="arr" aria-hidden="true">→</span></a>
+          </div>
+        </article>
+
+        <article class="prog-row reveal" id="special-needs">
+          <div class="prog-media">
+            <Picture base="/images/special-needs-child" formats={[]} alt="A child receiving attentive care" width={800} height={600} loading="lazy" />
+          </div>
+          <div class="prog-text">
+            <h2>Special Needs</h2>
+            <p class="lead">The heart of Annie's Havens, and the reason we exist.</p>
+            <p>Our special needs program serves children and youth living with developmental, physical, and medical needs. It is the program Annie's Havens was founded on. Foster parents here are committed, experienced caregivers, and we provide specialized training and, where it is needed, Personal Support Worker (PSW) hours to support higher daily care at home. Backgrounds in nursing, personal support work, or caring for a family member are a real asset.</p>
+            <p>The needs we care for include, but are not limited to:</p>
+            <ul class="spectrum">
+              {spectrum.map((s) => <li>{s}</li>)}
+            </ul>
+            <p>Because permanency planning can take much longer for children with special needs, these placements are often long-term, and foster parents are prepared to care for a child over many years.</p>
+            <a class="more" href="/contact-us">Talk to our team <span class="arr" aria-hidden="true">→</span></a>
+          </div>
+        </article>
+
+        <article class="prog-row reveal" id="trauma-focused">
+          <div class="prog-media">
+            <Picture base="/images/trauma-youth" formats={[]} alt="A thoughtful teenager outdoors" width={800} height={600} loading="lazy" />
+          </div>
+          <div class="prog-text">
+            <h2>Trauma-Focused Care</h2>
+            <p class="lead">Specialized treatment care, through our sister agency.</p>
+            <p>Children and youth with significant trauma-related needs are cared for through our sister agency, Safe Harbours Family Treatment Homes. Trauma-focused foster parents bring a background in child psychology, behavioural therapy, or a Child and Youth Worker credential, and complete a specialized trauma-focused curriculum before their home is licensed, with ongoing in-service training.</p>
+            <p>When a referral calls for trauma-focused care, Annie's Havens coordinates with Safe Harbours so the right home is found for the child.</p>
+            <a class="more" href="https://safeharbours.ca" target="_blank" rel="noopener">Visit Safe Harbours <span class="arr" aria-hidden="true">→</span></a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand />
+  <ReadMore links={readMore} />
+</BaseLayout>

@@ -14,16 +14,16 @@ const readMore = [
   { href: '/contact-us', label: 'Contact Us' },
 ];
 const facts = [
-  'Licensed by the Province of Ontario',
-  'Caring for children since 1991',
-  'Trauma-informed training provided',
+  'Licensed by the Province of Ontario (MCCSS)',
+  'A founding focus on special needs',
+  'PSW and clinical support available',
   'A support team behind every family',
 ];
 const points = [
-  { icon: 'home', h: 'A safe place to land', p: "Foster care gives a child a stable, temporary home when they can't remain with their birth family, often because of neglect, abuse, or instability. You provide the consistency, warmth, and care they've been missing." },
-  { icon: 'pulse', h: 'Trauma-informed care', p: "Many children in care have lived through real trauma. You'll be prepared to understand its impact and help a child feel safe and rebuild trust, gradually and at their own pace." },
-  { icon: 'headset', h: 'A team behind you', p: "You are never doing this alone. You work alongside our team, mental-health professionals, and the child's social worker, with support built around each child." },
-  { icon: 'leaf', h: 'A bond that lasts', p: 'With patience and consistency, children heal and grow. Many foster parents continue until they retire, and stay part of the lives of the grown children who once shared their home.' },
+  { icon: 'home', h: 'A safe place to land', p: "Foster care gives a child a stable home when they can't remain with their birth family. As a foster parent, you provide the consistency, warmth, and care they've been missing." },
+  { icon: 'pulse', h: 'Care built for special needs', p: "Annie's Havens specializes in children and youth living with developmental, physical, and medical needs, from mobility needs and Autism Spectrum Disorder to medically fragile children. Our homes are trained and equipped for higher daily care." },
+  { icon: 'headset', h: 'A team behind you', p: "You are never doing this alone. Personal Support Workers, Child and Youth Workers, clinical and educational supports, and your case manager all wrap around each placement." },
+  { icon: 'leaf', h: 'A bond that lasts', p: 'Because permanency planning takes longer for children with special needs, fostering here is often a long-term commitment, and many families stay part of a child’s life for good.' },
 ] as const;
 ---
 <BaseLayout
@@ -45,7 +45,7 @@ const points = [
     <div class="scrim">
       <div class="wrap">
         <h1>What Is Foster Parenting?</h1>
-        <p class="lead">In its simplest form, fostering means opening your home and family to a child who isn't related to you, in care regulated under Ontario's Child, Youth and Family Services Act. In practice, it's so much more than that.</p>
+        <p class="lead">Fostering means opening your home to a child who needs one. At Annie's Havens, that often means caring for a child or youth living with developmental, physical, or medical needs, and it's so much more than that.</p>
       </div>
     </div>
   </div>
@@ -54,7 +54,7 @@ const points = [
     <div class="wrap article">
       <div>
         <div class="prose" style="margin-bottom:40px">
-          <p>At Annie's Havens we specialize in caring for children with complex needs. That means fostering here is part caregiver, part advocate, and part steady hand through one of the hardest chapters of a young life. Here's what that really looks like.</p>
+          <p>Annie's Havens was founded by William and Hilda Wilson and named for their daughter, Annie, who lived with significant physical and medical needs. Caring for Annie gave the agency its founding expertise, and supporting children with special needs is still at the heart of what we do. Here's what fostering with us really looks like.</p>
         </div>
         <div class="points">
           {points.map((pt) => (

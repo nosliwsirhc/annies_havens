@@ -449,6 +449,18 @@ form.contact .sub { color: var(--muted); font-size: 0.95rem; margin-bottom: 22px
 .feature-quote { text-align: center; max-width: 22ch; margin: 0 auto; font-family: var(--font-serif); font-size: clamp(1.7rem, 3.4vw, 2.5rem); line-height: 1.24; color: var(--slate); }
 .feature-quote .by { display: block; margin-top: 20px; font-family: var(--font-body); font-size: 0.95rem; font-weight: 700; color: var(--muted); }
 
+/* care programs detail sections */
+.programs-detail { display: grid; gap: 64px; }
+.programs-detail .prog-row { align-items: start; scroll-margin-top: 120px; }
+.programs-detail .prog-text h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); margin-bottom: 8px; }
+.programs-detail .prog-text .lead { font-size: 1.1rem; font-weight: 700; color: var(--slate); margin-bottom: 14px; }
+.programs-detail .prog-text p { color: var(--muted); }
+.programs-detail .prog-text p + p { margin-top: 0.9em; }
+.programs-detail .prog-text .more { margin-top: 20px; }
+.spectrum { list-style: none; margin-top: 16px; display: grid; gap: 9px; }
+.spectrum li { position: relative; padding-left: 24px; color: var(--ink); font-weight: 600; }
+.spectrum li::before { content: ""; position: absolute; left: 0; top: 9px; width: 9px; height: 9px; border-radius: 3px; background: var(--coral); }
+
 /* closing CTA band */
 .cta-band { background: var(--slate); color: #fff; text-align: center; }
 .cta-band h2 { color: #fff; font-size: clamp(1.8rem, 3.2vw, 2.6rem); }
