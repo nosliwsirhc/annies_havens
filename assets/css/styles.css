@@ -643,6 +643,13 @@ video {
     position: fixed;
     left: 0.2rem;
     top: 6rem;
+    max-width: 11rem;
+    max-height: calc(100vh - 7rem);
+    overflow-y: auto;
+}
+
+.doc-links .collection-item {
+    line-height: 1.3;
 }
 
 .dropdown-trigger {

@@ -55,7 +55,7 @@ class EmailService {
             from: 'chriswilson@annieshavens.ca',
             to: recipients.join(','),
             replyTo: email,
-            subject: `Contact Us Submission re: ${subject}`,
+            subject: `Contact Us Submission re: ${subject.replace(/[\r\n]+/g, ' ')}`,
             html: `
                 <h2>New Contact Form Submission</h2>
                 <p><strong>Sender's Name:</strong> ${safeFirstName} ${safeLastName}</p>

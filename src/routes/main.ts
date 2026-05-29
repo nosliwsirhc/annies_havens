@@ -2,7 +2,7 @@ import express, { Request, Response, Router } from 'express';
 import { emailService } from '../services/email.js';
 import { captchaService } from '../services/captcha.js';
 import { getMetadata, getCanonicalUrl, getBaseRef } from '../utils/helpers.js';
-import { isValidEmail } from '../utils/sanitize.js';
+import { isValidEmail, validateText } from '../utils/sanitize.js';
 import { csrfProtection, formRateLimiter } from '../middleware/security.js';
 import type { ContactFormData } from '../types/index.js';
 
@@ -87,10 +87,19 @@ const handleContactUs = async (
     res: Response
 ): Promise<void> => {
     try {
-        const { token, email, firstName, lastName, subject, message } = req.body;
-        
+        const { token, email } = req.body;
+
         if (!isValidEmail(email)) {
             res.json({ success: false, message: 'Please provide a valid email address.' });
+            return;
+        }
+
+        const firstName = validateText(req.body.firstName, 100);
+        const lastName = validateText(req.body.lastName, 100);
+        const subject = validateText(req.body.subject, 150);
+        const message = validateText(req.body.message, 5000);
+        if (!firstName || !lastName || !subject || !message) {
+            res.json({ success: false, message: 'Please complete all required fields.' });
             return;
         }
 
@@ -139,6 +148,27 @@ router.get('/contact-success', (req: Request, res: Response): void => {
         data: {
             baseRef: getBaseRef(),
             noFooter: true,
+            noindex: true,
+            canonical: getCanonicalUrl(req)
+        }
+    });
+});
+
+router.get('/program-description', (req: Request, res: Response): void => {
+    res.render('program-description', {
+        data: {
+            baseRef: getBaseRef(),
+            meta: getMetadata('programDescription'),
+            canonical: getCanonicalUrl(req)
+        }
+    });
+});
+
+router.get('/complaints', (req: Request, res: Response): void => {
+    res.render('complaints', {
+        data: {
+            baseRef: getBaseRef(),
+            meta: getMetadata('complaints'),
             canonical: getCanonicalUrl(req)
         }
     });
@@ -148,6 +178,7 @@ router.get('/privacy-policy', (req: Request, res: Response): void => {
     res.render('privacy-policy', {
         data: {
             baseRef: getBaseRef(),
+            meta: getMetadata('privacyPolicy'),
             canonical: getCanonicalUrl(req)
         }
     });

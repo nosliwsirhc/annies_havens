@@ -167,8 +167,25 @@ app.use((req, res, next) => {
 
     const originalSend = res.send.bind(res);
     res.send = (body: any): Response => {
-        const contentType = res.get('Content-Type');
-        if (contentType && contentType.includes('text/html')) {
+        // Express sets the Content-Type *inside* its own res.send, i.e. after this
+        // override runs, so res.get('Content-Type') is usually empty here. Detect an
+        // HTML response from the body itself (rendered pages are full documents that
+        // start with '<'); JSON form responses are objects/strings starting with '{'.
+        const contentType = res.get('Content-Type') || '';
+        const isHtml =
+            typeof body === 'string' &&
+            (contentType.includes('text/html') || body.trimStart().startsWith('<'));
+        if (isHtml) {
+            // Pages that embed a per-session CSRF token must never be shared-cached:
+            // the cached HTML would carry one visitor's token while each new visitor
+            // gets their own token cookie, breaking every form submission (403).
+            const csrfToken = res.locals.csrfToken as string | undefined;
+            const embedsCsrfToken =
+                typeof body === 'string' && !!csrfToken && body.includes(csrfToken);
+            if (embedsCsrfToken) {
+                res.set('Cache-Control', 'private, no-store');
+                return originalSend(body);
+            }
             res.set('Cache-Control', 'public, max-age=3600');
             if (req.method === 'GET') {
                 const cached = htmlCache.get(req.originalUrl);

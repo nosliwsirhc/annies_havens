@@ -1,2 +1,4 @@
 User-agent: *
-Sitemap: https://www.annieshavens.ca/sitemap
+Disallow: /contact-success
+Disallow: /faq-submit-success
+Sitemap: https://www.annieshavens.ca/sitemap.xml

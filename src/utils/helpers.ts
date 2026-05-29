@@ -24,5 +24,9 @@ export const getMetadata = (key: string): SiteMetadata => {
     return {};
 };
 
-export const getCanonicalUrl = (req: Request): string => 
-    `${req.protocol}://${req.get('host')}${req.originalUrl}`;
+// Canonical URLs are pinned to the www host (matching og:url and the sitemap)
+// and exclude the query string so paginated/UTM variants don't fragment ranking.
+const CANONICAL_ORIGIN = 'https://www.annieshavens.ca';
+
+export const getCanonicalUrl = (req: Request): string =>
+    req.path === '/' ? CANONICAL_ORIGIN : `${CANONICAL_ORIGIN}${req.path}`;

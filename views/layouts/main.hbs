@@ -9,10 +9,9 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-    <link rel="manifest" href="/site.webmanifest" />
     <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
     <meta name="msapplication-TileColor" content="#00aba9" />
-    <meta name="theme-color" content="#f7f7f7" />
+    <meta name="theme-color" content="#667C89" />
     {{#if @preloadImage}}
       <link
         rel="preload"
@@ -37,10 +36,44 @@
     <title>{{@meta.title}}</title>
     <meta name="description" content="{{@meta.description}}" />
     <meta name="keywords" content="{{@meta.keywords}}" />
+    {{#if @noindex}}<meta name="robots" content="noindex,follow" />{{/if}}
     <meta property="og:locale" content="en_CA" />
     {{#each @meta.metaTags}}
       <meta property="{{this.property}}" content="{{this.content}}" />
     {{/each}}
+    {{#if @meta.metaTags}}
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
+      <meta property="og:image:type" content="image/jpeg" />
+      <meta property="og:image:alt" content="Annie's Havens logo" />
+    {{/if}}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@annieshavens" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Annie's Havens",
+        "alternateName": "Annie's Havens Ltd.",
+        "url": "https://www.annieshavens.ca",
+        "logo": "https://www.annieshavens.ca/images/logo_w_name_1200x630.jpg",
+        "telephone": "+1-905-294-2137",
+        "foundingDate": "1996",
+        "areaServed": "Ontario, Canada",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "517 Upper Sherman Ave.",
+          "addressLocality": "Hamilton",
+          "addressRegion": "ON",
+          "postalCode": "L8V 3L7",
+          "addressCountry": "CA"
+        },
+        "sameAs": [
+          "https://twitter.com/annieshavens",
+          "https://www.facebook.com/profile.php?id=61572234975509"
+        ]
+      }
+    </script>
   </head>
 
   <body>
@@ -51,6 +84,12 @@
       <ul id="more-dropdown" class="dropdown-content">
         <li>
           <a href="/news" class="blue-grey-text text-darken-4">News</a>
+        </li>
+        <li>
+          <a href="/program-description" class="blue-grey-text text-darken-4">Program Description</a>
+        </li>
+        <li>
+          <a href="/complaints" class="blue-grey-text text-darken-4">Complaints</a>
         </li>
         <li>
           <a href="/referral-sources" class="blue-grey-text text-darken-4">Referral Sources</a>
@@ -198,7 +237,10 @@
       </li>
       <li><a class="nav-subheader">More...</a></li>
       <li><a href="/news">News</a></li>
+      <li><a href="/program-description">Program Description</a></li>
+      <li><a href="/complaints">Complaints</a></li>
       <li><a href="/referral-sources">Referral Sources</a></li>
+      <li><a href="/service-area">Service Area</a></li>
     </ul>
     <!-- End Navigation -->
 
@@ -257,7 +299,7 @@
         </div>
         <div class="footer-copyright">
           <div class="container blue-grey-text text-darken-4">
-            &copy;&nbsp;<span id="copyright">2024</span>
+            &copy;&nbsp;<span id="copyright">2026</span>
             <a class="right" href="/sitemap.xml">Sitemap</a>
           </div>
         </div>

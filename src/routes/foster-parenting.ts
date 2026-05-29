@@ -2,7 +2,7 @@ import express, { Request, Response, Router } from 'express';
 import { emailService } from '../services/email.js';
 import { captchaService } from '../services/captcha.js';
 import { getMetadata, getCanonicalUrl, getBaseRef } from '../utils/helpers.js';
-import { isValidEmail } from '../utils/sanitize.js';
+import { isValidEmail, validateText } from '../utils/sanitize.js';
 import { csrfProtection, formRateLimiter } from '../middleware/security.js';
 import type { FAQFormData } from '../types/index.js';
 
@@ -44,13 +44,21 @@ router.post(
     csrfProtection,
     async (req: Request, res: Response): Promise<void> => {
     try {
-        const { token, email, firstName, lastName, question }: FAQFormData & { token: string } = req.body;
+        const { token, email } = req.body;
 
         if (!isValidEmail(email)) {
             res.json({ success: false, message: 'Please provide a valid email address.' });
             return;
         }
-        
+
+        const firstName = validateText(req.body.firstName, 100);
+        const lastName = validateText(req.body.lastName, 100);
+        const question = validateText(req.body.question, 5000);
+        if (!firstName || !lastName || !question) {
+            res.json({ success: false, message: 'Please complete all required fields.' });
+            return;
+        }
+
         // Validate captcha
         const isCaptchaValid = await captchaService.verify(token, req.ip || '');
         if (!isCaptchaValid) {
@@ -127,6 +135,7 @@ router.get('/faq-submit-success', (req: Request, res: Response): void => {
         data: {
             baseRef: getBaseRef(),
             noFooter: true,
+            noindex: true,
             canonical: getCanonicalUrl(req)
         }
     });

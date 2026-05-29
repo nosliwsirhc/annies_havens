@@ -27,12 +27,8 @@
                 "content": "Annie's Havens"
             },
             {
-                "property": "og:locale",
-                "content": "en_CA"
-            },
-            {
                 "property": "og:image",
-                "content": "https://www.annieshavens.ca/logo_w_name_1200x630.jpg"
+                "content": "https://www.annieshavens.ca/images/logo_w_name_1200x630.jpg"
             }
         ]
     },
@@ -64,12 +60,8 @@
                 "content": "Annie's Havens"
             },
             {
-                "property": "og:locale",
-                "content": "en_CA"
-            },
-            {
                 "property": "og:image",
-                "content": "https://www.annieshavens.ca/logo_w_name_1200x630.jpg"
+                "content": "https://www.annieshavens.ca/images/logo_w_name_1200x630.jpg"
             }
         ],
         "readMore": [
@@ -119,12 +111,8 @@
                 "content": "Annie's Havens"
             },
             {
-                "property": "og:locale",
-                "content": "en_CA"
-            },
-            {
                 "property": "og:image",
-                "content": "https://www.annieshavens.ca/logo_w_name_1200x630.jpg"
+                "content": "https://www.annieshavens.ca/images/logo_w_name_1200x630.jpg"
             }
         ],
         "readMore": [
@@ -174,12 +162,8 @@
                 "content": "Annie's Havens"
             },
             {
-                "property": "og:locale",
-                "content": "en_CA"
-            },
-            {
                 "property": "og:image",
-                "content": "https://www.annieshavens.ca/logo_w_name_1200x630.jpg"
+                "content": "https://www.annieshavens.ca/images/logo_w_name_1200x630.jpg"
             }
         ],
         "readMore": [
@@ -229,12 +213,8 @@
                 "content": "Annie's Havens"
             },
             {
-                "property": "og:locale",
-                "content": "en_CA"
-            },
-            {
                 "property": "og:image",
-                "content": "https://www.annieshavens.ca/logo_w_name_1200x630.jpg"
+                "content": "https://www.annieshavens.ca/images/logo_w_name_1200x630.jpg"
             }
         ],
         "readMore": [
@@ -284,12 +264,8 @@
                 "content": "Annie's Havens"
             },
             {
-                "property": "og:locale",
-                "content": "en_CA"
-            },
-            {
                 "property": "og:image",
-                "content": "https://www.annieshavens.ca/logo_w_name_1200x630.jpg"
+                "content": "https://www.annieshavens.ca/images/logo_w_name_1200x630.jpg"
             }
         ],
         "readMore": [
@@ -339,12 +315,8 @@
                 "content": "Annie's Havens"
             },
             {
-                "property": "og:locale",
-                "content": "en_CA"
-            },
-            {
                 "property": "og:image",
-                "content": "https://www.annieshavens.ca/logo_w_name_1200x630.jpg"
+                "content": "https://www.annieshavens.ca/images/logo_w_name_1200x630.jpg"
             }
         ],
         "readMore": [
@@ -394,12 +366,8 @@
                 "content": "Annie's Havens"
             },
             {
-                "property": "og:locale",
-                "content": "en_CA"
-            },
-            {
                 "property": "og:image",
-                "content": "https://www.annieshavens.ca/logo_w_name_1200x630.jpg"
+                "content": "https://www.annieshavens.ca/images/logo_w_name_1200x630.jpg"
             }
         ],
         "readMore": [
@@ -453,12 +421,8 @@
                 "content": "Annie's Havens"
             },
             {
-                "property": "og:locale",
-                "content": "en_CA"
-            },
-            {
                 "property": "og:image",
-                "content": "https://www.annieshavens.ca/logo_w_name_1200x630.jpg"
+                "content": "https://www.annieshavens.ca/images/logo_w_name_1200x630.jpg"
             }
         ],
         "readMore": [
@@ -508,12 +472,8 @@
                 "content": "Annie's Havens"
             },
             {
-                "property": "og:locale",
-                "content": "en_CA"
-            },
-            {
                 "property": "og:image",
-                "content": "https://www.annieshavens.ca/logo_w_name_1200x630.jpg"
+                "content": "https://www.annieshavens.ca/images/logo_w_name_1200x630.jpg"
             }
         ],
         "readMore": [
@@ -563,12 +523,8 @@
                 "content": "Annie's Havens"
             },
             {
-                "property": "og:locale",
-                "content": "en_CA"
-            },
-            {
                 "property": "og:image",
-                "content": "https://www.annieshavens.ca/logo_w_name_1200x630.jpg"
+                "content": "https://www.annieshavens.ca/images/logo_w_name_1200x630.jpg"
             }
         ],
         "readMore": [
@@ -618,12 +574,8 @@
                 "content": "Annie's Havens"
             },
             {
-                "property": "og:locale",
-                "content": "en_CA"
-            },
-            {
                 "property": "og:image",
-                "content": "https://www.annieshavens.ca/logo_w_name_1200x630.jpg"
+                "content": "https://www.annieshavens.ca/images/logo_w_name_1200x630.jpg"
             }
         ],
         "readMore": [
@@ -673,12 +625,8 @@
                 "content": "Annie's Havens"
             },
             {
-                "property": "og:locale",
-                "content": "en_CA"
-            },
-            {
                 "property": "og:image",
-                "content": "https://www.annieshavens.ca/logo_w_name_1200x630.jpg"
+                "content": "https://www.annieshavens.ca/images/logo_w_name_1200x630.jpg"
             }
         ],
         "readMore": [
@@ -697,6 +645,145 @@
             {
                 "href": "/contact-us",
                 "linkName": "Contact Us"
+            }
+        ]
+    },
+    "programDescription": {
+        "ogNamespace": "website",
+        "title": "Program Description | Annie's Havens",
+        "shortTitle": "Program Description",
+        "description": "Annie's Havens is a licensed private foster care agency serving Ontario since 1996. Read our program description: mission, population served, care programs, service area, and supports.",
+        "keywords": "program description, foster care program, Annie's Havens program, special needs foster care, foster care Ontario, MCCSS licensed foster care, CYFSA, Annie's Havens",
+        "metaTags": [
+            {
+                "property": "og:url",
+                "content": "https://www.annieshavens.ca/program-description"
+            },
+            {
+                "property": "og:type",
+                "content": "website"
+            },
+            {
+                "property": "og:title",
+                "content": "Program Description | Annie's Havens"
+            },
+            {
+                "property": "og:description",
+                "content": "Annie's Havens is a licensed private foster care agency serving Ontario since 1996. Read our program description: mission, population served, care programs, service area, and supports."
+            },
+            {
+                "property": "og:site_name",
+                "content": "Annie's Havens"
+            },
+            {
+                "property": "og:image",
+                "content": "https://www.annieshavens.ca/images/logo_w_name_1200x630.jpg"
+            }
+        ],
+        "readMore": [
+            {
+                "href": "/care-programs",
+                "linkName": "Care Programs"
+            },
+            {
+                "href": "/service-area",
+                "linkName": "Service Area"
+            },
+            {
+                "href": "/complaints",
+                "linkName": "Complaints Procedure"
+            },
+            {
+                "href": "/about-us",
+                "linkName": "About Us"
+            },
+            {
+                "href": "/contact-us",
+                "linkName": "Contact Us"
+            }
+        ]
+    },
+    "complaints": {
+        "ogNamespace": "website",
+        "title": "Complaints, Response & Review Procedures | Annie's Havens",
+        "shortTitle": "Complaints Procedure",
+        "description": "How to make a complaint about Annie's Havens foster care, the rights of children in care, and how we acknowledge, respond to, and review complaints under the CYFSA, 2017 and Ontario regulations.",
+        "keywords": "foster care complaint, complaints procedure, children's rights in care, Ontario Ombudsman, CYFSA, foster care complaint Ontario, Annie's Havens",
+        "metaTags": [
+            {
+                "property": "og:url",
+                "content": "https://www.annieshavens.ca/complaints"
+            },
+            {
+                "property": "og:type",
+                "content": "website"
+            },
+            {
+                "property": "og:title",
+                "content": "Complaints, Response & Review Procedures | Annie's Havens"
+            },
+            {
+                "property": "og:description",
+                "content": "How to make a complaint about Annie's Havens foster care, the rights of children in care, and how we acknowledge, respond to, and review complaints under the CYFSA, 2017 and Ontario regulations."
+            },
+            {
+                "property": "og:site_name",
+                "content": "Annie's Havens"
+            },
+            {
+                "property": "og:image",
+                "content": "https://www.annieshavens.ca/images/logo_w_name_1200x630.jpg"
+            }
+        ],
+        "readMore": [
+            {
+                "href": "/program-description",
+                "linkName": "Program Description"
+            },
+            {
+                "href": "/children-in-care",
+                "linkName": "Ontario Children in Care"
+            },
+            {
+                "href": "/about-us",
+                "linkName": "About Us"
+            },
+            {
+                "href": "/contact-us",
+                "linkName": "Contact Us"
+            }
+        ]
+    },
+    "privacyPolicy": {
+        "ogNamespace": "website",
+        "title": "Privacy Policy | Annie's Havens",
+        "shortTitle": "Privacy Policy",
+        "description": "How Annie's Havens Ltd. collects, uses, and protects your personal data when you use our website.",
+        "keywords": "privacy policy, data protection, Annie's Havens",
+        "metaTags": [
+            {
+                "property": "og:url",
+                "content": "https://www.annieshavens.ca/privacy-policy"
+            },
+            {
+                "property": "og:type",
+                "content": "website"
+            },
+            {
+                "property": "og:title",
+                "content": "Privacy Policy | Annie's Havens"
+            },
+            {
+                "property": "og:description",
+                "content": "How Annie's Havens Ltd. collects, uses, and protects your personal data when you use our website."
+            },
+            {
+                "property": "og:site_name",
+                "content": "Annie's Havens"
+            },
+            {
+                "property": "og:image",
+                "content": "https://www.annieshavens.ca/images/logo_w_name_1200x630.jpg"
             }
         ]
     },
@@ -728,12 +815,8 @@
                 "content": "Annie's Havens"
             },
             {
-                "property": "og:locale",
-                "content": "en_CA"
-            },
-            {
                 "property": "og:image",
-                "content": "https://www.annieshavens.ca/logo_w_name_1200x630.jpg"
+                "content": "https://www.annieshavens.ca/images/logo_w_name_1200x630.jpg"
             }
         ]
     },
@@ -765,12 +848,8 @@
                 "content": "Annie's Havens"
             },
             {
-                "property": "og:locale",
-                "content": "en_CA"
-            },
-            {
                 "property": "og:image",
-                "content": "https://www.annieshavens.ca/logo_w_name_1200x630.jpg"
+                "content": "https://www.annieshavens.ca/images/logo_w_name_1200x630.jpg"
             },
             {
                 "property": "article:author",

@@ -1,9 +1,4 @@
 import express, { Request, Response, Router } from 'express';
-import path from 'path';
-import { fileURLToPath } from 'url';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 const router: Router = express.Router();
 
@@ -68,12 +63,10 @@ const router: Router = express.Router();
 //     res.redirect(301, '/news/urgent-need-for-foster-parents-in-ontario');
 // });
 
-// Sitemap route
+// Sitemap route — the file is served statically at /sitemap.xml; keep the
+// extensionless URL working with a permanent redirect.
 router.get('/sitemap', (req: Request, res: Response): void => {
-    res.status(200).sendFile(
-        path.join(__dirname, '../../assets/sitemap'), 
-        { root: process.cwd() }
-    );
+    res.redirect(301, '/sitemap.xml');
 });
 
 export { router as redirectRoutes };
