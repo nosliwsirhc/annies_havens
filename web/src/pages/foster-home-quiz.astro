@@ -1,0 +1,213 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import ReadMore from '../components/ReadMore.astro';
+import Icon from '../components/Icon.astro';
+
+const readMore = [
+  { href: '/foster-parent-application-process', label: 'The Application Process' },
+  { href: '/what-is-foster-parenting', label: 'What Is Foster Parenting?' },
+  { href: '/faq', label: 'Frequently Asked Questions' },
+  { href: '/contact-us', label: 'Contact Us' },
+];
+
+// severity: note (asset, never blocks) | warn (flag, never blocks) | block (ineligible to continue)
+const questions = [
+  {
+    name: 'special-needs-experience', severity: 'note', concern: 'no',
+    prompt: 'Do you have experience supporting children or adults with special needs, or are you open to learning with training and support?',
+    options: [{ v: 'yes', l: 'Yes' }, { v: 'no', l: 'No' }],
+    message: 'Prior experience is an asset, especially for higher-needs placements. Homes without experience can still be considered, though early placement options may be more limited.',
+  },
+  {
+    name: 'crime', severity: 'block', concern: 'yes',
+    prompt: 'Is there anything in your household’s criminal history that could affect your ability to pass a Police Broad Record Check?',
+    options: [{ v: 'no', l: 'No' }, { v: 'yes', l: 'Yes' }],
+    message: 'Certain offences can make an applicant ineligible under licensing requirements. If you’re unsure, we’d recommend contacting us before applying.',
+  },
+  {
+    name: 'child-welfare', severity: 'warn', concern: 'yes',
+    prompt: 'Has anyone in your household ever been involved in a child welfare investigation as a caregiver?',
+    options: [{ v: 'no', l: 'No' }, { v: 'yes', l: 'Yes' }],
+    message: 'Prior involvement doesn’t automatically disqualify you. Eligibility depends on the nature, outcome, and timing of the situation.',
+  },
+  {
+    name: 'smoking', severity: 'block', concern: 'yes',
+    prompt: 'Are there any substances used in your home (including smoking or vaping) that could affect a child’s health or safety?',
+    options: [{ v: 'no', l: 'No' }, { v: 'yes', l: 'Yes' }],
+    message: 'Foster homes must meet health and safety standards for children. This may affect eligibility depending on the circumstances.',
+  },
+  {
+    name: 'substance-abuse', severity: 'block', concern: 'yes',
+    prompt: 'Is there anything related to substance use in your household that could impact your ability to safely care for a child?',
+    options: [{ v: 'no', l: 'No' }, { v: 'yes', l: 'Yes' }],
+    message: 'The safety and stability of the home is essential. Situations that could interfere with caregiving may affect eligibility.',
+  },
+  {
+    name: 'health', severity: 'block', concern: 'yes',
+    prompt: 'Are there any untreated physical or mental health concerns in your household that could interfere with safely meeting caregiving responsibilities?',
+    options: [{ v: 'no', l: 'No' }, { v: 'yes', l: 'Yes' }],
+    message: 'Many caregivers live with health conditions. Eligibility depends on whether needs are well managed and the home can safely meet care demands.',
+  },
+  {
+    name: 'schedule', severity: 'block', concern: 'fixed',
+    prompt: 'Is your schedule flexible enough to accommodate appointments, school meetings, and unexpected needs?',
+    options: [{ v: 'open', l: 'Yes, my schedule is open' }, { v: 'flexible', l: 'Somewhat flexible' }, { v: 'fixed', l: 'No, my schedule is fixed' }],
+    message: 'Foster caregiving needs flexibility to respond to children’s needs and professional obligations.',
+  },
+  {
+    name: 'care-direction', severity: 'block', concern: 'no',
+    prompt: 'Are you able to work collaboratively with a care team and follow care plans, even when you may not fully agree?',
+    options: [{ v: 'yes', l: 'Yes' }, { v: 'no', l: 'No' }],
+    message: 'Foster parents are key members of a care team and must be able to collaborate respectfully and consistently.',
+  },
+];
+---
+<BaseLayout
+  title="Foster Home Quiz | Annie's Havens"
+  description="A quick, private self-check to see whether now is the right time to apply to foster with Annie's Havens. Nothing is stored or submitted."
+>
+  <PageHeader
+    title="Could You Foster? A Quick Self-Check"
+    intro="Eight short questions to help you see whether now is the right time to apply. Answer honestly — nothing here is stored or submitted, it’s just for you."
+  />
+
+  <section class="pad">
+    <div class="quiz">
+      <div class="quiz-card">
+        <form id="quiz-form" novalidate>
+          <div class="quiz-progress" aria-hidden="true"><span id="quiz-bar"></span></div>
+          <p class="quiz-count" id="quiz-count" aria-live="polite">Question 1 of {questions.length}</p>
+
+          {questions.map((q, i) => (
+            <fieldset
+              class:list={['quiz-q', { active: i === 0 }]}
+              data-name={q.name}
+              data-severity={q.severity}
+              data-concern={q.concern}
+              data-message={q.message}
+            >
+              <legend class="prompt">{q.prompt}</legend>
+              <div class="quiz-options">
+                {q.options.map((o, oi) => (
+                  <div class="quiz-opt">
+                    <input type="radio" name={q.name} id={`${q.name}-${oi}`} value={o.v} />
+                    <label for={`${q.name}-${oi}`}>{o.l}</label>
+                  </div>
+                ))}
+              </div>
+              {i > 0 && <button type="button" class="quiz-back">← Back</button>}
+            </fieldset>
+          ))}
+        </form>
+
+        <div class="quiz-result" id="quiz-result" tabindex="-1" role="status">
+          <div class="rico" id="quiz-rico"></div>
+          <h2 id="quiz-result-title"></h2>
+          <p id="quiz-result-text"></p>
+          <div class="quiz-notes" id="quiz-notes"></div>
+          <div class="quiz-actions" id="quiz-actions"></div>
+        </div>
+      </div>
+      <p class="quiz-note-privacy">This quiz is a quick self-check, not an application or a decision. It isn’t stored or sent anywhere.</p>
+    </div>
+  </section>
+
+  <ReadMore links={readMore} />
+</BaseLayout>
+
+<script>
+  const form = document.getElementById('quiz-form') as HTMLFormElement | null;
+  if (form) {
+    const qs = Array.from(form.querySelectorAll<HTMLFieldSetElement>('.quiz-q'));
+    const total = qs.length;
+    const bar = document.getElementById('quiz-bar') as HTMLElement;
+    const count = document.getElementById('quiz-count') as HTMLElement;
+    const result = document.getElementById('quiz-result') as HTMLElement;
+    let current = 0;
+
+    const show = (idx: number) => {
+      qs.forEach((q, i) => q.classList.toggle('active', i === idx));
+      current = idx;
+      bar.style.width = `${(idx / total) * 100}%`;
+      count.textContent = `Question ${idx + 1} of ${total}`;
+      // focus the first option of the shown question for keyboard users
+      qs[idx].querySelector<HTMLInputElement>('input')?.focus();
+    };
+
+    const finish = () => {
+      bar.style.width = '100%';
+      count.style.display = 'none';
+      qs.forEach((q) => q.classList.remove('active'));
+
+      // Evaluate answers
+      const blocks: string[] = [];
+      const flags: string[] = [];
+      qs.forEach((q) => {
+        const name = q.dataset.name!;
+        const chosen = form.querySelector<HTMLInputElement>(`input[name="${name}"]:checked`)?.value;
+        if (chosen && chosen === q.dataset.concern) {
+          (q.dataset.severity === 'block' ? blocks : flags).push(q.dataset.message!);
+        }
+      });
+
+      const ok = blocks.length === 0;
+      result.classList.add('show', ok ? 'ok' : 'hold');
+      document.getElementById('quiz-rico')!.innerHTML = ok
+        ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>'
+        : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8v4"/><path d="M12 16h.01"/><circle cx="12" cy="12" r="10"/></svg>';
+      document.getElementById('quiz-result-title')!.textContent = ok
+        ? 'You’re off to a strong start.'
+        : 'Thank you for your honesty.';
+      document.getElementById('quiz-result-text')!.textContent = ok
+        ? 'Based on your answers, you may be ready to begin an application. This is just a self-check, so the best next step is a conversation with our team.'
+        : 'Based on your answers, there may be a few things to work through first. None of this is necessarily a “no” on its own — if you’d like, reach out and we can talk it through.';
+
+      const notes = document.getElementById('quiz-notes')!;
+      notes.innerHTML = '';
+      [...blocks, ...flags].forEach((m) => {
+        const d = document.createElement('div');
+        d.className = 'quiz-note';
+        d.textContent = m;
+        notes.appendChild(d);
+      });
+
+      const actions = document.getElementById('quiz-actions')!;
+      actions.innerHTML = ok
+        ? '<a class="btn btn-coral" href="/contact-us">Talk to Our Team</a><a class="btn btn-out" href="/foster-parent-application-process">See the steps</a>'
+        : '<a class="btn btn-coral" href="/contact-us">Contact Us to Discuss</a>';
+      const retake = document.createElement('button');
+      retake.type = 'button';
+      retake.className = 'quiz-retake';
+      retake.textContent = 'Retake quiz';
+      retake.addEventListener('click', reset);
+      actions.appendChild(retake);
+
+      result.focus();
+    };
+
+    function reset() {
+      form.reset();
+      result.classList.remove('show', 'ok', 'hold');
+      count.style.display = '';
+      show(0);
+    }
+
+    // advance on answer
+    form.addEventListener('change', (e) => {
+      const t = e.target as HTMLInputElement;
+      if (t.type !== 'radio') return;
+      window.setTimeout(() => {
+        if (current < total - 1) show(current + 1);
+        else finish();
+      }, 260);
+    });
+
+    // back buttons
+    form.querySelectorAll('.quiz-back').forEach((b) =>
+      b.addEventListener('click', () => show(Math.max(0, current - 1)))
+    );
+
+    show(0);
+  }
+</script>
