@@ -97,6 +97,20 @@ const orgSchema = {
         { threshold: 0.12 }
       );
       document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+
+      // Accordion (single-open) — works for any .faq-item on the page.
+      document.querySelectorAll('.faq-q').forEach((q) => {
+        q.addEventListener('click', () => {
+          const item = q.closest('.faq-item');
+          if (!item) return;
+          const isOpen = item.classList.contains('open');
+          document.querySelectorAll('.faq-item').forEach((i) => {
+            i.classList.remove('open');
+            i.querySelector('.faq-q')?.setAttribute('aria-expanded', 'false');
+          });
+          if (!isOpen) { item.classList.add('open'); q.setAttribute('aria-expanded', 'true'); }
+        });
+      });
     </script>
   </body>
 </html>

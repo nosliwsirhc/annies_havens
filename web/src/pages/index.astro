@@ -272,20 +272,6 @@ const supports = [
 <script>
   import { formatPhoneWithCaret, isValidEmail, isValidPhone } from '../lib/form';
 
-  // FAQ accordion (single-open)
-  document.querySelectorAll<HTMLButtonElement>('.faq-q').forEach((q) => {
-    q.addEventListener('click', () => {
-      const item = q.closest('.faq-item');
-      if (!item) return;
-      const isOpen = item.classList.contains('open');
-      document.querySelectorAll('.faq-item').forEach((i) => {
-        i.classList.remove('open');
-        i.querySelector('.faq-q')?.setAttribute('aria-expanded', 'false');
-      });
-      if (!isOpen) { item.classList.add('open'); q.setAttribute('aria-expanded', 'true'); }
-    });
-  });
-
   // Contact form - client validation only for now.
   // TODO (Phase 4): POST to /api/contact (Cloudflare Pages Function) with
   // Turnstile token; send via Resend. Until then this does NOT email anyone.

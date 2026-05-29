@@ -470,6 +470,15 @@ form.contact .sub { color: var(--muted); font-size: 0.95rem; margin-bottom: 22px
 /* utility */
 .bg-warm { background: var(--warm); }
 
+/* faq page groups + aside nav */
+.faq-group + .faq-group { margin-top: 44px; }
+.faq-group h2 { font-size: clamp(1.4rem, 2.4vw, 1.75rem); margin-bottom: 6px; scroll-margin-top: 110px; }
+.aside-nav { list-style: none; }
+.aside-nav li { border-top: 1px solid var(--line); }
+.aside-nav li:first-child { border-top: 0; }
+.aside-nav a { display: block; padding: 10px 0; font-weight: 600; font-size: 0.93rem; color: var(--slate-d); transition: color 0.2s; }
+.aside-nav a:hover { color: var(--coral-d); }
+
 /* about: founding story */
 .story { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 52px; align-items: center; }
 @media (max-width: 920px) { .story { grid-template-columns: 1fr; gap: 28px; } }

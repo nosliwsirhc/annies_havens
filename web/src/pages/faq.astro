@@ -1,0 +1,120 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Picture from '../components/Picture.astro';
+import ReadMore from '../components/ReadMore.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { site } from '../data/site';
+
+const readMore = [
+  { href: '/what-is-foster-parenting', label: 'What Is Foster Parenting?' },
+  { href: '/foster-parent-application-process', label: 'The Application Process' },
+  { href: '/care-programs', label: 'Our Care Programs' },
+  { href: '/children-in-care', label: 'Children in Care' },
+  { href: '/contact-us', label: 'Contact Us' },
+];
+
+const groups = [
+  {
+    id: 'eligibility',
+    title: 'Who can foster?',
+    items: [
+      { q: 'Can I foster if I’m single?', a: 'Yes. Single applicants are always welcome. What we assess is your ability to meet a child’s needs, including your time, your commitment, and the support around you.' },
+      { q: 'Is Annie’s Havens LGBTQ2S friendly?', a: 'Absolutely. We are committed to a safe and inclusive environment for everyone, and we are proud of the LGBTQ2S caregivers in our community.' },
+      { q: 'Do I need to own my home?', a: 'No. Foster parents rent or own. You can use the home you already have. You would only need more space if you chose to care for more children, and never at the cost of financial hardship.' },
+      { q: 'What kind of background helps?', a: 'No particular career is required, and we provide the training. For our special needs program, experience in nursing, personal support work, or caring for a family member is a real asset.' },
+    ],
+  },
+  {
+    id: 'children',
+    title: 'The children and matching',
+    items: [
+      { q: 'What’s the difference between fostering with a CAS and Annie’s Havens?', a: 'Both are licensed by the Province of Ontario under the same criteria. A Children’s Aid Society carries broader child-protection duties; as a smaller private agency, we focus on careful matching and close, specialized support for our homes.' },
+      { q: 'Can I choose which child is placed with me?', a: 'Yes. Foster parents have the final say on any placement. We share what we know about a child, often through a pre-placement assessment of their strengths and needs, so you can make an informed decision. Emergency placements may come with less information.' },
+      { q: 'Do you match children by race and ethnicity?', a: 'We do our best to. It can be difficult given how few foster homes are available, but wherever we can, we match according to a child’s racial and ethnic background.' },
+      { q: 'How many children can we foster?', a: 'Ontario limits a foster home to four children. Physical space, or other children already living in the home, may lower that number.' },
+    ],
+  },
+  {
+    id: 'money',
+    title: 'Money and support',
+    items: [
+      { q: 'Are foster parents paid?', a: 'Not in the usual sense. A daily per diem covers the costs of caring for a child: clothing, food, hygiene, and a contribution to household costs. Annie’s Havens caregivers receive roughly $80 to $85 per child per day, depending on experience and the support a child needs. It is not a replacement for steady income.' },
+      { q: 'What about major or medical costs?', a: 'Day-to-day costs are covered by the per diem. Exceptional costs, such as dental work, therapy, medication, or medical devices, are funded separately, often through Children’s Aid.' },
+      { q: 'Is there respite?', a: 'Yes. Respite gives foster parents planned breaks, either by placing the child with another foster home for a short time, or by bringing a youth worker into your home.' },
+      { q: 'Can we still take vacations?', a: 'It depends on any court-ordered family visits and the approval of the child’s guardian. Where a child cannot travel with you, we typically arrange respite so you can still take your break.' },
+    ],
+  },
+  {
+    id: 'process',
+    title: 'The process',
+    items: [
+      { q: 'How do I get started?', a: 'It begins with a phone conversation, then a home visit, some paperwork, and interviews that form your Home Study. After training, your home is ready for placements.' },
+      { q: 'What screening is involved?', a: 'A Vulnerable Sector police check, a child-welfare check, and references from your community and family.' },
+      { q: 'How long does it take?', a: 'With prompt paperwork and a flexible schedule, it can take as little as two months; our goal is no more than three. PRIDE training is required before you can foster.' },
+      { q: 'What happens if a placement doesn’t work out?', a: 'If a placement isn’t the right fit, we find an alternative home, usually within 30 days, and ask that you see the placement through while we do. We support you throughout.' },
+    ],
+  },
+];
+---
+<BaseLayout
+  title="Frequently Asked Questions | Annie's Havens"
+  description="Answers to common questions about becoming a foster parent in Ontario with Annie's Havens: eligibility, matching, reimbursement, support, and the application process."
+>
+  <div class="page-banner">
+    <Picture
+      base="/images/carousel3"
+      alt="A foster family"
+      width={1920}
+      height={600}
+      formats={['avif', 'webp']}
+      widths={[640, 1024, 1440, 1920]}
+      sizes="100vw"
+      loading="eager"
+      fetchpriority="high"
+    />
+    <div class="scrim">
+      <div class="wrap">
+        <h1>Frequently Asked Questions</h1>
+        <p class="lead">You probably have questions. Good. Here are the ones we hear most, from who can foster to how reimbursement and support work.</p>
+      </div>
+    </div>
+  </div>
+
+  <section class="pad">
+    <div class="wrap article">
+      <div>
+        {groups.map((g) => (
+          <div class="faq-group" id={g.id}>
+            <h2>{g.title}</h2>
+            <div class="faq">
+              {g.items.map((f, i) => (
+                <div class="faq-item">
+                  <button class="faq-q" type="button" aria-expanded="false" id={`faq-q-${g.id}-${i}`} aria-controls={`faq-a-${g.id}-${i}`}>{f.q}<span class="pm" aria-hidden="true"></span></button>
+                  <div class="faq-a" id={`faq-a-${g.id}-${i}`} role="region" aria-labelledby={`faq-q-${g.id}-${i}`}><div><p>{f.a}</p></div></div>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <aside class="aside">
+        <div class="aside-card">
+          <h3>Browse by topic</h3>
+          <ul class="aside-nav">
+            {groups.map((g) => <li><a href={`#${g.id}`}>{g.title}</a></li>)}
+          </ul>
+        </div>
+        <div class="aside-card is-cta">
+          <h3>Still have a question?</h3>
+          <p>If your question isn’t here, just ask. A real member of our team will get back to you.</p>
+          <a class="btn btn-coral" href="/contact-us">Ask Our Team</a>
+          <a class="call" href={site.phoneHref}>{site.phone}</a>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <CtaBand />
+  <ReadMore links={readMore} />
+</BaseLayout>
