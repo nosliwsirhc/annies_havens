@@ -75,9 +75,10 @@ const orgSchema = {
     <script type="application/ld+json" set:html={JSON.stringify(orgSchema)} />
   </head>
   <body>
+    <a href="#main" class="skip-link">Skip to content</a>
     <TopBar />
     <SiteHeader />
-    <main>
+    <main id="main">
       <slot />
     </main>
     <SiteFooter />

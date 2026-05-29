@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Icon from '../components/Icon.astro';
+import Picture from '../components/Picture.astro';
 import { site } from '../data/site';
 
 const title = "Annie's Havens — A Trusted Provider of Foster Care in Ontario";
@@ -35,7 +36,8 @@ const programs = [
   {
     title: 'Mainstream',
     headline: 'Everyday homes for children finding their feet',
-    img: '/images/mainstream-child-boy.jpg',
+    base: '/images/mainstream-child-boy',
+    formats: ['avif', 'webp'] as ('avif' | 'webp')[],
     alt: 'A happy young child playing',
     body: 'Every child in care carries some emotional weight — leaving home and being placed with new people is hard. “Mainstream” simply describes children without a known diagnosis or serious acting-out behaviours. It’s often the most straightforward fostering, though these referrals are a smaller share of what we see.',
     href: '/care-programs#mainstream',
@@ -43,7 +45,8 @@ const programs = [
   {
     title: 'Special Needs',
     headline: 'Specialized care for higher-needs children',
-    img: '/images/special-needs-child.jpg',
+    base: '/images/special-needs-child',
+    formats: [] as ('avif' | 'webp')[],
     alt: 'A child receiving attentive care',
     body: 'Many foster children in Ontario live with a developmental, physical, or mental-health need. These homes require extra training and support, and Annie’s Havens is proud to offer one of the most highly regarded special-needs programs in the province — our homes are consistently commended for their care.',
     href: '/care-programs#special-needs',
@@ -51,7 +54,8 @@ const programs = [
   {
     title: 'Trauma-Focused',
     headline: 'Trauma-informed homes, backed by clinical expertise',
-    img: '/images/trauma-youth.jpg',
+    base: '/images/trauma-youth',
+    formats: [] as ('avif' | 'webp')[],
     alt: 'A thoughtful teenager outdoors',
     body: 'The need for trauma-focused homes has grown sharply, and they’re in short supply. Caregivers complete a trauma-focused curriculum before accepting referrals. The challenge is real — so are the rewards. This program is provided by our sister agency, Safe Harbours Family Treatment Homes.',
     href: site.sisterAgency.url,
@@ -69,8 +73,6 @@ const supports = [
 ] as const;
 ---
 <BaseLayout title={title} description={description}>
-  <h1 class="visually-hidden">Annie's Havens — Foster Care in Ontario</h1>
-
   <!-- HERO -->
   <section class="hero">
     <div class="wrap hero-grid">
@@ -84,7 +86,17 @@ const supports = [
         </div>
       </div>
       <div class="hero-media">
-        <img src="/images/carousel1.jpg" alt="A foster family walking together, holding hands" width="600" height="400" fetchpriority="high" />
+        <Picture
+          base="/images/carousel1"
+          alt="A foster family walking together, holding hands"
+          width={600}
+          height={400}
+          formats={['avif', 'webp']}
+          widths={[640, 1024, 1440, 1920]}
+          sizes="(min-width: 920px) 540px, 100vw"
+          loading="eager"
+          fetchpriority="high"
+        />
         <div class="verify"><span class="chk"><Icon name="shield" /></span><div><b>Fully supported</b><br /><span>Licensed &amp; trauma-informed care</span></div></div>
       </div>
     </div>
@@ -156,7 +168,9 @@ const supports = [
       <div class="prog-rows">
         {programs.map((p) => (
           <article class="prog-row reveal">
-            <div class="prog-media"><img src={p.img} alt={p.alt} loading="lazy" /></div>
+            <div class="prog-media">
+              <Picture base={p.base} formats={p.formats} alt={p.alt} width={800} height={600} loading="lazy" />
+            </div>
             <div class="prog-text">
               <span class="eyebrow">{p.title}</span>
               <h3>{p.headline}</h3>
@@ -188,7 +202,7 @@ const supports = [
   <!-- FOUNDER QUOTE -->
   <section class="pad quote">
     <div class="wrap quote-grid">
-      <img class="portrait reveal" src="/images/hilda-wilson.jpg" alt="Hilda Wilson, founder of Annie's Havens" width="420" height="420" />
+      <img class="portrait reveal" src="/images/hilda-wilson.jpg" alt="Hilda Wilson, founder of Annie's Havens" width="420" height="420" loading="lazy" decoding="async" />
       <div class="reveal">
         <span class="eyebrow">From our founder</span>
         <blockquote class="serif" style="margin-top:14px">"My late husband William and I had been foster parents since 1991, and together we founded Annie's Havens. It has always been our mission to make sure children leave care with the best chances for success. Having been foster parents ourselves, we truly understand the daily lives of our families."</blockquote>
@@ -205,10 +219,10 @@ const supports = [
         <h2>You probably have questions. Good.</h2>
       </div>
       <div class="faq">
-        {faqs.map((f) => (
+        {faqs.map((f, i) => (
           <div class="faq-item">
-            <button class="faq-q" type="button" aria-expanded="false">{f.q}<span class="pm" aria-hidden="true"></span></button>
-            <div class="faq-a"><div><p>{f.a}</p></div></div>
+            <button class="faq-q" type="button" aria-expanded="false" id={`faq-q-${i}`} aria-controls={`faq-a-${i}`}>{f.q}<span class="pm" aria-hidden="true"></span></button>
+            <div class="faq-a" id={`faq-a-${i}`} role="region" aria-labelledby={`faq-q-${i}`}><div><p>{f.a}</p></div></div>
           </div>
         ))}
       </div>
@@ -234,27 +248,27 @@ const supports = [
           <h3>Send us a message</h3>
           <p class="sub">All fields except your message are required.</p>
           <div class="frow">
-            <div class="field"><label for="f-first">First name</label><input id="f-first" name="first" /><div class="errmsg">Required</div></div>
-            <div class="field"><label for="f-last">Last name</label><input id="f-last" name="last" /><div class="errmsg">Required</div></div>
+            <div class="field"><label for="f-first">First name</label><input id="f-first" name="first" required aria-required="true" aria-describedby="err-first" /><div class="errmsg" id="err-first" role="alert">Required</div></div>
+            <div class="field"><label for="f-last">Last name</label><input id="f-last" name="last" required aria-required="true" aria-describedby="err-last" /><div class="errmsg" id="err-last" role="alert">Required</div></div>
           </div>
           <div class="frow">
-            <div class="field"><label for="f-email">Email</label><input id="f-email" name="email" type="email" /><div class="errmsg">Enter a valid email</div></div>
-            <div class="field"><label for="f-phone">Phone</label><input id="f-phone" name="phone" type="tel" /><div class="errmsg">Required</div></div>
+            <div class="field"><label for="f-email">Email</label><input id="f-email" name="email" type="email" required aria-required="true" aria-describedby="err-email" /><div class="errmsg" id="err-email" role="alert">Enter a valid email</div></div>
+            <div class="field"><label for="f-phone">Phone</label><input id="f-phone" name="phone" type="tel" required aria-required="true" aria-describedby="err-phone" /><div class="errmsg" id="err-phone" role="alert">Required</div></div>
           </div>
           <div class="field"><label for="f-role">I am a…</label>
-            <select id="f-role" name="role">
+            <select id="f-role" name="role" required aria-required="true" aria-describedby="err-role">
               <option value="">Select one</option>
               <option>Prospective foster parent</option>
               <option>Current foster family</option>
               <option>Professional / agency partner</option>
               <option>Community supporter</option>
             </select>
-            <div class="errmsg">Please choose one</div>
+            <div class="errmsg" id="err-role" role="alert">Please choose one</div>
           </div>
           <div class="field"><label for="f-msg">Message <span style="font-weight:500;color:var(--muted)">(optional)</span></label><textarea id="f-msg" name="msg" placeholder="How can we help?"></textarea></div>
           <button type="submit" class="btn btn-coral" style="width:100%;justify-content:center;padding:15px">Submit message</button>
         </form>
-        <div class="form-ok" id="form-ok"><h3>Thank you for reaching out.</h3><p style="color:var(--muted)">Your message is on its way to our team. We'll be in touch soon.</p></div>
+        <div class="form-ok" id="form-ok" role="status" tabindex="-1"><h3>Thank you for reaching out.</h3><p style="color:var(--muted)">Your message is on its way to our team. We'll be in touch soon.</p></div>
       </div>
     </div>
   </section>
@@ -290,6 +304,7 @@ const supports = [
     form.addEventListener('submit', (e) => {
       e.preventDefault();
       let ok = true;
+      let firstBad: HTMLElement | null = null;
       ['first', 'last', 'email', 'phone', 'role'].forEach((n) => {
         const el = form.elements.namedItem(n) as HTMLInputElement | null;
         if (!el) return;
@@ -297,15 +312,23 @@ const supports = [
         let bad = !el.value.trim();
         if (n === 'email' && el.value.trim()) bad = !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(el.value);
         field?.classList.toggle('err', bad);
-        if (bad) ok = false;
+        el.setAttribute('aria-invalid', bad ? 'true' : 'false');
+        if (bad) { ok = false; if (!firstBad) firstBad = el; }
       });
       if (ok) {
         form.style.display = 'none';
-        document.getElementById('form-ok')?.classList.add('show');
+        const okEl = document.getElementById('form-ok');
+        okEl?.classList.add('show');
+        okEl?.focus();
+      } else {
+        firstBad?.focus();
       }
     });
     form.querySelectorAll('input,select').forEach((el) =>
-      el.addEventListener('input', () => el.closest('.field')?.classList.remove('err'))
+      el.addEventListener('input', () => {
+        el.closest('.field')?.classList.remove('err');
+        el.removeAttribute('aria-invalid');
+      })
     );
   }
 </script>

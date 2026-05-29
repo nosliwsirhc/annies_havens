@@ -81,4 +81,17 @@ import { site, nav } from '../data/site';
     drawer.querySelectorAll('[data-close]').forEach((el) => el.addEventListener('click', close));
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
   }
+
+  // Keep desktop dropdown aria-expanded in sync (menus open on hover/focus via CSS).
+  document.querySelectorAll('.has-menu').forEach((li) => {
+    const trigger = li.querySelector(':scope > .lnk');
+    if (!trigger) return;
+    trigger.setAttribute('aria-haspopup', 'true');
+    trigger.setAttribute('aria-expanded', 'false');
+    const set = (v) => trigger.setAttribute('aria-expanded', String(v));
+    li.addEventListener('mouseenter', () => set(true));
+    li.addEventListener('mouseleave', () => set(false));
+    li.addEventListener('focusin', () => set(true));
+    li.addEventListener('focusout', () => set(false));
+  });
 </script>
