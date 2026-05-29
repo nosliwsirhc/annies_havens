@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Icon from '../components/Icon.astro';
 import { site } from '../data/site';
 
 const title = "Annie's Havens — A Trusted Provider of Foster Care in Ontario";
@@ -33,6 +34,7 @@ const faqs = [
 const programs = [
   {
     title: 'Mainstream',
+    headline: 'Everyday homes for children finding their feet',
     img: '/images/mainstream-child-boy.jpg',
     alt: 'A happy young child playing',
     body: 'Every child in care carries some emotional weight — leaving home and being placed with new people is hard. “Mainstream” simply describes children without a known diagnosis or serious acting-out behaviours. It’s often the most straightforward fostering, though these referrals are a smaller share of what we see.',
@@ -40,6 +42,7 @@ const programs = [
   },
   {
     title: 'Special Needs',
+    headline: 'Specialized care for higher-needs children',
     img: '/images/special-needs-child.jpg',
     alt: 'A child receiving attentive care',
     body: 'Many foster children in Ontario live with a developmental, physical, or mental-health need. These homes require extra training and support, and Annie’s Havens is proud to offer one of the most highly regarded special-needs programs in the province — our homes are consistently commended for their care.',
@@ -47,12 +50,23 @@ const programs = [
   },
   {
     title: 'Trauma-Focused',
+    headline: 'Trauma-informed homes, backed by clinical expertise',
     img: '/images/trauma-youth.jpg',
     alt: 'A thoughtful teenager outdoors',
     body: 'The need for trauma-focused homes has grown sharply, and they’re in short supply. Caregivers complete a trauma-focused curriculum before accepting referrals. The challenge is real — so are the rewards. This program is provided by our sister agency, Safe Harbours Family Treatment Homes.',
     href: site.sisterAgency.url,
   },
 ];
+
+// Support items with distinct, meaningful icons.
+const supports = [
+  { icon: 'headset', h: 'A dedicated case manager', p: 'A worker who knows your family and walks alongside you.' },
+  { icon: 'cap', h: 'Ongoing training', p: 'Practical, trauma-informed learning before placement and throughout.' },
+  { icon: 'coin', h: 'Per-diem reimbursement', p: 'Caregiving costs are covered so fostering is sustainable.' },
+  { icon: 'pulse', h: 'Medical costs covered', p: 'Major costs like dental, medication and devices are covered through Children’s Aid.' },
+  { icon: 'layers', h: 'Specialized programs', p: 'Higher-needs and trauma-focused care backed by clinical expertise.' },
+  { icon: 'users', h: 'An inclusive community', p: 'A welcoming home for caregivers and children of every background.' },
+] as const;
 ---
 <BaseLayout title={title} description={description}>
   <h1 class="visually-hidden">Annie's Havens — Foster Care in Ontario</h1>
@@ -70,8 +84,8 @@ const programs = [
         </div>
       </div>
       <div class="hero-media">
-        <img src="/images/about-slider-image-2.jpg" alt="A foster parent holding a young child" width="560" height="480" fetchpriority="high" />
-        <div class="verify"><span class="chk"></span><div><b>Fully supported</b><br /><span>Licensed &amp; trauma-informed care</span></div></div>
+        <img src="/images/carousel1.jpg" alt="A foster family walking together, holding hands" width="600" height="400" fetchpriority="high" />
+        <div class="verify"><span class="chk"><Icon name="shield" /></span><div><b>Fully supported</b><br /><span>Licensed &amp; trauma-informed care</span></div></div>
       </div>
     </div>
   </section>
@@ -86,7 +100,7 @@ const programs = [
       <div class="divider"></div>
       <div class="stat"><b>All ages</b><span>infants to teens</span></div>
       <div class="divider"></div>
-      <div class="stat"><b>Per diem</b><span>caregiving costs covered</span></div>
+      <div class="stat"><b>Costs covered</b><span>so fostering is sustainable</span></div>
     </div>
   </div>
 
@@ -100,13 +114,13 @@ const programs = [
       </div>
       <div class="split">
         <div class="panel reveal">
-          <div class="ic"><span></span></div>
+          <div class="ic"><Icon name="home" /></div>
           <h3>I want to foster</h3>
           <p>You have room in your home and your life for a child who needs stability. We'll guide you from your very first question through your first placement — and well beyond.</p>
           <a class="more" href="#how">Start fostering <span class="arr">→</span></a>
         </div>
         <div class="panel dark reveal">
-          <div class="ic"><span></span></div>
+          <div class="ic"><Icon name="briefcase" /></div>
           <h3>I work with children</h3>
           <p>Social workers, Children's Aid Societies, schools and community partners — connect with us to refer a child, coordinate care, or explore working together.</p>
           <a class="more" href="/referral-sources">Partner with us <span class="arr">→</span></a>
@@ -131,6 +145,30 @@ const programs = [
     </div>
   </section>
 
+  <!-- PROGRAMS -->
+  <section class="pad how" id="programs">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">Foster care programs</span>
+        <h2>Care matched to a child's needs</h2>
+        <p>We offer a range of programs to meet the diverse needs of children in care across Ontario.</p>
+      </div>
+      <div class="prog-rows">
+        {programs.map((p) => (
+          <article class="prog-row reveal">
+            <div class="prog-media"><img src={p.img} alt={p.alt} loading="lazy" /></div>
+            <div class="prog-text">
+              <span class="eyebrow">{p.title}</span>
+              <h3>{p.headline}</h3>
+              <p>{p.body}</p>
+              <a class="more" href={p.href}>Learn more <span class="arr">→</span></a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
   <!-- SUPPORT -->
   <section class="pad support" id="support">
     <div class="wrap">
@@ -140,12 +178,9 @@ const programs = [
         <p>We've been foster parents ourselves. The support we offer is the support we wished we'd had.</p>
       </div>
       <div class="slist">
-        <div class="srow reveal"><span class="sic"></span><div><h3>A dedicated case manager</h3><p>A worker who knows your family and walks alongside you.</p></div></div>
-        <div class="srow reveal"><span class="sic"></span><div><h3>Ongoing training</h3><p>Practical, trauma-informed learning before placement and throughout.</p></div></div>
-        <div class="srow reveal"><span class="sic"></span><div><h3>Per-diem reimbursement</h3><p>Caregiving costs are covered so fostering is sustainable.</p></div></div>
-        <div class="srow reveal"><span class="sic"></span><div><h3>Medical costs covered</h3><p>Major costs like dental, medication and devices are covered through Children's Aid.</p></div></div>
-        <div class="srow reveal"><span class="sic"></span><div><h3>Specialized programs</h3><p>Higher-needs and trauma-focused care backed by clinical expertise.</p></div></div>
-        <div class="srow reveal"><span class="sic"></span><div><h3>An inclusive community</h3><p>A welcoming home for caregivers and children of every background.</p></div></div>
+        {supports.map((s) => (
+          <div class="srow reveal"><span class="sic"><Icon name={s.icon} /></span><div><h3>{s.h}</h3><p>{s.p}</p></div></div>
+        ))}
       </div>
     </div>
   </section>
@@ -158,31 +193,6 @@ const programs = [
         <span class="eyebrow">From our founder</span>
         <blockquote class="serif" style="margin-top:14px">"My late husband William and I had been foster parents since 1991, and together we founded Annie's Havens. It has always been our mission to make sure children leave care with the best chances for success. Having been foster parents ourselves, we truly understand the daily lives of our families."</blockquote>
         <div class="who">Hilda Wilson<span>Founder of Annie's Havens · fostering since 1991</span></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PROGRAMS -->
-  <section class="pad" id="programs">
-    <div class="wrap">
-      <div class="sec-head center">
-        <span class="eyebrow">Foster care programs</span>
-        <h2>Care matched to a child's needs</h2>
-        <p>We offer a range of programs to meet the diverse needs of children in care across Ontario.</p>
-      </div>
-      <div class="prog-grid">
-        {programs.map((p) => (
-          <article class="prog reveal">
-            <div class="img-wrap">
-              <img src={p.img} alt={p.alt} loading="lazy" />
-              <span class="tag">{p.title}</span>
-            </div>
-            <div class="body">
-              <p>{p.body}</p>
-              <a class="more" href={p.href}>Learn more <span class="arr">→</span></a>
-            </div>
-          </article>
-        ))}
       </div>
     </div>
   </section>
@@ -214,9 +224,9 @@ const programs = [
         <h2>Reach out today. We'll take it from here.</h2>
         <p>Share a few details and a member of our team will get back to you. No pressure — just a conversation.</p>
         <div class="ways">
-          <div class="way"><span class="wic"><span></span></span><a href={site.phoneHref}>{site.phone}</a> · New homes {site.newHomesExt}</div>
-          <div class="way"><span class="wic"><span></span></span><a href={`mailto:${site.newHomesEmail}`}>{site.newHomesEmail}</a></div>
-          <div class="way"><span class="wic"><span></span></span>{site.address.street}, {site.address.city}, {site.address.region}</div>
+          <div class="way"><span class="wic"><Icon name="phone" /></span><a href={site.phoneHref}>{site.phone}</a> · New homes {site.newHomesExt}</div>
+          <div class="way"><span class="wic"><Icon name="mail" /></span><a href={`mailto:${site.newHomesEmail}`}>{site.newHomesEmail}</a></div>
+          <div class="way"><span class="wic"><Icon name="pin" /></span>{site.address.street}, {site.address.city}, {site.address.region}</div>
         </div>
       </div>
       <div>

@@ -40,12 +40,18 @@ import { site, nav } from '../data/site';
       <span></span><span></span><span></span>
     </button>
   </div>
+</header>
 
-  <!-- Mobile drawer -->
-  <div class="drawer" id="drawer">
+<!-- Mobile drawer — kept OUTSIDE <header> because the header's backdrop-filter
+     would otherwise make this fixed panel size relative to the header, not the viewport. -->
+<div class="drawer" id="drawer">
     <div class="drawer-backdrop" data-close></div>
     <div class="drawer-panel" role="dialog" aria-modal="true" aria-label="Menu">
       <button class="drawer-close" data-close aria-label="Close menu">&times;</button>
+      <div class="drawer-cta">
+        <a class="btn btn-coral" href="/contact-us" data-close>Contact us</a>
+        <a class="btn btn-out" href={site.phoneHref} data-close>Call {site.phone}</a>
+      </div>
       <nav aria-label="Mobile">
         <ul>
           {nav.map((item) => (
@@ -64,7 +70,6 @@ import { site, nav } from '../data/site';
       </nav>
     </div>
   </div>
-</header>
 
 <script>
   const btn = document.getElementById('menuBtn');
