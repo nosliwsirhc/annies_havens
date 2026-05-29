@@ -8,7 +8,7 @@ export const site = {
   phone: '(905) 294-2137',
   phoneHref: 'tel:+19052942137',
   newHomesExt: 'ext. 5',
-  newHomesEmail: 'amanda.west@annieshavens.ca',
+  newHomesEmail: 'recruitment@annieshavens.ca',
   address: {
     street: '517 Upper Sherman Ave.',
     city: 'Hamilton',
