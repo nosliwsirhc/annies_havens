@@ -25,6 +25,26 @@ export function isValidPhone(value: string): boolean {
 }
 
 /**
+ * Like {@link formatPhone}, but also maps a caret offset through the reformat
+ * so the cursor stays where the user is editing instead of jumping to the end.
+ * Returns the formatted value and the adjusted caret position.
+ */
+export function formatPhoneWithCaret(raw: string, caret: number): { value: string; caret: number } {
+  const value = formatPhone(raw);
+  // Count digits before the caret in the raw input...
+  let digitsBefore = raw.slice(0, caret).replace(/\D/g, '').length;
+  // ...and account for the leading "1" that formatPhone strips.
+  if (raw.replace(/\D/g, '').startsWith('1') && digitsBefore > 0) digitsBefore -= 1;
+  if (digitsBefore <= 0) return { value, caret: 0 };
+  let seen = 0;
+  for (let i = 0; i < value.length; i++) {
+    if (value[i] >= '0' && value[i] <= '9') seen += 1;
+    if (seen === digitsBefore) return { value, caret: i + 1 };
+  }
+  return { value, caret: value.length };
+}
+
+/**
  * Email validation pattern. This is the WHATWG / HTML5 `<input type="email">`
  * spec pattern — strict enough to catch real typos (missing @, bad domain,
  * spaces) without rejecting valid-but-unusual addresses.

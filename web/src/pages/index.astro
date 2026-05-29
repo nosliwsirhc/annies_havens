@@ -269,7 +269,7 @@ const supports = [
 </BaseLayout>
 
 <script>
-  import { formatPhone, isValidEmail, isValidPhone } from '../lib/form';
+  import { formatPhoneWithCaret, isValidEmail, isValidPhone } from '../lib/form';
 
   // Scroll reveals
   const io = new IntersectionObserver(
@@ -358,8 +358,14 @@ const supports = [
     // Clear errors as the user types, and keep the button state live.
     form.querySelectorAll('input, select, textarea').forEach((el) =>
       el.addEventListener('input', () => {
-        // Live-format the phone number as the user types (KinFlow autoFormat).
-        if (el === phoneInput && phoneInput) phoneInput.value = formatPhone(phoneInput.value);
+        // Live-format the phone number as the user types (KinFlow autoFormat),
+        // preserving the caret position when editing mid-number.
+        if (el === phoneInput && phoneInput) {
+          const pos = phoneInput.selectionStart ?? phoneInput.value.length;
+          const { value, caret } = formatPhoneWithCaret(phoneInput.value, pos);
+          phoneInput.value = value;
+          phoneInput.setSelectionRange(caret, caret);
+        }
         setErr((el as HTMLInputElement).name, '');
         // contact group: clear both once one is a valid contact method
         if ((val('email') && isValidEmail(val('email'))) || (val('phone') && isValidPhone(val('phone')))) { setErr('email', ''); setErr('phone', ''); }
