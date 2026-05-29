@@ -269,6 +269,8 @@ const supports = [
 </BaseLayout>
 
 <script>
+  import { formatPhone, isValidEmail, isValidPhone } from '../lib/form';
+
   // Scroll reveals
   const io = new IntersectionObserver(
     (entries) => entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }),
@@ -296,7 +298,7 @@ const supports = [
   const form = document.getElementById('contact-form') as HTMLFormElement | null;
   if (form) {
     const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement | null;
-    const emailRe = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+    const phoneInput = document.getElementById('f-phone') as HTMLInputElement | null;
     const val = (n: string) => ((form.elements.namedItem(n) as HTMLInputElement | null)?.value ?? '').trim();
     const fieldOf = (n: string) => document.getElementById('f-' + n)?.closest('.field') ?? null;
     const setErr = (n: string, msg: string) => {
@@ -319,8 +321,9 @@ const supports = [
       const email = val('email'), phone = val('phone');
       const errs: Record<string, string> = {};
       if (!val('first')) errs.first = 'Required';
-      if (email && !emailRe.test(email)) errs.email = 'Enter a valid email';
-      else if (!email && !phone) { errs.email = 'Enter an email or phone number'; errs.phone = 'Enter an email or phone number'; }
+      if (email && !isValidEmail(email)) errs.email = 'Enter a valid email';
+      if (phone && !isValidPhone(phone)) errs.phone = 'Enter a 10-digit phone number';
+      if (!email && !phone) { errs.email = 'Enter an email or phone number'; errs.phone = 'Enter an email or phone number'; }
       if (!val('role')) errs.role = 'Please choose one';
       if (!val('msg')) errs.msg = 'Please add a short message';
       return errs;
@@ -355,9 +358,11 @@ const supports = [
     // Clear errors as the user types, and keep the button state live.
     form.querySelectorAll('input, select, textarea').forEach((el) =>
       el.addEventListener('input', () => {
+        // Live-format the phone number as the user types (KinFlow autoFormat).
+        if (el === phoneInput && phoneInput) phoneInput.value = formatPhone(phoneInput.value);
         setErr((el as HTMLInputElement).name, '');
-        // contact group: clear both once satisfied
-        if ((val('email') && emailRe.test(val('email'))) || val('phone')) { setErr('email', ''); setErr('phone', ''); }
+        // contact group: clear both once one is a valid contact method
+        if ((val('email') && isValidEmail(val('email'))) || (val('phone') && isValidPhone(val('phone')))) { setErr('email', ''); setErr('phone', ''); }
         refresh();
       })
     );
