@@ -1,0 +1,34 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import ReadMore from '../components/ReadMore.astro';
+
+const readMore = [
+  { href: '/faq', label: 'Frequently Asked Questions' },
+  { href: '/care-programs', label: 'Our Care Programs' },
+  { href: '/children-in-care', label: 'Children in Care' },
+  { href: '/foster-parent-application-process', label: 'The Application Process' },
+  { href: '/contact-us', label: 'Contact Us' },
+];
+---
+<BaseLayout
+  title="What Is Foster Parenting? | Annie's Havens"
+  description="The term 'foster parent' can mean something different to everyone. Learn what it means to be a foster parent in Ontario with Annie's Havens."
+>
+  <PageHeader
+    title="What Is Foster Parenting?"
+    intro="In its simplest form, fostering means opening your home and family to a child who isn't related to you, in care regulated under Ontario's Child, Youth and Family Services Act. In practice, it's so much more than that."
+  />
+  <section class="pad">
+    <div class="wrap">
+      <div class="prose">
+        <p>Foster parents become a lifeline for children who need a safe and stable environment, and the work done with a child can be the most rewarding experience of a lifetime.</p>
+        <p>A foster parent goes through background checks, an evaluation, and training, so that only the safest and most caring homes are able to receive children. Some refer to fostering as a career, but that's a clumsy term: a career would imply that foster parents are employees, which they are not.</p>
+        <p>While foster parents must be supervised by a licensed foster care agency and strictly adhere to a set of policies and procedures, they are the front-line partner in helping a child overcome a disability, trauma, or mental-health issue. Most find their role so important and rewarding that they continue to care for children until they retire. For some, even after retirement, they stay in touch with and remain part of the lives of the grown children who have come and gone from their home.</p>
+        <p>At times, foster parenting can feel like the most thankless job in the world, which, unsurprisingly, is how ordinary parenting can feel too. The sense of purpose comes from the lives touched and the progress made over the years.</p>
+        <p>Above all, a good foster parent is a hero for every child who desperately needs one.</p>
+      </div>
+    </div>
+  </section>
+  <ReadMore links={readMore} />
+</BaseLayout>
