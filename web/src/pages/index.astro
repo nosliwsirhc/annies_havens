@@ -227,7 +227,7 @@ const supports = [
         <h2>Reach Out Today. We'll Take It from Here.</h2>
         <p>Share a few details and a member of our team will get back to you. No pressure — just a conversation.</p>
         <div class="ways">
-          <div class="way"><span class="wic"><Icon name="phone" /></span><a href={site.phoneHref}>{site.phone}</a> · New homes {site.newHomesExt}</div>
+          <div class="way"><span class="wic"><Icon name="phone" /></span><a href={site.phoneHref}>{site.phone}</a></div>
           <div class="way"><span class="wic"><Icon name="mail" /></span><a href={`mailto:${site.newHomesEmail}`}>{site.newHomesEmail}</a></div>
           <div class="way"><span class="wic"><Icon name="pin" /></span>{site.address.street}, {site.address.city}, {site.address.region}</div>
         </div>
@@ -294,29 +294,43 @@ const supports = [
   // Turnstile token; send via Resend. Until then this does NOT email anyone.
   const form = document.getElementById('contact-form') as HTMLFormElement | null;
   if (form) {
+    const fieldNames = ['first', 'last', 'email', 'phone', 'role'];
+    const isBad = (el: HTMLInputElement, n: string) => {
+      if (!el.value.trim()) return true;
+      if (n === 'email') return !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(el.value);
+      return false;
+    };
+    const mark = (el: HTMLInputElement, n: string) => {
+      const bad = isBad(el, n);
+      el.closest('.field')?.classList.toggle('err', bad);
+      el.setAttribute('aria-invalid', bad ? 'true' : 'false');
+      return bad;
+    };
+    // Per-field feedback on blur: validate a field once the user has typed in
+    // it (or if it's already flagged), so bad input is caught immediately.
+    fieldNames.forEach((n) => {
+      const el = form.elements.namedItem(n) as HTMLInputElement | null;
+      el?.addEventListener('blur', () => {
+        if (el.value.trim() || el.getAttribute('aria-invalid') === 'true') mark(el, n);
+      });
+    });
     form.addEventListener('submit', (e) => {
       e.preventDefault();
-      let ok = true;
       let firstBad: HTMLElement | null = null;
-      ['first', 'last', 'email', 'phone', 'role'].forEach((n) => {
+      fieldNames.forEach((n) => {
         const el = form.elements.namedItem(n) as HTMLInputElement | null;
-        if (!el) return;
-        const field = el.closest('.field');
-        let bad = !el.value.trim();
-        if (n === 'email' && el.value.trim()) bad = !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(el.value);
-        field?.classList.toggle('err', bad);
-        el.setAttribute('aria-invalid', bad ? 'true' : 'false');
-        if (bad) { ok = false; if (!firstBad) firstBad = el; }
+        if (el && mark(el, n) && !firstBad) firstBad = el;
       });
-      if (ok) {
+      if (!firstBad) {
         form.style.display = 'none';
         const okEl = document.getElementById('form-ok');
         okEl?.classList.add('show');
         okEl?.focus();
       } else {
-        firstBad?.focus();
+        firstBad.focus();
       }
     });
+    // Clear the error as soon as the user starts correcting it.
     form.querySelectorAll('input,select').forEach((el) =>
       el.addEventListener('input', () => {
         el.closest('.field')?.classList.remove('err');
