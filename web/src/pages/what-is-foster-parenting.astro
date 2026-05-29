@@ -16,14 +16,14 @@ const readMore = [
 const facts = [
   'Licensed by the Province of Ontario',
   'Caring for children since 1991',
-  'Full training provided',
-  'Ongoing support for every family',
+  'Trauma-informed training provided',
+  'A support team behind every family',
 ];
 const points = [
-  { icon: 'home', h: 'A lifeline', p: 'Foster parents are a safe, stable presence for a child who needs one. The work you do with a child can be the most rewarding experience of a lifetime.' },
-  { icon: 'cap', h: 'Trained and supported', p: 'Background checks, an evaluation, and ongoing training mean only the safest, most caring homes receive children. And you are never doing it alone.' },
-  { icon: 'users', h: 'A front-line partner', p: 'Working alongside a licensed agency, foster parents are the front-line partner in helping a child overcome a disability, trauma, or a mental-health need.' },
-  { icon: 'leaf', h: 'A lifelong bond', p: 'Many foster until they retire, and stay part of the lives of the grown children who once shared their home.' },
+  { icon: 'home', h: 'A safe place to land', p: "Foster care gives a child a stable, temporary home when they can't remain with their birth family, often because of neglect, abuse, or instability. You provide the consistency, warmth, and care they've been missing." },
+  { icon: 'pulse', h: 'Trauma-informed care', p: "Many children in care have lived through real trauma. You'll be prepared to understand its impact and help a child feel safe and rebuild trust, gradually and at their own pace." },
+  { icon: 'headset', h: 'A team behind you', p: "You are never doing this alone. You work alongside our team, mental-health professionals, and the child's social worker, with support built around each child." },
+  { icon: 'leaf', h: 'A bond that lasts', p: 'With patience and consistency, children heal and grow. Many foster parents continue until they retire, and stay part of the lives of the grown children who once shared their home.' },
 ] as const;
 ---
 <BaseLayout
@@ -53,6 +53,9 @@ const points = [
   <section class="pad">
     <div class="wrap article">
       <div>
+        <div class="prose" style="margin-bottom:40px">
+          <p>At Annie's Havens we specialize in caring for children with complex needs. That means fostering here is part caregiver, part advocate, and part steady hand through one of the hardest chapters of a young life. Here's what that really looks like.</p>
+        </div>
         <div class="points">
           {points.map((pt) => (
             <article class="point">
