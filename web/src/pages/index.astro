@@ -257,7 +257,11 @@ const supports = [
           <div class="field"><label for="f-msg">Message <span style="font-weight:500;color:var(--muted)">(optional)</span></label><textarea id="f-msg" name="msg" placeholder="How can we help?"></textarea></div>
           <button type="submit" class="btn btn-coral" style="width:100%;justify-content:center;padding:15px">Submit Message</button>
         </form>
-        <div class="form-ok" id="form-ok" role="status" tabindex="-1"><h3>Thank You for Reaching Out.</h3><p style="color:var(--muted)">Your message is on its way to our team. We'll be in touch soon.</p></div>
+        <div class="form-ok" id="form-ok" role="status" tabindex="-1">
+          <svg class="ok-check" viewBox="0 0 52 52" aria-hidden="true"><circle cx="26" cy="26" r="25"/><path d="M14 27l8 8 16-18"/></svg>
+          <h3>Thank You for Reaching Out.</h3>
+          <p style="color:var(--muted)">A real person on our team reads every message, and we'll get back to you within one business day. Talk soon.</p>
+        </div>
       </div>
     </div>
   </section>
