@@ -132,8 +132,8 @@ img { display: block; max-width: 100%; }
 .nav { display: flex; align-items: center; justify-content: space-between; height: 78px; }
 .brand { display: flex; align-items: center; gap: 12px; }
 .brand img { width: 44px; height: 44px; }
-.brand b { font-size: 1.28rem; font-weight: 900; letter-spacing: -0.02em; line-height: 1; }
-.brand .sub { display: block; font-size: 0.62rem; letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted); font-weight: 700; margin-top: 1px; }
+.brand b { font-size: 1.28rem; font-weight: 900; letter-spacing: -0.02em; line-height: 1.1; }
+.brand .sub { display: block; font-size: 0.62rem; line-height: 1.2; letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted); font-weight: 700; margin-top: 2px; }
 .nav-links { display: flex; gap: 28px; list-style: none; align-items: center; }
 .nav-links .lnk { position: relative; font-weight: 700; font-size: 0.93rem; color: var(--slate-d); transition: color 0.2s; }
 .nav-links .lnk:hover { color: var(--coral-d); }
