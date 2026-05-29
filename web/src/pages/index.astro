@@ -235,27 +235,28 @@ const supports = [
       <div>
         <form class="contact" id="contact-form" novalidate>
           <h3>Send Us a Message</h3>
-          <p class="sub">All fields except your message are required.</p>
+          <p class="sub">A few quick details and we'll be in touch. An email or phone number is fine — whichever you prefer.</p>
           <div class="frow">
             <div class="field"><label for="f-first">First name</label><input id="f-first" name="first" required aria-required="true" aria-describedby="err-first" /><div class="errmsg" id="err-first" role="alert">Required</div></div>
-            <div class="field"><label for="f-last">Last name</label><input id="f-last" name="last" required aria-required="true" aria-describedby="err-last" /><div class="errmsg" id="err-last" role="alert">Required</div></div>
+            <div class="field"><label for="f-last">Last name <span style="font-weight:500;color:var(--muted)">(optional)</span></label><input id="f-last" name="last" /></div>
           </div>
           <div class="frow">
-            <div class="field"><label for="f-email">Email</label><input id="f-email" name="email" type="email" required aria-required="true" aria-describedby="err-email" /><div class="errmsg" id="err-email" role="alert">Enter a valid email</div></div>
-            <div class="field"><label for="f-phone">Phone</label><input id="f-phone" name="phone" type="tel" required aria-required="true" aria-describedby="err-phone" /><div class="errmsg" id="err-phone" role="alert">Required</div></div>
+            <div class="field"><label for="f-email">Email</label><input id="f-email" name="email" type="email" aria-describedby="err-email" /><div class="errmsg" id="err-email" role="alert">Enter a valid email</div></div>
+            <div class="field"><label for="f-phone">Phone</label><input id="f-phone" name="phone" type="tel" aria-describedby="err-phone" /><div class="errmsg" id="err-phone" role="alert">Required</div></div>
           </div>
           <div class="field"><label for="f-role">I am a…</label>
             <select id="f-role" name="role" required aria-required="true" aria-describedby="err-role">
               <option value="">Select one</option>
-              <option>Prospective foster parent</option>
-              <option>Current foster family</option>
-              <option>Professional / agency partner</option>
-              <option>Community supporter</option>
+              <option>Prospective Foster Parent</option>
+              <option>Current Foster Family</option>
+              <option>Professional / Agency Partner</option>
+              <option>Community Supporter</option>
+              <option>Something Else</option>
             </select>
             <div class="errmsg" id="err-role" role="alert">Please choose one</div>
           </div>
-          <div class="field"><label for="f-msg">Message <span style="font-weight:500;color:var(--muted)">(optional)</span></label><textarea id="f-msg" name="msg" placeholder="How can we help?"></textarea></div>
-          <button type="submit" class="btn btn-coral" style="width:100%;justify-content:center;padding:15px">Submit Message</button>
+          <div class="field"><label for="f-msg">Message</label><textarea id="f-msg" name="msg" placeholder="How can we help?" aria-describedby="err-msg"></textarea><div class="errmsg" id="err-msg" role="alert">Please add a short message</div></div>
+          <button type="submit" id="submit-btn" class="btn btn-coral" style="width:100%;justify-content:center;padding:15px">Submit Message</button>
         </form>
         <div class="form-ok" id="form-ok" role="status" tabindex="-1">
           <svg class="ok-check" viewBox="0 0 52 52" aria-hidden="true"><circle cx="26" cy="26" r="25"/><path d="M14 27l8 8 16-18"/></svg>
@@ -294,48 +295,75 @@ const supports = [
   // Turnstile token; send via Resend. Until then this does NOT email anyone.
   const form = document.getElementById('contact-form') as HTMLFormElement | null;
   if (form) {
-    const fieldNames = ['first', 'last', 'email', 'phone', 'role'];
-    const isBad = (el: HTMLInputElement, n: string) => {
-      if (!el.value.trim()) return true;
-      if (n === 'email') return !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(el.value);
-      return false;
-    };
-    const mark = (el: HTMLInputElement, n: string) => {
-      const bad = isBad(el, n);
-      el.closest('.field')?.classList.toggle('err', bad);
-      el.setAttribute('aria-invalid', bad ? 'true' : 'false');
-      return bad;
-    };
-    // Per-field feedback on blur: validate a field once the user has typed in
-    // it (or if it's already flagged), so bad input is caught immediately.
-    fieldNames.forEach((n) => {
-      const el = form.elements.namedItem(n) as HTMLInputElement | null;
-      el?.addEventListener('blur', () => {
-        if (el.value.trim() || el.getAttribute('aria-invalid') === 'true') mark(el, n);
-      });
-    });
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      let firstBad: HTMLElement | null = null;
-      fieldNames.forEach((n) => {
-        const el = form.elements.namedItem(n) as HTMLInputElement | null;
-        if (el && mark(el, n) && !firstBad) firstBad = el;
-      });
-      if (!firstBad) {
-        form.style.display = 'none';
-        const okEl = document.getElementById('form-ok');
-        okEl?.classList.add('show');
-        okEl?.focus();
+    const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement | null;
+    const emailRe = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+    const val = (n: string) => ((form.elements.namedItem(n) as HTMLInputElement | null)?.value ?? '').trim();
+    const fieldOf = (n: string) => document.getElementById('f-' + n)?.closest('.field') ?? null;
+    const setErr = (n: string, msg: string) => {
+      const field = fieldOf(n);
+      const input = document.getElementById('f-' + n);
+      const errEl = document.getElementById('err-' + n);
+      if (msg) {
+        field?.classList.add('err');
+        input?.setAttribute('aria-invalid', 'true');
+        if (errEl) errEl.textContent = msg;
       } else {
-        firstBad.focus();
+        field?.classList.remove('err');
+        input?.removeAttribute('aria-invalid');
       }
+    };
+
+    // Required: first name, an email OR phone, role, and message.
+    // Email, if provided, must be valid. Last name is optional.
+    const errorsFor = () => {
+      const email = val('email'), phone = val('phone');
+      const errs: Record<string, string> = {};
+      if (!val('first')) errs.first = 'Required';
+      if (email && !emailRe.test(email)) errs.email = 'Enter a valid email';
+      else if (!email && !phone) { errs.email = 'Enter an email or phone number'; errs.phone = 'Enter an email or phone number'; }
+      if (!val('role')) errs.role = 'Please choose one';
+      if (!val('msg')) errs.msg = 'Please add a short message';
+      return errs;
+    };
+
+    const refresh = () => {
+      if (submitBtn) submitBtn.disabled = Object.keys(errorsFor()).length > 0;
+    };
+
+    // Show a field's error when the user leaves it.
+    ['first', 'email', 'phone', 'role', 'msg'].forEach((n) => {
+      document.getElementById('f-' + n)?.addEventListener('blur', () => {
+        const errs = errorsFor();
+        setErr(n, errs[n] || '');
+      });
     });
-    // Clear the error as soon as the user starts correcting it.
-    form.querySelectorAll('input,select').forEach((el) =>
+
+    // Clear errors as the user types, and keep the button state live.
+    form.querySelectorAll('input, select, textarea').forEach((el) =>
       el.addEventListener('input', () => {
-        el.closest('.field')?.classList.remove('err');
-        el.removeAttribute('aria-invalid');
+        setErr((el as HTMLInputElement).name, '');
+        // contact group: clear both once satisfied
+        if ((val('email') && emailRe.test(val('email'))) || val('phone')) { setErr('email', ''); setErr('phone', ''); }
+        refresh();
       })
     );
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const errs = errorsFor();
+      const order = ['first', 'email', 'phone', 'role', 'msg'];
+      if (Object.keys(errs).length) {
+        order.forEach((n) => setErr(n, errs[n] || ''));
+        const firstBad = order.find((n) => errs[n]);
+        if (firstBad) document.getElementById('f-' + firstBad)?.focus();
+        return;
+      }
+      form.style.display = 'none';
+      const okEl = document.getElementById('form-ok');
+      okEl?.classList.add('show');
+      okEl?.focus();
+    });
+
+    refresh(); // start disabled until the form is valid
   }
 </script>
