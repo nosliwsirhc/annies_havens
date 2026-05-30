@@ -1,0 +1,92 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Picture from '../components/Picture.astro';
+import Icon from '../components/Icon.astro';
+import ReadMore from '../components/ReadMore.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { site } from '../data/site';
+
+const readMore = [
+  { href: '/foster-home-quiz', label: 'Take the Foster Home Quiz' },
+  { href: '/faq', label: 'Frequently Asked Questions' },
+  { href: '/what-is-foster-parenting', label: 'What Is Foster Parenting?' },
+  { href: '/care-programs', label: 'Our Care Programs' },
+  { href: '/contact-us', label: 'Contact Us' },
+];
+const checks = [
+  'A Vulnerable Sector police check',
+  'A child-welfare check',
+  'References from your community and family',
+  'PRIDE training (required before fostering)',
+];
+const steps = [
+  { h: 'Interview and home visit', p: 'It starts with a phone conversation, then a visit to your home. Ask us anything; there’s no commitment, and it’s a chance for both of us to see if fostering is the right fit.' },
+  { h: 'Application documents', p: 'You’ll complete the application paperwork and the background checks that keep children safe: a Vulnerable Sector police check, a child-welfare check, and references.' },
+  { h: 'Home study (SAFE)', p: 'A series of interviews, called a Structured Analysis Family Evaluation, that builds an honest picture of your family’s strengths and helps us match children well.' },
+  { h: 'Training', p: 'Trauma-informed preparation, including PRIDE training, so you feel ready and confident. Once it’s complete, your home is ready to welcome a child.' },
+];
+---
+<BaseLayout
+  title="Foster Parent Application Process | Annie's Havens"
+  description="Becoming a foster parent in Ontario is a series of manageable steps: an interview, application and checks, a home study, and training. Here's what to expect."
+>
+  <div class="page-banner">
+    <Picture
+      base="/images/about-us-parallax-2"
+      alt="A foster parent and child"
+      width={1920}
+      height={600}
+      formats={['avif', 'webp']}
+      widths={[640, 1024, 1440, 1920]}
+      sizes="100vw"
+      loading="eager"
+      fetchpriority="high"
+    />
+    <div class="scrim">
+      <div class="wrap">
+        <h1>The Application Process</h1>
+        <p class="lead">Becoming a foster parent can feel daunting. It helps to see it as a small series of steps that get you qualified, prepared, and supported. Here's what to expect.</p>
+      </div>
+    </div>
+  </div>
+
+  <section class="pad">
+    <div class="wrap article">
+      <div>
+        <div class="prose" style="margin-bottom:36px">
+          <p>Throughout the process, two things matter most: that you're prepared for the children coming into care, and that your home is a safe place for them. The background checks exist to do exactly that, screening out anyone with a history of child-protection concerns.</p>
+        </div>
+        <ol class="steps">
+          {steps.map((s, i) => (
+            <li class="step reveal">
+              <span class="step-n">{i + 1}</span>
+              <h3>{s.h}</h3>
+              <p>{s.p}</p>
+            </li>
+          ))}
+        </ol>
+        <div class="prose" style="margin-top:36px">
+          <p>With prompt paperwork and a flexible schedule, the whole process can take as little as two months; our goal is no more than three. Not sure if now's the right time? The <a href="/foster-home-quiz">Foster Home Quiz</a> is a quick, private self-check.</p>
+        </div>
+      </div>
+
+      <aside class="aside">
+        <div class="aside-card">
+          <h3>What you'll need</h3>
+          <ul class="aside-facts">
+            {checks.map((c) => <li><Icon name="leaf" />{c}</li>)}
+          </ul>
+        </div>
+        <div class="aside-card is-cta">
+          <h3>Ready to start?</h3>
+          <p>The first step is just a conversation. Reach out and we'll walk you through it.</p>
+          <a class="btn btn-coral" href="/contact-us">Talk to Our Team</a>
+          <a class="call" href={site.phoneHref}>{site.phone}</a>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <CtaBand />
+  <ReadMore links={readMore} />
+</BaseLayout>

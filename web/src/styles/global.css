@@ -470,6 +470,16 @@ form.contact .sub { color: var(--muted); font-size: 0.95rem; margin-bottom: 22px
 /* utility */
 .bg-warm { background: var(--warm); }
 
+/* vertical numbered steps (application process) */
+.steps { list-style: none; display: grid; }
+.step { position: relative; padding-left: 72px; padding-bottom: 38px; }
+.step:last-child { padding-bottom: 0; }
+.step-n { position: absolute; left: 0; top: 0; width: 46px; height: 46px; border-radius: 50%; background: var(--slate); color: #fff; font-family: var(--font-serif); font-weight: 800; font-size: 1.15rem; display: flex; align-items: center; justify-content: center; z-index: 1; }
+.step::before { content: ""; position: absolute; left: 22px; top: 50px; bottom: -2px; width: 2px; background: var(--line); }
+.step:last-child::before { display: none; }
+.step h3 { font-size: 1.3rem; margin-bottom: 6px; }
+.step p { color: var(--muted); }
+
 /* ---------- foster home quiz ---------- */
 .quiz { max-width: 680px; margin: 0 auto; }
 .quiz-card { background: var(--paper); border: 1px solid var(--line); border-radius: 18px; box-shadow: var(--shadow); padding: clamp(26px, 4vw, 44px); }
