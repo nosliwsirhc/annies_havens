@@ -158,6 +158,8 @@ const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '1x0000000000000000
         });
         const data = await res.json().catch(() => ({}));
         if (res.ok && data.ok) {
+          // GA4 conversion (only fires if the visitor accepted analytics — gtag is undefined otherwise).
+          (window as any).gtag?.('event', 'generate_lead', { form_location: location.pathname });
           morph(() => { form.style.display = 'none'; okEl?.classList.add('show'); });
           okEl?.focus();
         } else {

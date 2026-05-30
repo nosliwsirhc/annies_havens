@@ -100,6 +100,16 @@ const orgSchema = {
       );
       document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
 
+      // GA4 micro-conversions: phone taps and email clicks. gtag is only defined
+      // after the visitor accepts analytics, so these are no-ops without consent.
+      document.addEventListener('click', (e) => {
+        const a = (e.target as Element)?.closest?.('a[href^="tel:"], a[href^="mailto:"]') as HTMLAnchorElement | null;
+        if (!a) return;
+        const href = a.getAttribute('href') || '';
+        const event = href.startsWith('tel:') ? 'phone_call_click' : 'email_click';
+        (window as any).gtag?.('event', event, { link_url: href });
+      });
+
       // Accordion (single-open) — works for any .faq-item on the page.
       document.querySelectorAll('.faq-q').forEach((q) => {
         q.addEventListener('click', () => {
