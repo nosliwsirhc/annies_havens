@@ -1,0 +1,68 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import Icon from '../components/Icon.astro';
+import ReadMore from '../components/ReadMore.astro';
+import { site } from '../data/site';
+
+const readMore = [
+  { href: '/program-description', label: 'Program Description' },
+  { href: '/about-us', label: 'About Annie’s Havens' },
+  { href: '/contact-us', label: 'Contact Us' },
+];
+---
+<BaseLayout
+  title="Complaints | Annie's Havens"
+  description="How to make a complaint about a foster home or about Annie's Havens. Every complaint is taken seriously and acknowledged within 24 hours."
+>
+  <PageHeader
+    title="Complaints"
+    intro="Complaints about a foster home or about Annie's Havens are taken seriously, and the safety and well-being of the child is always paramount. You can make a complaint at any time."
+  />
+
+  <section class="pad">
+    <div class="wrap article">
+      <div>
+        <p class="doc-ref"><strong>Regulatory reference:</strong> CYFSA, 2017, s. 74 (rights of children in care); O. Reg. 155/18, ss. 8–9 (complaints); O. Reg. 156/18, ss. 6 and 8 (policies, procedures, and records).</p>
+
+        <section class="doc-section" id="making">
+          <h2>Making a complaint</h2>
+          <p>A child or young person in foster care, their family, a placing agency, or a member of the community may make a complaint at any time. A complaint can be made verbally or in writing, in private or with others present, and to any person the child feels comfortable with and trusts. Every complaint we receive is acknowledged within 24 hours.</p>
+        </section>
+
+        <section class="doc-section" id="rights">
+          <h2>Your right to make a complaint</h2>
+          <p>A child or young person in foster care has the right to make a complaint at any time about their care or treatment, or about the actions or decisions of a foster parent, agency staff, or the agency itself.</p>
+          <p>You can bring a complaint to anyone you trust, including a foster parent, a Case Manager, the Program Supervisor, the Executive Director, or any Annie's Havens staff member. Anyone who receives a complaint is required to make sure it reaches the agency promptly for action.</p>
+        </section>
+
+        <section class="doc-section" id="handling">
+          <h2>How we handle complaints</h2>
+          <p>Every complaint is documented and addressed, and the person who is the subject of a complaint is never the one who responds to it. The safety and well-being of the child comes first at all times.</p>
+          <p>Where there is no protection concern and a complaint can be readily addressed, we work with everyone involved to resolve it directly. The decision to close a foster home rests with Annie's Havens alone. For each complaint, we record the circumstances, who was involved, how any investigation was conducted, the recommendation, and the action taken.</p>
+        </section>
+
+        <section class="doc-section" id="ombudsman">
+          <h2>The Ontario Ombudsman</h2>
+          <p>A child in foster care has the right to speak privately with, and have visits from, the Ontario Ombudsman about a complaint. The Ombudsman can be reached at <a href="tel:+18002631830">1-800-263-1830</a> or at <a href="https://www.ombudsman.on.ca" target="_blank" rel="noopener">ombudsman.on.ca</a>.</p>
+        </section>
+      </div>
+
+      <aside class="aside">
+        <div class="aside-card is-cta">
+          <h3>How to reach us</h3>
+          <p>To make a complaint, contact us any time:</p>
+          <ul class="aside-facts" style="margin-bottom:16px">
+            <li><Icon name="phone" /><a href={site.phoneHref} style="color:var(--on-dark)">{site.phone}</a></li>
+            <li><Icon name="mail" /><a href="mailto:alexis.mcneil@annieshavens.ca" style="color:var(--on-dark)">Alexis McNeil, Compliance Manager</a></li>
+            <li><Icon name="mail" /><a href="mailto:chriswilson@annieshavens.ca" style="color:var(--on-dark)">Chris Wilson, Executive Director</a></li>
+          </ul>
+          <a class="btn btn-coral" href="/contact-us">Use our contact form</a>
+          <span class="call">{site.address.street}, {site.address.city}, ON</span>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <ReadMore links={readMore} />
+</BaseLayout>
