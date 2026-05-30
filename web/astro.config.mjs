@@ -9,6 +9,7 @@ import cloudflare from '@astrojs/cloudflare';
 export default defineConfig({
   site: 'https://www.annieshavens.ca',
   output: 'static',
+  trailingSlash: 'never',
   adapter: cloudflare(),
   integrations: [sitemap()],
   // Images live in public/ and are referenced directly, so we don't need

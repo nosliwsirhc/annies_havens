@@ -1,0 +1,27 @@
+# Cloudflare Pages redirects. Syntax: /from  /to  status
+# Built from the old site's Search Console 404s + the GA consolidation plan.
+
+# --- Consolidated / removed pages ---
+/family-involvement        /children-in-care                              301
+/service-area              /program-description#service-area               301
+/contact-success           /contact-us                                     301
+/faq-submit-success        /faq                                            301
+
+# --- Old WordPress URLs (still crawled by Google) ---
+/contact                   /contact-us                                     301
+/contact/                  /contact-us                                     301
+/about                     /about-us                                       301
+/about/                    /about-us                                       301
+/home/                     /                                               301
+/apply-to-foster           /foster-parent-application-process              301
+/foster-parenting          /what-is-foster-parenting                       301
+/foster-parenting/foster-care-in-ontario              /foster-care-in-ontario              301
+/foster-parenting/what-is-foster-parenting            /what-is-foster-parenting            301
+/foster-parenting/children-in-care                    /children-in-care                    301
+/foster-parenting/foster-parent-application-process   /foster-parent-application-process   301
+/foster-parenting/foster-home-quiz                    /foster-home-quiz                    301
+/foster-parenting/faq                                 /faq                                 301
+/foster-parenting/family-involvement                  /children-in-care                    301
+/fostering/foster-home-shortage   /news/urgent-need-for-foster-parents-in-ontario   301
+/fostering/foster-home-shortage/  /news/urgent-need-for-foster-parents-in-ontario   301
+/fostering/childrens-aid/         /foster-care-in-ontario                            301
