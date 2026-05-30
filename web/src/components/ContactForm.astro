@@ -1,8 +1,11 @@
 ---
 // Reusable contact form: client-side validation, KinFlow phone formatting,
-// and an inline "morph" success state. Used on the homepage and /contact-us.
-// NOTE: still client-only — real submission (Turnstile + Resend) is Phase 4.
+// Cloudflare Turnstile, and an inline "morph" success state. Submits to the
+// /api/contact Pages Function. Used on the homepage and /contact-us.
+const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '1x00000000000000000000AA'; // test key fallback
 ---
+<script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+
 <div class="form-card" id="form-card">
   <form class="contact" id="contact-form" novalidate>
     <h3>Send Us a Message</h3>
@@ -27,7 +30,9 @@
       <div class="errmsg" id="err-role" role="alert">Please choose one</div>
     </div>
     <div class="field"><label for="f-msg">Message <span class="req" aria-hidden="true">*</span></label><textarea id="f-msg" name="msg" placeholder="How can we help?" required aria-required="true" aria-describedby="err-msg"></textarea><div class="errmsg" id="err-msg" role="alert">Please add a short message</div></div>
-    <button type="submit" id="submit-btn" class="btn btn-coral" style="width:100%;justify-content:center;padding:15px">Submit Message</button>
+    <div class="cf-turnstile" data-sitekey={siteKey} data-size="flexible"></div>
+    <button type="submit" id="submit-btn" class="btn btn-coral" style="width:100%;justify-content:center;padding:15px;margin-top:16px">Submit Message</button>
+    <p class="form-error" id="form-error" role="alert"></p>
   </form>
   <div class="form-ok" id="form-ok" role="status" tabindex="-1">
     <svg class="ok-check" viewBox="0 0 52 52" aria-hidden="true"><circle cx="26" cy="26" r="25"/><path d="M14 27l8 8 16-18"/></svg>
@@ -40,17 +45,14 @@
 <script>
   import { formatPhoneWithCaret, isValidEmail, isValidPhone } from '../lib/form';
 
-  // Client validation only for now.
-  // TODO (Phase 4): POST to /api/contact (Cloudflare Pages Function) with a
-  // Turnstile token; send via Resend. Until then this does NOT email anyone.
   const form = document.getElementById('contact-form') as HTMLFormElement | null;
   if (form) {
     const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement | null;
     const phoneInput = document.getElementById('f-phone') as HTMLInputElement | null;
+    const formError = document.getElementById('form-error') as HTMLElement | null;
     const val = (n: string) => ((form.elements.namedItem(n) as HTMLInputElement | null)?.value ?? '').trim();
-    const fieldOf = (n: string) => document.getElementById('f-' + n)?.closest('.field') ?? null;
     const setErr = (n: string, msg: string) => {
-      const field = fieldOf(n);
+      const field = document.getElementById('f-' + n)?.closest('.field');
       const input = document.getElementById('f-' + n);
       const errEl = document.getElementById('err-' + n);
       if (msg) {
@@ -62,8 +64,9 @@
         input?.removeAttribute('aria-invalid');
       }
     };
+    const showFormError = (m: string) => { if (formError) formError.textContent = m; };
+    const clearFormError = () => { if (formError) formError.textContent = ''; };
 
-    // Required: first name, an email OR phone, role, and message.
     const errorsFor = () => {
       const email = val('email'), phone = val('phone');
       const errs: Record<string, string> = {};
@@ -93,10 +96,7 @@
     };
 
     ['first', 'email', 'phone', 'role', 'msg'].forEach((n) => {
-      document.getElementById('f-' + n)?.addEventListener('blur', () => {
-        const errs = errorsFor();
-        setErr(n, errs[n] || '');
-      });
+      document.getElementById('f-' + n)?.addEventListener('blur', () => setErr(n, errorsFor()[n] || ''));
     });
 
     form.querySelectorAll('input, select, textarea').forEach((el) =>
@@ -108,6 +108,7 @@
           phoneInput.setSelectionRange(caret, caret);
         }
         setErr((el as HTMLInputElement).name, '');
+        clearFormError();
         if ((val('email') && isValidEmail(val('email'))) || (val('phone') && isValidPhone(val('phone')))) { setErr('email', ''); setErr('phone', ''); }
         refresh();
       })
@@ -131,18 +132,46 @@
       card.addEventListener('transitionend', done);
     };
 
-    form.addEventListener('submit', (e) => {
+    let submitting = false;
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
+      if (submitting) return;
       const errs = errorsFor();
       const order = ['first', 'email', 'phone', 'role', 'msg'];
       if (Object.keys(errs).length) {
         order.forEach((n) => setErr(n, errs[n] || ''));
-        const firstBad = order.find((n) => errs[n]);
-        if (firstBad) document.getElementById('f-' + firstBad)?.focus();
+        document.getElementById('f-' + order.find((n) => errs[n]))?.focus();
         return;
       }
-      morph(() => { form.style.display = 'none'; okEl?.classList.add('show'); });
-      okEl?.focus();
+      const token = (form.querySelector('[name="cf-turnstile-response"]') as HTMLInputElement | null)?.value || '';
+      if (!token) { showFormError('Please complete the verification below, then submit again.'); return; }
+
+      submitting = true;
+      clearFormError();
+      const label = submitBtn?.textContent;
+      if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Sending…'; }
+      try {
+        const res = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({ first: val('first'), last: val('last'), email: val('email'), phone: val('phone'), role: val('role'), msg: val('msg'), token }),
+        });
+        const data = await res.json().catch(() => ({}));
+        if (res.ok && data.ok) {
+          morph(() => { form.style.display = 'none'; okEl?.classList.add('show'); });
+          okEl?.focus();
+        } else {
+          showFormError(data.error || 'Something went wrong. Please try again, or call us.');
+          (window as any).turnstile?.reset();
+        }
+      } catch {
+        showFormError('We couldn’t reach the server. Please try again, or call us.');
+        (window as any).turnstile?.reset();
+      } finally {
+        submitting = false;
+        if (submitBtn) { submitBtn.textContent = label || 'Submit Message'; }
+        refresh();
+      }
     });
 
     document.getElementById('send-another')?.addEventListener('click', () => {
@@ -150,7 +179,9 @@
         okEl?.classList.remove('show');
         form.style.display = '';
         form.reset();
+        clearFormError();
         ['first', 'email', 'phone', 'role', 'msg'].forEach((n) => setErr(n, ''));
+        (window as any).turnstile?.reset();
         refresh();
       });
       document.getElementById('f-first')?.focus();

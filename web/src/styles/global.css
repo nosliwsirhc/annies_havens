@@ -329,6 +329,9 @@ form.contact .sub { color: var(--muted); font-size: 0.95rem; margin-bottom: 22px
 .field.err input, .field.err select { border-color: var(--coral-d); }
 .errmsg { color: var(--coral-d); font-size: 0.78rem; font-weight: 700; margin-top: 6px; display: none; }
 .field.err .errmsg { display: block; }
+.cf-turnstile { margin-top: 16px; min-height: 65px; }
+.form-error { color: var(--coral-d); font-weight: 700; font-size: 0.9rem; margin-top: 12px; }
+.form-error:empty { display: none; }
 .form-ok { padding: 52px 34px; text-align: center; display: none; }
 .form-ok.show { display: block; animation: okIn 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
 .form-ok h3 { color: var(--slate-d); font-size: 1.6rem; margin-bottom: 10px; }
