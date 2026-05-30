@@ -1,0 +1,81 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import ContactForm from '../components/ContactForm.astro';
+import Icon from '../components/Icon.astro';
+import ReadMore from '../components/ReadMore.astro';
+import { site } from '../data/site';
+
+const readMore = [
+  { href: '/what-is-foster-parenting', label: 'What Is Foster Parenting?' },
+  { href: '/foster-home-quiz', label: 'Take the Foster Home Quiz' },
+  { href: '/care-programs', label: 'Our Care Programs' },
+  { href: '/faq', label: 'Frequently Asked Questions' },
+];
+const mapsUrl = 'https://maps.google.com/?q=517+Upper+Sherman+Ave,+Hamilton,+ON+L8V+3L7';
+const team = [
+  { name: 'Christopher Wilson', role: 'Executive Director', email: 'chriswilson@annieshavens.ca' },
+  { name: 'Jamie Moreau', role: "Director of Children's Services", email: 'jamie.moreau@annieshavens.ca' },
+  { name: 'Oksana Fedan', role: 'Director of Service Development', email: 'oksana.fedan@annieshavens.ca' },
+  { name: 'Alexis McNeil', role: 'Compliance Manager', email: 'alexis.mcneil@annieshavens.ca' },
+  { name: 'Michelle Potvin, MSW', role: 'Case Manager & Placement Coordinator', email: 'michellepotvin@annieshavens.ca' },
+  { name: 'Tracy Godden', role: 'Area Manager, Southwestern Ontario', email: 'tracygodden@annieshavens.ca' },
+  { name: 'Faith Buckingham', role: 'Case Manager', email: 'faith.buckingham@annieshavens.ca' },
+  { name: 'Jason Dove', role: 'Case Manager', email: 'jason.dove@annieshavens.ca' },
+  { name: 'Lillian White', role: 'Case Manager', email: 'lillian.white@annieshavens.ca' },
+  { name: 'Sherry Flood', role: 'Case Manager', email: 'sherry.flood@annieshavens.ca' },
+];
+---
+<BaseLayout
+  title="Contact Us | Annie's Havens"
+  description="Get in touch with Annie's Havens. Call (905) 294-2137, email recruitment@annieshavens.ca, or send us a message and we'll get back to you within one business day."
+>
+  <PageHeader
+    title="Contact Us"
+    intro="Whether you're thinking about fostering or have a question for our team, we'd love to hear from you. Send a message, call, or email, and we'll get back to you within one business day."
+  />
+
+  <section class="pad">
+    <div class="wrap article">
+      <ContactForm />
+
+      <aside class="aside">
+        <div class="aside-card">
+          <h3>Get in touch</h3>
+          <ul class="aside-facts">
+            <li><Icon name="phone" /><a href={site.phoneHref}>{site.phone}</a></li>
+            <li><Icon name="leaf" />New home inquiries: {site.newHomesExt}</li>
+            <li><Icon name="mail" /><a href={`mailto:${site.newHomesEmail}`}>{site.newHomesEmail}</a></li>
+          </ul>
+        </div>
+        <div class="aside-card">
+          <h3>Our office</h3>
+          <ul class="aside-facts">
+            <li><Icon name="pin" />{site.address.street}, {site.address.city}, {site.address.region} {site.address.postal}</li>
+          </ul>
+          <p style="margin-top:14px"><a class="more" href={mapsUrl} target="_blank" rel="noopener" style="font-weight:700;color:var(--coral-d)">View on map <span class="arr" aria-hidden="true">→</span></a></p>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="pad bg-warm">
+    <div class="wrap">
+      <div class="sec-head" style="margin-bottom:24px">
+        <h2>Email a team member</h2>
+        <p>Already working with us, or have a specific question? Reach the right person directly.</p>
+      </div>
+      <ul class="team-list">
+        {team.map((p) => (
+          <li>
+            <span class="nm">{p.name}</span><br />
+            <span class="role">{p.role}</span><br />
+            <a href={`mailto:${p.email}`} style="font-weight:600;color:var(--coral-d);font-size:0.9rem">{p.email}</a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <ReadMore links={readMore} />
+</BaseLayout>
