@@ -1,0 +1,34 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import CtaBand from '../../components/CtaBand.astro';
+
+const posts = (await getCollection('news')).sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime()
+);
+const fmt = (d: Date) => d.toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
+---
+<BaseLayout
+  title="News | Annie's Havens"
+  description="News and developments in foster care from Annie's Havens, a licensed Ontario foster care agency."
+>
+  <PageHeader title="News" intro="Updates and perspectives on foster care in Ontario." />
+
+  <section class="pad">
+    <div class="wrap">
+      <div class="news-grid">
+        {posts.map((post) => (
+          <a class="news-card reveal" href={`/news/${post.id}`}>
+            <span class="date">{fmt(post.data.date)}</span>
+            <h2>{post.data.title}</h2>
+            <p>{post.data.description}</p>
+            <span class="more">Read more <span class="arr" aria-hidden="true">→</span></span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CtaBand />
+</BaseLayout>

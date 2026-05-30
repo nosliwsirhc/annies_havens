@@ -1,0 +1,49 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import ReadMore from '../../components/ReadMore.astro';
+import CtaBand from '../../components/CtaBand.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('news');
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const fmt = (d: Date) => d.toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
+
+const readMore = [
+  { href: '/news', label: 'All News' },
+  { href: '/what-is-foster-parenting', label: 'What Is Foster Parenting?' },
+  { href: '/foster-home-quiz', label: 'Take the Foster Home Quiz' },
+  { href: '/contact-us', label: 'Contact Us' },
+];
+---
+<BaseLayout title={`${post.data.title} | Annie's Havens`} description={post.data.description}>
+  <PageHeader title={post.data.title} intro={post.data.description} />
+
+  <section class="pad">
+    <div class="wrap">
+      <div class="prose">
+        <p class="article-meta">{fmt(post.data.date)} · {post.data.author}</p>
+        {post.data.youtube && (
+          <div class="video-embed">
+            <iframe
+              src={`https://www.youtube-nocookie.com/embed/${post.data.youtube}`}
+              title={post.data.title}
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+          </div>
+        )}
+        <Content />
+      </div>
+    </div>
+  </section>
+
+  <CtaBand />
+  <ReadMore links={readMore} />
+</BaseLayout>
