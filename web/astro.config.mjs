@@ -10,6 +10,10 @@ export default defineConfig({
   site: 'https://www.annieshavens.ca',
   output: 'static',
   trailingSlash: 'never',
+  // Emit flat files (/about-us.html, not /about-us/index.html) so Cloudflare
+  // Pages serves no-slash URLs with a 200 instead of 308-redirecting to a
+  // trailing slash — keeps the served URL matching our no-slash canonicals.
+  build: { format: 'file' },
   adapter: cloudflare(),
   integrations: [sitemap()],
   // Images live in public/ and are referenced directly, so we don't need

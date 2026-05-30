@@ -12,3 +12,6 @@ node_modules/
 .env
 .env.production
 .dev.vars
+
+# Local Cloudflare token (never commit)
+.cf.env

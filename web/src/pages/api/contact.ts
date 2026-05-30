@@ -30,7 +30,7 @@ export const POST: APIRoute = async ({ request, locals, clientAddress }) => {
   const token = data.token ?? '';
 
   // 1) Verify the Turnstile token (bot protection).
-  const secret = env.TURNSTILE_SECRET_KEY ?? import.meta.env.TURNSTILE_SECRET_KEY ?? TEST_SECRET;
+  const secret = env.TURNSTILE_SECRET_KEY ?? TEST_SECRET;
   let verified = false;
   try {
     const body = new URLSearchParams({ secret, response: token });
@@ -57,7 +57,8 @@ export const POST: APIRoute = async ({ request, locals, clientAddress }) => {
   }
 
   // 3) Send via Resend.
-  const apiKey = env.RESEND_API_KEY ?? import.meta.env.RESEND_API_KEY;
+  // Accept either name; `RESEND_TOKEN` is what's set in this project's .env.
+  const apiKey = env.RESEND_TOKEN ?? env.RESEND_API_KEY;
   const to = env.CONTACT_TO ?? 'recruitment@annieshavens.ca';
   const from = env.CONTACT_FROM ?? "Annie's Havens <noreply@annieshavens.ca>";
   if (!apiKey) {

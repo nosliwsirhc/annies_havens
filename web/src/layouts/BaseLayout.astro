@@ -3,6 +3,7 @@ import { site } from '../data/site';
 import TopBar from '../components/TopBar.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
+import ConsentBanner from '../components/ConsentBanner.astro';
 import '../styles/global.css';
 
 interface Props {
@@ -82,6 +83,7 @@ const orgSchema = {
       <slot />
     </main>
     <SiteFooter />
+    <ConsentBanner />
     <script>
       // Global scroll-reveal: reveal .reveal elements as they enter the viewport.
       // Lives in the layout so every page gets it (the .js .reveal { opacity: 0 }
