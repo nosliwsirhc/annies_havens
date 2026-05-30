@@ -1,0 +1,118 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import ReadMore from '../components/ReadMore.astro';
+
+const readMore = [
+  { href: '/care-programs', label: 'Our Care Programs' },
+  { href: '/referral-sources', label: 'For Referral Sources' },
+  { href: '/about-us', label: 'About Annie’s Havens' },
+  { href: '/complaints', label: 'Complaints Process' },
+  { href: '/contact-us', label: 'Contact Us' },
+];
+const nav = [
+  { id: 'mission', label: 'Mission' },
+  { id: 'about', label: 'About Us' },
+  { id: 'population', label: 'Population Served' },
+  { id: 'programs', label: 'Programs' },
+  { id: 'service-area', label: 'Service Area' },
+  { id: 'referrals', label: 'Referrals & Admission' },
+  { id: 'supports', label: 'Supports & Services' },
+  { id: 'foster-parents', label: 'Foster Parents' },
+  { id: 'organization', label: 'Organization' },
+  { id: 'philosophy', label: 'Philosophy' },
+  { id: 'compliance', label: 'Compliance' },
+];
+---
+<BaseLayout
+  title="Program Description | Annie's Havens"
+  description="A description of the foster care program operated by Annie's Havens Ltd.: mission, population served, programs, service area, supports, and legislative compliance."
+>
+  <PageHeader
+    title="Program Description"
+    intro="This page describes the foster care program operated by Annie's Havens Ltd.: our mission, the children and young persons we serve, our programs, service area, and how services are organized and delivered. It's a common reference for foster parents, staff, placing agencies, and the Ministry."
+  />
+
+  <section class="pad">
+    <div class="wrap article">
+      <div>
+        <p class="doc-ref"><strong>Regulatory reference:</strong> CYFSA, 2017; O. Reg. 156/18, s. 6 (policies and procedures); MCCSS foster care licence.</p>
+
+        <section class="doc-section" id="mission">
+          <h2>Mission</h2>
+          <p>Annie's Havens has a total commitment to quality and excellence in everything it does. The agency provides a positive growth environment for every child and young person placed in its care. To do that, we give careful attention to the matching and placement of each child, and we provide exceptional support and specialized training to our foster parents and staff.</p>
+        </section>
+
+        <section class="doc-section" id="about">
+          <h2>About Annie's Havens</h2>
+          <p>Annie's Havens Ltd. is a licensed private foster care agency that has provided foster care in Ontario since 1996. It was founded by William and Hilda Wilson, who had been foster parents since the early 1990s, and is named in memory of their daughter, Annie. The family's experience caring for Annie, who lived with significant physical and medical needs, gave Annie's Havens its founding expertise in caring for children with special needs, and that focus remains at the heart of the agency today.</p>
+          <p>The agency is licensed by the Ministry of Children, Community and Social Services (MCCSS) and operates as a foster care licensee under the Child, Youth and Family Services Act, 2017 (CYFSA) and its regulations. We receive referrals from Children's Aid Societies and other placing agencies across our service area.</p>
+        </section>
+
+        <section class="doc-section" id="population">
+          <h2>Population served</h2>
+          <p>Annie's Havens provides foster care to children and young persons in the care of, or being placed by, Children's Aid Societies and other authorized placing agencies. Children come into care for many reasons and with a wide range of needs, from comparatively low-needs placements to children with complex developmental, physical, and medical requirements. Annie's Havens is particularly recognized for its work with children who have special needs.</p>
+        </section>
+
+        <section class="doc-section" id="programs">
+          <h2>Foster care programs</h2>
+          <p>We offer a range of programs so placements can be matched to each child's needs: a <a href="/care-programs#mainstream">Mainstream</a> program for lower-needs children; a <a href="/care-programs#special-needs">Special Needs</a> program for children with developmental, physical, and medical needs (with specialized training and Personal Support Worker hours where required); and <a href="/care-programs#trauma-focused">Trauma-Focused</a> treatment care, provided through our sister agency, Safe Harbours. Full detail is on our <a href="/care-programs">Care Programs</a> page.</p>
+        </section>
+
+        <section class="doc-section" id="service-area">
+          <h2>Service area</h2>
+          <p>Annie's Havens maintains a defined service area of more than 30,000 square kilometres across southern and central Ontario, extending from Woodstock in the southwest to Peterborough in the east and north to Gravenhurst. A defined service area lets us concentrate our resources, including in-home staff support and responsive travel time in an emergency. Homes outside the service area may be considered case by case.</p>
+        </section>
+
+        <section class="doc-section" id="referrals">
+          <h2>Referrals and admission</h2>
+          <p>Referrals come from Children's Aid Societies and other placing agencies. Before any child is placed, Annie's Havens completes a pre-placement assessment to determine whether the child's immediate needs can be met in the proposed foster home, in accordance with our Placement of Children and Youth policy and O. Reg. 156/18. Placement decisions consider the needs and identity of the child, the suitability and training of the foster home, and the needs of any children already living there.</p>
+        </section>
+
+        <section class="doc-section" id="supports">
+          <h2>Supports and services</h2>
+          <p>We wrap services around each placement based on the assessed needs of the child. Depending on those needs, supports may include:</p>
+          <ul>
+            <li>Personal Support Workers for children with higher daily care needs;</li>
+            <li>Child and Youth Workers;</li>
+            <li>access to community mental-health services and, where needed, funding for psychological services;</li>
+            <li>educational supports, including school-board liaison and tutoring; and</li>
+            <li>access to community support programs.</li>
+          </ul>
+          <p>A preliminary assessment of a child's support needs is completed early in the placement so any additional in-home support can be arranged.</p>
+        </section>
+
+        <section class="doc-section" id="foster-parents">
+          <h2>Foster parent recruitment, training, and support</h2>
+          <p>Annie's Havens recruits, assesses, approves, and supports foster parents in accordance with its assessment, screening, and approval policies and the requirements of the CYFSA and O. Reg. 156/18. Foster parents complete pre-service qualifications and a learning plan, receive program-specific and in-service training, and are supported by agency staff through regular contact, in-home support, and ongoing professional development.</p>
+        </section>
+
+        <section class="doc-section" id="organization">
+          <h2>Organizational structure and staffing</h2>
+          <p>Annie's Havens is led by an Executive Director and a Director of Children's Services, supported by a Compliance Manager, Case Managers, a Placement Coordinator, a Director of Service Development, and Area Managers. Resource Workers and Case Managers maintain regular contact with foster homes, monitor the well-being of children in care, and ensure compliance with agency policy and legislation.</p>
+        </section>
+
+        <section class="doc-section" id="philosophy">
+          <h2>Service philosophy and approach</h2>
+          <p>Annie's Havens is committed to child-centred, trauma-informed, and culturally responsive care that protects the dignity, safety, and rights of every child and young person. We emphasize prevention, relationship-based care, and de-escalation. Annie's Havens is a hands-off provider: physical restraint is prohibited in all of our foster homes, and behaviour is supported through the strategies set out in our behaviour-support and safety-planning policies.</p>
+        </section>
+
+        <section class="doc-section" id="compliance">
+          <h2>Legislative compliance</h2>
+          <p>Annie's Havens operates in compliance with the Child, Youth and Family Services Act, 2017 and its regulations, the Personal Health Information Protection Act, 2004 (PHIPA), and the requirements of its MCCSS foster care licence. All services are delivered in keeping with the rights of children and young persons in care.</p>
+        </section>
+      </div>
+
+      <aside class="aside">
+        <div class="aside-card">
+          <h3>On this page</h3>
+          <ul class="aside-nav">
+            {nav.map((n) => <li><a href={`#${n.id}`}>{n.label}</a></li>)}
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <ReadMore links={readMore} />
+</BaseLayout>
