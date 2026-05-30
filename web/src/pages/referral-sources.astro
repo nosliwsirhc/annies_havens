@@ -1,0 +1,61 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import ReadMore from '../components/ReadMore.astro';
+import { site } from '../data/site';
+
+const readMore = [
+  { href: '/program-description', label: 'Program Description' },
+  { href: '/care-programs', label: 'Our Care Programs' },
+  { href: '/service-area', label: 'Our Service Area' },
+  { href: '/about-us', label: 'About Annie’s Havens' },
+  { href: '/contact-us', label: 'Contact Us' },
+];
+const partners = [
+  { logo: '/images/durhamcas-logo.jpg', name: 'Durham Children’s Aid Society', desc: 'Protecting children across the Durham Region community since 1905.' },
+  { logo: '/images/facs-niagara-logo.jpg', name: 'Family and Children’s Services Niagara', desc: 'One of Niagara’s largest child and family organizations, serving the region since 1898.' },
+  { logo: '/images/waterloofacs-logo.jpg', name: 'Family & Children’s Services of the Waterloo Region', desc: 'Works with families and communities to protect and care for children across Waterloo.' },
+  { logo: '/images/hamilton-cfs-logo.jpg', name: 'Hamilton Child and Family Supports', desc: 'A not-for-profit focused on the well-being and protection of children since 1894.' },
+  { logo: '/images/kawartha-haliburton-logo.jpg', name: 'Kawartha-Haliburton Children’s Aid Society', desc: 'A child-protection agency safeguarding children from harm across Kawartha and Haliburton.' },
+  { logo: '/images/nativechild-logo.jpg', name: 'Native Child and Family Services of Toronto', desc: 'A leader in Native human services, serving Toronto’s urban Indigenous community since 1986.' },
+  { logo: '/images/simcoe-muskoka-family-connexions-logo.jpg', name: 'Simcoe Muskoka Family Connexions', desc: 'The integrated child and family services agency for Simcoe County and Muskoka.' },
+  { logo: '/images/york-cas-logo.jpg', name: 'York Region Children’s Aid Society', desc: 'Works to keep families together and build safe, strong communities across York Region.' },
+  { logo: '/images/nunavut-logo.jpg', name: 'Nunavut Department of Family Services', desc: 'Responsible for children and family services across Nunavut.' },
+];
+---
+<BaseLayout
+  title="For Referral Sources | Annie's Havens"
+  description="Annie's Havens is trusted by Children's Aid Societies across Ontario. We accept referrals for children and youth with developmental, physical, and medical needs."
+>
+  <PageHeader
+    title="For Referral Sources"
+    intro="Annie's Havens is proud to have the trust of Children's Aid Societies across Ontario. We consistently receive referrals from the agencies below, and occasionally from organizations outside our service area."
+  />
+
+  <section class="pad">
+    <div class="wrap">
+      <div class="logo-grid">
+        {partners.map((p) => (
+          <article class="partner reveal">
+            <img src={p.logo} alt={`${p.name} logo`} loading="lazy" decoding="async" />
+            <h3>{p.name}</h3>
+            <p>{p.desc}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="pad cta-band">
+    <div class="wrap">
+      <h2>Placing a child with us?</h2>
+      <p>Our team responds quickly. Reach out to discuss a referral or a child's needs, and we'll let you know how we can help.</p>
+      <div class="actions">
+        <a class="btn btn-coral" href="/contact-us">Make a Referral</a>
+        <a class="btn btn-out" href={site.phoneHref}>Call {site.phone}</a>
+      </div>
+    </div>
+  </section>
+
+  <ReadMore links={readMore} />
+</BaseLayout>
