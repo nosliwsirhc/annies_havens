@@ -1,0 +1,100 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Picture from '../components/Picture.astro';
+import Icon from '../components/Icon.astro';
+import ReadMore from '../components/ReadMore.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { site } from '../data/site';
+
+const readMore = [
+  { href: '/what-is-foster-parenting', label: 'What Is Foster Parenting?' },
+  { href: '/care-programs', label: 'Our Care Programs' },
+  { href: '/faq', label: 'Frequently Asked Questions' },
+  { href: '/referral-sources', label: 'For Referral Sources' },
+  { href: '/contact-us', label: 'Contact Us' },
+];
+const facts = [
+  'Licensed by the Province of Ontario (MCCSS)',
+  'Inspected every year',
+  'Referrals from Children’s Aid Societies',
+  'Three levels of care',
+];
+const roles = [
+  { icon: 'shield', h: 'The Ministry (MCCSS)', p: 'Sets the rules under the Child, Youth and Family Services Act, licenses every foster care agency, inspects them each year, and upholds the rights of children in care. It sets the standards, but it doesn’t place children itself.' },
+  { icon: 'users', h: 'Children’s Aid Societies', p: 'More than 40 across Ontario. A CAS investigates child-welfare concerns, can bring a child into care, and usually holds guardianship. When it doesn’t have a suitable home, it refers a child to a licensed agency like us.' },
+  { icon: 'home', h: 'Annie’s Havens', p: 'A licensed private foster care agency. We recruit, assess, train, and support foster homes, and care for the children placed with us, working alongside the CAS that referred them.' },
+];
+---
+<BaseLayout
+  title="Foster Care in Ontario | Annie's Havens"
+  description="How foster care works in Ontario: the role of the Ministry, Children's Aid Societies, and licensed agencies like Annie's Havens, plus the three levels of care."
+>
+  <div class="page-banner">
+    <Picture
+      base="/images/queens-park"
+      alt="Queen's Park, the Ontario legislature"
+      width={1200}
+      height={500}
+      formats={['avif', 'webp']}
+      widths={[640, 1200]}
+      sizes="100vw"
+      loading="eager"
+      fetchpriority="high"
+    />
+    <div class="scrim">
+      <div class="wrap">
+        <h1>Foster Care in Ontario</h1>
+        <p class="lead">Ontario does foster care a little differently. Here's how the system fits together, and where Annie's Havens sits within it.</p>
+      </div>
+    </div>
+  </div>
+
+  <section class="pad">
+    <div class="wrap article">
+      <div>
+        <div class="prose" style="margin-bottom:40px">
+          <p>In Ontario, the government sets the rules for foster care but doesn't recruit foster parents itself. That work is done by licensed agencies, either a local Children's Aid Society or a private agency like Annie's Havens. The Ministry visits every agency each year to make sure the rules are being followed.</p>
+          <p>The line between an agency and a Children's Aid Society can be confusing, because both run foster homes. The difference is that a CAS also investigates concerns, holds guardianship, and handles adoptions. Here's who does what.</p>
+        </div>
+
+        <div class="points">
+          {roles.map((r) => (
+            <article class="point">
+              <div class="ic"><Icon name={r.icon} /></div>
+              <h3>{r.h}</h3>
+              <p>{r.p}</p>
+            </article>
+          ))}
+        </div>
+
+        <div class="prose" style="margin-top:44px">
+          <h2>The levels of care</h2>
+          <p>Foster care in Ontario is generally provided at three levels, and our programs map directly onto them:</p>
+          <ul>
+            <li><strong>Mainstream (regular) care</strong> for children and youth without complex needs, through our <a href="/care-programs#mainstream">Mainstream program</a>.</li>
+            <li><strong>Therapeutic care</strong> for children with developmental and medical needs, through our <a href="/care-programs#special-needs">Special Needs program</a>, our founding focus.</li>
+            <li><strong>Treatment care</strong> for children and youth who have experienced severe trauma, through our sister agency, Safe Harbours, in our <a href="/care-programs#trauma-focused">Trauma-Focused program</a>.</li>
+          </ul>
+        </div>
+      </div>
+
+      <aside class="aside">
+        <div class="aside-card">
+          <h3>At a glance</h3>
+          <ul class="aside-facts">
+            {facts.map((f) => <li><Icon name="leaf" />{f}</li>)}
+          </ul>
+        </div>
+        <div class="aside-card is-cta">
+          <h3>Have a question?</h3>
+          <p>If you're not sure how any of this applies to you, just ask. We're happy to explain.</p>
+          <a class="btn btn-coral" href="/contact-us">Talk to Our Team</a>
+          <a class="call" href={site.phoneHref}>{site.phone}</a>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <CtaBand />
+  <ReadMore links={readMore} />
+</BaseLayout>
