@@ -30,8 +30,8 @@ Continuous deployment: **pushing to `master` triggers a GitHub Actions workflow*
 
 ## Repo structure
 
-- **`web/`** — the live Astro site (all active development).
-- **Repo root** (`src/`, `views/`, `assets/`, …) — the **retired v1** of the site (Express + Handlebars + MaterializeCSS, formerly on a DigitalOcean droplet). Kept for reference; not deployed.
+- **`web/`** — the live Astro site (all active development); the whole project lives here.
+- The retired v1 (Express + Handlebars + MaterializeCSS, formerly on a DigitalOcean droplet) used to sit at the repo root. It was deleted on 2026-05-31 and is recoverable from git history (last present at commit `b537f39`).
 
 ## Working notes
 

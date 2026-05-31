@@ -4,8 +4,8 @@ Annie's Havens is an Ontario foster-care agency that supports children and youth
 
 ## Repo layout (important)
 
-- **`web/`** — the **LIVE site**. An Astro app deployed to Cloudflare Pages. **All real work happens here.**
-- **Repo root** (`src/`, `views/`, `assets/`, root `package.json`) — the **retired v1** (Express + Handlebars + MaterializeCSS). Kept for history only. **Do not develop against it; it is not deployed.**
+- **`web/`** — the **LIVE site** and the whole project. An Astro app deployed to Cloudflare Pages. **All real work happens here.**
+- The retired v1 (Express + Handlebars + MaterializeCSS) used to live at the repo root; it was deleted on 2026-05-31 and remains recoverable from git history (it was last present at commit `b537f39`).
 
 ## Stack (web/)
 
