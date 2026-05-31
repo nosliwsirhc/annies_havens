@@ -56,3 +56,8 @@ Thumbs.db
 .idea/
 *.swp
 *.swo
+# GA4 service-account key (never commit)
+.ga-sa-key.json
+
+# News article drafts inbox (local only; never published)
+web/_drafts/
