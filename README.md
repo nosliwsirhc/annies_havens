@@ -1,10 +1,38 @@
 # Annie's Havens Website
-This repo is for the development work done for Annie's Havens - a foster care agency in the province of Ontario. The goal of the website is to raise awareness of Annie's Havens to potential foster parents.
-## Technologies Used
-The pages served to the browser are rendered on a NodeJS server using Express. The templating engine is Express-Handlebars utilizing a helper function to inject page specific Javascript thanks to [Wolfgang Ziegler](https://wolfgang-ziegler.com/blog/a-scripts-section-for-your-handlebars-layout-template).
-Nodemailer is used on the server to send messages that users create on the website. Bot screening is handled by Recaptcha offscreen.
-The entire UI framework utilizes [MaterializeCSS](https://materializecss.com/) with some custom CSS added.
-## SEO
-A JSON file is used to supply the metadata for each page including OpenGraph tags. Not sure of this is the best approach. For development purposes, a robots.txt file located in the assets directory prevents indexing and there is a meta tag in the main.hbs layout preventing indexing and following.
-## Notes
-Some work was done to get the page load time down. Videos are lazy loaded and future work will include getting images to lazy load. Older versions with the environmental variables supplied through json and .env files were removed to align with best practices.
+
+The website for **Annie's Havens**, a foster-care agency in Ontario that supports children and youth with developmental needs, special needs, and medical conditions. The site's purpose is to raise awareness and recruit foster parents.
+
+🌐 **Live:** [www.annieshavens.ca](https://www.annieshavens.ca)
+
+## Current stack (the live site lives in [`web/`](./web))
+
+- **[Astro](https://astro.build/)** (static output) deployed to **Cloudflare Pages**
+- **Cloudflare Turnstile** + **Resend** power the contact form (a Cloudflare Pages Function at `web/src/pages/api/contact.ts`)
+- **GA4** analytics, opt-in via a cookie-consent banner
+- Fonts: Fraunces (display) + Mulish (body); design tokens in `web/src/styles/global.css`
+- News/articles are Markdown files in `web/src/content/news/` (Astro content collections)
+
+## Develop
+
+Requires **Node 22** (see `web/.nvmrc`).
+
+```bash
+cd web
+nvm use
+npm install --ignore-scripts
+npm run dev      # http://localhost:4321
+npm run build    # builds to web/dist
+```
+
+## Deploy
+
+Continuous deployment: **pushing to `master` triggers a GitHub Actions workflow** (`.github/workflows/deploy.yml`) that builds `web/` and deploys to Cloudflare Pages automatically. No manual step.
+
+## Repo structure
+
+- **`web/`** — the live Astro site (all active development).
+- **Repo root** (`src/`, `views/`, `assets/`, …) — the **retired v1** of the site (Express + Handlebars + MaterializeCSS, formerly on a DigitalOcean droplet). Kept for reference; not deployed.
+
+## Working notes
+
+See [`CLAUDE.md`](./CLAUDE.md) for project conventions, the article-publishing workflow, deploy/token rules, and DNS cautions.
