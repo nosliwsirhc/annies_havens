@@ -15,7 +15,9 @@ export const site = {
     region: 'Ontario',
     postal: 'L8V 3L7',
   },
-  founded: 1991,
+  founded: 2004, // Annie's Havens (the agency) was founded in 2004
+  fosteringSince: 1991, // the Wilsons have been foster parents since 1991
+  // (they started their first agency, Openarms Family Homes in Ottawa, in 1996)
   sisterAgency: { name: 'Safe Harbours Family Treatment Homes', url: 'https://safeharbours.ca' },
 } as const;
 
