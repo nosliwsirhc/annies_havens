@@ -778,6 +778,35 @@ form.contact .sub { color: var(--muted); font-size: 0.95rem; margin-bottom: 22px
 }
 .keypoints li strong { color: var(--slate-d); }
 
+/* ---- article share row ---- */
+.article-share {
+  max-width: 720px; margin: 2.6em auto 0; padding-top: 1.7em;
+  border-top: 1px solid var(--line);
+  display: flex; align-items: center; gap: 18px; flex-wrap: wrap;
+}
+.article-share .share-label {
+  font-size: 0.8rem; font-weight: 800; letter-spacing: 0.07em;
+  text-transform: uppercase; color: var(--muted);
+}
+.share-buttons { display: flex; gap: 10px; align-items: center; }
+.share-btn {
+  width: 42px; height: 42px; border-radius: 50%;
+  border: 1.5px solid var(--line); background: var(--paper); color: var(--slate);
+  display: inline-flex; align-items: center; justify-content: center;
+  cursor: pointer; position: relative; padding: 0;
+  transition: border-color 0.18s, color 0.18s, transform 0.18s;
+}
+.share-btn svg { width: 18px; height: 18px; fill: currentColor; display: block; }
+.share-btn:hover { border-color: var(--coral); color: var(--coral-d); transform: translateY(-2px); }
+.share-copy .copied {
+  position: absolute; bottom: calc(100% + 7px); left: 50%; transform: translateX(-50%);
+  background: var(--slate); color: #fff; font-size: 0.7rem; font-weight: 700;
+  padding: 3px 9px; border-radius: 6px; white-space: nowrap;
+  opacity: 0; transition: opacity 0.15s; pointer-events: none;
+}
+.share-copy.is-copied .copied { opacity: 1; }
+.share-copy.is-copied { border-color: var(--coral); color: var(--coral-d); }
+
 /* ---- references / sources block (:::sources) ---- */
 .article-sources {
   margin: 2.4em 0 0; padding: 26px 30px;

@@ -5,6 +5,8 @@ import PageHeader from '../../components/PageHeader.astro';
 import Picture from '../../components/Picture.astro';
 import ReadMore from '../../components/ReadMore.astro';
 import CtaBand from '../../components/CtaBand.astro';
+import ShareButtons from '../../components/ShareButtons.astro';
+import { site } from '../../data/site';
 
 export async function getStaticPaths() {
   const posts = await getCollection('news');
@@ -93,6 +95,7 @@ const readMore = [
         )}
         <Content />
       </article>
+      <ShareButtons url={new URL(`/news/${post.id}`, site.url).href} title={post.data.title} />
     </div>
   </section>
 
