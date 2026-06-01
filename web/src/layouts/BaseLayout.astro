@@ -13,7 +13,12 @@ interface Props {
 }
 
 const { title, description, ogImage = '/images/logo_w_name_1200x630.jpg' } = Astro.props;
-const canonical = new URL(Astro.url.pathname, site.url).href;
+// Astro 6 with build.format:'file' reports Astro.url.pathname WITH the .html
+// extension (e.g. /about-us.html, /index.html). Strip it so canonical/og:url
+// match our clean, no-extension served URLs (and the sitemap) instead of
+// pointing at .html URLs that 307-redirect.
+const cleanPath = Astro.url.pathname.replace(/\/index\.html$/, '/').replace(/\.html$/, '');
+const canonical = new URL(cleanPath || '/', site.url).href;
 
 const orgSchema = {
   '@context': 'https://schema.org',
