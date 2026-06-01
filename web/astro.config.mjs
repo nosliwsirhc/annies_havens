@@ -1,5 +1,5 @@
 // @ts-check
-import { defineConfig, passthroughImageService } from 'astro/config';
+import { defineConfig, passthroughImageService, sessionDrivers } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import cloudflare from '@astrojs/cloudflare';
 import remarkDirective from 'remark-directive';
@@ -30,7 +30,7 @@ export default defineConfig({
   // adapter defaults to a KV-backed session and emits a SESSION KV binding
   // that would need a provisioned namespace at deploy time. A memory driver
   // keeps the build binding-free; nothing in the site ever reads a session.
-  session: { driver: 'memory' },
+  session: { driver: sessionDrivers.memory() },
   // Article authoring directives (:::pullquote, :::stats, ::figure, ...) that
   // map onto the editorial classes in global.css. remarkDirective must run
   // first to parse the syntax; remarkArticle then rewrites the nodes.
