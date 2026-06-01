@@ -1,7 +1,7 @@
 ---
 title: "Where to Start: Ontario Resources for Children with Autism, Disabilities, or Mental Health Needs"
 description: A practical starting guide for Ontario families and caregivers looking for autism services, disability supports, child and youth mental-health help, school supports, and community resources.
-date: 2026-06-01
+date: 2026-03-12
 author: Annie's Havens
 kicker: Family Resources
 image: /images/about-slider-image-1

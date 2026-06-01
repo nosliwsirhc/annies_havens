@@ -1,7 +1,7 @@
 ---
 title: "Beyond a Placement: Supporting Children with Disabilities and Complex Needs in Ontario"
 description: Children with disabilities and complex needs need more than a safe place to stay. They need coordinated care, stable relationships, and support across home, school, health, and community.
-date: 2026-06-01
+date: 2026-05-21
 author: Annie's Havens
 kicker: Complex Needs
 image: /images/carousel3

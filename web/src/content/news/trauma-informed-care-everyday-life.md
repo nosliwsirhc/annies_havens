@@ -1,7 +1,7 @@
 ---
 title: "Trauma-Informed Care in Everyday Life: Why Safety Comes Before Behaviour"
 description: Trauma-informed care helps adults understand behaviour through safety, trust, connection, and dignity. Here is what that can look like for children in everyday life.
-date: 2026-05-31
+date: 2026-04-30
 author: Annie's Havens
 kicker: Trauma-Informed Care
 image: /images/carousel1

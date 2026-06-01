@@ -1,7 +1,7 @@
 ---
 title: Ontario's Child Welfare System Is Under Pressure
 description: Ontario's child welfare system is facing placement shortages and more complex needs. Here is what that means for children, families, and the kind of care that helps.
-date: 2026-05-31
+date: 2026-04-02
 author: Annie's Havens
 kicker: Child Welfare
 image: /images/special-needs-group
