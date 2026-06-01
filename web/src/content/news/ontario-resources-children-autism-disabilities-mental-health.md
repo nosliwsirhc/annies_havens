@@ -187,7 +187,7 @@ Whether a child is living with family, kin, foster caregivers, or another caring
 A child's needs may be complex. The first step does not have to be.
 :::
 
-To learn more about Annie's Havens' approach, you can read about [our care programs](/care-programs), [children in care](/children-in-care), and [family involvement](/family-involvement).
+To learn more about Annie's Havens' approach, you can read about [our care programs](/care-programs), [children in care](/children-in-care), and [what foster parenting involves](/what-is-foster-parenting).
 
 ## Sources
 

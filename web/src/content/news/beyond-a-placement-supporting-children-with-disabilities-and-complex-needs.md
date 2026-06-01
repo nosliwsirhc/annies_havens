@@ -153,7 +153,7 @@ A child's diagnosis or disability may shape what support they need, but it shoul
 A placement is a place to begin. The goal is a life where the child can be known, supported, included, and loved.
 :::
 
-To learn more about Annie's Havens' approach, you can read about [our care programs](/care-programs), [children in care](/children-in-care), and [family involvement](/family-involvement).
+To learn more about Annie's Havens' approach, you can read about [our care programs](/care-programs), [children in care](/children-in-care), and [what foster parenting involves](/what-is-foster-parenting).
 
 ## Sources
 

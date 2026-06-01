@@ -1,6 +1,6 @@
 # Annie's Havens
 
-> Annie's Havens is a licensed Ontario foster care agency, founded in 1991, that recruits and supports foster parents for children and youth with developmental, physical, and medical needs. This site explains foster parenting in Ontario, describes the agency's care programs, and helps prospective foster parents get in touch.
+> Annie's Havens is a licensed Ontario foster care agency, founded in 2004, that recruits and supports foster parents for children and youth with developmental, physical, and medical needs. This site explains foster parenting in Ontario, describes the agency's care programs, and helps prospective foster parents get in touch.
 
 Annie's Havens is based in Hamilton, Ontario and serves much of southern and central Ontario. Its tone is warm, trustworthy, and human, never salesy or clinical. The agency works alongside its sister agency, Safe Harbours Family Treatment Homes.
 
@@ -8,8 +8,7 @@ Annie's Havens is based in Hamilton, Ontario and serves much of southern and cen
 
 - [Foster Care in Ontario](https://www.annieshavens.ca/foster-care-in-ontario): How foster care works in Ontario and the current need for foster parents.
 - [What Is Foster Parenting?](https://www.annieshavens.ca/what-is-foster-parenting): What the foster parenting role involves day to day.
-- [Children In Care](https://www.annieshavens.ca/children-in-care): Who the children and youth in care are and what they need.
-- [Family Involvement](https://www.annieshavens.ca/family-involvement): How birth families stay connected during a placement.
+- [Children In Care](https://www.annieshavens.ca/children-in-care): Who the children and youth in care are, what they need, and how birth families stay connected during a placement.
 - [Foster Parent Application Process](https://www.annieshavens.ca/foster-parent-application-process): The steps to becoming an approved foster parent.
 - [Foster Home Quiz](https://www.annieshavens.ca/foster-home-quiz): A short quiz to see whether your home could be a fit.
 - [Frequently Asked Questions](https://www.annieshavens.ca/faq): Common questions about fostering with Annie's Havens.
@@ -24,10 +23,11 @@ Annie's Havens is based in Hamilton, Ontario and serves much of southern and cen
 - [About Us](https://www.annieshavens.ca/about-us): The agency's history, founding family, and team.
 - [Contact Us](https://www.annieshavens.ca/contact-us): Phone, email, and a contact form. Recruitment: recruitment@annieshavens.ca, (905) 294-2137.
 - [Referral Sources](https://www.annieshavens.ca/referral-sources): Information for Children's Aid Societies and referring agencies.
-- [Service Area](https://www.annieshavens.ca/service-area): The regions of Ontario the agency serves.
+- [Affiliations and Memberships](https://www.annieshavens.ca/affiliations): The agency's membership in the Ontario Care Collective and provincial licensing and oversight.
 - [News](https://www.annieshavens.ca/news): News and perspectives on foster care in Ontario.
 
 ## Optional
 
 - [Complaints](https://www.annieshavens.ca/complaints): How to raise a concern or complaint.
+- [Land Acknowledgement](https://www.annieshavens.ca/land-acknowledgement): The agency's acknowledgement of the traditional territories it works on and its commitment to Indigenous children and youth.
 - [Privacy Policy](https://www.annieshavens.ca/privacy-policy): How the agency handles personal information.

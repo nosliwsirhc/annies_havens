@@ -36,7 +36,6 @@ export const nav: NavItem[] = [
       { label: 'What Is Foster Parenting?', href: '/what-is-foster-parenting' },
       { label: 'Frequently Asked Questions', href: '/faq' },
       { label: 'Children In Care', href: '/children-in-care' },
-      { label: 'Family Involvement', href: '/family-involvement' },
       { label: 'Foster Parent Application Process', href: '/foster-parent-application-process' },
       { label: 'Foster Home Quiz', href: '/foster-home-quiz' },
     ],
@@ -57,9 +56,10 @@ export const nav: NavItem[] = [
     children: [
       { label: 'News', href: '/news' },
       { label: 'Program Description', href: '/program-description' },
+      { label: 'Affiliations and Memberships', href: '/affiliations' },
+      { label: 'Land Acknowledgement', href: '/land-acknowledgement' },
       { label: 'Complaints', href: '/complaints' },
       { label: 'Referral Sources', href: '/referral-sources' },
-      { label: 'Service Area', href: '/service-area' },
     ],
   },
 ];

@@ -1,0 +1,55 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import Icon from '../components/Icon.astro';
+import ReadMore from '../components/ReadMore.astro';
+import { site } from '../data/site';
+
+const readMore = [
+  { href: '/about-us', label: 'About Annie’s Havens' },
+  { href: '/program-description', label: 'Program Description' },
+  { href: '/contact-us', label: 'Contact Us' },
+];
+---
+<BaseLayout
+  title="Affiliations and Memberships | Annie's Havens"
+  description="The provincial partnerships and oversight behind Annie's Havens, including our membership in the Ontario Care Collective and our work as a licensed foster care provider in Ontario."
+>
+  <PageHeader
+    title="Affiliations and Memberships"
+    intro="We don't do this work alone. Annie's Havens belongs to a network of provincial partners and oversight that keeps our care accountable, current, and aligned with the best of Ontario's child welfare sector."
+  />
+
+  <section class="pad">
+    <div class="wrap article">
+      <div>
+        <section class="doc-section" id="occ">
+          <h2>Ontario Care Collective</h2>
+          <p>Annie's Havens is a proud member of the <a href="https://ontariocarecollective.ca" target="_blank" rel="noopener">Ontario Care Collective</a> (OCC), a province-wide association dedicated to strengthening the quality, consistency, and impact of care across Ontario.</p>
+          <p>The Collective brings together operators, caregivers, and sector partners to advocate for vulnerable children and youth and to champion excellence in care. Through this membership we share practices with other trusted providers, stay current with provincial standards, and add our voice to the work of building a more cohesive and equitable care system across the province.</p>
+        </section>
+
+        <section class="doc-section" id="licensing">
+          <h2>Provincial Licensing and Oversight</h2>
+          <p>Annie's Havens operates as a licensed foster care provider in Ontario, under the oversight of the Ministry of Children, Community and Social Services. Our work is governed by the <em>Child, Youth and Family Services Act, 2017</em> (CYFSA) and its regulations, which set the standards for how children and young people in care must be supported, kept safe, and treated with dignity.</p>
+          <p>That oversight is something we welcome. It is part of how we make sure every child placed with us receives care that meets, and aims to exceed, the standards Ontario expects. You can read more about how we put those standards into practice in our <a href="/program-description">Program Description</a>.</p>
+        </section>
+      </div>
+
+      <aside class="aside">
+        <div class="aside-card is-cta">
+          <h3>Work With Us</h3>
+          <p>Whether you're considering fostering or placing a child in care, we're glad to talk.</p>
+          <ul class="aside-facts" style="margin-bottom:16px">
+            <li><Icon name="phone" /><a href={site.phoneHref} style="color:var(--on-dark)">{site.phone}</a></li>
+            <li><Icon name="mail" /><a href={`mailto:${site.newHomesEmail}`} style="color:var(--on-dark)">New Home Inquiries</a></li>
+          </ul>
+          <a class="btn btn-coral" href="/contact-us">Contact Us</a>
+          <span class="call">{site.address.street}, {site.address.city}, ON</span>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <ReadMore links={readMore} />
+</BaseLayout>
