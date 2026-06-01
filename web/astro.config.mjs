@@ -2,6 +2,8 @@
 import { defineConfig, passthroughImageService } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import cloudflare from '@astrojs/cloudflare';
+import remarkDirective from 'remark-directive';
+import remarkArticle from './src/lib/remark-article.mjs';
 
 // Mostly-static content site with one on-demand endpoint (the contact form).
 // Pages are prerendered by default; the contact API route opts into SSR and
@@ -20,4 +22,8 @@ export default defineConfig({
   // sharp-based optimization. Passthrough avoids the native sharp dependency.
   image: { service: passthroughImageService() },
   prefetch: { prefetchAll: true },
+  // Article authoring directives (:::pullquote, :::stats, ::figure, ...) that
+  // map onto the editorial classes in global.css. remarkDirective must run
+  // first to parse the syntax; remarkArticle then rewrites the nodes.
+  markdown: { remarkPlugins: [remarkDirective, remarkArticle] },
 });
