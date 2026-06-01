@@ -2,12 +2,13 @@
 // Reusable contact form: client-side validation, KinFlow phone formatting,
 // Cloudflare Turnstile, and an inline "morph" success state. Submits to the
 // /api/contact Pages Function. Used on the homepage and /contact-us.
+import { site } from '../data/site';
 const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '1x00000000000000000000AA'; // test key fallback
 ---
 <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 
 <div class="form-card" id="form-card">
-  <form class="contact" id="contact-form" novalidate>
+  <form class="contact" id="contact-form" novalidate data-phone={site.phone}>
     <h3>Send Us a Message</h3>
     <p class="sub">Fields marked <span class="req" aria-hidden="true">*</span> are required. An email or a phone number is fine - fill in whichever you prefer.</p>
     <div class="frow">
@@ -15,8 +16,8 @@ const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '1x0000000000000000
       <div class="field"><label for="f-last">Last name <span class="opt">(optional)</span></label><input id="f-last" name="last" /></div>
     </div>
     <div class="frow">
-      <div class="field"><label for="f-email">Email <span class="req" id="req-email" aria-hidden="true">*</span></label><input id="f-email" name="email" type="email" aria-required="true" aria-describedby="err-email" /><div class="errmsg" id="err-email" role="alert">Enter a valid email</div></div>
-      <div class="field"><label for="f-phone">Phone <span class="req" id="req-phone" aria-hidden="true">*</span></label><input id="f-phone" name="phone" type="tel" aria-required="true" aria-describedby="err-phone" /><div class="errmsg" id="err-phone" role="alert">Required</div></div>
+      <div class="field"><label for="f-email">Email <span class="opt" id="req-email">(email or phone)</span></label><input id="f-email" name="email" type="email" aria-required="true" aria-describedby="err-email" /><div class="errmsg" id="err-email" role="alert">Enter a valid email</div></div>
+      <div class="field"><label for="f-phone">Phone <span class="opt" id="req-phone">(email or phone)</span></label><input id="f-phone" name="phone" type="tel" aria-required="true" aria-describedby="err-phone" /><div class="errmsg" id="err-phone" role="alert">Required</div></div>
     </div>
     <div class="field"><label for="f-role">I am a… <span class="req" aria-hidden="true">*</span></label>
       <select id="f-role" name="role" required aria-required="true" aria-describedby="err-role">
@@ -144,7 +145,16 @@ const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '1x0000000000000000
         return;
       }
       const token = (form.querySelector('[name="cf-turnstile-response"]') as HTMLInputElement | null)?.value || '';
-      if (!token) { showFormError('Please complete the verification below, then submit again.'); return; }
+      if (!token) {
+        // If the Turnstile widget rendered, ask them to complete it. If it
+        // never loaded (blocked/offline), don't leave them stuck - offer a phone.
+        const widgetLoaded = !!form.querySelector('.cf-turnstile iframe');
+        const phone = form.dataset.phone;
+        showFormError(widgetLoaded
+          ? 'Please complete the verification below, then submit again.'
+          : `Verification could not load. Please refresh the page${phone ? `, or call us at ${phone}` : ''}.`);
+        return;
+      }
 
       submitting = true;
       clearFormError();

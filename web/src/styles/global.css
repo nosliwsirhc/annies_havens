@@ -279,7 +279,7 @@ section.pad { padding: 88px 0; }
 .quote-grid { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 50px; align-items: center; }
 .quote .portrait { height: 420px; width: 100%; object-fit: cover; border-radius: 18px; box-shadow: var(--shadow); transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1), box-shadow 0.4s; }
 .quote .portrait:hover { transform: translateY(-4px); box-shadow: 0 26px 50px -22px rgba(27, 42, 56, 0.5); }
-.quote blockquote { font-family: var(--font-serif); font-size: clamp(1.4rem, 2.6vw, 2rem); line-height: 1.35; color: var(--ink); }
+.quote blockquote { font-family: var(--font-serif); font-size: clamp(1.2rem, 2.6vw, 2rem); line-height: 1.4; color: var(--ink); }
 .quote .who { margin-top: 22px; font-weight: 800; }
 .quote .who span { display: block; color: var(--muted); font-weight: 600; font-size: 0.92rem; }
 
@@ -393,7 +393,8 @@ form.contact .sub { color: var(--muted); font-size: 0.95rem; margin-bottom: 22px
   .prog-row:nth-child(even) .prog-media { order: 0; }
   .timeline { grid-template-columns: 1fr 1fr; gap: 34px 0; }
   .tnode::before { display: none; }
-  .hero-media { order: -1; }
+  /* lead with the headline + CTA on mobile; image follows the text */
+  .hero-media { order: 0; margin-top: 28px; }
   .hero-media img { height: 320px; }
   /* don't float the badge over faces on mobile - sit it below the photo */
   .verify { position: static; max-width: none; margin-top: 14px; }
@@ -405,6 +406,19 @@ form.contact .sub { color: var(--muted); font-size: 0.95rem; margin-bottom: 22px
   .timeline { grid-template-columns: 1fr; }
   section.pad { padding: 60px 0; }
   .strip .divider { display: none; }
+  /* credibility strip: tidy centered stack instead of a ragged wrap */
+  .strip .wrap { flex-direction: column; align-items: center; gap: 16px; }
+  .strip .lbl { text-align: center; }
+  /* shorter program images so the stacked rows aren't so heavy */
+  .prog-media img { aspect-ratio: 3 / 2; }
+}
+
+/* footer: collapse the 4-column grid so it never overflows narrow screens */
+@media (max-width: 760px) {
+  .foot-grid { grid-template-columns: 1fr 1fr; gap: 28px; }
+}
+@media (max-width: 440px) {
+  .foot-grid { grid-template-columns: 1fr; gap: 22px; }
 }
 
 /* ============================================================
