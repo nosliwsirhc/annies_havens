@@ -1,7 +1,11 @@
 import type { APIRoute } from 'astro';
+// Worker environment (bindings, vars, secrets). In Astro 6 the Cloudflare
+// adapter removed `Astro.locals.runtime.env`; the supported replacement is
+// the `env` export from the `cloudflare:workers` virtual module.
+import { env as workerEnv } from 'cloudflare:workers';
 import { isValidEmail, isValidPhone } from '../../lib/form';
 
-// On-demand: runs as a Cloudflare Pages Function, not prerendered.
+// On-demand: runs as a Cloudflare Worker route, not prerendered.
 export const prerender = false;
 
 const TURNSTILE_VERIFY = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
@@ -11,8 +15,8 @@ const TEST_SECRET = '1x0000000000000000000000000000000AA';
 const json = (body: unknown, status = 200) =>
   new Response(JSON.stringify(body), { status, headers: { 'content-type': 'application/json' } });
 
-export const POST: APIRoute = async ({ request, locals, clientAddress }) => {
-  const env = ((locals as any).runtime?.env ?? {}) as Record<string, string | undefined>;
+export const POST: APIRoute = async ({ request, clientAddress }) => {
+  const env = workerEnv as unknown as Record<string, string | undefined>;
 
   let data: Record<string, string> = {};
   try {

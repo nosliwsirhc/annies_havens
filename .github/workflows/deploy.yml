@@ -1,10 +1,17 @@
-name: Deploy to Cloudflare Pages
+name: Deploy to Cloudflare Workers
 
-# Auto-deploy on every push to master (the old DigitalOcean App Platform
-# git-deploy equivalent). Builds the Astro app in web/ and uploads to the
-# existing "annies-havens" Pages project via wrangler. Runtime secrets
-# (RESEND_TOKEN, TURNSTILE_SECRET_KEY, CONTACT_TO/FROM) live on the Pages
-# project and are preserved across deploys.
+# Auto-deploy on every push to master. Builds the Astro app in web/ and
+# deploys it to Cloudflare Workers (static assets + the contact-form route)
+# via wrangler, using the config the @astrojs/cloudflare adapter emits at
+# dist/server/wrangler.json. Runtime secrets (RESEND_TOKEN,
+# TURNSTILE_SECRET_KEY, CONTACT_TO/FROM) live on the Worker and persist across
+# deploys.
+#
+# NOTE: Astro 6 + @astrojs/cloudflare v13 dropped Cloudflare Pages support;
+# this site moved from a Pages project to a Worker. The Worker is named
+# "annies-havens-web" (from package.json "name"). The CLOUDFLARE_API_TOKEN
+# secret must have Workers Scripts:Edit (the old Pages:Edit scope is not
+# sufficient for `wrangler deploy`).
 on:
   push:
     branches: [master]
@@ -39,10 +46,10 @@ jobs:
           PUBLIC_TURNSTILE_SITE_KEY: "0x4AAAAAADZOPrSVP-tOzqUk"
         run: npm run build
 
-      - name: Deploy to Cloudflare Pages
+      - name: Deploy to Cloudflare Workers
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           workingDirectory: web
-          command: pages deploy dist --project-name=annies-havens --branch=main
+          command: deploy --config dist/server/wrangler.json
