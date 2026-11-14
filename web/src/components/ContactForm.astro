@@ -236,12 +236,14 @@ const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '1x0000000000000000
           signal: controller.signal,
         });
         // The deadline covers reading the reply too, so a stalled body can't
-        // leave "Sending…" up. /api/contact answers 200 only once the email has
-        // been accepted for delivery (every failure is a 4xx or 5xx), so a 200
-        // whose body timed out still counts as sent.
-        let bodyTimedOut = false;
-        const data = await res.json().catch(() => { bodyTimedOut = controller.signal.aborted; return {}; });
-        if (res.ok && (data.ok || bodyTimedOut)) {
+        // leave "Sending…" up. In production /api/contact answers 200 only once
+        // the email has been accepted for delivery (every failure is a 4xx or
+        // 5xx), so a 200 whose body was lost (timed out, or the connection
+        // dropped) still counts as sent. A body that arrived but isn't JSON
+        // (a SyntaxError) isn't the endpoint's reply, so that stays a failure.
+        let bodyLost = false;
+        const data = await res.json().catch((err) => { bodyLost = !(err instanceof SyntaxError); return {}; });
+        if (res.ok && (data.ok || bodyLost)) {
           // GA4 conversion (only fires if the visitor accepted analytics; gtag is undefined otherwise).
           (window as any).gtag?.('event', 'generate_lead', { form_location: location.pathname });
           morph(() => { form.style.display = 'none'; okEl?.classList.add('show'); });
