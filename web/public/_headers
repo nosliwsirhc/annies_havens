@@ -11,8 +11,10 @@
 #   older and newer browsers).
 # - Permissions-Policy: turns off device features the site never uses. It
 #   doesn't touch what the YouTube embed is allowed (autoplay, fullscreen...).
-# - Strict-Transport-Security: browsers always use HTTPS for this host for a
-#   year. No includeSubDomains, so mail and other subdomains are unaffected.
+# - Strict-Transport-Security: browsers always use HTTPS for www for a year.
+#   A header sent from www can only ever cover www (and hosts under it), never
+#   the apex or mail hosts; the apex doesn't get it at all, since Cloudflare's
+#   redirect rule answers there before the Worker runs.
 /*
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
