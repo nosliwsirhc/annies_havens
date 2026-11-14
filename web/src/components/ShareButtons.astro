@@ -30,7 +30,7 @@ const svg = (g: keyof typeof glyphs) =>
   `<svg viewBox="0 0 24 24" aria-hidden="true">${glyphs[g]}</svg>`;
 ---
 <div class="article-share" data-url={url} data-title={title}>
-  <span class="share-label">Share this article</span>
+  <span class="share-label">Share This Article</span>
   <div class="share-buttons">
     <button type="button" class="share-btn share-native" hidden aria-label="Share" set:html={svg('share')}></button>
     <a class="share-btn" href={links.facebook} target="_blank" rel="noopener" aria-label="Share on Facebook" data-method="Facebook" set:html={svg('facebook')}></a>
