@@ -64,11 +64,11 @@ const questions = [
 ---
 <BaseLayout
   title="Foster Home Quiz | Annie's Havens"
-  description="A quick, private self-check to see whether now is the right time to apply to foster with Annie's Havens. Nothing is stored or submitted."
+  description="A quick, private self-check to see whether now is the right time to apply to foster with Annie's Havens. Your answers stay in your browser."
 >
   <PageHeader
     title="Could You Foster? A Quick Self-Check"
-    intro="Eight short questions to help you see whether now is the right time to apply. Answer honestly. Nothing here is stored or submitted; it’s just for you."
+    intro="Eight short questions to help you see whether now is the right time to apply. Answer honestly. Your answers stay in your browser and are never sent to us, so this is just for you."
   />
 
   <section class="pad">
@@ -108,7 +108,7 @@ const questions = [
           <div class="quiz-actions" id="quiz-actions"></div>
         </div>
       </div>
-      <p class="quiz-note-privacy">This quiz is a quick self-check, not an application or a decision. It isn’t stored or sent anywhere.</p>
+      <p class="quiz-note-privacy">This quiz is a quick self-check, not an application or a decision. Your answers stay in your browser. If you’ve accepted analytics, Google Analytics also records that the quiz was finished and whether the result was “ready” or “not yet”, never your answers.</p>
     </div>
   </section>
 
@@ -270,7 +270,7 @@ const questions = [
       }
     });
 
-    // The quiz is never sent anywhere. Some browsers submit a form on Enter,
+    // The quiz form is never submitted. Some browsers submit a form on Enter,
     // which would reload the page with the answers in its URL.
     form.addEventListener('submit', (e) => e.preventDefault());
 
