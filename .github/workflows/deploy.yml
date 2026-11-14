@@ -7,7 +7,10 @@ name: Deploy to Cloudflare Workers
 # TURNSTILE_SECRET_KEY, CONTACT_TO/FROM) live on the Worker and persist across
 # deploys.
 #
-# NOTE: Astro 6 + @astrojs/cloudflare v13 dropped Cloudflare Pages support;
+# Pull requests into master run the same type check and build, without
+# deploying, so a change is known to build before it merges.
+#
+# NOTE: Astro 6+ / @astrojs/cloudflare v13+ dropped Cloudflare Pages support;
 # this site moved from a Pages project to a Worker. The Worker is named
 # "annies-havens-web" (from package.json "name"). The CLOUDFLARE_API_TOKEN
 # secret must have Workers Scripts:Edit (the old Pages:Edit scope is not
@@ -18,7 +21,17 @@ on:
     paths:
       - 'web/**'
       - '.github/workflows/deploy.yml'
+  pull_request:
+    branches: [master]
+    paths:
+      - 'web/**'
+      - '.github/workflows/deploy.yml'
   workflow_dispatch:
+
+# One deploy at a time, in push order; a newer PR push cancels its older run.
+concurrency:
+  group: ${{ github.event_name == 'pull_request' && format('pr-{0}', github.event.pull_request.number) || 'deploy' }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
   deploy:
@@ -26,11 +39,11 @@ jobs:
     permissions:
       contents: read
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
-          node-version: 22
+          node-version-file: web/.nvmrc
           cache: npm
           cache-dependency-path: web/package-lock.json
 
@@ -38,19 +51,23 @@ jobs:
         working-directory: web
         run: npm ci --ignore-scripts
 
+      - name: Type check
+        working-directory: web
+        run: npm run check
+
       - name: Build
         working-directory: web
         env:
-          # Public Turnstile site key — baked into the client HTML at build time.
+          # Public Turnstile site key, baked into the client HTML at build time.
           # Not a secret (it's visible in the page source either way).
           PUBLIC_TURNSTILE_SITE_KEY: "0x4AAAAAADZOPrSVP-tOzqUk"
         run: npm run build
 
-      # Deploy with the project's own wrangler (a dependency of
-      # @astrojs/cloudflare), so the deploy CLI is always the exact version
-      # that generated dist/server/wrangler.json — no drift from a separately
-      # installed wrangler.
+      # Deploy with the project's own wrangler (a devDependency, and the peer
+      # @astrojs/cloudflare builds against), so the deploy CLI matches the one
+      # that generated dist/server/wrangler.json.
       - name: Deploy to Cloudflare Workers
+        if: github.event_name != 'pull_request'
         working-directory: web
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}

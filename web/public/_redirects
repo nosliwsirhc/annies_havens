@@ -1,4 +1,4 @@
-# Cloudflare Pages redirects. Syntax: /from  /to  status
+# Cloudflare redirects (served by the Worker's static assets). Syntax: /from  /to  status
 # Built from the old site's Search Console 404s + the GA consolidation plan.
 
 # --- Consolidated / removed pages ---

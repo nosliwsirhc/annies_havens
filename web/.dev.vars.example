@@ -1,5 +1,5 @@
-# Copy to `.dev.vars` for local testing, and set these in the Cloudflare Pages
-# dashboard for production. `.dev.vars` is gitignored.
+# Copy to `.dev.vars` for local testing. In production these are Worker secrets
+# (`wrangler secret put <NAME> --name annies-havens-web`). `.dev.vars` is gitignored.
 #
 # Cloudflare Turnstile (https://dash.cloudflare.com -> Turnstile):
 #   PUBLIC_TURNSTILE_SITE_KEY is exposed to the browser (the widget).

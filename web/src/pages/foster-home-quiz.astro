@@ -2,7 +2,6 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHeader from '../components/PageHeader.astro';
 import ReadMore from '../components/ReadMore.astro';
-import Icon from '../components/Icon.astro';
 
 const readMore = [
   { href: '/foster-parent-application-process', label: 'The Application Process' },
@@ -69,7 +68,7 @@ const questions = [
 >
   <PageHeader
     title="Could You Foster? A Quick Self-Check"
-    intro="Eight short questions to help you see whether now is the right time to apply. Answer honestly — nothing here is stored or submitted, it’s just for you."
+    intro="Eight short questions to help you see whether now is the right time to apply. Answer honestly. Nothing here is stored or submitted; it’s just for you."
   />
 
   <section class="pad">
@@ -125,17 +124,21 @@ const questions = [
     const count = document.getElementById('quiz-count') as HTMLElement;
     const result = document.getElementById('quiz-result') as HTMLElement;
     let current = 0;
+    let advanceTimer: number | undefined;
+    let arrowNav = false;
 
     const show = (idx: number) => {
+      window.clearTimeout(advanceTimer);
       qs.forEach((q, i) => q.classList.toggle('active', i === idx));
       current = idx;
       bar.style.width = `${(idx / total) * 100}%`;
       count.textContent = `Question ${idx + 1} of ${total}`;
-      // focus the first option of the shown question for keyboard users
-      qs[idx].querySelector<HTMLInputElement>('input')?.focus();
+      // Focus the chosen option (after Back) or the first one, for keyboard users.
+      (qs[idx].querySelector<HTMLInputElement>('input:checked') ?? qs[idx].querySelector<HTMLInputElement>('input'))?.focus();
     };
 
     const finish = () => {
+      if (result.classList.contains('show')) return;
       bar.style.width = '100%';
       count.style.display = 'none';
       qs.forEach((q) => q.classList.remove('active'));
@@ -163,7 +166,7 @@ const questions = [
         : 'Thank you for your honesty.';
       document.getElementById('quiz-result-text')!.textContent = ok
         ? 'Based on your answers, you may be ready to begin an application. This is just a self-check, so the best next step is a conversation with our team.'
-        : 'Based on your answers, there may be a few things to work through first. None of this is necessarily a “no” on its own — if you’d like, reach out and we can talk it through.';
+        : 'Based on your answers, there may be a few things to work through first. None of this is necessarily a “no” on its own. If you’d like, reach out and we can talk it through.';
 
       const notes = document.getElementById('quiz-notes')!;
       notes.innerHTML = '';
@@ -188,21 +191,61 @@ const questions = [
       result.focus();
     };
 
-    function reset() {
+    const reset = () => {
       form.reset();
       result.classList.remove('show', 'ok', 'hold');
       count.style.display = '';
       show(0);
-    }
+    };
 
-    // advance on answer
+    const advance = () => {
+      window.clearTimeout(advanceTimer);
+      if (current < total - 1) show(current + 1);
+      else finish();
+    };
+
+    // Advance shortly after an answer is picked. Only one advance can be
+    // pending, so changing an answer quickly (or twice) never skips the next
+    // question unanswered.
     form.addEventListener('change', (e) => {
       const t = e.target as HTMLInputElement;
+      if (t.type !== 'radio' || t.closest('.quiz-q') !== qs[current]) return;
+      window.clearTimeout(advanceTimer);
+      if (arrowNav) {
+        // Arrow keys move the selection through a radio group and fire
+        // `change` on every step. Auto-advancing there would stop a keyboard
+        // user from ever reaching the second or third option, so they confirm
+        // with Enter or Space instead (handled below). The count line is
+        // visible and aria-live, so it tells both sighted and screen-reader
+        // keyboard users how to continue.
+        arrowNav = false;
+        count.textContent = `Question ${current + 1} of ${total}. Press Enter to continue.`;
+        return;
+      }
+      advanceTimer = window.setTimeout(advance, 260);
+    });
+
+    // A pointer click on an option also advances, even when that option was
+    // already chosen (after Back), which fires no `change`. Keyboard-made
+    // clicks have detail 0 and are left to the handlers above and below.
+    form.addEventListener('click', (e) => {
+      if (e.detail === 0) return;
+      const opt = (e.target as Element).closest('.quiz-opt');
+      if (!opt || opt.closest('.quiz-q') !== qs[current]) return;
+      window.clearTimeout(advanceTimer);
+      advanceTimer = window.setTimeout(advance, 260);
+    });
+
+    form.addEventListener('pointerdown', () => { arrowNav = false; });
+    form.addEventListener('keydown', (e) => {
+      const t = e.target as HTMLInputElement;
       if (t.type !== 'radio') return;
-      window.setTimeout(() => {
-        if (current < total - 1) show(current + 1);
-        else finish();
-      }, 260);
+      if (e.key.startsWith('Arrow')) { arrowNav = true; return; }
+      arrowNav = false;
+      if ((e.key === 'Enter' || e.key === ' ') && t.checked && t.closest('.quiz-q') === qs[current]) {
+        e.preventDefault();
+        advance();
+      }
     });
 
     // back buttons

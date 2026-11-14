@@ -4,26 +4,29 @@ Annie's Havens is an Ontario foster-care agency that supports children and youth
 
 ## Repo layout (important)
 
-- **`web/`** — the **LIVE site** and the whole project. An Astro app deployed to Cloudflare Pages. **All real work happens here.**
+- **`web/`** — the **LIVE site** and the whole project. An Astro app deployed to Cloudflare Workers. **All real work happens here.**
 - The retired v1 (Express + Handlebars + MaterializeCSS) used to live at the repo root; it was deleted on 2026-05-31 and remains recoverable from git history (it was last present at commit `b537f39`).
 
 ## Stack (web/)
 
-- **Astro 6**, static output, `@astrojs/cloudflare` v13 adapter (Cloudflare **Workers** target), `@astrojs/sitemap`.
+- **Astro 7**, static output, `@astrojs/cloudflare` v14 adapter (Cloudflare **Workers** target), `@astrojs/sitemap`. `wrangler` is a devDependency (a peer of the adapter) and is what CI deploys with.
 - `passthroughImageService()` (no `sharp`) — images are pre-generated files in `web/public/images/`. The adapter is configured with `imageService: 'compile'` so no Cloudflare Images binding is required.
-- We don't use Astro sessions; `session: { driver: 'memory' }` in `astro.config.mjs` keeps the adapter from emitting a `SESSION` KV binding that would need a provisioned namespace.
+- We don't use Astro sessions; `session: false` in `astro.config.mjs` keeps the adapter from emitting a `SESSION` KV binding that would need a provisioned namespace.
+- Markdown runs on the **unified (remark) pipeline** via `@astrojs/markdown-remark`, not Astro 7's default Satteri processor, because the article directives (`web/src/lib/remark-article.mjs`) are remark plugins.
+- `compressHTML: true` keeps Astro 6's whitespace handling (Astro 7 defaults to JSX rules, which drop spaces between inline elements on separate lines).
 - Fonts: **Fraunces** (display/headings) + **Mulish** (body). Design tokens live in `web/src/styles/global.css`.
-- One server endpoint: `web/src/pages/api/contact.ts` (`prerender = false`) runs inside the Worker. It reads runtime env (RESEND etc.) via `import { env } from 'cloudflare:workers'` (Astro 6 removed `Astro.locals.runtime.env`). Everything else is static, served from the Worker's `ASSETS` binding.
+- One server endpoint: `web/src/pages/api/contact.ts` (`prerender = false`) runs inside the Worker. It reads runtime env (RESEND etc.) via `import { env } from 'cloudflare:workers'` (Astro 6+ removed `Astro.locals.runtime.env`). Everything else is static, served from the Worker's `ASSETS` binding.
 
 ## Local dev
 
-Pinned to **Node 22** (`web/.nvmrc`). Run commands inside `web/`:
+Pinned to **Node 24** (`web/.nvmrc`; CI reads the same file). Run commands inside `web/`:
 
 ```bash
 cd web
 nvm use            # or: source ~/.nvm/nvm.sh && nvm use
 npm install --ignore-scripts   # first time
 npm run dev        # local dev server
+npm run check      # type check (astro check), also run in CI
 npm run build      # production build into web/dist
 ```
 
@@ -31,7 +34,7 @@ If you ever deploy manually, use `./node_modules/.bin/wrangler` (the global `npx
 
 ## Deploy: just push
 
-**Push to `master` → GitHub Actions auto-builds and deploys to Cloudflare Workers** (`.github/workflows/deploy.yml`). No manual step. Live in ~40s. The deploy runs `wrangler deploy --config dist/server/wrangler.json` (the config the adapter emits at build time). The Worker is named **`annies-havens-web`** (from `package.json` "name").
+**Push to `master` → GitHub Actions auto-builds and deploys to Cloudflare Workers** (`.github/workflows/deploy.yml`). No manual step. Live in ~40s. Pull requests into `master` run the same type check and build without deploying. The deploy runs `wrangler deploy --config dist/server/wrangler.json` (the config the adapter emits at build time). The Worker is named **`annies-havens-web`** (from `package.json` "name").
 
 - The GH Actions secret **`CLOUDFLARE_API_TOKEN`** must have **Workers Scripts:Edit** scope (the old Pages:Edit scope does not work for `wrangler deploy`). It's persistent; don't roll it without updating the secret.
 - Runtime secrets (`RESEND_TOKEN`, `TURNSTILE_SECRET_KEY`, `CONTACT_TO`, `CONTACT_FROM`) live on the **Worker** (set with `wrangler secret put <NAME> --name annies-havens-web`), not in the repo, and persist across deploys.

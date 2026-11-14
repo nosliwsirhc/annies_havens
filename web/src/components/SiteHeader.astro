@@ -88,7 +88,7 @@ import { site, nav } from '../data/site';
     if (!trigger) return;
     trigger.setAttribute('aria-haspopup', 'true');
     trigger.setAttribute('aria-expanded', 'false');
-    const set = (v) => trigger.setAttribute('aria-expanded', String(v));
+    const set = (v: boolean) => trigger.setAttribute('aria-expanded', String(v));
     li.addEventListener('mouseenter', () => set(true));
     li.addEventListener('mouseleave', () => set(false));
     li.addEventListener('focusin', () => set(true));

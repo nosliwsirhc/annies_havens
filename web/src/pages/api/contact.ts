@@ -1,40 +1,60 @@
 import type { APIRoute } from 'astro';
-// Worker environment (bindings, vars, secrets). In Astro 6 the Cloudflare
+// Worker environment (bindings, vars, secrets). In Astro 6+ the Cloudflare
 // adapter removed `Astro.locals.runtime.env`; the supported replacement is
-// the `env` export from the `cloudflare:workers` virtual module.
-import { env as workerEnv } from 'cloudflare:workers';
+// the `env` export from the `cloudflare:workers` virtual module (typed in
+// src/cloudflare-workers.d.ts).
+import { env } from 'cloudflare:workers';
 import { isValidEmail, isValidPhone } from '../../lib/form';
 
 // On-demand: runs as a Cloudflare Worker route, not prerendered.
 export const prerender = false;
 
 const TURNSTILE_VERIFY = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
-// Cloudflare's documented test keys (always pass). Real secret comes from env.
+// Cloudflare's documented always-pass test secret. Only used in local dev;
+// production must have TURNSTILE_SECRET_KEY set or the form refuses to send.
 const TEST_SECRET = '1x0000000000000000000000000000000AA';
+
+// Generous caps so a real message is never cut short, but a bot can't post
+// megabytes through to the mail service.
+const MAX_SHORT = 200;
+const MAX_MESSAGE = 5000;
 
 const json = (body: unknown, status = 200) =>
   new Response(JSON.stringify(body), { status, headers: { 'content-type': 'application/json' } });
 
-export const POST: APIRoute = async ({ request, clientAddress }) => {
-  const env = workerEnv as unknown as Record<string, string | undefined>;
+// Read a field as a trimmed string whatever the client sent (a number, null,
+// an object), and cap its length.
+const field = (data: Record<string, unknown>, key: string, max: number) => {
+  const raw = data[key];
+  return (typeof raw === 'string' ? raw : raw == null ? '' : String(raw)).trim().slice(0, max);
+};
+// Names end up in the email subject, which must stay on one line.
+const oneLine = (s: string) => s.replace(/[\r\n]+/g, ' ');
 
-  let data: Record<string, string> = {};
+export const POST: APIRoute = async ({ request, clientAddress }) => {
+  let data: Record<string, unknown>;
   try {
-    data = (await request.json()) as Record<string, string>;
+    const parsed: unknown = await request.json();
+    if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) throw new Error('not an object');
+    data = parsed as Record<string, unknown>;
   } catch {
     return json({ ok: false, error: 'Invalid request.' }, 400);
   }
 
-  const first = (data.first ?? '').trim();
-  const last = (data.last ?? '').trim();
-  const email = (data.email ?? '').trim();
-  const phone = (data.phone ?? '').trim();
-  const role = (data.role ?? '').trim();
-  const message = (data.msg ?? data.message ?? '').trim();
-  const token = data.token ?? '';
+  const first = oneLine(field(data, 'first', MAX_SHORT));
+  const last = oneLine(field(data, 'last', MAX_SHORT));
+  const email = field(data, 'email', MAX_SHORT);
+  const phone = field(data, 'phone', MAX_SHORT);
+  const role = oneLine(field(data, 'role', MAX_SHORT));
+  const message = field(data, 'msg', MAX_MESSAGE) || field(data, 'message', MAX_MESSAGE);
+  const token = field(data, 'token', 4096);
 
   // 1) Verify the Turnstile token (bot protection).
-  const secret = env.TURNSTILE_SECRET_KEY ?? TEST_SECRET;
+  const secret = env.TURNSTILE_SECRET_KEY ?? (import.meta.env.DEV ? TEST_SECRET : undefined);
+  if (!secret) {
+    console.error('[contact] TURNSTILE_SECRET_KEY is not set on the Worker.');
+    return json({ ok: false, error: 'The contact form is not configured. Please call us.' }, 500);
+  }
   let verified = false;
   try {
     const body = new URLSearchParams({ secret, response: token });
@@ -61,15 +81,16 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
   }
 
   // 3) Send via Resend.
-  // Accept either name; `RESEND_TOKEN` is what's set in this project's .env.
+  // Accept either name; `RESEND_TOKEN` is what's set on the Worker.
   const apiKey = env.RESEND_TOKEN ?? env.RESEND_API_KEY;
   const to = env.CONTACT_TO ?? 'recruitment@annieshavens.ca';
   const from = env.CONTACT_FROM ?? "Annie's Havens <noreply@annieshavens.ca>";
   if (!apiKey) {
     if (import.meta.env.DEV) {
-      console.warn('[contact] No RESEND_API_KEY set — skipping send (dev only).');
+      console.warn('[contact] No RESEND_TOKEN set, skipping send (dev only).');
       return json({ ok: true, dev: true });
     }
+    console.error('[contact] RESEND_TOKEN is not set on the Worker.');
     return json({ ok: false, error: 'The contact form is not configured. Please call us.' }, 500);
   }
 
@@ -94,9 +115,12 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
       }),
     });
     if (!res.ok) {
+      // Status only: the response body can echo the message, which is personal data.
+      console.error(`[contact] Resend rejected the message: HTTP ${res.status}`);
       return json({ ok: false, error: 'We could not send your message. Please call us instead.' }, 502);
     }
-  } catch {
+  } catch (err) {
+    console.error('[contact] Could not reach Resend:', err instanceof Error ? err.message : err);
     return json({ ok: false, error: 'We could not reach our mail service. Please call us instead.' }, 502);
   }
 
