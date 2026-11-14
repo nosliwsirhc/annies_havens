@@ -13,7 +13,7 @@ const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '1x0000000000000000
     <p class="sub">Fields marked <span class="req" aria-hidden="true">*</span> are required. An email or a phone number is fine - fill in whichever you prefer.</p>
     <div class="frow">
       <div class="field"><label for="f-first">First name <span class="req" aria-hidden="true">*</span></label><input id="f-first" name="first" required aria-required="true" aria-describedby="err-first" /><div class="errmsg" id="err-first" role="alert">Required</div></div>
-      <div class="field"><label for="f-last">Last name <span class="opt">(optional)</span></label><input id="f-last" name="last" /></div>
+      <div class="field"><label for="f-last">Last name <span class="opt">(optional)</span></label><input id="f-last" name="last" aria-describedby="err-last" /><div class="errmsg" id="err-last" role="alert">Please keep this to 254 characters or fewer</div></div>
     </div>
     <div class="frow">
       <div class="field"><label for="f-email">Email <span class="opt" id="req-email">(email or phone)</span></label><input id="f-email" name="email" type="email" aria-required="true" aria-describedby="err-email" /><div class="errmsg" id="err-email" role="alert">Enter a valid email</div></div>
@@ -82,6 +82,7 @@ const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '1x0000000000000000
       const errs: Record<string, string> = {};
       if (!val('first')) errs.first = 'Required';
       else if (val('first').length > FIELD_MAX_LENGTH) errs.first = FIELD_TOO_LONG;
+      if (val('last').length > FIELD_MAX_LENGTH) errs.last = FIELD_TOO_LONG;
       if (email.length > FIELD_MAX_LENGTH) errs.email = FIELD_TOO_LONG;
       else if (email && !isValidEmail(email)) errs.email = 'Enter a valid email';
       if (phone && !isValidPhone(phone)) errs.phone = 'Enter a 10-digit phone number';
@@ -108,7 +109,7 @@ const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '1x0000000000000000
       if (submitBtn) submitBtn.disabled = Object.keys(errorsFor()).length > 0;
     };
 
-    ['first', 'email', 'phone', 'role', 'msg'].forEach((n) => {
+    ['first', 'last', 'email', 'phone', 'role', 'msg'].forEach((n) => {
       document.getElementById('f-' + n)?.addEventListener('blur', () => {
         const err = errorsFor()[n] || '';
         if (!err || !isShowing(n, err)) setErr(n, err);
@@ -165,7 +166,7 @@ const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '1x0000000000000000
       e.preventDefault();
       if (submitting) return;
       const errs = errorsFor();
-      const order = ['first', 'email', 'phone', 'role', 'msg'];
+      const order = ['first', 'last', 'email', 'phone', 'role', 'msg'];
       if (Object.keys(errs).length) {
         order.forEach((n) => setErr(n, errs[n] || ''));
         document.getElementById('f-' + order.find((n) => errs[n]))?.focus();
@@ -219,7 +220,7 @@ const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '1x0000000000000000
         form.style.display = '';
         form.reset();
         clearFormError();
-        ['first', 'email', 'phone', 'role', 'msg'].forEach((n) => setErr(n, ''));
+        ['first', 'last', 'email', 'phone', 'role', 'msg'].forEach((n) => setErr(n, ''));
         (window as any).turnstile?.reset();
         refresh();
       });
