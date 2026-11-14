@@ -110,9 +110,11 @@ const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '1x0000000000000000
       toggle('phone', !emailFilled);
     };
 
+    // Submit stays enabled (#25): pressing it with problems shows every error
+    // and moves focus to the first one, rather than a greyed-out button that
+    // never says why. It's only disabled while a message is sending.
     const refresh = () => {
       updateContactReq();
-      if (submitBtn) submitBtn.disabled = Object.keys(errorsFor()).length > 0;
     };
 
     ['first', 'last', 'email', 'phone', 'role', 'msg'].forEach((n) => {
@@ -131,8 +133,8 @@ const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '1x0000000000000000
           phoneInput.setSelectionRange(caret, caret);
         }
         // Clear this field's error while typing, except a length error, which
-        // shows as soon as it applies (submit is disabled meanwhile). It is
-        // written once when it appears, not on every keystroke.
+        // shows as soon as it applies. It is written once when it appears, not
+        // on every keystroke.
         const name = (el as HTMLInputElement).name;
         const err = errorsFor()[name];
         if (err === MESSAGE_TOO_LONG || err === FIELD_TOO_LONG) {
@@ -174,7 +176,14 @@ const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '1x0000000000000000
       const errs = errorsFor();
       const order = ['first', 'last', 'email', 'phone', 'role', 'msg'];
       if (Object.keys(errs).length) {
-        order.forEach((n) => setErr(n, errs[n] || ''));
+        clearFormError();
+        // Show every error, but don't rewrite one that's already showing: each
+        // is role=alert, and rewriting it would announce it again.
+        order.forEach((n) => {
+          const err = errs[n] || '';
+          if (!err || !isShowing(n, err)) setErr(n, err);
+        });
+        // The first invalid field now describes its error when focused.
         document.getElementById('f-' + order.find((n) => errs[n]))?.focus();
         return;
       }
@@ -215,7 +224,7 @@ const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '1x0000000000000000
         (window as any).turnstile?.reset();
       } finally {
         submitting = false;
-        if (submitBtn) { submitBtn.textContent = label || 'Submit Message'; }
+        if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = label || 'Submit Message'; }
         refresh();
       }
     });
