@@ -126,11 +126,13 @@ const questions = [
     let current = 0;
     let advanceTimer: number | undefined;
     let arrowNav = false;
+    let shownAt = 0;
 
     const show = (idx: number) => {
       window.clearTimeout(advanceTimer);
       qs.forEach((q, i) => q.classList.toggle('active', i === idx));
       current = idx;
+      shownAt = performance.now();
       bar.style.width = `${(idx / total) * 100}%`;
       count.textContent = `Question ${idx + 1} of ${total}`;
       // Focus the chosen option (after Back) or the first one, for keyboard users.
@@ -248,6 +250,9 @@ const questions = [
       // an option that's already chosen fires no `change`, so advance here.
       if (e.key === 'Enter' || (e.key === ' ' && t.checked)) {
         e.preventDefault();
+        // A held key (auto-repeat) or a quick second press would otherwise
+        // answer the next question too, with an option the visitor never read.
+        if (e.repeat || performance.now() - shownAt < 400) return;
         t.checked = true;
         advance();
       }

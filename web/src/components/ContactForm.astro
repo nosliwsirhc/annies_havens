@@ -44,7 +44,10 @@ const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '1x0000000000000000
 </div>
 
 <script>
-  import { MESSAGE_MAX_LENGTH, formatPhoneWithCaret, isValidEmail, isValidPhone } from '../lib/form';
+  import {
+    FIELD_MAX_LENGTH, FIELD_TOO_LONG, MESSAGE_MAX_LENGTH, MESSAGE_TOO_LONG,
+    formatPhoneWithCaret, isValidEmail, isValidPhone,
+  } from '../lib/form';
 
   const form = document.getElementById('contact-form') as HTMLFormElement | null;
   if (form) {
@@ -65,6 +68,12 @@ const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '1x0000000000000000
         input?.removeAttribute('aria-invalid');
       }
     };
+    // True when field `n` already shows exactly `msg`. Rewriting an error's
+    // text makes screen readers announce it again (the errors are role=alert),
+    // so the same message isn't written twice.
+    const isShowing = (n: string, msg: string) =>
+      !!document.getElementById('f-' + n)?.closest('.field')?.classList.contains('err') &&
+      document.getElementById('err-' + n)?.textContent === msg;
     const showFormError = (m: string) => { if (formError) formError.textContent = m; };
     const clearFormError = () => { if (formError) formError.textContent = ''; };
 
@@ -72,12 +81,14 @@ const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '1x0000000000000000
       const email = val('email'), phone = val('phone');
       const errs: Record<string, string> = {};
       if (!val('first')) errs.first = 'Required';
-      if (email && !isValidEmail(email)) errs.email = 'Enter a valid email';
+      else if (val('first').length > FIELD_MAX_LENGTH) errs.first = FIELD_TOO_LONG;
+      if (email.length > FIELD_MAX_LENGTH) errs.email = FIELD_TOO_LONG;
+      else if (email && !isValidEmail(email)) errs.email = 'Enter a valid email';
       if (phone && !isValidPhone(phone)) errs.phone = 'Enter a 10-digit phone number';
       if (!email && !phone) { errs.email = 'Enter an email or phone number'; errs.phone = 'Enter an email or phone number'; }
       if (!val('role')) errs.role = 'Please choose one';
       if (!val('msg')) errs.msg = 'Please add a short message';
-      else if (val('msg').length > MESSAGE_MAX_LENGTH) errs.msg = `Please keep your message under 5,000 characters (it’s ${val('msg').length.toLocaleString('en-CA')} now)`;
+      else if (val('msg').length > MESSAGE_MAX_LENGTH) errs.msg = MESSAGE_TOO_LONG;
       return errs;
     };
 
@@ -98,7 +109,10 @@ const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '1x0000000000000000
     };
 
     ['first', 'email', 'phone', 'role', 'msg'].forEach((n) => {
-      document.getElementById('f-' + n)?.addEventListener('blur', () => setErr(n, errorsFor()[n] || ''));
+      document.getElementById('f-' + n)?.addEventListener('blur', () => {
+        const err = errorsFor()[n] || '';
+        if (!err || !isShowing(n, err)) setErr(n, err);
+      });
     });
 
     form.querySelectorAll('input, select, textarea').forEach((el) =>
@@ -109,12 +123,21 @@ const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '1x0000000000000000
           phoneInput.value = value;
           phoneInput.setSelectionRange(caret, caret);
         }
-        // Clear this field's error while typing, except "too long", which
-        // should show as soon as it applies (the submit button is disabled).
+        // Clear this field's error while typing, except a length error, which
+        // shows as soon as it applies (submit is disabled meanwhile). It is
+        // written once when it appears, not on every keystroke.
         const name = (el as HTMLInputElement).name;
-        setErr(name, name === 'msg' && val('msg').length > MESSAGE_MAX_LENGTH ? errorsFor().msg || '' : '');
+        const err = errorsFor()[name];
+        if (err === MESSAGE_TOO_LONG || err === FIELD_TOO_LONG) {
+          if (!isShowing(name, err)) setErr(name, err);
+        } else {
+          setErr(name, '');
+        }
         clearFormError();
-        if ((val('email') && isValidEmail(val('email'))) || (val('phone') && isValidPhone(val('phone')))) { setErr('email', ''); setErr('phone', ''); }
+        if ((val('email') && isValidEmail(val('email'))) || (val('phone') && isValidPhone(val('phone')))) {
+          // One way to reach them is enough: clear both, but keep a length error.
+          (['email', 'phone'] as const).forEach((n) => { if (errorsFor()[n] !== FIELD_TOO_LONG) setErr(n, ''); });
+        }
         refresh();
       })
     );
