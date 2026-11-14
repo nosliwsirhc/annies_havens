@@ -225,11 +225,12 @@ const questions = [
       advanceTimer = window.setTimeout(advance, 260);
     });
 
-    // A pointer click on an option also advances, even when that option was
-    // already chosen (after Back), which fires no `change`. Keyboard-made
-    // clicks have detail 0 and are left to the handlers above and below.
+    // A click on an option also advances, even when that option was already
+    // chosen (after Back), which fires no `change`. That covers mouse, touch
+    // and screen-reader activation. Clicks the browser makes while arrow keys
+    // move the selection are skipped, as above.
     form.addEventListener('click', (e) => {
-      if (e.detail === 0) return;
+      if (arrowNav) return;
       const opt = (e.target as Element).closest('.quiz-opt');
       if (!opt || opt.closest('.quiz-q') !== qs[current]) return;
       window.clearTimeout(advanceTimer);
@@ -242,11 +243,19 @@ const questions = [
       if (t.type !== 'radio') return;
       if (e.key.startsWith('Arrow')) { arrowNav = true; return; }
       arrowNav = false;
-      if ((e.key === 'Enter' || e.key === ' ') && t.checked && t.closest('.quiz-q') === qs[current]) {
+      if (t.closest('.quiz-q') !== qs[current]) return;
+      // Enter picks the focused option and moves on, like Space does. Space on
+      // an option that's already chosen fires no `change`, so advance here.
+      if (e.key === 'Enter' || (e.key === ' ' && t.checked)) {
         e.preventDefault();
+        t.checked = true;
         advance();
       }
     });
+
+    // The quiz is never sent anywhere. Some browsers submit a form on Enter,
+    // which would reload the page with the answers in its URL.
+    form.addEventListener('submit', (e) => e.preventDefault());
 
     // back buttons
     form.querySelectorAll('.quiz-back').forEach((b) =>
