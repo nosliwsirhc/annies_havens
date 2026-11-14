@@ -38,7 +38,7 @@ If you ever deploy manually, use `./node_modules/.bin/wrangler` (the global `npx
 **Push to `master` → GitHub Actions auto-builds and deploys to Cloudflare Workers** (`.github/workflows/deploy.yml`). No manual step. Live in ~40s. Pull requests into `master` run the same type check and build without deploying. The deploy runs `wrangler deploy --config dist/server/wrangler.json` (the config the adapter emits at build time). The Worker is named **`annies-havens-web`** (from `package.json` "name").
 
 - The GH Actions secret **`CLOUDFLARE_API_TOKEN`** must have **Workers Scripts:Edit** scope (the old Pages:Edit scope does not work for `wrangler deploy`). It's persistent; don't roll it without updating the secret.
-- Runtime secrets (`RESEND_TOKEN`, `TURNSTILE_SECRET_KEY`, `CONTACT_TO`, `CONTACT_FROM`, `RESEND_WEBHOOK_SECRET`, `ALERT_TO`) live on the **Worker** (set with `wrangler secret put <NAME> --name annies-havens-web`), not in the repo, and persist across deploys.
+- Runtime secrets (`RESEND_TOKEN`, `TURNSTILE_SECRET_KEY`, `RESEND_WEBHOOK_SECRET`, `ALERT_TO`, and the optional `CONTACT_TO` / `CONTACT_FROM`, which default to the addresses in `contact.ts`) live on the **Worker** (set with `wrangler secret put <NAME> --name annies-havens-web`), not in the repo, and persist across deploys.
 - Migrated off Cloudflare Pages on 2026-05-31 when Astro 6 / adapter v13 dropped Pages support. The old Pages project can be deleted once the Worker + DNS are confirmed live.
 
 ## Adding a news article
