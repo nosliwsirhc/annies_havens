@@ -71,6 +71,12 @@ const ALERTS: Record<string, { title: string; happened: string; what: string; to
 const json = (body: unknown, status = 200) =>
   new Response(JSON.stringify(body), { status, headers: { 'content-type': 'application/json' } });
 
+// Resend's log is the only other copy of a lost email.
+const KEEP = 'Resend keeps emails for a limited time (30 days on the current plan), so copy out anything you need today.';
+
+// Today's date in Toronto, as YYYY-MM-DD.
+const torontoDate = () => new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Toronto' }).format(new Date());
+
 const torontoTime = (iso: string) => {
   const date = new Date(iso);
   if (Number.isNaN(date.getTime())) return '';
@@ -203,6 +209,9 @@ export const POST: APIRoute = async ({ request }) => {
     (emailId ? `In Resend: https://resend.com/emails/${emailId}\n` : '');
 
   const apiKey = env.RESEND_TOKEN ?? env.RESEND_API_KEY;
+  // The email the event is about: the lost email, or for a failed alert, the
+  // alert (which holds the lost email).
+  const message = apiKey && emailId ? await readEmailText(apiKey, emailId) : null;
   let outgoing: { to: string[]; subject: string; text: string; source: string; idempotencyKey: string };
   if (isAlert) {
     // ALERT_TO isn't getting alerts: tell the recruitment mailbox instead.
@@ -212,28 +221,32 @@ export const POST: APIRoute = async ({ request }) => {
       subject: 'Website delivery alerts are not getting through',
       text:
         `When a website email is not delivered, the Annie's Havens website emails an alert to ${alertTo.join(', ')}. ` +
-        `One of those alerts ${alert.happened}, so later alerts may not reach anyone.\n\n` +
+        `One of those alerts ${alert.happened}, so later alerts may not reach ${alertTo.length > 1 ? 'all of those addresses' : 'anyone'}.\n\n` +
         facts +
         `\nWhat to do: ${alert.todo} If the address itself is wrong, change the ALERT_TO secret on the annies-havens-web Worker.\n\n` +
-        `This notice is sent at most once a day.\n`,
+        `This notice is sent at most once a day (Toronto time). Later failures that day are not emailed, so check https://resend.com/emails until this is fixed.\n\n` +
+        (message !== null
+          ? `The alert, with the email it was about:\n\n${message.slice(0, 30000)}\n`
+          : `That alert was about an email that was not delivered. Open the link above to read it. ${KEEP}\n`),
       source: SOURCE.notice,
       // At most one notice a day, however many alerts fail: the same key with a
       // different body is refused, and send() counts that as already sent.
-      idempotencyKey: `${SOURCE.notice}/${new Date().toISOString().slice(0, 10)}`,
+      idempotencyKey: `${SOURCE.notice}/${torontoDate()}`,
     };
   } else {
-    const message = apiKey && emailId ? await readEmailText(apiKey, emailId) : null;
-    const what = source === SOURCE.inquiry ? "An inquiry from the website's contact form" : 'An email sent from the website';
+    // Every email the site sends is tagged, so an untagged one came from
+    // elsewhere (the Resend dashboard, or before tags were added).
+    const inquiry = source === SOURCE.inquiry;
     outgoing = {
       to: alertTo,
-      subject: `Website email ${alert.title}: ${subject || type}`,
+      subject: `${inquiry ? 'Website inquiry' : 'Email'} ${alert.title}: ${subject || type}`,
       text:
-        `${what} ${alert.happened}.\n\n` +
+        `${inquiry ? "An inquiry from the website's contact form" : "An email from the agency's Resend account"} ${alert.happened}.\n\n` +
         facts +
         `\nWhat to do: ${alert.todo}\n\n` +
         (message !== null
           ? `The email:\n\n${message.slice(0, 20000)}\n`
-          : `The email itself is in Resend's log (link above), which keeps emails for a limited time (30 days on the current plan). Copy out anything you need today.\n`),
+          : `The email itself is in Resend's log (link above). ${KEEP}\n`),
       source: SOURCE.alert,
       // Resend retries an event until it gets a 2xx, each time with the same
       // svix-id, so the alert goes out once. Its last retries come after the
