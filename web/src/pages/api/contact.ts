@@ -178,5 +178,7 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
     return json({ ok: false, error: 'We could not reach our mail service. Please call us instead.' }, 502);
   }
 
+  // 200 must mean "accepted for delivery": the contact form counts a 200 whose
+  // body never arrives as sent. Any failure must use a 4xx or 5xx status.
   return json({ ok: true });
 };
