@@ -164,8 +164,8 @@ const questions = [
         ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>'
         : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8v4"/><path d="M12 16h.01"/><circle cx="12" cy="12" r="10"/></svg>';
       document.getElementById('quiz-result-title')!.textContent = ok
-        ? 'You’re off to a strong start.'
-        : 'Thank you for your honesty.';
+        ? 'You’re Off to a Strong Start.'
+        : 'Thank You for Your Honesty.';
       document.getElementById('quiz-result-text')!.textContent = ok
         ? 'Based on your answers, you may be ready to begin an application. This is just a self-check, so the best next step is a conversation with our team.'
         : 'Based on your answers, there may be a few things to work through first. None of this is necessarily a “no” on its own. If you’d like, reach out and we can talk it through.';
@@ -181,12 +181,12 @@ const questions = [
 
       const actions = document.getElementById('quiz-actions')!;
       actions.innerHTML = ok
-        ? '<a class="btn btn-coral" href="/contact-us">Talk to Our Team</a><a class="btn btn-out" href="/foster-parent-application-process">See the steps</a>'
+        ? '<a class="btn btn-coral" href="/contact-us">Talk to Our Team</a><a class="btn btn-out" href="/foster-parent-application-process">See the Steps</a>'
         : '<a class="btn btn-coral" href="/contact-us">Contact Us to Discuss</a>';
       const retake = document.createElement('button');
       retake.type = 'button';
       retake.className = 'quiz-retake';
-      retake.textContent = 'Retake quiz';
+      retake.textContent = 'Retake Quiz';
       retake.addEventListener('click', reset);
       actions.appendChild(retake);
 
