@@ -15,7 +15,8 @@ Annie's Havens is an Ontario foster-care agency that supports children and youth
 - Markdown runs on the **unified (remark) pipeline** via `@astrojs/markdown-remark`, not Astro 7's default Satteri processor, because the article directives (`web/src/lib/remark-article.mjs`) are remark plugins.
 - `compressHTML: true` keeps Astro 6's whitespace handling (Astro 7 defaults to JSX rules, which drop spaces between inline elements on separate lines).
 - Fonts: **Fraunces** (display/headings) + **Mulish** (body). Design tokens live in `web/src/styles/global.css`.
-- One server endpoint: `web/src/pages/api/contact.ts` (`prerender = false`) runs inside the Worker. It reads runtime env (RESEND etc.) via `import { env } from 'cloudflare:workers'` (Astro 6+ removed `Astro.locals.runtime.env`). Everything else is static, served from the Worker's `ASSETS` binding.
+- Two server endpoints run inside the Worker (`prerender = false`): `web/src/pages/api/contact.ts` (the contact form) and `web/src/pages/api/resend-events.ts` (delivery alerts, below). They read runtime env (RESEND etc.) via `import { env } from 'cloudflare:workers'` (Astro 6+ removed `Astro.locals.runtime.env`). Everything else is static, served from the Worker's `ASSETS` binding.
+- **Delivery alerts:** a Resend webhook posts `email.bounced`, `email.failed`, `email.suppressed` and `email.complained` events to `https://www.annieshavens.ca/api/resend-events`, which emails `ALERT_TO` with the lost message. Resend answers a send to a suppressed address with a success, so without this a broken inbox goes unnoticed: from July to November 2026 every inquiry was dropped after `recruitment@annieshavens.ca` bounced once and landed on Resend's suppression list.
 
 ## Local dev
 
@@ -37,7 +38,7 @@ If you ever deploy manually, use `./node_modules/.bin/wrangler` (the global `npx
 **Push to `master` → GitHub Actions auto-builds and deploys to Cloudflare Workers** (`.github/workflows/deploy.yml`). No manual step. Live in ~40s. Pull requests into `master` run the same type check and build without deploying. The deploy runs `wrangler deploy --config dist/server/wrangler.json` (the config the adapter emits at build time). The Worker is named **`annies-havens-web`** (from `package.json` "name").
 
 - The GH Actions secret **`CLOUDFLARE_API_TOKEN`** must have **Workers Scripts:Edit** scope (the old Pages:Edit scope does not work for `wrangler deploy`). It's persistent; don't roll it without updating the secret.
-- Runtime secrets (`RESEND_TOKEN`, `TURNSTILE_SECRET_KEY`, `CONTACT_TO`, `CONTACT_FROM`) live on the **Worker** (set with `wrangler secret put <NAME> --name annies-havens-web`), not in the repo, and persist across deploys.
+- Runtime secrets (`RESEND_TOKEN`, `TURNSTILE_SECRET_KEY`, `CONTACT_TO`, `CONTACT_FROM`, `RESEND_WEBHOOK_SECRET`, `ALERT_TO`) live on the **Worker** (set with `wrangler secret put <NAME> --name annies-havens-web`), not in the repo, and persist across deploys.
 - Migrated off Cloudflare Pages on 2026-05-31 when Astro 6 / adapter v13 dropped Pages support. The old Pages project can be deleted once the Worker + DNS are confirmed live.
 
 ## Adding a news article
