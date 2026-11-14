@@ -13,13 +13,25 @@ export const prerender = false;
 
 // Event payloads are a few kilobytes.
 const MAX_BODY_BYTES = 256 * 1024;
-// Alerts carry this tag, so an alert that itself fails is never alerted on.
-const ALERT_TAG = 'delivery-alert';
+
+// Each email the site sends carries a `source` tag, which tells an event what
+// it is about, and which address hears about a failure:
+// - an inquiry (contact.ts): ALERT_TO gets an alert, with the inquiry in it;
+// - an alert: CONTACT_TO gets a notice that alerts are failing;
+// - that notice: nobody can be emailed, so only the Worker log says so.
+// No kind of email is alerted on by its own kind, so a broken address can't
+// start a loop.
+const SOURCE = { inquiry: 'contact-form', alert: 'delivery-alert', notice: 'delivery-alert-notice' } as const;
+
 const SUPPRESSIONS = 'https://resend.com/emails/suppressions';
+const DEFAULT_CONTACT_TO = 'recruitment@annieshavens.ca';
+const DEFAULT_FROM = "Annie's Havens <noreply@annieshavens.ca>";
 
 type Details = Record<string, unknown>;
 const str = (v: unknown) => (typeof v === 'string' ? v.trim() : '');
 const oneLine = (s: string) => s.replace(/[\r\n]+/g, ' ');
+// "Name <a@example.com>" or "a@example.com", compared as "a@example.com".
+const bareAddress = (s: string) => (s.match(/<([^>]+)>/)?.[1] ?? s).trim().toLowerCase();
 
 // The events the webhook subscribes to, each with what happened and what to do.
 const ALERTS: Record<string, { title: string; happened: string; what: string; todo: string; reason: (d: Details) => string }> = {
@@ -27,7 +39,7 @@ const ALERTS: Record<string, { title: string; happened: string; what: string; to
     title: 'not sent',
     happened: 'was not sent',
     what: 'Resend did not send it, because the address is on its suppression list.',
-    todo: `Resend blocks an address after it bounces or is marked as spam. Once the address works again, remove it at ${SUPPRESSIONS} so emails get through.`,
+    todo: `Resend blocks an address after it bounces or is reported as spam. Once the address works again, remove it at ${SUPPRESSIONS} so emails get through.`,
     reason: (d) => str((d.suppressed as Details | undefined)?.message),
   },
   'email.bounced': {
@@ -48,10 +60,10 @@ const ALERTS: Record<string, { title: string; happened: string; what: string; to
     reason: (d) => str((d.failed as Details | undefined)?.reason),
   },
   'email.complained': {
-    title: 'marked as spam',
-    happened: 'was marked as spam',
-    what: "It was delivered, but the recipient's mail system marked it as spam.",
-    todo: `Check the mailbox's junk filtering. Resend adds an address that complains to its suppression list (${SUPPRESSIONS}).`,
+    title: 'reported as spam',
+    happened: 'was reported as spam',
+    what: 'It was delivered, but someone reading that mailbox reported it as spam.',
+    todo: `Ask whoever reads the mailbox whether it was reported by mistake. Resend stops sending to an address that reports spam; once that is sorted out, remove the address at ${SUPPRESSIONS}.`,
     reason: () => '',
   },
 };
@@ -63,6 +75,16 @@ const torontoTime = (iso: string) => {
   const date = new Date(iso);
   if (Number.isNaN(date.getTime())) return '';
   return `${date.toLocaleString('en-CA', { timeZone: 'America/Toronto', dateStyle: 'medium', timeStyle: 'short' })} (Toronto time)`;
+};
+
+// A tag's value. Events give tags as an object ({ source: '...' }); accept the
+// send API's list form ([{ name, value }]) too.
+const tagValue = (tags: unknown, name: string) => {
+  if (Array.isArray(tags)) {
+    const tag = tags.find((t) => t && typeof t === 'object' && (t as Details).name === name) as Details | undefined;
+    return str(tag?.value);
+  }
+  return tags && typeof tags === 'object' ? str((tags as Details)[name]) : '';
 };
 
 // The email's text, read back from Resend, or null if that isn't allowed (a
@@ -82,6 +104,32 @@ async function readEmailText(apiKey: string, emailId: string): Promise<string | 
   } catch (err) {
     console.warn('[resend-events] Could not read the email back from Resend:', err instanceof Error ? err.message : err);
     return null;
+  }
+}
+
+// Send through Resend; true once it is accepted. Resend refuses a reused
+// idempotency key with a different body (409 invalid_idempotent_request): an
+// email with that key already went out, so that counts as sent too.
+async function send(apiKey: string, idempotencyKey: string, email: Record<string, unknown>): Promise<boolean> {
+  try {
+    const res = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: { authorization: `Bearer ${apiKey}`, 'content-type': 'application/json', 'idempotency-key': idempotencyKey },
+      body: JSON.stringify(email),
+      signal: AbortSignal.timeout(10000),
+    });
+    if (res.ok) return true;
+    const name = await res
+      .json()
+      .then((body) => str((body as Details | null)?.name))
+      .catch(() => '');
+    if (res.status === 409 && name === 'invalid_idempotent_request') return true;
+    // Status and error name only: the body can echo the email, which is personal data.
+    console.error(`[resend-events] Resend refused the email: HTTP ${res.status}${name ? ` (${name})` : ''}`);
+    return false;
+  } catch (err) {
+    console.error('[resend-events] Could not reach Resend:', err instanceof Error ? err.message : err);
+    return false;
   }
 }
 
@@ -124,72 +172,93 @@ export const POST: APIRoute = async ({ request }) => {
   }
   const type = str(event.type);
   const alert = Object.hasOwn(ALERTS, type) ? ALERTS[type] : undefined;
-  const data = (event.data && typeof event.data === 'object' ? event.data : {}) as Details;
-  // Event tags are an object ({ source: '...' }); accept the API's list form too.
-  const isAlert = Array.isArray(data.tags)
-    ? data.tags.some((t) => t?.name === 'source' && t?.value === ALERT_TAG)
-    : (data.tags as Details | undefined)?.source === ALERT_TAG;
-  // Anything else (a webhook subscribed to more events, or an alert about an
-  // alert) is acknowledged and dropped, so Resend doesn't retry it.
-  if (!alert || isAlert) return json({ ok: true, ignored: true });
+  // Other events (if the webhook subscribes to more) are acknowledged, so
+  // Resend doesn't retry them.
+  if (!alert) return json({ ok: true, ignored: true });
 
+  const data = (event.data && typeof event.data === 'object' ? event.data : {}) as Details;
+  const source = tagValue(data.tags, 'source');
+  if (source === SOURCE.notice) {
+    console.error(`[resend-events] The notice that alerts are failing was not delivered either (${type}). Check ALERT_TO and CONTACT_TO at ${SUPPRESSIONS}.`);
+    return json({ ok: true, ignored: true });
+  }
+
+  const recipients = (Array.isArray(data.to) ? data.to : [data.to]).map(str).filter(Boolean);
+  const alertAddresses = new Set(alertTo.map(bareAddress));
+  // An alert, by its tag, or by being addressed only to ALERT_TO in case an
+  // event ever arrives without its tags.
+  const isAlert =
+    source === SOURCE.alert ||
+    (!source && recipients.length > 0 && recipients.every((r) => alertAddresses.has(bareAddress(r))));
   const emailId = str(data.email_id);
-  const recipients = Array.isArray(data.to) ? data.to.map(str).filter(Boolean).join(', ') : str(data.to);
   const subject = oneLine(str(data.subject));
   const sent = torontoTime(str(data.created_at));
   const reason = alert.reason(data);
-
-  const apiKey = env.RESEND_TOKEN ?? env.RESEND_API_KEY;
-  const message = apiKey && emailId ? await readEmailText(apiKey, emailId) : null;
-
-  const text =
-    `An email from the Annie's Havens website ${alert.happened}.\n\n` +
+  const facts =
     `What happened: ${alert.what}\n` +
-    `To: ${recipients || '(unknown)'}\n` +
+    `To: ${recipients.join(', ') || '(unknown)'}\n` +
     `Subject: ${subject || '(none)'}\n` +
     (sent ? `Sent: ${sent}\n` : '') +
     (reason ? `Reason: ${reason}\n` : '') +
-    (emailId ? `In Resend: https://resend.com/emails/${emailId}\n` : '') +
-    `\nWhat to do: ${alert.todo}\n\n` +
-    (message !== null
-      ? `The email:\n\n${message.slice(0, 20000)}\n`
-      : `The email itself is in Resend's log (link above) for 30 days. Copy anything you need from it before then.\n`);
-  const alertSubject = `Website email ${alert.title}: ${subject || type}`;
+    (emailId ? `In Resend: https://resend.com/emails/${emailId}\n` : '');
+
+  const apiKey = env.RESEND_TOKEN ?? env.RESEND_API_KEY;
+  let outgoing: { to: string[]; subject: string; text: string; source: string; idempotencyKey: string };
+  if (isAlert) {
+    // ALERT_TO isn't getting alerts: tell the recruitment mailbox instead.
+    console.error(`[resend-events] An alert to ALERT_TO ${alert.happened} (${type}).`);
+    outgoing = {
+      to: [env.CONTACT_TO ?? DEFAULT_CONTACT_TO],
+      subject: 'Website delivery alerts are not getting through',
+      text:
+        `When a website email is not delivered, the Annie's Havens website emails an alert to ${alertTo.join(', ')}. ` +
+        `One of those alerts ${alert.happened}, so later alerts may not reach anyone.\n\n` +
+        facts +
+        `\nWhat to do: ${alert.todo} If the address itself is wrong, change the ALERT_TO secret on the annies-havens-web Worker.\n\n` +
+        `This notice is sent at most once a day.\n`,
+      source: SOURCE.notice,
+      // At most one notice a day, however many alerts fail: the same key with a
+      // different body is refused, and send() counts that as already sent.
+      idempotencyKey: `${SOURCE.notice}/${new Date().toISOString().slice(0, 10)}`,
+    };
+  } else {
+    const message = apiKey && emailId ? await readEmailText(apiKey, emailId) : null;
+    const what = source === SOURCE.inquiry ? "An inquiry from the website's contact form" : 'An email sent from the website';
+    outgoing = {
+      to: alertTo,
+      subject: `Website email ${alert.title}: ${subject || type}`,
+      text:
+        `${what} ${alert.happened}.\n\n` +
+        facts +
+        `\nWhat to do: ${alert.todo}\n\n` +
+        (message !== null
+          ? `The email:\n\n${message.slice(0, 20000)}\n`
+          : `The email itself is in Resend's log (link above), which keeps emails for a limited time (30 days on the current plan). Copy out anything you need today.\n`),
+      source: SOURCE.alert,
+      // Resend retries an event until it gets a 2xx, each time with the same
+      // svix-id, so the alert goes out once. Its last retries come after the
+      // key's 24 hours, which at worst repeats an alert.
+      idempotencyKey: `${SOURCE.alert}/${request.headers.get('svix-id')}`,
+    };
+  }
 
   if (!apiKey) {
     if (import.meta.env.DEV) {
-      console.info(`[resend-events] Would send to ${alertTo.join(', ')} (dev only):\n${alertSubject}\n\n${text}`);
-      return json({ ok: true, dev: true });
+      // The text goes back to the caller (a local test), never to the log.
+      console.info(`[resend-events] Would send the ${isAlert ? 'notice' : 'alert'} for this ${type} event (dev only).`);
+      return json({ ok: true, dev: true, to: outgoing.to, subject: outgoing.subject, text: outgoing.text });
     }
     console.error('[resend-events] RESEND_TOKEN is not set on the Worker.');
     return json({ ok: false, error: 'Not configured.' }, 500);
   }
 
-  try {
-    const res = await fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: {
-        authorization: `Bearer ${apiKey}`,
-        'content-type': 'application/json',
-        // Resend retries an event until it gets a 2xx; the same key within 24
-        // hours sends the alert only once.
-        'idempotency-key': `delivery-alert/${request.headers.get('svix-id')}`,
-      },
-      body: JSON.stringify({
-        from: env.CONTACT_FROM ?? "Annie's Havens <noreply@annieshavens.ca>",
-        to: alertTo,
-        subject: alertSubject,
-        text,
-        tags: [{ name: 'source', value: ALERT_TAG }],
-      }),
-    });
-    if (!res.ok) {
-      console.error(`[resend-events] Resend rejected the alert: HTTP ${res.status}`);
-      return json({ ok: false, error: 'Alert not sent.' }, 502);
-    }
-  } catch (err) {
-    console.error('[resend-events] Could not reach Resend:', err instanceof Error ? err.message : err);
-    return json({ ok: false, error: 'Alert not sent.' }, 502);
-  }
-  return json({ ok: true });
+  const accepted = await send(apiKey, outgoing.idempotencyKey, {
+    from: env.CONTACT_FROM ?? DEFAULT_FROM,
+    to: outgoing.to,
+    subject: outgoing.subject,
+    text: outgoing.text,
+    tags: [{ name: 'source', value: outgoing.source }],
+  });
+  // 502 so Resend retries later.
+  return accepted ? json({ ok: true }) : json({ ok: false, error: 'Alert not sent.' }, 502);
 };

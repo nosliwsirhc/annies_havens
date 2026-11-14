@@ -140,6 +140,8 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
         reply_to: email || undefined,
         subject: `New inquiry from ${first} ${last}`.trim(),
         text,
+        // Tells api/resend-events.ts that a failure is a lost inquiry.
+        tags: [{ name: 'source', value: 'contact-form' }],
       }),
     });
     if (!res.ok) {
