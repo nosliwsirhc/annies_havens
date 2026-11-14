@@ -22,8 +22,9 @@ import PageHeader from '../components/PageHeader.astro';
         <ul>
           <li>Your first name and, if you give it, your last name</li>
           <li>Your email address, your phone number, or both</li>
-          <li>What brings you to us (the option you choose on our contact form) and the message you write</li>
-          <li>Cookies and usage data, if you accept analytics</li>
+          <li>Which best describes you (the "I am a…" choice on our contact form) and the message you write</li>
+          <li>Technical information such as your IP address and browser type, which our hosting and security providers process on every visit (see Service Providers below)</li>
+          <li>Cookies and usage data, only if you accept analytics</li>
         </ul>
 
         <h3>Foster Home Quiz</h3>
@@ -33,8 +34,8 @@ import PageHeader from '../components/PageHeader.astro';
         <p>We may also collect information on how the Service is accessed and used ("Usage Data"). This may include your computer's Internet Protocol (IP) address, browser type and version, the pages of our Service that you visit, the time and date of your visit, the time spent on those pages, unique device identifiers, and other diagnostic data.</p>
 
         <h3>Tracking and Cookies Data</h3>
-        <p>Cookies are small files a website stores in your browser. This website sets none of its own. The only cookies on it are Google Analytics' cookies, and only after you choose Accept on the consent banner (see Analytics below).</p>
-        <p>Your choice to accept or decline analytics is remembered in your browser's local storage, which stays on your device and isn't sent to us. You can also tell your browser to refuse all cookies; the site works the same without them.</p>
+        <p>Cookies are small files a website stores in your browser. Our own code sets none. Google Analytics sets cookies only after you choose Accept on the consent banner (see Analytics below). Content and services from other companies may store their own data in your browser: for example, the YouTube video embedded in one of our news articles, and Cloudflare, which may set a cookie it needs to protect the site.</p>
+        <p>Your choice to accept or decline analytics is remembered in your browser's local storage, which stays on your device and isn't sent to us. You can tell your browser to refuse cookies; the site still works, though the analytics question may then appear on each visit.</p>
 
         <h2>Use of Data</h2>
         <p>Annie's Havens Ltd. uses the collected data to provide and maintain the Service; to notify you about changes to the Service; to allow you to participate in interactive features when you choose to; to provide customer care and support; to provide analysis and valuable information so we can improve the Service; to monitor usage of the Service; and to detect, prevent, and address technical issues.</p>
@@ -55,12 +56,15 @@ import PageHeader from '../components/PageHeader.astro';
         <p>Our website is hosted by Cloudflare. Like any web host, Cloudflare processes technical information such as your IP address and browser type to deliver pages to you and to protect the site from attacks. For more information, see <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">Cloudflare's Privacy Policy</a>.</p>
 
         <h3>Contact Form</h3>
-        <p>When you send us a message through our contact form, two service providers handle it:</p>
+        <p>Our contact form, on our home page and our Contact Us page, uses two service providers:</p>
         <ul>
-          <li><strong>Cloudflare Turnstile</strong> first checks that a person, not an automated program, is filling in the form. It processes technical signals from your browser and connection, such as your IP address and browser type, to detect automated programs, and doesn't use them for advertising. See the <a href="https://www.cloudflare.com/turnstile-privacy-policy/" target="_blank" rel="noopener">Turnstile Privacy Addendum</a>.</li>
-          <li><strong>Resend</strong> then delivers your message to our team as an email. See <a href="https://resend.com/legal/privacy-policy" target="_blank" rel="noopener">Resend's Privacy Policy</a> for how it handles that information.</li>
+          <li><strong>Cloudflare Turnstile</strong> checks that a person, not an automated program, is using the form. It runs when one of those pages loads, processing technical signals from your browser and connection, such as your IP address and browser type, to detect automated programs, and doesn't use them for advertising. When you send a message, our server asks Turnstile to confirm the check and passes along your IP address. See the <a href="https://www.cloudflare.com/turnstile-privacy-policy/" target="_blank" rel="noopener">Turnstile Privacy Addendum</a>.</li>
+          <li><strong>Resend</strong> delivers your message to our team as an email. Resend may keep a record of that email for a limited time under its own policy; see <a href="https://resend.com/legal/privacy-policy" target="_blank" rel="noopener">Resend's Privacy Policy</a>.</li>
         </ul>
-        <p>The website itself doesn't keep a copy of your message. It arrives in our email inbox, where our team reads and answers it.</p>
+        <p>The website itself doesn't store your message. It arrives in our email inbox, where our team reads and answers it.</p>
+
+        <h3>Fonts and Videos</h3>
+        <p>Our pages use Google Fonts, so your browser fetches the fonts from Google's servers and Google receives your IP address and browser details when you visit, whether or not you accept analytics. One of our news articles embeds a YouTube video in YouTube's privacy-enhanced mode. When you open that article, YouTube, which is owned by Google, receives similar technical information, and it may store data in your browser, especially if you play the video. See <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's Privacy &amp; Terms</a>.</p>
 
         <h3>Analytics</h3>
         <p>We use Google Analytics, a web analytics service offered by Google that tracks and reports website traffic, to understand how visitors find and use our site. Analytics cookies are only set if you choose Accept on the consent banner shown on your first visit; if you decline, no analytics cookies are loaded. If you accept, we also record a few actions as analytics events: sending the contact form (never what you wrote), clicking our phone number or email address, sharing an article, and finishing the quiz. You can change your choice any time by clearing this site's data in your browser, and you can also opt out by installing the Google Analytics opt-out browser add-on. For more information on Google's privacy practices, see <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's Privacy &amp; Terms</a>.</p>
