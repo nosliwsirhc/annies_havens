@@ -209,9 +209,11 @@ export const POST: APIRoute = async ({ request }) => {
     (emailId ? `In Resend: https://resend.com/emails/${emailId}\n` : '');
 
   const apiKey = env.RESEND_TOKEN ?? env.RESEND_API_KEY;
-  // The email the event is about: the lost email, or for a failed alert, the
-  // alert (which holds the lost email).
-  const message = apiKey && emailId ? await readEmailText(apiKey, emailId) : null;
+  // The email the event is about: the lost inquiry, or for a failed alert, the
+  // alert (which holds the inquiry). Only this site's own emails are read back
+  // and forwarded; the webhook covers the whole Resend account.
+  const ours = source === SOURCE.inquiry || isAlert;
+  const message = apiKey && emailId && ours ? await readEmailText(apiKey, emailId) : null;
   let outgoing: { to: string[]; subject: string; text: string; source: string; idempotencyKey: string };
   if (isAlert) {
     // ALERT_TO isn't getting alerts: tell the recruitment mailbox instead.
