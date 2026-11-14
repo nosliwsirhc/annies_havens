@@ -143,16 +143,11 @@ const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '1x0000000000000000
           setErr(name, '');
         }
         clearFormError();
-        if ((val('email') && isValidEmail(val('email'))) || (val('phone') && isValidPhone(val('phone')))) {
-          // One way to reach them is enough: clear both, but keep a length error.
-          (['email', 'phone'] as const).forEach((n) => { if (errorsFor()[n] !== FIELD_TOO_LONG) setErr(n, ''); });
-        }
-        // Typing in one contact field can resolve the other's "Enter an email or
-        // phone number" error before either is valid: re-check the partner.
-        if (name === 'email' || name === 'phone') {
-          const peer = name === 'email' ? 'phone' : 'email';
-          if (!errorsFor()[peer]) setErr(peer, '');
-        }
+        // Clear email's or phone's error once it no longer applies (one way to
+        // reach them is enough, so filling in either can resolve the other's
+        // "Enter an email or phone number"), but never one that still does,
+        // such as an invalid email next to a valid phone.
+        (['email', 'phone'] as const).forEach((n) => { if (!errorsFor()[n]) setErr(n, ''); });
         refresh();
       })
     );
