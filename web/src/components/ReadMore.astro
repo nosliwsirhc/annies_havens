@@ -3,7 +3,7 @@ interface Props {
   links: { href: string; label: string }[];
   heading?: string;
 }
-const { links, heading = 'Read more' } = Astro.props;
+const { links, heading = 'Read More' } = Astro.props;
 ---
 {links?.length ? (
   <section class="read-more">

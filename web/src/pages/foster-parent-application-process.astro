@@ -20,9 +20,9 @@ const checks = [
   'PRIDE training (required before fostering)',
 ];
 const steps = [
-  { h: 'Interview and home visit', p: 'It starts with a phone conversation, then a visit to your home. Ask us anything; there’s no commitment, and it’s a chance for both of us to see if fostering is the right fit.' },
-  { h: 'Application documents', p: 'You’ll complete the application paperwork and the background checks that keep children safe: a Vulnerable Sector police check, a child-welfare check, and references.' },
-  { h: 'Home study (SAFE)', p: 'A series of interviews, called a Structured Analysis Family Evaluation, that builds an honest picture of your family’s strengths and helps us match children well.' },
+  { h: 'Interview and Home Visit', p: 'It starts with a phone conversation, then a visit to your home. Ask us anything; there’s no commitment, and it’s a chance for both of us to see if fostering is the right fit.' },
+  { h: 'Application Documents', p: 'You’ll complete the application paperwork and the background checks that keep children safe: a Vulnerable Sector police check, a child-welfare check, and references.' },
+  { h: 'Home Study (SAFE)', p: 'A series of interviews, called a Structured Analysis Family Evaluation, that builds an honest picture of your family’s strengths and helps us match children well.' },
   { h: 'Training', p: 'Trauma-informed preparation, including PRIDE training, so you feel ready and confident. Once it’s complete, your home is ready to welcome a child.' },
 ];
 ---
@@ -72,13 +72,13 @@ const steps = [
 
       <aside class="aside">
         <div class="aside-card">
-          <h3>What you'll need</h3>
+          <h3>What You'll Need</h3>
           <ul class="aside-facts">
             {checks.map((c) => <li><Icon name="leaf" />{c}</li>)}
           </ul>
         </div>
         <div class="aside-card is-cta">
-          <h3>Ready to start?</h3>
+          <h3>Ready to Start?</h3>
           <p>The first step is just a conversation. Reach out and we'll walk you through it.</p>
           <a class="btn btn-coral" href="/contact-us">Talk to Our Team</a>
           <a class="call" href={site.phoneHref}>{site.phone}</a>

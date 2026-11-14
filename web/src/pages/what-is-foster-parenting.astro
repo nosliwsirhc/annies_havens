@@ -20,10 +20,10 @@ const facts = [
   'A support team behind every family',
 ];
 const points = [
-  { icon: 'home', h: 'A safe place to land', p: "Foster care gives a child a stable home when they can't remain with their birth family. As a foster parent, you provide the consistency, warmth, and care they've been missing." },
-  { icon: 'pulse', h: 'Care built for special needs', p: "Annie's Havens specializes in children and youth living with developmental, physical, and medical needs, from mobility needs and Autism Spectrum Disorder to medically fragile children. Our homes are trained and equipped for higher daily care." },
-  { icon: 'headset', h: 'A team behind you', p: "You are never doing this alone. Personal Support Workers, Child and Youth Workers, clinical and educational supports, and your case manager all wrap around each placement." },
-  { icon: 'leaf', h: 'A bond that lasts', p: 'Because permanency planning takes longer for children with special needs, fostering here is often a long-term commitment, and many families stay part of a child’s life for good.' },
+  { icon: 'home', h: 'A Safe Place to Land', p: "Foster care gives a child a stable home when they can't remain with their birth family. As a foster parent, you provide the consistency, warmth, and care they've been missing." },
+  { icon: 'pulse', h: 'Care Built for Special Needs', p: "Annie's Havens specializes in children and youth living with developmental, physical, and medical needs, from mobility needs and Autism Spectrum Disorder to medically fragile children. Our homes are trained and equipped for higher daily care." },
+  { icon: 'headset', h: 'A Team Behind You', p: "You are never doing this alone. Personal Support Workers, Child and Youth Workers, clinical and educational supports, and your case manager all wrap around each placement." },
+  { icon: 'leaf', h: 'A Bond That Lasts', p: 'Because permanency planning takes longer for children with special needs, fostering here is often a long-term commitment, and many families stay part of a child’s life for good.' },
 ] as const;
 ---
 <BaseLayout
@@ -70,7 +70,7 @@ const points = [
 
       <aside class="aside">
         <div class="aside-card">
-          <h3>At a glance</h3>
+          <h3>At a Glance</h3>
           <ul class="aside-facts">
             {facts.map((f) => (
               <li><Icon name="leaf" />{f}</li>
@@ -78,7 +78,7 @@ const points = [
           </ul>
         </div>
         <div class="aside-card is-cta">
-          <h3>Thinking about it?</h3>
+          <h3>Thinking About It?</h3>
           <p>Ask us anything. A real member of our team answers, with no commitment required.</p>
           <a class="btn btn-coral" href="/contact-us">Talk to Our Team</a>
           <a class="call" href={site.phoneHref}>{site.phone}</a>

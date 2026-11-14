@@ -16,7 +16,7 @@ const readMore = [
 const groups = [
   {
     id: 'eligibility',
-    title: 'Who can foster?',
+    title: 'Who Can Foster?',
     items: [
       { q: 'Can I foster if I’m single?', a: 'Yes. Single applicants are always welcome. What we assess is your ability to meet a child’s needs, including your time, your commitment, and the support around you.' },
       { q: 'Is Annie’s Havens LGBTQ2S friendly?', a: 'Absolutely. We are committed to a safe and inclusive environment for everyone, and we are proud of the LGBTQ2S caregivers in our community.' },
@@ -26,7 +26,7 @@ const groups = [
   },
   {
     id: 'children',
-    title: 'The children and matching',
+    title: 'The Children and Matching',
     items: [
       { q: 'What’s the difference between fostering with a CAS and Annie’s Havens?', a: 'Both are licensed by the Province of Ontario under the same criteria. A Children’s Aid Society carries broader child-protection duties; as a smaller private agency, we focus on careful matching and close, specialized support for our homes.' },
       { q: 'Can I choose which child is placed with me?', a: 'Yes. Foster parents have the final say on any placement. We share what we know about a child, often through a pre-placement assessment of their strengths and needs, so you can make an informed decision. Emergency placements may come with less information.' },
@@ -36,7 +36,7 @@ const groups = [
   },
   {
     id: 'money',
-    title: 'Money and support',
+    title: 'Money and Support',
     items: [
       { q: 'Are foster parents paid?', a: 'Not in the usual sense. A daily per diem covers the costs of caring for a child: clothing, food, hygiene, and a contribution to household costs. Annie’s Havens caregivers receive roughly $80 to $85 per child per day, depending on experience and the support a child needs. It is not a replacement for steady income.' },
       { q: 'What about major or medical costs?', a: 'Day-to-day costs are covered by the per diem. Exceptional costs, such as dental work, therapy, medication, or medical devices, are funded separately, often through Children’s Aid.' },
@@ -46,7 +46,7 @@ const groups = [
   },
   {
     id: 'process',
-    title: 'The process',
+    title: 'The Process',
     items: [
       { q: 'How do I get started?', a: 'It begins with a phone conversation, then a home visit, some paperwork, and interviews that form your Home Study. After training, your home is ready for placements.' },
       { q: 'What screening is involved?', a: 'A Vulnerable Sector police check, a child-welfare check, and references from your community and family.' },
@@ -100,13 +100,13 @@ const groups = [
 
       <aside class="aside">
         <div class="aside-card">
-          <h3>Browse by topic</h3>
+          <h3>Browse by Topic</h3>
           <ul class="aside-nav">
             {groups.map((g) => <li><a href={`#${g.id}`}>{g.title}</a></li>)}
           </ul>
         </div>
         <div class="aside-card is-cta">
-          <h3>Still have a question?</h3>
+          <h3>Still Have a Question?</h3>
           <p>If your question isn’t here, just ask. A real member of our team will get back to you.</p>
           <a class="btn btn-coral" href="/contact-us">Ask Our Team</a>
           <a class="call" href={site.phoneHref}>{site.phone}</a>
