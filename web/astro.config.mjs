@@ -9,9 +9,9 @@ import remarkArticle from './src/lib/remark-article.mjs';
 // Vite 7's default browser targets (Vite 8 raised them; see `vite` below).
 const VITE7_BROWSERS = ['chrome107', 'edge107', 'firefox104', 'safari16'];
 
-// Mostly-static content site with one on-demand endpoint (the contact form).
-// Pages are prerendered by default; the contact API route opts into SSR and
-// runs as a Cloudflare Worker (static assets + a server entry).
+// Mostly-static content site with two on-demand endpoints (the contact form
+// and Resend's delivery events). Pages are prerendered by default; the API
+// routes opt into SSR and run as a Cloudflare Worker (static assets + a server entry).
 export default defineConfig({
   site: 'https://www.annieshavens.ca',
   output: 'static',

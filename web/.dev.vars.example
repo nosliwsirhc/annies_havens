@@ -15,3 +15,12 @@ RESEND_TOKEN=
 # Where inquiries are sent / sent from (the "from" domain must be verified in Resend).
 CONTACT_TO=recruitment@annieshavens.ca
 CONTACT_FROM=Annie's Havens <noreply@annieshavens.ca>
+
+# Delivery alerts (/api/resend-events, a Resend webhook). The webhook's signing
+# secret (whsec_...) from the Resend dashboard, and where alerts go: one bare
+# address (no display name), or several separated by commas. Alerts carry inquirers' details, so use a
+# mailbox the agency controls (not a personal account), and not the CONTACT_TO
+# address, so an alert still arrives when that address is the problem. If an
+# alert can't be delivered, CONTACT_TO gets a notice instead.
+RESEND_WEBHOOK_SECRET=
+ALERT_TO=
