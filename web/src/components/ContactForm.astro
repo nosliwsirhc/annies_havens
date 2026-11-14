@@ -44,7 +44,7 @@ const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '1x0000000000000000
 </div>
 
 <script>
-  import { formatPhoneWithCaret, isValidEmail, isValidPhone } from '../lib/form';
+  import { MESSAGE_MAX_LENGTH, formatPhoneWithCaret, isValidEmail, isValidPhone } from '../lib/form';
 
   const form = document.getElementById('contact-form') as HTMLFormElement | null;
   if (form) {
@@ -77,6 +77,7 @@ const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '1x0000000000000000
       if (!email && !phone) { errs.email = 'Enter an email or phone number'; errs.phone = 'Enter an email or phone number'; }
       if (!val('role')) errs.role = 'Please choose one';
       if (!val('msg')) errs.msg = 'Please add a short message';
+      else if (val('msg').length > MESSAGE_MAX_LENGTH) errs.msg = `Please keep your message under 5,000 characters (it’s ${val('msg').length.toLocaleString('en-CA')} now)`;
       return errs;
     };
 
@@ -108,7 +109,10 @@ const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '1x0000000000000000
           phoneInput.value = value;
           phoneInput.setSelectionRange(caret, caret);
         }
-        setErr((el as HTMLInputElement).name, '');
+        // Clear this field's error while typing, except "too long", which
+        // should show as soon as it applies (the submit button is disabled).
+        const name = (el as HTMLInputElement).name;
+        setErr(name, name === 'msg' && val('msg').length > MESSAGE_MAX_LENGTH ? errorsFor().msg || '' : '');
         clearFormError();
         if ((val('email') && isValidEmail(val('email'))) || (val('phone') && isValidPhone(val('phone')))) { setErr('email', ''); setErr('phone', ''); }
         refresh();

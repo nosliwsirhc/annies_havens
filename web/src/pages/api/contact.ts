@@ -4,7 +4,7 @@ import type { APIRoute } from 'astro';
 // the `env` export from the `cloudflare:workers` virtual module (typed in
 // src/cloudflare-workers.d.ts).
 import { env } from 'cloudflare:workers';
-import { isValidEmail, isValidPhone } from '../../lib/form';
+import { FIELD_MAX_LENGTH, MESSAGE_MAX_LENGTH, isValidEmail, isValidPhone } from '../../lib/form';
 
 // On-demand: runs as a Cloudflare Worker route, not prerendered.
 export const prerender = false;
@@ -14,24 +14,29 @@ const TURNSTILE_VERIFY = 'https://challenges.cloudflare.com/turnstile/v0/sitever
 // production must have TURNSTILE_SECRET_KEY set or the form refuses to send.
 const TEST_SECRET = '1x0000000000000000000000000000000AA';
 
-// Generous caps so a real message is never cut short, but a bot can't post
-// megabytes through to the mail service.
-const MAX_SHORT = 200;
-const MAX_MESSAGE = 5000;
+// A full form (fields at their limits, plus the Turnstile token) is well under
+// this; anything bigger isn't a real inquiry, so don't parse it.
+const MAX_BODY_BYTES = 64 * 1024;
 
 const json = (body: unknown, status = 200) =>
   new Response(JSON.stringify(body), { status, headers: { 'content-type': 'application/json' } });
 
-// Read a field as a trimmed string whatever the client sent (a number, null,
-// an object), and cap its length.
-const field = (data: Record<string, unknown>, key: string, max: number) => {
+// Read a field as a trimmed string. Only strings and numbers count; anything
+// else (null, an object, an array) is treated as empty, so validation answers
+// it, and converting it can't throw. Lengths are checked during validation,
+// never cut short.
+const field = (data: Record<string, unknown>, key: string) => {
   const raw = data[key];
-  return (typeof raw === 'string' ? raw : raw == null ? '' : String(raw)).trim().slice(0, max);
+  return (typeof raw === 'string' ? raw : typeof raw === 'number' ? String(raw) : '').trim();
 };
 // Names end up in the email subject, which must stay on one line.
 const oneLine = (s: string) => s.replace(/[\r\n]+/g, ' ');
 
 export const POST: APIRoute = async ({ request, clientAddress }) => {
+  if (Number(request.headers.get('content-length') ?? 0) > MAX_BODY_BYTES) {
+    return json({ ok: false, error: 'That message is too long to send. Please shorten it, or call us.' }, 413);
+  }
+
   let data: Record<string, unknown>;
   try {
     const parsed: unknown = await request.json();
@@ -41,13 +46,13 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
     return json({ ok: false, error: 'Invalid request.' }, 400);
   }
 
-  const first = oneLine(field(data, 'first', MAX_SHORT));
-  const last = oneLine(field(data, 'last', MAX_SHORT));
-  const email = field(data, 'email', MAX_SHORT);
-  const phone = field(data, 'phone', MAX_SHORT);
-  const role = oneLine(field(data, 'role', MAX_SHORT));
-  const message = field(data, 'msg', MAX_MESSAGE) || field(data, 'message', MAX_MESSAGE);
-  const token = field(data, 'token', 4096);
+  const first = oneLine(field(data, 'first'));
+  const last = oneLine(field(data, 'last'));
+  const email = field(data, 'email');
+  const phone = field(data, 'phone');
+  const role = oneLine(field(data, 'role'));
+  const message = field(data, 'msg') || field(data, 'message');
+  const token = field(data, 'token');
 
   // 1) Verify the Turnstile token (bot protection).
   const secret = env.TURNSTILE_SECRET_KEY ?? (import.meta.env.DEV ? TEST_SECRET : undefined);
@@ -68,7 +73,15 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
     return json({ ok: false, error: 'Verification failed. Please try the check again.' }, 400);
   }
 
-  // 2) Server-side validation (mirrors the client).
+  // 2) Server-side validation (mirrors the client). Over-long input is
+  // refused with a clear message rather than trimmed, so nothing is lost
+  // without the sender knowing.
+  if (message.length > MESSAGE_MAX_LENGTH) {
+    return json({ ok: false, error: 'Please keep your message under 5,000 characters, or call us.' }, 422);
+  }
+  if ([first, last, email, phone, role].some((v) => v.length > FIELD_MAX_LENGTH)) {
+    return json({ ok: false, error: 'One of the fields is too long. Please shorten it and try again.' }, 422);
+  }
   const missing: string[] = [];
   if (!first) missing.push('your first name');
   if (email && !isValidEmail(email)) missing.push('a valid email address');

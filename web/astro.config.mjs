@@ -6,6 +6,9 @@ import { unified } from '@astrojs/markdown-remark';
 import remarkDirective from 'remark-directive';
 import remarkArticle from './src/lib/remark-article.mjs';
 
+// Vite 7's default browser targets (Vite 8 raised them; see `vite` below).
+const VITE7_BROWSERS = ['chrome107', 'edge107', 'firefox104', 'safari16'];
+
 // Mostly-static content site with one on-demand endpoint (the contact form).
 // Pages are prerendered by default; the contact API route opts into SSR and
 // runs as a Cloudflare Worker (static assets + a server entry).
@@ -32,11 +35,13 @@ export default defineConfig({
   // sharp-based optimization. Passthrough avoids the native sharp dependency.
   image: { service: passthroughImageService() },
   prefetch: { prefetchAll: true },
-  // Vite 8 (Astro 7) raised its default CSS target to Safari 16.4, which lets
-  // the minifier rewrite `@media (max-width: 520px)` as `(width <= 520px)`.
-  // Older iPhones ignore that syntax and would get the desktop layout. Keep
-  // Vite 7's browser targets so the CSS still works where it did before.
-  vite: { build: { cssTarget: ['chrome107', 'edge107', 'firefox104', 'safari16'] } },
+  // Vite 8 (Astro 7) raised its default browser target to Safari 16.4. For
+  // CSS that lets the minifier rewrite `@media (max-width: 520px)` as
+  // `(width <= 520px)`, which older iPhones ignore (they'd get the desktop
+  // layout); for JS it would let newer syntax through unlowered. Keep Vite 7's
+  // targets so the site works where it did before. Set both: in this build
+  // cssTarget does not pick up `target` on its own.
+  vite: { build: { target: VITE7_BROWSERS, cssTarget: VITE7_BROWSERS } },
   // We don't use Astro sessions. Opting out keeps the Cloudflare adapter from
   // wiring a KV-backed session (and a SESSION binding that would need a
   // provisioned namespace at deploy time).

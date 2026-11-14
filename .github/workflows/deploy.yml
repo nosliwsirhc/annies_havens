@@ -65,9 +65,10 @@ jobs:
 
       # Deploy with the project's own wrangler (a devDependency, and the peer
       # @astrojs/cloudflare builds against), so the deploy CLI matches the one
-      # that generated dist/server/wrangler.json.
+      # that generated dist/server/wrangler.json. Only master deploys: a manual
+      # run on another branch builds it as a check and stops here.
       - name: Deploy to Cloudflare Workers
-        if: github.event_name != 'pull_request'
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/master'
         working-directory: web
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
