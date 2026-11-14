@@ -80,8 +80,17 @@ const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '1x0000000000000000
     const isShowing = (n: string, msg: string) =>
       !!document.getElementById('f-' + n)?.closest('.field')?.classList.contains('err') &&
       document.getElementById('err-' + n)?.textContent === msg;
-    const showFormError = (m: string) => { if (formError) formError.textContent = m; };
-    const clearFormError = () => { if (formError) formError.textContent = ''; };
+    // A pending re-announcement (see announceFormError) is cancelled by any
+    // newer form message, or by clearing it, so it can't overwrite them.
+    let announceFrame = 0;
+    const showFormError = (m: string) => { cancelAnimationFrame(announceFrame); if (formError) formError.textContent = m; };
+    const clearFormError = () => { cancelAnimationFrame(announceFrame); if (formError) formError.textContent = ''; };
+    // Say a message in the form's alert even if it's the same text as last
+    // time: clear it now and set it on the next frame, so it's announced again.
+    const announceFormError = (m: string) => {
+      clearFormError();
+      announceFrame = requestAnimationFrame(() => { if (formError) formError.textContent = m; });
+    };
 
     const errorsFor = () => {
       const email = val('email'), phone = val('phone');
@@ -173,7 +182,7 @@ const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '1x0000000000000000
     // Give up on a send that hasn't answered by then, rather than leave
     // "Sending…" up forever.
     const SEND_TIMEOUT_MS = 20000;
-    const CHECK_FIELDS = 'Please check the highlighted fields.';
+    const CHECK_FIELDS = 'Some fields still need attention. Each one says what’s missing.';
 
     let submitting = false;
     form.addEventListener('submit', async (e) => {
@@ -191,12 +200,13 @@ const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '1x0000000000000000
           if (!err || !isShowing(n, err)) { if (err) shownNew = true; setErr(n, err); }
         });
         // The first invalid field now describes its error when focused.
+        const before = document.activeElement;
         document.getElementById('f-' + order.find((n) => errs[n]))?.focus();
-        // A press with nothing new to show (Enter again in the same empty
-        // field) would be silent for a screen reader, so say it in the form's
-        // own alert. It was just cleared; setting it a frame later makes it
-        // announce again on every such press.
-        if (!shownNew) requestAnimationFrame(() => showFormError(CHECK_FIELDS));
+        // A press that shows nothing new and doesn't move focus (Enter again in
+        // the same empty field) would be silent for a screen reader, so say it
+        // in the form's own alert. When focus moves, the field's label and
+        // error are read instead, and an alert would talk over them.
+        if (!shownNew && document.activeElement === before) announceFormError(CHECK_FIELDS);
         return;
       }
       const token = (form.querySelector('[name="cf-turnstile-response"]') as HTMLInputElement | null)?.value || '';
@@ -205,7 +215,7 @@ const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '1x0000000000000000
         // never loaded (blocked/offline), don't leave them stuck - offer a phone.
         const widgetLoaded = !!form.querySelector('.cf-turnstile iframe');
         const phone = form.dataset.phone;
-        showFormError(widgetLoaded
+        announceFormError(widgetLoaded
           ? 'Please complete the verification below, then submit again.'
           : `Verification could not load. Please refresh the page${phone ? `, or call us at ${phone}` : ''}.`);
         return;
@@ -225,6 +235,9 @@ const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '1x0000000000000000
           body: JSON.stringify({ first: val('first'), last: val('last'), email: val('email'), phone: val('phone'), role: val('role'), msg: val('msg'), token }),
           signal: controller.signal,
         });
+        // The server has answered. The timeout only covers waiting for that, so
+        // it can't fire while the reply is read (a 200 means the email went out).
+        window.clearTimeout(timer);
         const data = await res.json().catch(() => ({}));
         if (res.ok && data.ok) {
           // GA4 conversion (only fires if the visitor accepted analytics; gtag is undefined otherwise).
@@ -235,8 +248,10 @@ const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '1x0000000000000000
           failure = data.error || 'Something went wrong. Please try again, or call us.';
         }
       } catch {
-        // Network failure, or the send timed out.
-        failure = 'We couldn’t reach the server. Please try again, or call us.';
+        // Timed out (the server may still have sent it), or a network failure.
+        failure = controller.signal.aborted
+          ? 'This is taking longer than expected, so your message may not have been sent. Please try again, or call us.'
+          : 'We couldn’t reach the server. Please try again, or call us.';
       } finally {
         window.clearTimeout(timer);
         submitting = false;
