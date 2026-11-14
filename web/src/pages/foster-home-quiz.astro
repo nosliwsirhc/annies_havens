@@ -240,18 +240,16 @@ const questions = [
     });
 
     form.addEventListener('pointerdown', () => { arrowNav = false; });
+    // The arrow key's own click and change come before its keyup in every
+    // browser (Chrome and Safari move the selection on keydown, Firefox on
+    // keypress), so the flag has done its job by then. Clearing it here means
+    // an arrow press that moves nothing (Ctrl+Arrow in Firefox) can't make the
+    // quiz ignore a later click, such as a screen reader's.
+    form.addEventListener('keyup', (e) => { if (e.key.startsWith('Arrow')) arrowNav = false; });
     form.addEventListener('keydown', (e) => {
       const t = e.target as HTMLInputElement;
       if (t.type !== 'radio') return;
-      if (e.key.startsWith('Arrow')) {
-        arrowNav = true;
-        // Browsers fire the arrow key's click and change within this same
-        // keypress, so the flag has done its job by the next task. Clearing it
-        // then means an arrow press that moves nothing (Ctrl+Arrow in Firefox)
-        // can't make the quiz ignore a later click, e.g. a screen reader's.
-        window.setTimeout(() => { arrowNav = false; }, 0);
-        return;
-      }
+      if (e.key.startsWith('Arrow')) { arrowNav = true; return; }
       arrowNav = false;
       if (t.closest('.quiz-q') !== qs[current]) return;
       // Enter picks the focused option and moves on, like Space does. Space on
