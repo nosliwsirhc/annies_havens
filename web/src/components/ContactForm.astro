@@ -235,11 +235,13 @@ const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '1x0000000000000000
           body: JSON.stringify({ first: val('first'), last: val('last'), email: val('email'), phone: val('phone'), role: val('role'), msg: val('msg'), token }),
           signal: controller.signal,
         });
-        // The server has answered. The timeout only covers waiting for that, so
-        // it can't fire while the reply is read (a 200 means the email went out).
-        window.clearTimeout(timer);
-        const data = await res.json().catch(() => ({}));
-        if (res.ok && data.ok) {
+        // The deadline covers reading the reply too, so a stalled body can't
+        // leave "Sending…" up. /api/contact answers 200 only once the email has
+        // been accepted for delivery (every failure is a 4xx or 5xx), so a 200
+        // whose body timed out still counts as sent.
+        let bodyTimedOut = false;
+        const data = await res.json().catch(() => { bodyTimedOut = controller.signal.aborted; return {}; });
+        if (res.ok && (data.ok || bodyTimedOut)) {
           // GA4 conversion (only fires if the visitor accepted analytics; gtag is undefined otherwise).
           (window as any).gtag?.('event', 'generate_lead', { form_location: location.pathname });
           morph(() => { form.style.display = 'none'; okEl?.classList.add('show'); });
