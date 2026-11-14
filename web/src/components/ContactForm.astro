@@ -147,6 +147,12 @@ const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '1x0000000000000000
           // One way to reach them is enough: clear both, but keep a length error.
           (['email', 'phone'] as const).forEach((n) => { if (errorsFor()[n] !== FIELD_TOO_LONG) setErr(n, ''); });
         }
+        // Typing in one contact field can resolve the other's "Enter an email or
+        // phone number" error before either is valid: re-check the partner.
+        if (name === 'email' || name === 'phone') {
+          const peer = name === 'email' ? 'phone' : 'email';
+          if (!errorsFor()[peer]) setErr(peer, '');
+        }
         refresh();
       })
     );
@@ -242,6 +248,9 @@ const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '1x0000000000000000
       document.getElementById('f-first')?.focus();
     });
 
+    // Firefox can restore a button's disabled state on reload (e.g. reloaded
+    // mid-send), so start enabled.
+    if (submitBtn) submitBtn.disabled = false;
     refresh();
   }
 </script>
