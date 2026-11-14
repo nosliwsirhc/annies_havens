@@ -67,7 +67,13 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
     json({ ok: false, error: 'That message is too long to send. Please shorten it, or call us.' }, 413);
   // A declared size over the limit is refused without reading anything.
   if (Number(request.headers.get('content-length') ?? 0) > MAX_BODY_BYTES) return tooBig();
-  const raw = await readBody(request, MAX_BODY_BYTES);
+  let raw: string | null;
+  try {
+    raw = await readBody(request, MAX_BODY_BYTES);
+  } catch {
+    // The upload broke off (client went away, stream error): a bad request, not a crash.
+    return json({ ok: false, error: 'Invalid request.' }, 400);
+  }
   if (raw === null) return tooBig();
 
   let data: Record<string, unknown>;
