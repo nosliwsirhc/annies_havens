@@ -29,8 +29,10 @@ on:
   workflow_dispatch:
 
 # One deploy at a time, in push order; a newer PR push cancels its older run.
+# Only master runs share the 'deploy' group, so a manual check on another
+# branch can't displace a master deploy that is waiting its turn.
 concurrency:
-  group: ${{ github.event_name == 'pull_request' && format('pr-{0}', github.event.pull_request.number) || 'deploy' }}
+  group: ${{ github.event_name == 'pull_request' && format('pr-{0}', github.event.pull_request.number) || (github.ref == 'refs/heads/master' && 'deploy') || format('check-{0}', github.ref) }}
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:

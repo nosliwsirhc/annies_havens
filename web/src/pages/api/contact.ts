@@ -4,7 +4,7 @@ import type { APIRoute } from 'astro';
 // the `env` export from the `cloudflare:workers` virtual module (typed in
 // src/cloudflare-workers.d.ts).
 import { env } from 'cloudflare:workers';
-import { FIELD_MAX_LENGTH, MESSAGE_MAX_LENGTH, isValidEmail, isValidPhone } from '../../lib/form';
+import { FIELD_MAX_LENGTH, MESSAGE_MAX_LENGTH, MESSAGE_TOO_LONG, isValidEmail, isValidPhone } from '../../lib/form';
 
 // On-demand: runs as a Cloudflare Worker route, not prerendered.
 export const prerender = false;
@@ -32,14 +32,47 @@ const field = (data: Record<string, unknown>, key: string) => {
 // Names end up in the email subject, which must stay on one line.
 const oneLine = (s: string) => s.replace(/[\r\n]+/g, ' ');
 
-export const POST: APIRoute = async ({ request, clientAddress }) => {
-  if (Number(request.headers.get('content-length') ?? 0) > MAX_BODY_BYTES) {
-    return json({ ok: false, error: 'That message is too long to send. Please shorten it, or call us.' }, 413);
+// Read the request body as text, giving up (null) once it passes `max` bytes.
+// Content-Length can be missing (a chunked upload), so count what arrives
+// rather than trusting the header.
+async function readBody(request: Request, max: number): Promise<string | null> {
+  if (!request.body) return '';
+  const reader = request.body.getReader();
+  const chunks: Uint8Array[] = [];
+  let size = 0;
+  for (;;) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    size += value.byteLength;
+    if (size > max) {
+      await reader.cancel().catch(() => {});
+      return null;
+    }
+    chunks.push(value);
   }
+  const bytes = new Uint8Array(size);
+  let offset = 0;
+  for (const chunk of chunks) {
+    bytes.set(chunk, offset);
+    offset += chunk.byteLength;
+  }
+  return new TextDecoder().decode(bytes);
+}
+
+// Which field to name when one is too long.
+const FIELD_LABELS = { first: 'first name', last: 'last name', email: 'email address', phone: 'phone number', role: 'role' } as const;
+
+export const POST: APIRoute = async ({ request, clientAddress }) => {
+  const tooBig = () =>
+    json({ ok: false, error: 'That message is too long to send. Please shorten it, or call us.' }, 413);
+  // A declared size over the limit is refused without reading anything.
+  if (Number(request.headers.get('content-length') ?? 0) > MAX_BODY_BYTES) return tooBig();
+  const raw = await readBody(request, MAX_BODY_BYTES);
+  if (raw === null) return tooBig();
 
   let data: Record<string, unknown>;
   try {
-    const parsed: unknown = await request.json();
+    const parsed: unknown = JSON.parse(raw);
     if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) throw new Error('not an object');
     data = parsed as Record<string, unknown>;
   } catch {
@@ -77,10 +110,12 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
   // refused with a clear message rather than trimmed, so nothing is lost
   // without the sender knowing.
   if (message.length > MESSAGE_MAX_LENGTH) {
-    return json({ ok: false, error: 'Please keep your message under 5,000 characters, or call us.' }, 422);
+    return json({ ok: false, error: `${MESSAGE_TOO_LONG}, or call us.` }, 422);
   }
-  if ([first, last, email, phone, role].some((v) => v.length > FIELD_MAX_LENGTH)) {
-    return json({ ok: false, error: 'One of the fields is too long. Please shorten it and try again.' }, 422);
+  const values = { first, last, email, phone, role };
+  const tooLong = (Object.keys(values) as (keyof typeof values)[]).find((k) => values[k].length > FIELD_MAX_LENGTH);
+  if (tooLong) {
+    return json({ ok: false, error: `Your ${FIELD_LABELS[tooLong]} is too long. Please shorten it and try again.` }, 422);
   }
   const missing: string[] = [];
   if (!first) missing.push('your first name');

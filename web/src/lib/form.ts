@@ -5,8 +5,13 @@
  * /api/contact. Longer messages are refused with a clear error, never cut short.
  */
 export const MESSAGE_MAX_LENGTH = 5000;
-/** Longest name, email, phone or role value /api/contact accepts. */
-export const FIELD_MAX_LENGTH = 200;
+/** Longest name, email, phone or role value /api/contact accepts (254 fits any valid email address). */
+export const FIELD_MAX_LENGTH = 254;
+
+/** Error text for a message over the limit (the form adds no count, so screen readers don't re-announce it). */
+export const MESSAGE_TOO_LONG = `Please keep your message to ${MESSAGE_MAX_LENGTH.toLocaleString('en-CA')} characters or fewer`;
+/** Error text for a name or email over the limit. */
+export const FIELD_TOO_LONG = `Please keep this to ${FIELD_MAX_LENGTH} characters or fewer`;
 
 /** NANP local phone pattern once formatted: XXX-XXX-XXXX */
 export const PHONE_LOCAL_PATTERN = /^\d{3}-\d{3}-\d{4}$/;
