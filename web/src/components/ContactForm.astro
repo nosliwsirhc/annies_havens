@@ -13,15 +13,15 @@ const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '1x0000000000000000
     <h3>Send Us a Message</h3>
     <p class="sub">Fields marked <span class="req" aria-hidden="true">*</span> are required. An email or a phone number is fine - fill in whichever you prefer.</p>
     <div class="frow">
-      <div class="field"><label for="f-first">First name <span class="req" aria-hidden="true">*</span></label><input id="f-first" name="first" required aria-required="true" aria-describedby="err-first" /><div class="errmsg" id="err-first" role="alert">Required</div></div>
-      <div class="field"><label for="f-last">Last name <span class="opt">(optional)</span></label><input id="f-last" name="last" aria-describedby="err-last" /><div class="errmsg" id="err-last" role="alert">{FIELD_TOO_LONG}</div></div>
+      <div class="field"><label for="f-first">First name <span class="req" aria-hidden="true">*</span></label><input id="f-first" name="first" required aria-required="true" /><div class="errmsg" id="err-first" role="alert">Required</div></div>
+      <div class="field"><label for="f-last">Last name <span class="opt">(optional)</span></label><input id="f-last" name="last" /><div class="errmsg" id="err-last" role="alert">{FIELD_TOO_LONG}</div></div>
     </div>
     <div class="frow">
-      <div class="field"><label for="f-email">Email <span class="opt" id="req-email">(email or phone)</span></label><input id="f-email" name="email" type="email" aria-required="true" aria-describedby="err-email" /><div class="errmsg" id="err-email" role="alert">Enter a valid email</div></div>
-      <div class="field"><label for="f-phone">Phone <span class="opt" id="req-phone">(email or phone)</span></label><input id="f-phone" name="phone" type="tel" aria-required="true" aria-describedby="err-phone" /><div class="errmsg" id="err-phone" role="alert">Required</div></div>
+      <div class="field"><label for="f-email">Email <span class="opt" id="req-email">(email or phone)</span></label><input id="f-email" name="email" type="email" aria-required="true" /><div class="errmsg" id="err-email" role="alert">Enter a valid email</div></div>
+      <div class="field"><label for="f-phone">Phone <span class="opt" id="req-phone">(email or phone)</span></label><input id="f-phone" name="phone" type="tel" aria-required="true" /><div class="errmsg" id="err-phone" role="alert">Required</div></div>
     </div>
     <div class="field"><label for="f-role">I am a… <span class="req" aria-hidden="true">*</span></label>
-      <select id="f-role" name="role" required aria-required="true" aria-describedby="err-role">
+      <select id="f-role" name="role" required aria-required="true">
         <option value="">Select one</option>
         <option>Prospective Foster Parent</option>
         <option>Current Foster Family</option>
@@ -31,7 +31,7 @@ const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '1x0000000000000000
       </select>
       <div class="errmsg" id="err-role" role="alert">Please choose one</div>
     </div>
-    <div class="field"><label for="f-msg">Message <span class="req" aria-hidden="true">*</span></label><textarea id="f-msg" name="msg" placeholder="How can we help?" required aria-required="true" aria-describedby="err-msg"></textarea><div class="errmsg" id="err-msg" role="alert">Please add a short message</div></div>
+    <div class="field"><label for="f-msg">Message <span class="req" aria-hidden="true">*</span></label><textarea id="f-msg" name="msg" placeholder="How can we help?" required aria-required="true"></textarea><div class="errmsg" id="err-msg" role="alert">Please add a short message</div></div>
     <div class="cf-turnstile" data-sitekey={siteKey} data-size="flexible"></div>
     <button type="submit" id="submit-btn" class="btn btn-coral" style="width:100%;justify-content:center;padding:15px;margin-top:16px">Submit Message</button>
     <p class="form-error" id="form-error" role="alert"></p>
@@ -63,10 +63,15 @@ const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '1x0000000000000000
       if (msg) {
         field?.classList.add('err');
         input?.setAttribute('aria-invalid', 'true');
+        // Point the field at its error only while it shows one: text that
+        // aria-describedby names is read even when hidden, so a permanent
+        // link made screen readers announce "Required" with no error (#21).
+        input?.setAttribute('aria-describedby', 'err-' + n);
         if (errEl) errEl.textContent = msg;
       } else {
         field?.classList.remove('err');
         input?.removeAttribute('aria-invalid');
+        input?.removeAttribute('aria-describedby');
       }
     };
     // True when field `n` already shows exactly `msg`. Rewriting an error's
