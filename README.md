@@ -6,27 +6,28 @@ The website for **Annie's Havens**, a foster-care agency in Ontario that support
 
 ## Current stack (the live site lives in [`web/`](./web))
 
-- **[Astro](https://astro.build/)** (static output) deployed to **Cloudflare Pages**
-- **Cloudflare Turnstile** + **Resend** power the contact form (a Cloudflare Pages Function at `web/src/pages/api/contact.ts`)
+- **[Astro](https://astro.build/)** (static output) deployed to **Cloudflare Workers**
+- **Cloudflare Turnstile** + **Resend** power the contact form (a Worker route at `web/src/pages/api/contact.ts`)
 - **GA4** analytics, opt-in via a cookie-consent banner
 - Fonts: Fraunces (display) + Mulish (body); design tokens in `web/src/styles/global.css`
 - News/articles are Markdown files in `web/src/content/news/` (Astro content collections)
 
 ## Develop
 
-Requires **Node 22** (see `web/.nvmrc`).
+Requires **Node 24** (see `web/.nvmrc`).
 
 ```bash
 cd web
 nvm use
 npm install --ignore-scripts
 npm run dev      # http://localhost:4321
+npm run check    # type check
 npm run build    # builds to web/dist
 ```
 
 ## Deploy
 
-Continuous deployment: **pushing to `master` triggers a GitHub Actions workflow** (`.github/workflows/deploy.yml`) that builds `web/` and deploys to Cloudflare Pages automatically. No manual step.
+Continuous deployment: **pushing to `master` triggers a GitHub Actions workflow** (`.github/workflows/deploy.yml`) that builds `web/` and deploys to Cloudflare Workers automatically. No manual step. Pull requests get the same build as a check, without deploying.
 
 ## Repo structure
 

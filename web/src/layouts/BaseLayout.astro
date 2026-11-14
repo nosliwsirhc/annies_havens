@@ -10,9 +10,11 @@ interface Props {
   title: string;
   description: string;
   ogImage?: string;
+  /** For pages that shouldn't be indexed (the 404 page): no canonical URL, robots noindex. */
+  noindex?: boolean;
 }
 
-const { title, description, ogImage = '/images/logo_w_name_1200x630.jpg' } = Astro.props;
+const { title, description, ogImage = '/images/logo_w_name_1200x630.jpg', noindex = false } = Astro.props;
 // Astro 6 with build.format:'file' reports Astro.url.pathname WITH the .html
 // extension (e.g. /about-us.html, /index.html). Strip it so canonical/og:url
 // match our clean, no-extension served URLs (and the sitemap) instead of
@@ -52,7 +54,7 @@ const orgSchema = {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={canonical} />
+    {noindex ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={canonical} />}
 
     <link rel="manifest" href="/site.webmanifest" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
@@ -66,7 +68,7 @@ const orgSchema = {
     <meta property="og:site_name" content={site.name} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:url" content={canonical} />
+    {!noindex && <meta property="og:url" content={canonical} />}
     <meta property="og:image" content={new URL(ogImage, site.url).href} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@annieshavens" />

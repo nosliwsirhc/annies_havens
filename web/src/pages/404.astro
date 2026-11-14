@@ -1,0 +1,27 @@
+---
+// Shown for any URL that isn't a page, a file, or a redirect in public/_redirects.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import ReadMore from '../components/ReadMore.astro';
+import { site } from '../data/site';
+
+const links = [
+  { href: '/', label: 'Home' },
+  { href: '/what-is-foster-parenting', label: 'What Is Foster Parenting?' },
+  { href: '/foster-parent-application-process', label: 'The Application Process' },
+  { href: '/faq', label: 'Frequently Asked Questions' },
+  { href: '/news', label: 'News' },
+  { href: '/contact-us', label: 'Contact Us' },
+];
+---
+<BaseLayout
+  title="Page Not Found | Annie's Havens"
+  description="The page you were looking for couldn't be found."
+  noindex
+>
+  <PageHeader
+    title="We Couldn't Find That Page"
+    intro={`The page may have moved, or the link may be out of date. One of the pages below is a good place to pick up, or you can call us at ${site.phone}.`}
+  />
+  <ReadMore links={links} heading="Where to Go Next" />
+</BaseLayout>

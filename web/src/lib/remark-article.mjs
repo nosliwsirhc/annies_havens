@@ -42,6 +42,8 @@
  */
 
 const text = (value) => ({ type: 'text', value });
+const toPlainText = (node) =>
+  typeof node.value === 'string' ? node.value : (node.children || []).map(toPlainText).join('');
 
 // An mdast node that renders to a specific HTML tag with classes/attrs.
 const el = (tagName, properties, children = []) => ({
@@ -221,7 +223,14 @@ export default function remarkArticle() {
           }
 
           default:
-            // Unknown directive: keep its children, drop the wrapper.
+            // Unknown inline directive: almost always an accident in prose
+            // ("Note:this", "see:below"). Put the literal text back, or it
+            // would render as an empty <div> and the words would vanish.
+            if (child.type === 'textDirective') {
+              const label = (child.children || []).map(toPlainText).join('');
+              return text(`:${child.name}${label ? `[${label}]` : ''}`);
+            }
+            // Unknown block directive: render its children in a plain <div>.
             walk(child);
             break;
         }

@@ -1,7 +1,8 @@
 // @ts-check
-import { defineConfig, passthroughImageService, sessionDrivers } from 'astro/config';
+import { defineConfig, passthroughImageService } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import cloudflare from '@astrojs/cloudflare';
+import { unified } from '@astrojs/markdown-remark';
 import remarkDirective from 'remark-directive';
 import remarkArticle from './src/lib/remark-article.mjs';
 
@@ -12,10 +13,15 @@ export default defineConfig({
   site: 'https://www.annieshavens.ca',
   output: 'static',
   trailingSlash: 'never',
-  // Emit flat files (/about-us.html, not /about-us/index.html) so Cloudflare
-  // Pages serves no-slash URLs with a 200 instead of 308-redirecting to a
-  // trailing slash — keeps the served URL matching our no-slash canonicals.
+  // Emit flat files (/about-us.html, not /about-us/index.html) so Cloudflare's
+  // static asset handling serves no-slash URLs with a 200 instead of
+  // redirecting to a trailing slash - keeps the served URL matching our
+  // no-slash canonicals.
   build: { format: 'file' },
+  // Astro 7 changed the default to 'jsx', which strips whitespace between
+  // inline elements on separate lines (e.g. the byline's date / bullet /
+  // author spans). Keep the HTML-aware behaviour the templates were written for.
+  compressHTML: true,
   // imageService 'compile' transforms images at build time for prerendered
   // routes instead of using a runtime Cloudflare Images binding. We already
   // pre-generate every image and use passthroughImageService below, so this
@@ -26,13 +32,21 @@ export default defineConfig({
   // sharp-based optimization. Passthrough avoids the native sharp dependency.
   image: { service: passthroughImageService() },
   prefetch: { prefetchAll: true },
-  // We don't use Astro sessions. Without an explicit driver the Cloudflare
-  // adapter defaults to a KV-backed session and emits a SESSION KV binding
-  // that would need a provisioned namespace at deploy time. A memory driver
-  // keeps the build binding-free; nothing in the site ever reads a session.
-  session: { driver: sessionDrivers.memory() },
-  // Article authoring directives (:::pullquote, :::stats, ::figure, ...) that
-  // map onto the editorial classes in global.css. remarkDirective must run
-  // first to parse the syntax; remarkArticle then rewrites the nodes.
-  markdown: { remarkPlugins: [remarkDirective, remarkArticle] },
+  // Vite 8 (Astro 7) raised its default CSS target to Safari 16.4, which lets
+  // the minifier rewrite `@media (max-width: 520px)` as `(width <= 520px)`.
+  // Older iPhones ignore that syntax and would get the desktop layout. Keep
+  // Vite 7's browser targets so the CSS still works where it did before.
+  vite: { build: { cssTarget: ['chrome107', 'edge107', 'firefox104', 'safari16'] } },
+  // We don't use Astro sessions. Opting out keeps the Cloudflare adapter from
+  // wiring a KV-backed session (and a SESSION binding that would need a
+  // provisioned namespace at deploy time).
+  session: false,
+  markdown: {
+    // Astro 7 renders Markdown with Satteri by default. Our article
+    // directives (:::pullquote, :::stats, ::figure, ...) are remark plugins,
+    // so stay on the unified (remark/rehype) pipeline. remarkDirective must
+    // run first to parse the syntax; remarkArticle then rewrites the nodes
+    // onto the editorial classes in global.css.
+    processor: unified({ remarkPlugins: [remarkDirective, remarkArticle] }),
+  },
 });
