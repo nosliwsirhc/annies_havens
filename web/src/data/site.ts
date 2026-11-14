@@ -35,7 +35,7 @@ export const nav: NavItem[] = [
       { label: 'Foster Care in Ontario', href: '/foster-care-in-ontario' },
       { label: 'What Is Foster Parenting?', href: '/what-is-foster-parenting' },
       { label: 'Frequently Asked Questions', href: '/faq' },
-      { label: 'Children In Care', href: '/children-in-care' },
+      { label: 'Children in Care', href: '/children-in-care' },
       { label: 'Foster Parent Application Process', href: '/foster-parent-application-process' },
       { label: 'Foster Home Quiz', href: '/foster-home-quiz' },
     ],
