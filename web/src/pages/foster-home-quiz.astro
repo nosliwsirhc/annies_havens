@@ -240,12 +240,18 @@ const questions = [
     });
 
     form.addEventListener('pointerdown', () => { arrowNav = false; });
-    // The arrow key's own click and change come before its keyup in every
-    // browser (Chrome and Safari move the selection on keydown, Firefox on
-    // keypress), so the flag has done its job by then. Clearing it here means
-    // an arrow press that moves nothing (Ctrl+Arrow in Firefox) can't make the
-    // quiz ignore a later click, such as a screen reader's.
-    form.addEventListener('keyup', (e) => { if (e.key.startsWith('Arrow')) arrowNav = false; });
+    // An arrow key's own click and change happen while it's handled (Chrome
+    // and Safari on keydown, Firefox on keypress), before any key is released,
+    // so the flag has done its job by the next keyup. Clear it on any keyup,
+    // not just the arrow's: with Cmd held, macOS sends only Cmd's keyup. Also
+    // clear it if focus leaves the window mid-press or the page comes back
+    // from the back/forward cache. Otherwise an arrow press that moves nothing
+    // (Ctrl+Arrow in Firefox, Cmd+Arrow on a Mac) could make the quiz ignore a
+    // later click, such as a screen reader's.
+    const clearArrowNav = () => { arrowNav = false; };
+    form.addEventListener('keyup', clearArrowNav);
+    window.addEventListener('blur', clearArrowNav);
+    window.addEventListener('pageshow', clearArrowNav);
     form.addEventListener('keydown', (e) => {
       const t = e.target as HTMLInputElement;
       if (t.type !== 'radio') return;
