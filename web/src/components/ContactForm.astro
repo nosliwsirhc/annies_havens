@@ -170,6 +170,11 @@ const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '1x0000000000000000
       card.addEventListener('transitionend', done);
     };
 
+    // Give up on a send that hasn't answered by then, rather than leave
+    // "Sending…" up forever.
+    const SEND_TIMEOUT_MS = 20000;
+    const CHECK_FIELDS = 'Please check the highlighted fields.';
+
     let submitting = false;
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -180,12 +185,18 @@ const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '1x0000000000000000
         clearFormError();
         // Show every error, but don't rewrite one that's already showing: each
         // is role=alert, and rewriting it would announce it again.
+        let shownNew = false;
         order.forEach((n) => {
           const err = errs[n] || '';
-          if (!err || !isShowing(n, err)) setErr(n, err);
+          if (!err || !isShowing(n, err)) { if (err) shownNew = true; setErr(n, err); }
         });
         // The first invalid field now describes its error when focused.
         document.getElementById('f-' + order.find((n) => errs[n]))?.focus();
+        // A press with nothing new to show (Enter again in the same empty
+        // field) would be silent for a screen reader, so say it in the form's
+        // own alert. It was just cleared; setting it a frame later makes it
+        // announce again on every such press.
+        if (!shownNew) requestAnimationFrame(() => showFormError(CHECK_FIELDS));
         return;
       }
       const token = (form.querySelector('[name="cf-turnstile-response"]') as HTMLInputElement | null)?.value || '';
@@ -204,29 +215,42 @@ const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '1x0000000000000000
       clearFormError();
       const label = submitBtn?.textContent;
       if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Sending…'; }
+      const controller = new AbortController();
+      const timer = window.setTimeout(() => controller.abort(), SEND_TIMEOUT_MS);
+      let failure = '';
       try {
         const res = await fetch('/api/contact', {
           method: 'POST',
           headers: { 'content-type': 'application/json' },
           body: JSON.stringify({ first: val('first'), last: val('last'), email: val('email'), phone: val('phone'), role: val('role'), msg: val('msg'), token }),
+          signal: controller.signal,
         });
         const data = await res.json().catch(() => ({}));
         if (res.ok && data.ok) {
-          // GA4 conversion (only fires if the visitor accepted analytics — gtag is undefined otherwise).
+          // GA4 conversion (only fires if the visitor accepted analytics; gtag is undefined otherwise).
           (window as any).gtag?.('event', 'generate_lead', { form_location: location.pathname });
           morph(() => { form.style.display = 'none'; okEl?.classList.add('show'); });
           okEl?.focus();
         } else {
-          showFormError(data.error || 'Something went wrong. Please try again, or call us.');
-          (window as any).turnstile?.reset();
+          failure = data.error || 'Something went wrong. Please try again, or call us.';
         }
       } catch {
-        showFormError('We couldn’t reach the server. Please try again, or call us.');
-        (window as any).turnstile?.reset();
+        // Network failure, or the send timed out.
+        failure = 'We couldn’t reach the server. Please try again, or call us.';
       } finally {
+        window.clearTimeout(timer);
         submitting = false;
         if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = label || 'Submit Message'; }
         refresh();
+      }
+      if (failure) {
+        // Disabling the button while it had focus dropped focus to the page.
+        // Put it back on the button first, so the move doesn't cut off the
+        // announcement of the problem that follows.
+        const active = document.activeElement;
+        if (submitBtn && (!active || active === document.body)) submitBtn.focus();
+        showFormError(failure);
+        (window as any).turnstile?.reset();
       }
     });
 
