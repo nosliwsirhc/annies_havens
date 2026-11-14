@@ -3,6 +3,7 @@
 // Cloudflare Turnstile, and an inline "morph" success state. Submits to the
 // /api/contact Worker route. Used on the homepage and /contact-us.
 import { site } from '../data/site';
+import { FIELD_TOO_LONG } from '../lib/form';
 const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '1x00000000000000000000AA'; // test key fallback
 ---
 <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
@@ -13,7 +14,7 @@ const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '1x0000000000000000
     <p class="sub">Fields marked <span class="req" aria-hidden="true">*</span> are required. An email or a phone number is fine - fill in whichever you prefer.</p>
     <div class="frow">
       <div class="field"><label for="f-first">First name <span class="req" aria-hidden="true">*</span></label><input id="f-first" name="first" required aria-required="true" aria-describedby="err-first" /><div class="errmsg" id="err-first" role="alert">Required</div></div>
-      <div class="field"><label for="f-last">Last name <span class="opt">(optional)</span></label><input id="f-last" name="last" aria-describedby="err-last" /><div class="errmsg" id="err-last" role="alert">Please keep this to 254 characters or fewer</div></div>
+      <div class="field"><label for="f-last">Last name <span class="opt">(optional)</span></label><input id="f-last" name="last" aria-describedby="err-last" /><div class="errmsg" id="err-last" role="alert">{FIELD_TOO_LONG}</div></div>
     </div>
     <div class="frow">
       <div class="field"><label for="f-email">Email <span class="opt" id="req-email">(email or phone)</span></label><input id="f-email" name="email" type="email" aria-required="true" aria-describedby="err-email" /><div class="errmsg" id="err-email" role="alert">Enter a valid email</div></div>
